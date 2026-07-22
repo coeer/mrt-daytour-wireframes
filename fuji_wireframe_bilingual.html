@@ -8,16 +8,23 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Malgun Gothic', 'Noto Sans KR', 'Microsoft YaHei', sans-serif;
-    background: #e8e8e8;
+    background: #ececec;
   }
-  /* 左右分栏 */
+  /* 左右分栏 - 桌面端 */
   .split {
-    display: flex; gap: 40px; min-height: 100vh;
-    justify-content: center; padding: 0 20px;
+    display: flex; gap: 36px; min-height: 100vh;
+    max-width: 900px; margin: 0 auto; padding: 24px 20px;
+    justify-content: center; align-items: flex-start;
   }
   .col {
-    flex: 0 1 420px; max-width: 420px; min-width: 320px; background: #fff;
-    overflow-x: hidden; border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,.08);
+    width: 400px; flex-shrink: 0; background: #fff;
+    overflow-x: hidden; border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  }
+  /* 手机端 - 上下排列 */
+  @media (max-width: 880px) {
+    .split { flex-direction: column; gap: 20px; padding: 12px; max-width: 440px; }
+    .col { width: 100%; }
   }
 
   /* 列标题条 */
