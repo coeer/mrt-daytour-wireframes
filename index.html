@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>富士山1日游 - 线框 V2 中文版（文案对照用）</title>
+<!--
+  中文版 V2 (2026-07-22)：结构与 fuji_wireframe_v2.html 完全一致，
+  文案为《富士山三路线详情页设计方案》中文对照版，供逐句核对韩文文案。
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', 'Malgun Gothic', sans-serif;
+    background: #fff;
+    color: #1a1a1a;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .hero {
+    background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 100%);
+    color: #fff;
+    padding: 0 24px 32px;
+    text-align: center;
+  }
+  .hero-img {
+    margin: 0 -24px 24px;
+    height: 180px;
+    background: repeating-linear-gradient(45deg, #24466b, #24466b 12px, #1a3a5c 12px, #1a3a5c 24px);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.75); font-size: 13px;
+    border-bottom: 3px solid #ffd966;
+  }
+  .hero h1 { font-size: 22px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .hero .subtitle { font-size: 13px; opacity: 0.85; margin-bottom: 20px; }
+  .hero .slogan {
+    font-family: Georgia, serif; font-size: 18px; font-style: italic;
+    letter-spacing: 2px; margin: 20px 0; color: #ffd966;
+  }
+  .decision-tree { background: rgba(255,255,255,0.12); border-radius: 16px; padding: 20px 16px; }
+  .decision-tree .question { font-size: 15px; font-weight: 700; }
+  .decision-tree .q-sub { font-size: 11px; opacity: .75; margin: 4px 0 14px; }
+  .route-option {
+    position: relative;
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px; border-radius: 12px; margin-bottom: 10px;
+    text-align: left;
+  }
+  .route-option:last-child { margin-bottom: 0; }
+  .route-option.opt-a { background: #2d6a9f; }
+  .route-option.opt-b { background: #e8833a; }
+  .route-option.opt-c { background: #5b8c5a; }
+  .route-option .badge {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #fff; color: #1a3a5c;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; flex-shrink: 0;
+  }
+  .route-option .info { flex: 1; }
+  .route-option .info .label { font-size: 13px; font-weight: 700; color: #fff; }
+  .route-option .info .hint { font-size: 11px; color: rgba(255,255,255,.85); }
+  .reco-badge {
+    position: absolute; top: -8px; right: 10px;
+    background: #ffd966; color: #7a5200;
+    font-size: 10px; font-weight: 800;
+    padding: 2px 8px; border-radius: 999px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+  }
+  .trust { padding: 24px; background: #f8f9fa; }
+  .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .trust-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; }
+  .trust-item .check { color: #2d6a9f; font-weight: 800; }
+  .mini-img-row { display: flex; gap: 10px; margin-top: 16px; }
+  .mini-img {
+    flex: 1; height: 72px; border-radius: 8px;
+    background: #e8e8e8; color: #999; font-size: 11px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+  }
+  .route-section { padding: 28px 24px; border-top: 1px solid #eee; }
+  .route-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .route-header .letter {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 20px; color: #fff; flex-shrink: 0;
+  }
+  .route-a .letter { background: #2d6a9f; }
+  .route-b .letter { background: #e8833a; }
+  .route-c .letter { background: #5b8c5a; }
+  .route-header .ko-title { font-size: 16px; font-weight: 700; }
+  .route-header .hook { font-size: 12px; color: #888; margin-top: 2px; }
+  .route-slogan {
+    font-family: Georgia, serif; font-size: 14px; font-style: italic;
+    color: #666; margin-bottom: 8px; letter-spacing: 1px;
+  }
+  .route-pain {
+    font-size: 13px; color: #444; line-height: 1.5;
+    background: #fff8f0; border-left: 3px solid #ffd966;
+    padding: 10px 12px; border-radius: 0 8px 8px 0; margin-bottom: 16px;
+  }
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px;
+    width: 2px; background: #ddd;
+  }
+  .timeline-item { position: relative; padding-bottom: 16px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -19px; top: 4px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #fff; border: 2px solid #ccc;
+  }
+  .timeline-item.peak::before { background: #ffd966; border-color: #e8a900; }
+  .timeline-item .time { font-size: 12px; font-weight: 700; color: #2d6a9f; margin-bottom: 2px; }
+  .timeline-item .name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .timeline-item .name .dur { font-weight: 400; color: #999; font-size: 11px; }
+  .timeline-item .name .dim {
+    font-size: 10px; font-weight: 700; color: #5b8c5a;
+    background: #eef5ee; border-radius: 4px; padding: 1px 5px; margin-left: 4px;
+  }
+  .timeline-item .desc { font-size: 12px; color: #666; line-height: 1.55; }
+  .timeline-item .peak-tag {
+    display: inline-block; font-size: 10px;
+    background: #fff3d0; color: #b8860b;
+    padding: 1px 6px; border-radius: 4px; margin-left: 4px; font-weight: 600;
+  }
+  .timeline-item .note { font-size: 11px; color: #999; margin-top: 3px; }
+  .timeline-item .warn {
+    display: inline-block; font-size: 10px; color: #b35c00;
+    background: #fdeede; border-radius: 4px; padding: 1px 6px; margin-top: 4px;
+  }
+  .replace-note {
+    font-size: 11px; color: #8a6d00; background: #fff8e0;
+    border-radius: 6px; padding: 6px 8px; margin-top: 6px; line-height: 1.5;
+  }
+  .logistics { padding: 24px; background: #f8f9fa; border-top: 1px solid #eee; }
+  .logistics h3 { font-size: 14px; margin-bottom: 12px; }
+  .three-img-row { display: flex; gap: 8px; margin-bottom: 14px; }
+  .three-img {
+    flex: 1; height: 84px; border-radius: 8px;
+    background: #e8e8e8; color: #999; font-size: 11px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+  }
+  .faq { padding: 24px; }
+  .faq h3 { font-size: 15px; margin-bottom: 16px; font-weight: 700; }
+  .faq-item { margin-bottom: 12px; }
+  .faq-item .q { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .faq-item .a { font-size: 12px; color: #666; line-height: 1.55; }
+  .faq-closing { font-size: 12px; color: #888; margin-top: 16px; }
+  .placeholder-img {
+    background: #e8e8e8; height: 120px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: #aaa; font-size: 12px; margin-bottom: 12px;
+  }
+  .section-label {
+    background: #1a1a1a; color: #ffd966;
+    font-size: 10px; padding: 4px 12px; text-align: center;
+    font-weight: 600; letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 区块1: 主图区 + 决策树 ===== -->
+<div class="section-label">① 主图区 + 决策树</div>
+<div class="hero">
+  <div class="hero-img">[ 富士山主视觉大图位 · 实拍富士山+河口湖 · 渐变蒙版 ]</div>
+  <div class="slogan">YOUR FUJI, YOUR WAY.</div>
+  <h1>东京出发富士山小团1日游</h1>
+  <div class="subtitle">3条路线中选属于你的一天</div>
+
+  <div class="decision-tree">
+    <div class="question">🤔 你想要什么样的富士山？</div>
+    <div class="q-sub">(3秒找到属于你的路线)</div>
+    <div class="route-option opt-a">
+      <div class="badge">A</div>
+      <div class="info">
+        <div class="label">想要特别的照片 → 摄影师路线</div>
+        <div class="hint">三湖 + 富士山方向列车</div>
+      </div>
+    </div>
+    <div class="route-option opt-b">
+      <div class="reco-badge">首次推荐</div>
+      <div class="badge">B</div>
+      <div class="info">
+        <div class="label">第一次来 → 经典路线</div>
+        <div class="hint">六绝景，一个不落地经典打卡</div>
+      </div>
+    </div>
+    <div class="route-option opt-c">
+      <div class="badge">C</div>
+      <div class="info">
+        <div class="label">想坐着看 → 体验路线</div>
+        <div class="hint">海陆空3WAY（缆车+游船）</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 区块2: 信任锚 ===== -->
+<div class="section-label">② 信任锚（三路线共用）</div>
+<div class="trust">
+  <div class="trust-grid">
+    <div class="trust-item"><span class="check">✓</span> 东京市内住宿门口接送</div>
+    <div class="trust-item"><span class="check">✓</span> 最多9人小团</div>
+    <div class="trust-item"><span class="check">✓</span> JNTO合作方·正规登记</div>
+    <div class="trust-item"><span class="check">✓</span> 司机兼向导陪同</div>
+    <div class="trust-item"><span class="check">✓</span> 1人起可预约</div>
+    <div class="trust-item"><span class="check">✓</span> 出发前一天群聊通知</div>
+  </div>
+  <div class="mini-img-row">
+    <div class="mini-img">[ 资质证书小图 ]</div>
+    <div class="mini-img">[ 车型小图 ]</div>
+  </div>
+</div>
+
+<!-- ===== 区块3: A路线 ===== -->
+<div class="section-label">③ A路线 详情</div>
+<div class="route-section route-a" id="route-a">
+  <div class="route-header">
+    <div class="letter">A</div>
+    <div class="title-group">
+      <div class="ko-title">富士三湖 + 列车体验</div>
+      <div class="hook">📷 摄影师视角的3种富士</div>
+    </div>
+  </div>
+  <div class="route-slogan">SAME FUJI. DIFFERENT EYES.</div>
+  <div class="route-pain">
+    🤔 "大家都拍一样的富士山照片？"<br>
+    两山重叠的精进湖、车窗逼近的富士、湖中倒映的逆富士——摄影师视角的3种富士。
+  </div>
+  <div class="placeholder-img">[ 精进湖 抱子富士 配图 ]</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="time">预计 8:00</div>
+      <div class="name">东京出发 🚗</div>
+      <div class="desc">预计7:00~8:00 东京市内住宿接送</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 11:00</div>
+      <div class="name">精进湖·他手合滨 <span class="dur">(约30分钟)</span></div>
+      <div class="desc">富士五湖中最小的湖。富士山后大室山重叠的奇迹构图。天气好可见逆富士。游客少到只听得见快门声的30分钟。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 12:00</div>
+      <div class="name">富士山罗森便利店 <span class="dur">(约20分钟 / 打卡照)</span></div>
+      <div class="desc">蓝屋顶与富士山同框——最日本的网红打卡照。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 12:40</div>
+      <div class="name">河口湖大石公园 <span class="dur">(约80分钟 / 含午餐时间)</span></div>
+      <div class="desc">四季花田与富士山。🍽️自由午餐（人均约1,000~3,000日元）。🌸樱花(3/28~4/12)→樱花步道 / 🍁红叶(11/1~12/1)→枫叶回廊</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 14:10</div>
+      <div class="name">日川时计店·天梯小镇 <span class="dur">(约20分钟)</span></div>
+      <div class="desc">巷尾挂着富士山的奇迹构图。Instagram分享最多的街道。</div>
+    </div>
+    <div class="timeline-item peak">
+      <div class="time">预计 14:55</div>
+      <div class="name">富士山方向列车 <span class="dur">(约20分钟 · 下吉田站→富士山站)</span><span class="peak-tag">⭐ 高光时刻</span></div>
+      <div class="desc">真正开往富士山的列车。180度全景展望窗，越靠近越清晰的富士山。🏁富士山站：建筑师隈研吾设计。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 15:30</div>
+      <div class="name">山中湖白鸟滨 <span class="dur">(约40分钟)</span></div>
+      <div class="desc">离富士山最近的湖。天鹅梳理羽毛，湖面倒映富士——走在画里的时间。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">▼ 预计 16:10</div>
+      <div class="name">返程 → 预计18:30抵达东京</div>
+      <div class="note">⏰ 拼车进行，抵达时间可能随交通状况变动。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 区块4: B路线 ===== -->
+<div class="section-label">④ B路线 详情</div>
+<div class="route-section route-b" id="route-b">
+  <div class="route-header">
+    <div class="letter">B</div>
+    <div class="title-group">
+      <div class="ko-title">富士经典双湖 + 六绝景</div>
+      <div class="hook">📸 第一次富士山之旅的"正解"</div>
+    </div>
+  </div>
+  <div class="route-slogan">FUJI, DONE RIGHT.</div>
+  <div class="route-pain">
+    🤔 "第一次去，从哪开始？"<br>
+    最稳妥最经典的路线。一次逛6个代表景点，为以后打好基础的一天。
+  </div>
+  <div class="placeholder-img">[ 忠灵塔+富士山+城市 三同框配图 ]</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="time">预计 8:00</div>
+      <div class="name">东京出发 🚗</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 10:00</div>
+      <div class="name">山中湖·白鸟滨 <span class="dur">(约90分钟 / 含午餐时间)</span> 🌟</div>
+      <div class="desc">离富士山最近的湖。喂天鹅，眼前超大富士山。🍽️自由午餐（人均约1,000~3,000日元）。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 11:50</div>
+      <div class="name">富士山罗森 <span class="dur">(约30分钟 / 打卡照)</span></div>
+      <div class="desc">蓝屋顶上耸立的富士山——夕阳洒落时最戏剧的一张。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 12:40</div>
+      <div class="name">河口湖大石公园 <span class="dur">(约60分钟)</span></div>
+      <div class="desc">350米湖滨花道，90种四季花卉。☕自然生活馆（果酱体验·咖啡）的小鸟居+富士山。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 14:00</div>
+      <div class="name">日川时计店·天梯小镇 <span class="dur">(约20分钟)</span></div>
+      <div class="desc">巷尾挂着富士山的奇迹构图。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 14:30</div>
+      <div class="name">富士金鸟居 <span class="dur">(约20分钟)</span></div>
+      <div class="desc">富士吉田站前，正对富士山的金色鸟居。</div>
+    </div>
+    <div class="timeline-item peak">
+      <div class="time">预计 15:00</div>
+      <div class="name">富士吉田浅间公园 <span class="dur">(约60分钟)</span><span class="peak-tag">⭐ 高光时刻</span></div>
+      <div class="desc">忠灵塔(五重塔)+富士山+城市同框。登上398级台阶——摄影师必去21处之一。</div>
+      <span class="warn">⚠️ 398级台阶 — 老人·孕妇请注意体力</span>
+    </div>
+    <div class="timeline-item">
+      <div class="time">▼ 预计 16:00</div>
+      <div class="name">返程 → 预计18:00抵达东京</div>
+      <div class="note">⏰ 拼车进行，抵达时间可能随交通状况变动。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 区块5: C路线 ===== -->
+<div class="section-label">⑤ C路线 详情</div>
+<div class="route-section route-c" id="route-c">
+  <div class="route-header">
+    <div class="letter">C</div>
+    <div class="title-group">
+      <div class="ko-title">海陆空3WAY 富士全景</div>
+      <div class="hook">🛥️ 在天空·陆地·湖上遇见富士山</div>
+    </div>
+  </div>
+  <div class="route-slogan">SEE FUJI FROM EVERY ANGLE.</div>
+  <div class="route-pain">
+    🤔 富士山看的地方不同，就变成不同的山。<br>
+    天上俯瞰是雄壮，地上仰望是神秘，湖上是童话。<br>
+    🎁 赠送游船票（价值1,200日元）——本路线独有福利。
+  </div>
+  <div class="placeholder-img">[ 白鸟号游船+富士山 配图 ]</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="time">预计 8:00</div>
+      <div class="name">东京出发 🚗</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 10:00</div>
+      <div class="name">🚠 河口湖天上山公园 <span class="dur">(约90分钟)</span><span class="dim">天空</span></div>
+      <div class="desc">缆车3分钟登顶。富士见台展望台一览河口湖与富士山。（缆车往返1,000日元另付）</div>
+      <div class="replace-note">※2026/5/11~7/15 设施翻新 → 替换为「河口浅间神社·天空鸟居」（约90分钟）</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 11:40</div>
+      <div class="name">📸 富士山罗森 <span class="dur">(约20分钟 / 打卡照)</span></div>
+      <div class="desc">🍽️午餐：市场内自由用餐（人均约1,000~3,000日元）。不用餐可继续游览。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 12:30</div>
+      <div class="name">🍃 忍野八海 <span class="dur">(约60分钟)</span><span class="dim">陆地</span></div>
+      <div class="desc">富士融雪穿过滤层涌出的8个清泉。透明池塘与茅草屋村落。（国家指定天然纪念物）</div>
+    </div>
+    <div class="timeline-item peak">
+      <div class="time">预计 13:50</div>
+      <div class="name">🛥️ 山中湖白鸟号游船 <span class="dur">(约90分钟)</span><span class="dim">湖上</span><span class="peak-tag">⭐ 高光时刻 🎁</span></div>
+      <div class="desc">天鹅造型游船漂浮在清波上。湖面倒映的富士山，悠游的天鹅。🎁赠送船票（价值1,200日元）。（不参加不退款）</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">预计 15:30</div>
+      <div class="name">🌅 平野之滨 <span class="dur">(约30分钟)</span></div>
+      <div class="desc">山中湖东北岸宁静沙滩。晴天湖对岸富士山剪影的句号。</div>
+    </div>
+    <div class="timeline-item">
+      <div class="time">▼ 预计 16:00</div>
+      <div class="name">返程</div>
+      <div class="note">⏰ 拼车进行，抵达时间可能随交通状况变动。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 区块6: 资质/接送 ===== -->
+<div class="section-label">⑥ 资质+车型+接送（三路线共用）</div>
+<div class="logistics">
+  <div class="three-img-row">
+    <div class="three-img">[ 资质证书图 ]</div>
+    <div class="three-img">[ 车型实拍图 ]</div>
+    <div class="three-img">[ 接送范围地图 ]</div>
+  </div>
+  <h3>🏛️ 日本大阪府知事登记旅行社 · JNTO（日本政府观光局）合作方</h3>
+  <p style="font-size:12px;color:#666;line-height:1.7;">
+    —— 放心交给我们。<br>
+    🚐 参考车型：7座阿尔法 / 10座海狮（根据当日人数调配）<br>
+    📍 接送范围：东京12区住宿门口接送（部分区需提前确认）
+  </p>
+</div>
+
+<!-- ===== 区块7: FAQ ===== -->
+<div class="section-label">⑦ FAQ（三路线共用）</div>
+<div class="faq">
+  <h3>■ 预订前，这些请先了解一下。</h3>
+  <div class="faq-item">
+    <div class="q">Q1. 三条路线有什么区别？</div>
+    <div class="a">A=摄影（三湖+列车）/ B=经典六绝景（首次来的推荐）/ C=体验（缆车+游船）。同样的富士山，看的方式不同。</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q2. 车辆怎么安排？</div>
+    <div class="a">拼车。5人以下7座阿尔法，以上10座海狮。可能与其他国家客人同行。</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q3. 下雨还进行吗？</div>
+    <div class="a">是的，照常进行。仅台风·暴雪等恶劣天气，出发前取消可全额退款。</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q4. 餐费和门票包含吗？</div>
+    <div class="a">餐费全路线不含（自由用餐，人均约1,000~3,000日元）。C线游船票含，缆车（1,000日元）另付。</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q5. 取消退款规定？</div>
+    <div class="a">出行日前3天及之前：100%退款 / 前2天~当天：不可退。（以当地时间为准）</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q6. 看不到富士山怎么办？</div>
+    <div class="a">富士山视天气可能看不到。晴天概率高，但阴天也正常发车，不退款。</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q7. 司机会讲解吗？</div>
+    <div class="a">司机兼向导同行。到达主要景点简单介绍后自由参观。</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q8. 出发前怎么联系？</div>
+    <div class="a">出发前一天建群。司机和负责人都在群里，随时咨询。(WhatsApp·LINE·KakaoTalk)</div>
+  </div>
+  <div class="faq-closing">■ 如有其他疑问，请随时咨询。</div>
+</div>
+
+</body>
+</html>
