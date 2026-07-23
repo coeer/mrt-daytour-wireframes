@@ -13,8 +13,8 @@
   }
   /* 左右分栏 - 桌面端 */
   .split {
-    display: flex; gap: 32px; min-height: 100vh;
-    max-width: 880px; margin: 0 auto; padding: 28px 20px;
+    display: flex; gap: 40px; min-height: 100vh;
+    max-width: 900px; margin: 0 auto; padding: 28px 20px;
     justify-content: center; align-items: flex-start;
   }
   .col {
@@ -22,10 +22,12 @@
     overflow-x: hidden; border-radius: 12px;
     box-shadow: 0 4px 24px rgba(26,58,92,.08);
   }
+  .col-kr { border-right: 3px solid #d0d8e0; }
   /* 手机端 - 上下排列 */
   @media (max-width: 880px) {
-    .split { flex-direction: column; gap: 20px; padding: 12px; max-width: 420px; }
+    .split { flex-direction: column; gap: 24px; padding: 12px; max-width: 420px; }
     .col { width: 100%; }
+    .col-kr { border-right: none; border-bottom: 3px solid #d0d8e0; }
   }
 
   /* 列标题条 */
@@ -180,7 +182,7 @@
     <div class="hero-img">[ 후지산 메인 비주얼 이미지 ]</div>
     <div class="slogan">YOUR FUJI, YOUR WAY.</div>
     <h1>도쿄 출발 후지산 소그룹 1일 투어</h1>
-    <div class="subtitle">3가지 코스 중 나에게 딱 맞는 하루를 선택하세요</div>
+    <div class="subtitle">3가지 코스 중 나에게 딱 맞는 하루를 찾아보세요</div>
     <div class="decision-tree">
       <div class="question">🤔 어떤 후지산을 원하시나요?<br><span style="font-size:10px;opacity:.7">(3초 만에 나만의 코스 찾기)</span></div>
       <div class="route-option opt-a">
@@ -206,12 +208,12 @@
       <div class="letter">A</div>
       <div>
         <div class="title">후지 3대 호수 + 열차 체험 【A코스】</div>
-        <div class="hook">📷 사진가의 눈으로 만나는 3가지 후지산</div>
+        <div class="hook">📷 사진가의 시선으로 만나는 3가지 후지산</div>
       </div>
     </div>
     <div class="route-slogan">ONE FUJI. DIFFERENT ANGLES.</div>
     <div class="route-pain">
-      🤔 "다 같은 후지산 사진이라면?" 두 산이 겹쳐 보이는 쇼지코(진화), 열차 창 너머로 다가오는 후지산, 호수에 비친 사카사 후지(逆富士)까지 — 사진가의 눈으로 만나는 3가지 후지산.
+      🤔 "다 같은 후지산 사진이라면?" 두 산이 겹쳐 보이는 쇼지코(진화), 열차 창 너머로 다가오는 후지산, 호수에 비친 사카사 후지(逆富士)까지 — 사진가의 시선으로 만나는 3가지 후지산.
     </div>
     <div class="placeholder-img">[ 진화 다테아이하마 '안고 있는 후지산' ]</div>
     <div class="timeline">
@@ -222,7 +224,7 @@
       <div class="timeline-item">
         <div class="time">예정 11:00</div>
         <div class="name">쇼지코·다테아이하마 <span class="dur">(약 30분)</span></div>
-        <div class="desc">후지 5호 중 가장 작은 호수. 후지산 뒤로 오무로산이 겹쳐 보이는 기적의 구도. 날씨가 좋으면 사카사 후지(逆富士)까지. 관광객이 적어 셔터 소리만 들리는 30분.</div>
+        <div class="desc">후지 5호 중 가장 작은 호수. 후지산 뒤로 오무로산이 겹쳐 보이는 기적의 프레임. 날씨가 좋으면 사카사 후지(逆富士)까지. 관광객이 적어 사진 찍기 딱 좋은 30분.</div>
       </div>
       <div class="timeline-item">
         <div class="time">예정 12:00</div>
@@ -232,12 +234,12 @@
       <div class="timeline-item">
         <div class="time">예정 12:40</div>
         <div class="name">가와구치코 오이시 공원 <span class="dur">(약 80분 / 점심 포함)</span></div>
-        <div class="desc">사계절 꽃밭과 후지산. 🍽️ 자유 점심 (1인 약 1,000~3,000엔). 🌸 벚꽃(3/28~4/12)→벚꽃 산책길 / 🍁 단풍(11/1~12/1)→단풍 회랑</div>
+        <div class="desc">사계절 내내 꽃이 피는 호숫가와 후지산. 🍽️ 자유 점심 (1인 약 1,000~3,000엔). 🌸 벚꽃(3/28~4/12)→벚꽃 산책길 / 🍁 단풍(11/1~12/1)→단풍 회랑</div>
       </div>
       <div class="timeline-item">
         <div class="time">예정 14:10</div>
         <div class="name">히카와 토키점·계단 마을 <span class="dur">(약 20분)</span></div>
-        <div class="desc">골목 끝에 후지산이 걸려 있는 기적의 구도. 인스타그램 최다 공유 거리.</div>
+        <div class="desc">골목 끝에 후지산이 걸려 있는 기적의 프레임. 인스타그램 최다 공유 거리.</div>
       </div>
       <div class="timeline-item peak">
         <div class="time">⭐ 예정 14:55</div>
@@ -248,7 +250,7 @@
       <div class="timeline-item">
         <div class="time">예정 15:30</div>
         <div class="name">야마나카코 백조 해변 <span class="dur">(약 40분)</span></div>
-        <div class="desc">후지산에서 가장 가까운 호수. 백조가 깃털을 다듬고 수면에 후지산이 비칩니다 — 그림 한 점을 걷는 시간.</div>
+        <div class="desc">후지산에서 가장 가까운 호수. 백조가 노니는 호숫가에 후지산이 비칩니다 — 한 폭의 그림 같은 시간.</div>
       </div>
       <div class="timeline-item">
         <div class="time">▼ 예정 16:10</div>
@@ -270,7 +272,7 @@
     </div>
     <div class="route-slogan">FUJI, DONE RIGHT.</div>
     <div class="route-pain">
-      🤔 "처음인데, 어디부터?" 가장 정석적인 클래식 코스. 한 번에 대표 명소 6곳을 돌며, 기본 코스를 한 번에 둘러보는 하루.
+      🤔 "처음인데, 어디부터?" 가장 정석적인 클래식 코스. 한 번에 대표 명소 6곳을 돌며, 클래식 코스를 한 번에 정복하는 하루.
     </div>
     <div class="placeholder-img">[ 야마나카코(山中湖) ]</div>
     <div class="timeline">
@@ -286,7 +288,7 @@
       <div class="timeline-item">
         <div class="time">예정 11:50</div>
         <div class="name">후지산 로손 <span class="dur">(약 30분 / 인증샷)</span></div>
-        <div class="desc">파란 지붕 위로 솟는 후지산 — 노을빛이 쏟아지면 가장 드라마틱한 한 장.</div>
+        <div class="desc">파란 지붕 위로 솟는 후지산 — 노을빛이 쏟아지면 가장 극적인 한 장을 담을 수 있어요.</div>
       </div>
       <div class="timeline-item">
         <div class="time">예정 12:40</div>
@@ -296,12 +298,12 @@
       <div class="timeline-item">
         <div class="time">예정 14:00</div>
         <div class="name">히카와 토키점·계단 마을 <span class="dur">(약 20분)</span></div>
-        <div class="desc">골목 끝 후지산이 걸려 있는 기적의 구도.</div>
+        <div class="desc">골목 끝 후지산이 걸려 있는 기적의 프레임.</div>
       </div>
       <div class="timeline-item">
         <div class="time">예정 14:30</div>
         <div class="name">후지산 금도리이 <span class="dur">(약 20분)</span></div>
-        <div class="desc">후지요시다역 앞, 후지산을 정면으로 마주하는 금빛 도리이. 신성함과 장관이 공존하는 구도.</div>
+        <div class="desc">후지요시다역 앞, 후지산을 정면으로 마주하는 금빛 도리이. 신성함과 장관이 어우러진 풍경.</div>
       </div>
       <div class="timeline-item peak">
         <div class="time">⭐ 예정 15:00</div>
@@ -339,7 +341,7 @@
       <div class="timeline-item">
         <div class="time">예정 10:00</div>
         <div class="name">🚠 가와구치코 텐조산 공원 <span class="dur">(약 90분)</span><span class="dim">하늘</span></div>
-        <div class="desc">케이블카 3분 만에 정상. 후지미다이 전망대에서 가와구치코와 후지산이 한눈에. (케이블카 왕복 1,000엔 별도)</div>
+        <div class="desc">케이블카로 3분이면 정상. 후지미다이 전망대에서 가와구치코와 후지산이 한눈에. (케이블카 왕복 1,000엔 별도)</div>
         <div class="placeholder-img">[ 텐조산 케이블카 + 후지산 파노라마 ]</div>
       </div>
       <div class="timeline-item">
@@ -350,18 +352,18 @@
       <div class="timeline-item">
         <div class="time">예정 12:30</div>
         <div class="name">🍃 오시노 핫카이 <span class="dur">(약 60분)</span><span class="dim">땅</span></div>
-        <div class="desc">후지산 녹은 눈이 지층을 통과해 솟아오른 8개의 샘물. 투명한 연못과 초가집 마을. (국가 지정 천연기념물)</div>
+        <div class="desc">후지산의 눈 녹은 물이 지층을 통과해 솟아오른 8개의 샘물. 투명한 연못과 초가집 마을. (국가 지정 천연기념물)</div>
       </div>
       <div class="timeline-item peak">
         <div class="time">⭐ 예정 13:50</div>
         <div class="name">🛥️ 야마나카코 백조호 유람선 <span class="dur">(약 90분)</span><span class="dim">호수</span><span class="peak-tag">⭐ 하이라이트 🎁</span></div>
-        <div class="desc">백조 모양의 유람선이 맑은 물결 위를 둥실 떠다닙니다. 수면에 비친 후지산, 유유히 헤엄치는 백조. 🎁 티켓(1,200엔 상당) 증정. (미참석 시 환불 불가)</div>
+        <div class="desc">백조 모양의 유람선이 맑은 물결 위를 둥실 떠다닙니다. 수면에 비친 후지산, 여유롭게 헤엄치는 백조. 🎁 티켓(1,200엔 상당) 증정. (미참석 시 환불 불가)</div>
         <div class="placeholder-img">[ 백조호 유람선 + 후지산 역영 ]</div>
       </div>
       <div class="timeline-item">
         <div class="time">예정 15:30</div>
         <div class="name">🌅 히라노노하마 <span class="dur">(약 30분)</span></div>
-        <div class="desc">야마나카코 북동안 고요한 모래사장. 맑은 날 호수 너머 후지산 실루엣에 마침표.</div>
+        <div class="desc">야마나카코 북동안 고요한 모래사장. 맑은 날 호수 너머 후지산 실루엣으로 하루를 마무리하는 곳.</div>
       </div>
       <div class="timeline-item">
         <div class="time">▼ 예정 16:00</div>
@@ -376,7 +378,7 @@
   <div class="logistics">
     <h3>🏛️ 일본 오사카부지사 등록 여행사 · JNTO(일본정부관광국) 협력사 — 안심하고 맡기세요.</h3>
     <p>🚐 참고 차량: 7인승 알파드 / 10인승 하이에이스 (당일 인원에 따라 배차)</p>
-    <p>📍 픽업 범위: 도쿄 도내 12구 숙소 문 앞 픽업 (일부 구역은 픽업 여부를 확인해 주세요)</p>
+    <p>📍 픽업 범위: 도쿄 도내 12구 숙소 문 앞 픽업 (일부 구역은 픽업 여부를 미리 문의해 주세요)</p>
     <div class="placeholder-img" style="height:120px;margin-top:14px">[ 자질증명서(JNTO·오사카부 등록) + 차량 실물 사진(알파드/하이에이스) ]</div>
   </div>
 
@@ -436,7 +438,7 @@
     <div class="hero-img">[ 富士山主视觉大图 ]</div>
     <div class="slogan">YOUR FUJI, YOUR WAY.</div>
     <h1>东京出发富士山小团1日游</h1>
-    <div class="subtitle">3条路线中选刚好适合你的一天</div>
+    <div class="subtitle">3条路线中找到刚好适合你的一天</div>
     <div class="decision-tree">
       <div class="question">🤔 你想要什么样的富士山？<br><span style="font-size:10px;opacity:.7">(3秒找到属于你的路线)</span></div>
       <div class="route-option opt-a">
@@ -462,12 +464,12 @@
       <div class="letter">A</div>
       <div>
         <div class="title">富士三湖 + 列车体验【A套餐】</div>
-        <div class="hook">📷 用摄影师的眼睛遇见的3种富士</div>
+        <div class="hook">📷 摄影师的视角遇见的3种富士</div>
       </div>
     </div>
     <div class="route-slogan">ONE FUJI. DIFFERENT ANGLES.（一座富士，不同角度）</div>
     <div class="route-pain">
-      🤔 "大家都拍一样的富士山照片？" 两山重叠的精进湖(쇼지코)、车窗逼近的富士、湖中倒映的逆富士——用摄影师的眼睛遇见的3种富士。
+      🤔 "大家都拍一样的富士山照片？" 两山重叠的精进湖(쇼지코)、车窗逼近的富士、湖中倒映的逆富士——摄影师视角遇见的3种富士。
     </div>
     <div class="placeholder-img">[ 精进湖 抱子富士 ]</div>
     <div class="timeline">
@@ -478,7 +480,7 @@
       <div class="timeline-item">
         <div class="time">预计 11:00</div>
         <div class="name">精进湖·他手合滨 <span class="dur">(约30分钟)</span></div>
-        <div class="desc">富士五湖中最小的湖。富士山后大室山重叠的奇迹构图。天气好可见逆富士。游客少到只听得见快门声的30分钟。</div>
+        <div class="desc">富士五湖中最小的湖。富士山后大室山重叠的奇迹画面。天气好可见逆富士。游客少，适合拍照的30分钟。</div>
       </div>
       <div class="timeline-item">
         <div class="time">预计 12:00</div>
@@ -488,12 +490,12 @@
       <div class="timeline-item">
         <div class="time">预计 12:40</div>
         <div class="name">河口湖大石公园 <span class="dur">(约80分钟 / 含午餐时间)</span></div>
-        <div class="desc">四季花田与富士山。🍽️自由午餐（人均约1,000~3,000日元）。🌸樱花(3/28~4/12)→樱花步道 / 🍁红叶(11/1~12/1)→枫叶回廊</div>
+        <div class="desc">四季花开的湖畔与富士山。🍽️自由午餐（人均约1,000~3,000日元）。🌸樱花(3/28~4/12)→樱花步道 / 🍁红叶(11/1~12/1)→枫叶回廊</div>
       </div>
       <div class="timeline-item">
         <div class="time">预计 14:10</div>
         <div class="name">日川时计店·天梯小镇 <span class="dur">(约20分钟)</span></div>
-        <div class="desc">巷尾挂着富士山的奇迹构图。Instagram分享最多的街道。</div>
+        <div class="desc">巷尾挂着富士山的奇迹画面。Instagram分享最多的街道。</div>
       </div>
       <div class="timeline-item peak">
         <div class="time">⭐ 预计 14:55</div>
@@ -526,7 +528,7 @@
     </div>
     <div class="route-slogan">FUJI, DONE RIGHT.（富士，正确的打开方式）</div>
     <div class="route-pain">
-      🤔 "第一次去，从哪开始？" 最正统的经典路线。一次逛6个代表景点，一次逛完基本路线的一天。
+      🤔 "第一次去，从哪开始？" 最正统的经典路线。一次逛6个代表景点，一次征服经典路线的一天。
     </div>
     <div class="placeholder-img">[ 山中湖 ]</div>
     <div class="timeline">
@@ -542,7 +544,7 @@
       <div class="timeline-item">
         <div class="time">预计 11:50</div>
         <div class="name">富士山罗森 <span class="dur">(约30分钟 / 打卡照)</span></div>
-        <div class="desc">蓝屋顶上耸立的富士山——夕阳洒落时最戏剧的一张。</div>
+        <div class="desc">蓝屋顶上耸立的富士山——夕阳洒落时能拍出最戏剧性的一张。</div>
       </div>
       <div class="timeline-item">
         <div class="time">预计 12:40</div>
@@ -552,12 +554,12 @@
       <div class="timeline-item">
         <div class="time">预计 14:00</div>
         <div class="name">日川时计店·天梯小镇 <span class="dur">(约20分钟)</span></div>
-        <div class="desc">巷尾挂着富士山的奇迹构图。</div>
+        <div class="desc">巷尾挂着富士山的奇迹画面。</div>
       </div>
       <div class="timeline-item">
         <div class="time">预计 14:30</div>
         <div class="name">富士金鸟居 <span class="dur">(约20分钟)</span></div>
-        <div class="desc">富士吉田站前，正对富士山的金色鸟居。神圣与壮观共存的构图。</div>
+        <div class="desc">富士吉田站前，正对富士山的金色鸟居。神圣与壮观交融的风景。</div>
       </div>
       <div class="timeline-item peak">
         <div class="time">⭐ 预计 15:00</div>
@@ -595,7 +597,7 @@
       <div class="timeline-item">
         <div class="time">预计 10:00</div>
         <div class="name">🚠 河口湖天上山公园 <span class="dur">(约90分钟)</span><span class="dim">天空</span></div>
-        <div class="desc">缆车3分钟登顶。富士见台展望台一览河口湖与富士山。（缆车往返1,000日元另付）</div>
+        <div class="desc">缆车3分钟即达山顶。富士见台展望台一览河口湖与富士山。（缆车往返1,000日元另付）</div>
         <div class="placeholder-img">[ 天上山缆车 + 富士山全景 ]</div>
       </div>
       <div class="timeline-item">
@@ -611,13 +613,13 @@
       <div class="timeline-item peak">
         <div class="time">⭐ 预计 13:50</div>
         <div class="name">🛥️ 山中湖白鸟号游船 <span class="dur">(约90分钟)</span><span class="dim">湖上</span><span class="peak-tag">⭐ 高光时刻 🎁</span></div>
-        <div class="desc">天鹅造型游船漂浮在清波上。湖面倒映的富士山，悠游的天鹅。🎁赠送船票（价值1,200日元）。（不参加不退款）</div>
+        <div class="desc">天鹅造型游船漂浮在清波上。湖面倒映的富士山，悠闲游弋的天鹅。🎁赠送船票（价值1,200日元）。（不参加不退款）</div>
         <div class="placeholder-img">[ 白鸟号游船 + 富士山倒影 ]</div>
       </div>
       <div class="timeline-item">
         <div class="time">预计 15:30</div>
         <div class="name">🌅 平野之滨 <span class="dur">(约30分钟)</span></div>
-        <div class="desc">山中湖东北岸宁静沙滩。晴天湖对岸富士山剪影的句号。</div>
+        <div class="desc">山中湖东北岸宁静沙滩。晴天以湖对岸富士山剪影为一天画上句号的地方。</div>
       </div>
       <div class="timeline-item">
         <div class="time">▼ 预计 16:00</div>
@@ -632,7 +634,7 @@
   <div class="logistics">
     <h3>🏛️ 日本大阪府知事登记旅行社 · JNTO（日本政府观光局）合作方——放心交给我们。</h3>
     <p>🚐 参考车型：7座阿尔法 / 10座海狮（根据当日人数调配）</p>
-    <p>📍 接送范围：东京12区住宿门口接送（部分区域请确认是否接送）</p>
+    <p>📍 接送范围：东京12区住宿门口接送（部分区域请提前咨询是否接送）</p>
     <div class="placeholder-img" style="height:120px;margin-top:14px">[ 资质证书(JNTO·大阪府登记) + 车型实拍(阿尔法/海狮) ]</div>
   </div>
 
