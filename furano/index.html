@@ -6,48 +6,76 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>北海道富良野一日游 - 线框 中文版</title>
+<title>北海道富良野1日游 - 线框 中文版</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Microsoft YaHei', 'PingFang SC', 'Malgun Gothic', sans-serif;
     background: #fff; color: #1a1a1a; max-width: 480px; margin: 0 auto;
   }
+  /* ====== HERO ====== */
   .hero {
     background: linear-gradient(135deg, #4a2c6e 0%, #7b4fa2 50%, #c77dba 100%);
     color: #fff; padding: 0 24px 32px; text-align: center;
   }
   .hero-img {
-    margin: 0 -24px 24px; height: 200px;
+    margin: 0 -24px 24px; height: 220px;
     background: linear-gradient(135deg, #e8d5f5 0%, #f5e6d0 30%, #d5f5e8 60%, #f5d5e8 100%);
     display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,.85); font-size: 14px; font-weight: 600;
+    color: rgba(255,255,255,.85); font-size: 13px; font-weight: 600;
     border-bottom: 3px solid #ffd966; text-shadow: 0 1px 3px rgba(0,0,0,.3);
+    flex-direction: column; gap: 4px;
   }
-  .hero h1 { font-size: 22px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .hero .en-slogan {
+    font-family: Georgia, serif; font-size: 20px; font-style: italic;
+    letter-spacing: 3px; color: #ffd966; margin-bottom: 4px;
+  }
+  .hero h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
   .hero .subtitle { font-size: 13px; opacity: 0.85; margin-bottom: 16px; }
   .hero .slogan {
-    font-family: Georgia, serif; font-size: 17px; font-style: italic;
-    letter-spacing: 2px; margin: 16px 0; color: #ffd966;
+    font-family: Georgia, serif; font-size: 15px; font-style: italic;
+    letter-spacing: 1.5px; margin: 12px 0; color: rgba(255,255,255,.9);
   }
-  .hero .highlights {
-    display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 16px;
+  /* ====== 决策树（单路线也用，帮客人锁定"为什么选这条"） ====== */
+  .decision-tree {
+    background: rgba(255,255,255,0.12); border-radius: 16px;
+    padding: 20px 16px; margin-top: 16px;
   }
-  .hero .highlights .tag {
-    background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
-    border-radius: 999px; padding: 4px 12px; font-size: 11px; color: #fff;
+  .decision-tree .question { font-size: 15px; font-weight: 700; }
+  .decision-tree .q-sub { font-size: 11px; opacity: .75; margin: 4px 0 14px; }
+  .persona-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px; border-radius: 12px; margin-bottom: 10px;
+    text-align: left; background: rgba(255,255,255,0.15);
+  }
+  .persona-card:last-child { margin-bottom: 0; }
+  .persona-card .emoji { font-size: 28px; flex-shrink: 0; }
+  .persona-card .info .label { font-size: 13px; font-weight: 700; color: #fff; }
+  .persona-card .info .hint { font-size: 11px; color: rgba(255,255,255,.85); }
+  .reco-badge {
+    position: absolute; top: -8px; right: 10px;
+    background: #ffd966; color: #7a5200;
+    font-size: 10px; font-weight: 800;
+    padding: 2px 8px; border-radius: 999px;
   }
 
+  /* ====== 信任锚 ====== */
   .trust { padding: 24px; background: #f8f9fa; }
   .trust h3 { font-size: 14px; margin-bottom: 12px; color: #333; }
   .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .trust-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; }
   .trust-item .check { color: #4a2c6e; font-weight: 800; }
 
+  /* ====== 行程区 ====== */
   .route-section { padding: 28px 24px; border-top: 1px solid #eee; }
+  .section-title {
+    font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #333;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title .dot { width: 8px; height: 8px; border-radius: 50%; background: #c77dba; }
   .route-slogan {
-    font-family: Georgia, serif; font-size: 15px; font-style: italic;
-    color: #666; margin-bottom: 12px; letter-spacing: 1px;
+    font-family: Georgia, serif; font-size: 14px; font-style: italic;
+    color: #888; margin-bottom: 6px; letter-spacing: 1px;
   }
   .route-pain {
     font-size: 13px; color: #444; line-height: 1.6;
@@ -69,7 +97,6 @@
   .timeline-item.peak::before { background: #ffd966; border-color: #e8a900; width: 14px; height: 14px; left: -23px; top: 3px; }
   .timeline-item .time { font-size: 12px; font-weight: 700; color: #7b4fa2; margin-bottom: 3px; }
   .timeline-item .name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-  .timeline-item .name .dur { font-weight: 400; color: #999; font-size: 11px; }
   .timeline-item .name .peak-tag {
     display: inline-block; font-size: 10px;
     background: #fff3d0; color: #b8860b;
@@ -81,15 +108,27 @@
     font-size: 11px; color: #7b4fa2; background: #f5eefb;
     border-radius: 4px; padding: 3px 8px; margin-top: 4px; display: inline-block;
   }
+  .timeline-item .img-placeholder {
+    margin-top: 8px; height: 100px; border-radius: 8px;
+    background: #e8e0f0; color: #999; font-size: 11px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+  }
 
+  /* ====== 接送·资质 ====== */
   .logistics { padding: 24px; background: #f8f9fa; border-top: 1px solid #eee; }
-  .logistics h3 { font-size: 14px; margin-bottom: 12px; }
   .logistics-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
   .logistics-item { display: flex; gap: 10px; align-items: flex-start; }
   .logistics-item .icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
   .logistics-item .info .label { font-size: 12px; font-weight: 600; color: #333; }
   .logistics-item .info .detail { font-size: 11px; color: #666; line-height: 1.5; margin-top: 2px; }
+  .logistics-img-row { display: flex; gap: 8px; margin-top: 14px; }
+  .logistics-img {
+    flex: 1; height: 84px; border-radius: 8px;
+    background: #e8e8e8; color: #999; font-size: 11px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+  }
 
+  /* ====== FAQ ====== */
   .faq { padding: 24px; }
   .faq h3 { font-size: 15px; margin-bottom: 16px; font-weight: 700; }
   .faq-item { margin-bottom: 14px; }
@@ -100,33 +139,46 @@
     padding: 20px 24px; text-align: center; font-size: 11px; color: #999;
     border-top: 1px solid #eee; background: #fafafa;
   }
-
-  .section-title {
-    font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #333;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .section-title .dot {
-    width: 8px; height: 8px; border-radius: 50%; background: #c77dba;
-  }
 </style>
 </head>
 <body>
 
-<!-- ==================== HERO区 ==================== -->
+<!-- ==================== HERO ==================== -->
 <div class="hero">
   <div class="hero-img">
+    <div class="en-slogan">BLOOM. RIDE. FLOAT.</div>
     🌸 富良野薰衣草花田 × 青之池 × 白须瀑布 🌸
-    <br>主图占位 — 建议放薰衣草花田+青之池的拼图
+    <br>主图占位 — 建议放薰衣草花田+青之池拼图
   </div>
   <h1>홋카이도 인생샷 여름꽃밭투어</h1>
   <div class="subtitle">北海道富良野·美瑛一日游</div>
-  <div class="slogan">"一ViewById天，拍到手软的花田与秘境"</div>
-  <div class="highlights">
-    <span class="tag">💜 富田农场薰衣草</span>
-    <span class="tag">🌈 四季彩之丘</span>
-    <span class="tag">💎 青之池</span>
-    <span class="tag">💧 白须瀑布</span>
-    <span class="tag">🎢 云霄飞车之路</span>
+  <div class="slogan">"一天之内，从薰衣草海到秘境蓝湖"</div>
+
+  <!-- 模型6：锚定——用客人的自我认知做入口 -->
+  <div class="decision-tree">
+    <div class="question">🤔 你想要什么样的北海道？</div>
+    <div class="q-sub">3秒找到属于你的理由</div>
+    <div class="persona-card">
+      <span class="emoji">📸</span>
+      <div class="info">
+        <div class="label">想要人生照片 → 花田路线</div>
+        <div class="hint">薰衣草海+四季彩之丘+青之池，一天拍到手软</div>
+      </div>
+    </div>
+    <div class="persona-card">
+      <span class="emoji">🚌</span>
+      <div class="info">
+        <div class="label">不想跟大巴挤 → 小团路线</div>
+        <div class="hint">最多9人，酒店接送，不用自己做攻略</div>
+      </div>
+    </div>
+    <div class="persona-card">
+      <span class="emoji">💜</span>
+      <div class="info">
+        <div class="label">就为看薰衣草 → 季节限定</div>
+        <div class="hint">7月满开期，富田农场紫色花海一望无际</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -145,74 +197,74 @@
 
 <!-- ==================== 行程详情 ==================== -->
 <div class="route-section">
-  <div class="section-title"><span class="dot"></span>行程时间表</div>
-  <div class="route-slogan">"一天打卡富良野+美瑛5大网红景点，拍出北海道最美夏天"</div>
+  <div class="section-title"><span class="dot"></span>行程详情</div>
+  <div class="route-slogan">BLOOM. RIDE. FLOAT.</div>
+  <!-- 模型4：痛点驱动——"不想做攻略"是最大的痛点 -->
   <div class="route-pain">
-    💡 不用自己做攻略、不用拼车、不用找路——早上酒店接你，晚上送回来，中间只管拍照和享受！
+    💡 北海道自驾太远、公共交通太绕、跟大巴又太赶——<strong>这条路线帮你把3个最远的网红景点串成一天，酒店接你送你，中间只管拍照。</strong>
   </div>
 
   <div class="timeline">
     <div class="timeline-item">
-      <div class="time">08:00 예정</div>
-      <div class="name">札幌出发</div>
-      <div class="desc">酒店接送，出发前往富良野。车程约2.5小时，沿途欣赏北海道田园风光。</div>
+      <div class="time">预计 08:00 札幌出发 🚗</div>
+      <div class="name">酒店接送，出发前往富良野</div>
+      <div class="desc">车程约2.5小时，沿途欣赏北海道田园风光。司机师傅会在出发前一晚联系您确认接送时间。</div>
+      <div class="note">⚠️ 根据当天路况，抵达时间可能前后浮动</div>
     </div>
 
     <div class="timeline-item peak">
-      <div class="time">10:30 예정</div>
-      <div class="name">富田农场（ファーム富田）<span class="peak-tag">⭐ 高光时刻</span></div>
-      <div class="desc">北海道最著名的薰衣草花田！7月是薰衣草满开期，紫色花海一望无际。还有彩色花田、薰衣草冰淇淋等你打卡。</div>
+      <div class="time">预计 10:30 富田农场（ファーム富田）⭐ 高光时刻</div>
+      <div class="name">薰衣草花田 · 拍照天堂 <span class="peak-tag">⭐ 必拍</span></div>
+      <div class="desc">北海道最著名的薰衣草花田！7月是满开期，紫色花海一望无际。还有彩色花田、薰衣草冰淇淋等你打卡。</div>
       <div class="photo-tip">📸 拍照tips：站在花田中间的小路上，背对薰衣草海，逆光拍最出片</div>
       <div class="note">停留约60分钟（至11:30）</div>
+      <div class="img-placeholder">[ 富田农场 薰衣草花田全景 配图 ]</div>
     </div>
 
     <div class="timeline-item">
-      <div class="time">11:30 예정</div>
-      <div class="name">车窗观赏"云霄飞车之路"（ジェットコースターの路）</div>
-      <div class="desc">美瑛的网红公路！笔直的上下坡路看起来就像云霄飞车轨道，从车窗看出去超震撼。司机会放慢车速让大家拍照。</div>
+      <div class="time">预计 11:30 车窗观赏"云霄飞车之路"</div>
+      <div class="name">ジェットコースターの路 · 网红公路</div>
+      <div class="desc">美瑛的标志性公路！笔直的上下坡路看起来就像云霄飞车轨道，从车窗看出去超震撼。司机会放慢车速让大家拍照。</div>
       <div class="note">车窗观赏约15分钟</div>
     </div>
 
     <div class="timeline-item peak">
-      <div class="time">12:15 예정</div>
-      <div class="name">四季彩之丘（四季彩の丘）<span class="peak-tag">⭐ 必拍景点</span></div>
+      <div class="time">预计 12:15 四季彩之丘（四季彩の丘）⭐ 高光时刻</div>
+      <div class="name">彩色花毯 · 360°全景 <span class="peak-tag">⭐ 必拍</span></div>
       <div class="desc">15种以上花卉铺成的彩色地毯！薰衣草、向日葵、波斯菊……每个季节都有不同的色彩组合。远处还能看到十胜岳连峰。</div>
       <div class="photo-tip">📸 拍照tips：站在高处俯拍彩色花田，广角镜头效果最佳</div>
       <div class="note">停留约60分钟（至13:15）</div>
+      <div class="img-placeholder">[ 四季彩之丘 彩色花田+十胜岳 配图 ]</div>
     </div>
 
     <div class="timeline-item">
-      <div class="time">13:15 예정</div>
-      <div class="name">午餐时间</div>
+      <div class="time">预计 13:15 🍽️ 午餐时间</div>
+      <div class="name">自由用餐</div>
       <div class="desc">四季彩之丘附近自由用餐。推荐园区内的餐厅，有成吉思汗烤肉、富良野咖喱等北海道特色美食。</div>
-      <div class="note">约60分钟自由活动（午餐费用自理）</div>
+      <div class="note">约60分钟自由活动（午餐费用自理，人均约1,000~3,000日元）</div>
     </div>
 
     <div class="timeline-item peak">
-      <div class="time">15:00 예정</div>
-      <div class="name">青之池（青い池）<span class="peak-tag">⭐ 秘境景点</span></div>
+      <div class="time">预计 15:00 青之池（青い池）⭐ 高光时刻</div>
+      <div class="name">秘境蓝湖 · Apple壁纸取景地 <span class="peak-tag">⭐ 必拍</span></div>
       <div class="desc">美瑛最神秘的景点！池水因矿物质呈现梦幻的钴蓝色，配上枯木群，像走进了另一个世界。曾被用作苹果Mac壁纸。</div>
       <div class="photo-tip">📸 拍照tips：站在池边栈道上，拍水面倒影最梦幻</div>
       <div class="note">停留约30分钟（至15:30）</div>
+      <div class="img-placeholder">[ 青之池 钴蓝色水面+枯木 配图 ]</div>
     </div>
 
     <div class="timeline-item">
-      <div class="time">15:35 예정</div>
-      <div class="name">白须瀑布（白ひげの滝）</div>
+      <div class="time">预计 15:35 白须瀑布（白ひげの滝）</div>
+      <div class="name">白色瀑布 · 隐藏打卡点</div>
       <div class="desc">从岩石缝隙中涌出的地下水形成白色瀑布，落差约30米。蓝色的河水配上白色瀑布，是美瑛的隐藏打卡点。</div>
       <div class="note">停留约25分钟（至16:00）</div>
     </div>
 
     <div class="timeline-item">
-      <div class="time">16:00 예정</div>
-      <div class="name">启程返回札幌</div>
-      <div class="desc">带着满满的美照和回忆，返回札幌。车程约2.5小时，可以在车上休息回味今天的美好。</div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="time">18:30 예정</div>
-      <div class="name">抵达札幌</div>
-      <div class="desc">送回酒店。旅途愉快！✨</div>
+      <div class="time">预计 16:00 返程回札幌 → 预计18:30左右抵达札幌</div>
+      <div class="name">带着满满的美照和回忆，返回札幌</div>
+      <div class="desc">车程约2.5小时，可以在车上休息回味今天的美好。</div>
+      <div class="note">⚠️ 根据当天路况，抵达时间可能前后浮动。有固定出发时间的交通工具（航班·火车）或演出、餐厅预约，建议您尽量安排在其他日期。</div>
     </div>
   </div>
 </div>
@@ -232,7 +284,7 @@
     <div class="logistics-item">
       <span class="icon">🕘</span>
       <div class="info">
-        <div class="label">接送时间</div>
+        <div class="label">出发前联系</div>
         <div class="detail">出发前一天晚上，司机联系您确认具体接送时间和地点。出发当天早上约08:00酒店大堂等候。</div>
       </div>
     </div>
@@ -265,19 +317,26 @@
       </div>
     </div>
   </div>
+
+  <!-- 配图占位：告诉美工放什么图 -->
+  <div class="logistics-img-row">
+    <div class="logistics-img">[ 资质证书<br>JNTO·大阪府登记 ]</div>
+    <div class="logistics-img">[ 车型实拍<br>阿尔法/海狮 ]</div>
+    <div class="logistics-img">[ 接送范围图<br>札幌站3km圈 ]</div>
+  </div>
 </div>
 
 <!-- ==================== FAQ ==================== -->
 <div class="faq">
-  <div class="section-title"><span class="dot"></span>常见问题</div>
+  <div class="section-title"><span class="dot"></span>预订前，这些信息也许能帮到您</div>
 
   <div class="faq-item">
     <div class="q">Q. 下雨天还出发吗？</div>
-    <div class="a">小雨正常出发，大雨/台风天气会提前联系您协商改期或全额退款。北海道的雨天也有不一样的美哦！</div>
+    <div class="a">是的，照常进行。小雨正常出发，北海道的雨天也有不一样的美哦！但因台风等恶劣天气导致安全上难以进行时，出发前取消全额退款。</div>
   </div>
   <div class="faq-item">
     <div class="q">Q. 午餐怎么办？</div>
-    <div class="a">行程中有约1小时自由用餐时间。四季彩之丘附近有多家餐厅，推荐成吉思汗烤肉、富良野咖喱等北海道特色。费用自理。</div>
+    <div class="a">行程中有约1小时自由用餐时间。四季彩之丘附近有多家餐厅，推荐成吉思汗烤肉、富良野咖喱等北海道特色。餐费不含，人均约1,000~3,000日元。</div>
   </div>
   <div class="faq-item">
     <div class="q">Q. 会去几个景点？每个景点待多久？</div>
@@ -285,11 +344,15 @@
   </div>
   <div class="faq-item">
     <div class="q">Q. 薰衣草什么时候最好看？</div>
-    <div class="a">富田农场薰衣草满开期通常在7月中旬（约7/10-7/25）。7月上旬和下旬也有薰衣草可看，但颜色深浅会有差异。7-8月其他花卉（向日葵、波斯菊等）也在盛开期。</div>
+    <div class="a">富田农场薰衣草满开期通常在7月中旬（约7/10~7/25）。7月上旬和下旬也有薰衣草可看，但颜色深浅会有差异。7~8月其他花卉（向日葵、波斯菊等）也在盛开期。</div>
   </div>
   <div class="faq-item">
     <div class="q">Q. 司机会说韩语吗？</div>
     <div class="a">司机主要使用日语和英语。不会韩语，但会用翻译器与您沟通。行程前一天司机会通过翻译器联系您确认接送信息，请放心！</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q. 车辆怎么安排？同车的是谁？</div>
+    <div class="a">本行程以拼车方式运行。6人及以下安排7座阿尔法，超过6人安排9座海狮。车上可能有来自其他国家的客人一同乘坐。共同度过的时光里分享彼此的旅途故事，也是一种小小的乐趣。</div>
   </div>
   <div class="faq-item">
     <div class="q">Q. 可以带行李箱吗？</div>
@@ -300,8 +363,8 @@
     <div class="a">以出行日为准：提前3天及之前取消 → 100%全额退款。提前2天至当天取消 → 不可退款。请尽早确认行程哦！</div>
   </div>
 
-  <div class="faq-closing">
-    还有其他问题？随时联系我们，秒回！💬
+  <div style="font-size: 12px; color: #888; margin-top: 16px;">
+    ■ 如有其他疑问，请随时咨询。
   </div>
 </div>
 
