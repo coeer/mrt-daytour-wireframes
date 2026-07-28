@@ -21,7 +21,7 @@
   .col-kr .col-header { background: #1a3a5c; color: #fff; }
   .col-zh .col-header { background: #5c4a1a; color: #fff; }
 
-  h2 { font-size: 15px; font-weight: 700; margin: 20px 0 10px; color: #333; border-bottom: 2px solid #eee; padding-bottom: 6px; }
+  h2 { font-size: 14px; font-weight: 700; margin: 20px 0 10px; color: #333; border-bottom: 2px solid #eee; padding-bottom: 6px; }
   .item { margin-bottom: 14px; }
   .item .time { font-size: 11px; font-weight: 700; color: #7b4fa2; }
   .item .name { font-size: 13px; font-weight: 600; margin: 2px 0; }
@@ -29,6 +29,10 @@
   .item .note { font-size: 10px; color: #999; margin-top: 2px; }
   .item.peak { background: #fff8e0; border-left: 3px solid #ffd966; padding: 8px 10px; border-radius: 0 6px 6px 0; }
   .peak-tag { font-size: 10px; background: #fff3d0; color: #b8860b; padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+
+  .persona { background: #f5eefb; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+  .persona .p-label { font-size: 12px; font-weight: 600; color: #4a2c6e; }
+  .persona .p-desc { font-size: 11px; color: #666; margin-top: 2px; }
 
   .trust-grid { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 12px; }
   .trust-item { font-size: 11px; color: #555; display: flex; align-items: center; gap: 6px; }
@@ -43,6 +47,8 @@
   .log-row .lb { font-size: 11px; font-weight: 600; }
   .log-row .dt { font-size: 10px; color: #666; line-height: 1.4; }
 
+  .pain { font-size: 11px; color: #444; line-height: 1.5; background: #f5eefb; border-left: 3px solid #c77dba; padding: 8px 10px; border-radius: 0 6px 6px 0; margin-bottom: 14px; }
+
   @media (max-width: 880px) {
     .bilingual-wrap { grid-template-columns: 1fr; gap: 0; }
     .col-kr { border-right: none; border-bottom: 3px solid #d0d8e0; padding-right: 0; padding-bottom: 32px; margin-bottom: 32px; }
@@ -53,7 +59,7 @@
 <body>
 <div class="bilingual-wrap">
 
-<!-- ========== 韩文列 ========== -->
+<!-- ========== 韓文列 ========== -->
 <div class="col-kr">
 <div class="col-header">🇰🇷 한국어판</div>
 
@@ -65,7 +71,8 @@
 
 <h2>핵심 포인트</h2>
 <div style="font-size:12px;color:#555;line-height:1.6;">
-  "하늘이 보이는 꽃밭, 손이 바쁜 비경"<br><br>
+  BLOOM. RIDE. FLOAT.<br>
+  "하루 만에 라벤더 바다에서 비밀 호수까지"<br><br>
   💜 팜 토미타 라벤더<br>
   🌈 사계채의 언덕<br>
   💎 청의호수<br>
@@ -73,57 +80,60 @@
   🎢 제트코스터의 길
 </div>
 
+<h2>당신에게 맞는 이유</h2>
+<div class="persona"><div class="p-label">📸 인생샷이 필요하면 → 꽃밭 코스</div><div class="p-desc">라벤더밭+사계채의 언덕+청의호수, 하루 종일 사진 찍기</div></div>
+<div class="persona"><div class="p-label">🚌 버스 투어가 싫으면 → 소규모 코스</div><div class="p-desc">최대 9인, 호텔 픽업, 셀프 여행 짤 필요 없음</div></div>
+<div class="persona"><div class="p-label">💜 라벤더 보러 가는 거라면 → 계절 한정</div><div class="p-desc">7월 만개기, 팜 토미타 보랏빛 꽃밭이 끝없이 펼쳐져요</div></div>
+
 <h2>일정 안내</h2>
+<div class="pain">💡 홋카이도 자동차 여행은 너무 멀고, 대중교통은 너무 복잡하고, 단체 버스는 너무 빡빡해요 — 이 코스는 가장 먼 인생샷 스팟 3곳을 하루에 묶어서, 호텔에서 모셔다 드리고, 중간엔 사진 찍기만 하면 돼요!</div>
 
 <div class="item">
-  <div class="time">08:00 출발</div>
-  <div class="name">삿포로 출발</div>
-  <div class="desc">호텔 픽업 후 후라노로 이동 (약 2.5시간)</div>
+  <div class="time">예정 08:00 삿포로 출발 🚗</div>
+  <div class="name">호텔 픽업 후 후라노로 출발 (약 2.5시간)</div>
 </div>
 
 <div class="item peak">
-  <div class="time">10:30 도착</div>
-  <div class="name">팜 토미타 <span class="peak-tag">⭐</span></div>
+  <div class="time">예정 10:30 팜 토미타 <span class="peak-tag">⭐</span></div>
+  <div class="name">라벤더밭 · 포토 천국</div>
   <div class="desc">홋카이도 최고의 라벤더 명소! 보랏빛 꽃밭이 끝없이 펼쳐져요.</div>
   <div class="note">약 60분 체유 (11:30까지)</div>
 </div>
 
 <div class="item">
-  <div class="time">11:30 이동</div>
+  <div class="time">예정 11:30 이동</div>
   <div class="name">제트코스터의 길 (차창)</div>
   <div class="desc">비에이의 핫한 도로! 차 안에서 사진 찍는 인생샷 스팟.</div>
   <div class="note">약 15분</div>
 </div>
 
 <div class="item peak">
-  <div class="time">12:15 도착</div>
-  <div class="name">사계채의 언덕 <span class="peak-tag">⭐</span></div>
+  <div class="time">예정 12:15 사계채의 언덕 <span class="peak-tag">⭐</span></div>
+  <div class="name">컬러풀 카펫</div>
   <div class="desc">15종 이상의 꽃이 펼쳐지는 컬러풀 카펫!</div>
   <div class="note">약 60분 체유 (13:15까지)</div>
 </div>
 
 <div class="item">
-  <div class="time">13:15</div>
-  <div class="name">점심 식사</div>
-  <div class="desc">자유 식사 (약 60분, 점심비용 별도)</div>
+  <div class="time">예정 13:15 🍽️ 점심</div>
+  <div class="name">자유 식사 (약 60분, 비용 별도)</div>
 </div>
 
 <div class="item peak">
-  <div class="time">15:00 도착</div>
-  <div class="name">청의호수 <span class="peak-tag">⭐</span></div>
-  <div class="desc">코발트블루로 빛나는 신비로운 호수. Apple Mac 배경화면으로도 유명!</div>
+  <div class="time">예정 15:00 청의호수 <span class="peak-tag">⭐</span></div>
+  <div class="name">비밀 블루호수 · 애플 배경화면</div>
+  <div class="desc">코발트블루로 빛나는 신비로운 호수!</div>
   <div class="note">약 30분 체유 (15:30까지)</div>
 </div>
 
 <div class="item">
-  <div class="time">15:35 도착</div>
-  <div class="name">시라히게 폭포</div>
-  <div class="desc">바위 틈에서 솟아나는 하얀 폭포, 낙차 약 30m.</div>
+  <div class="time">예정 15:35 시라히게 폭포</div>
+  <div class="name">흰 수염 폭포 (낙차 약 30m)</div>
   <div class="note">약 25분 체유 (16:00까지)</div>
 </div>
 
 <div class="item">
-  <div class="time">16:00 출발 → 18:30 삿포로 도착</div>
+  <div class="time">예정 16:00 출발 → 18:30 삿포로 도착</div>
   <div class="name">삿포로로 귀환</div>
 </div>
 
@@ -139,9 +149,10 @@
 <div class="faq-item"><div class="q">Q. 점심은?</div><div class="a">약 1시간 자유 식사, 비용 별도(自理).</div></div>
 <div class="faq-item"><div class="q">Q. 라벤더 시즌?</div><div class="a">만개: 7/10~7/25경. 7~8월 다른 꽃들도 만개.</div></div>
 <div class="faq-item"><div class="q">Q. 기사님 한국어?</div><div class="a">일본어+영어, 한국어는 번역기로 소통.</div></div>
+<div class="faq-item"><div class="q">Q. 차량 배정?</div><div class="a">합승 진행. 6명↓ 알파드 / 6명↑ 하이에이스.</div></div>
 <div class="faq-item"><div class="q">Q. 취소 정책?</div><div class="a">3일 전까지 100% 환불 / 2일 전~당일 환불 불가.</div></div>
 
-</div><!-- /col-kr -->
+</div>
 
 <!-- ========== 中文列 ========== -->
 <div class="col-zh">
@@ -155,7 +166,8 @@
 
 <h2>核心亮点</h2>
 <div style="font-size:12px;color:#555;line-height:1.6;">
-  "一ViewById天，拍到手软的花田与秘境"<br><br>
+  BLOOM. RIDE. FLOAT.<br>
+  "一天之内，从薰衣草海到秘境蓝湖"<br><br>
   💜 富田农场薰衣草<br>
   🌈 四季彩之丘<br>
   💎 青之池<br>
@@ -163,57 +175,60 @@
   🎢 云霄飞车之路
 </div>
 
+<h2>为什么选这条路线</h2>
+<div class="persona"><div class="p-label">📸 想要人生照片 → 花田路线</div><div class="p-desc">薰衣草海+四季彩之丘+青之池，一天拍到手软</div></div>
+<div class="persona"><div class="p-label">🚌 不想跟大巴挤 → 小团路线</div><div class="p-desc">最多9人，酒店接送，不用自己做攻略</div></div>
+<div class="persona"><div class="p-label">💜 就为看薰衣草 → 季节限定</div><div class="p-desc">7月满开期，富田农场紫色花海一望无际</div></div>
+
 <h2>行程时间表</h2>
+<div class="pain">💡 北海道自驾太远、公共交通太绕、跟大巴又太赶——这条路线帮你把3个最远的网红景点串成一天，酒店接你送你，中间只管拍照。</div>
 
 <div class="item">
-  <div class="time">08:00 出发</div>
-  <div class="name">札幌出发</div>
-  <div class="desc">酒店接送，前往富良野（约2.5小时）</div>
+  <div class="time">预计 08:00 札幌出发 🚗</div>
+  <div class="name">酒店接送，前往富良野（约2.5小时）</div>
 </div>
 
 <div class="item peak">
-  <div class="time">10:30 到达</div>
-  <div class="name">富田农场 <span class="peak-tag">⭐</span></div>
+  <div class="time">预计 10:30 富田农场 <span class="peak-tag">⭐</span></div>
+  <div class="name">薰衣草花田 · 拍照天堂</div>
   <div class="desc">北海道最著名的薰衣草花田！紫色花海一望无际。</div>
   <div class="note">停留约60分钟（至11:30）</div>
 </div>
 
 <div class="item">
-  <div class="time">11:30 移动</div>
+  <div class="time">预计 11:30 移动</div>
   <div class="name">云霄飞车之路（车窗）</div>
   <div class="desc">美瑛网红公路！车窗拍照也能出大片。</div>
   <div class="note">约15分钟</div>
 </div>
 
 <div class="item peak">
-  <div class="time">12:15 到达</div>
-  <div class="name">四季彩之丘 <span class="peak-tag">⭐</span></div>
+  <div class="time">预计 12:15 四季彩之丘 <span class="peak-tag">⭐</span></div>
+  <div class="name">彩色花毯 · 360°全景</div>
   <div class="desc">15种以上花卉铺成的彩色地毯！</div>
   <div class="note">停留约60分钟（至13:15）</div>
 </div>
 
 <div class="item">
-  <div class="time">13:15</div>
-  <div class="name">午餐时间</div>
-  <div class="desc">自由用餐（约60分钟，费用自理）</div>
+  <div class="time">预计 13:15 🍽️ 午餐</div>
+  <div class="name">自由用餐（约60分钟，费用自理）</div>
 </div>
 
 <div class="item peak">
-  <div class="time">15:00 到达</div>
-  <div class="name">青之池 <span class="peak-tag">⭐</span></div>
-  <div class="desc">梦幻钴蓝色池水，Apple Mac壁纸取景地！</div>
+  <div class="time">预计 15:00 青之池 <span class="peak-tag">⭐</span></div>
+  <div class="name">秘境蓝湖 · Apple壁纸取景地</div>
+  <div class="desc">梦幻钴蓝色池水！</div>
   <div class="note">停留约30分钟（至15:30）</div>
 </div>
 
 <div class="item">
-  <div class="time">15:35 到达</div>
-  <div class="name">白须瀑布</div>
-  <div class="desc">岩石缝隙涌出的白色瀑布，落差约30米。</div>
+  <div class="time">预计 15:35 白须瀑布</div>
+  <div class="name">白色瀑布（落差约30米）</div>
   <div class="note">停留约25分钟（至16:00）</div>
 </div>
 
 <div class="item">
-  <div class="time">16:00 出发 → 18:30 抵达札幌</div>
+  <div class="time">预计 16:00 出发 → 18:30 抵达札幌</div>
   <div class="name">返回札幌</div>
 </div>
 
@@ -229,11 +244,12 @@
 <div class="faq-item"><div class="q">Q. 午餐？</div><div class="a">约1小时自由用餐，费用自理。</div></div>
 <div class="faq-item"><div class="q">Q. 薰衣草季？</div><div class="a">满开约7/10~7/25。7~8月其他花也盛开。</div></div>
 <div class="faq-item"><div class="q">Q. 司机语言？</div><div class="a">日+英，韩语用翻译器。</div></div>
+<div class="faq-item"><div class="q">Q. 车辆安排？</div><div class="a">拼车，6人↓阿尔法 / 6人↑海狮。</div></div>
 <div class="faq-item"><div class="q">Q. 取消政策？</div><div class="a">前3天100%退 / 前2天~当天不退。</div></div>
 
-</div><!-- /col-zh -->
+</div>
 
-</div><!-- /bilingual-wrap -->
+</div>
 
 <div style="text-align:center;padding:20px;font-size:10px;color:#bbb;">
   PEGASUS観光株式会社 · 大阪府知事登録旅行業第2-3251号 · © 2026
