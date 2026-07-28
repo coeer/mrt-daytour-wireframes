@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>홋카이도 후라노 1일 투어 - 와이어프레임 한국어판</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Microsoft YaHei', sans-serif;
+    background: #fff; color: #1a1a1a; max-width: 480px; margin: 0 auto;
+  }
+  .hero {
+    background: linear-gradient(135deg, #4a2c6e 0%, #7b4fa2 50%, #c77dba 100%);
+    color: #fff; padding: 0 24px 32px; text-align: center;
+  }
+  .hero-img {
+    margin: 0 -24px 24px; height: 200px;
+    background: linear-gradient(135deg, #e8d5f5 0%, #f5e6d0 30%, #d5f5e8 60%, #f5d5e8 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.85); font-size: 14px; font-weight: 600;
+    border-bottom: 3px solid #ffd966; text-shadow: 0 1px 3px rgba(0,0,0,.3);
+  }
+  .hero h1 { font-size: 22px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .hero .subtitle { font-size: 13px; opacity: 0.85; margin-bottom: 16px; }
+  .hero .slogan {
+    font-family: Georgia, serif; font-size: 17px; font-style: italic;
+    letter-spacing: 2px; margin: 16px 0; color: #ffd966;
+  }
+  .hero .highlights {
+    display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 16px;
+  }
+  .hero .highlights .tag {
+    background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
+    border-radius: 999px; padding: 4px 12px; font-size: 11px; color: #fff;
+  }
+
+  .trust { padding: 24px; background: #f8f9fa; }
+  .trust h3 { font-size: 14px; margin-bottom: 12px; color: #333; }
+  .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .trust-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; }
+  .trust-item .check { color: #4a2c6e; font-weight: 800; }
+
+  .route-section { padding: 28px 24px; border-top: 1px solid #eee; }
+  .route-slogan {
+    font-family: Georgia, serif; font-size: 15px; font-style: italic;
+    color: #666; margin-bottom: 12px; letter-spacing: 1px;
+  }
+  .route-pain {
+    font-size: 13px; color: #444; line-height: 1.6;
+    background: #f5eefb; border-left: 3px solid #c77dba;
+    padding: 10px 12px; border-radius: 0 8px 8px 0; margin-bottom: 20px;
+  }
+
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px;
+    width: 2px; background: #e0d0f0;
+  }
+  .timeline-item { position: relative; padding-bottom: 20px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -22px; top: 4px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fff; border: 2px solid #c4b0d9;
+  }
+  .timeline-item.peak::before { background: #ffd966; border-color: #e8a900; width: 14px; height: 14px; left: -23px; top: 3px; }
+  .timeline-item .time { font-size: 12px; font-weight: 700; color: #7b4fa2; margin-bottom: 3px; }
+  .timeline-item .name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .timeline-item .name .dur { font-weight: 400; color: #999; font-size: 11px; }
+  .timeline-item .name .peak-tag {
+    display: inline-block; font-size: 10px;
+    background: #fff3d0; color: #b8860b;
+    padding: 1px 6px; border-radius: 4px; margin-left: 4px; font-weight: 600;
+  }
+  .timeline-item .desc { font-size: 12px; color: #666; line-height: 1.6; }
+  .timeline-item .note { font-size: 11px; color: #999; margin-top: 4px; }
+  .timeline-item .photo-tip {
+    font-size: 11px; color: #7b4fa2; background: #f5eefb;
+    border-radius: 4px; padding: 3px 8px; margin-top: 4px; display: inline-block;
+  }
+
+  .logistics { padding: 24px; background: #f8f9fa; border-top: 1px solid #eee; }
+  .logistics h3 { font-size: 14px; margin-bottom: 12px; }
+  .logistics-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .logistics-item { display: flex; gap: 10px; align-items: flex-start; }
+  .logistics-item .icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .logistics-item .info .label { font-size: 12px; font-weight: 600; color: #333; }
+  .logistics-item .info .detail { font-size: 11px; color: #666; line-height: 1.5; margin-top: 2px; }
+
+  .faq { padding: 24px; }
+  .faq h3 { font-size: 15px; margin-bottom: 16px; font-weight: 700; }
+  .faq-item { margin-bottom: 14px; }
+  .faq-item .q { font-size: 13px; font-weight: 600; margin-bottom: 4px; color: #333; }
+  .faq-item .a { font-size: 12px; color: #666; line-height: 1.6; }
+
+  .footer-note {
+    padding: 20px 24px; text-align: center; font-size: 11px; color: #999;
+    border-top: 1px solid #eee; background: #fafafa;
+  }
+
+  .section-title {
+    font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #333;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #c77dba;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+  <div class="hero-img">
+    🌸 후라노 라벤더밭 × 청의호수 × 시라히게 폭포 🌸
+    <br>메인 이미지 영역 — 라벤더밭+청의호수 콜라주 추천
+  </div>
+  <h1>홋카이도 인생샷 여름꽃밭투어</h1>
+  <div class="subtitle">후라노・비에이 1일 투어</div>
+  <div class="slogan">"하늘이 보이는 꽃밭, 손이 바쁜 비경"</div>
+  <div class="highlights">
+    <span class="tag">💜 팜 토미타 라벤더</span>
+    <span class="tag">🌈 사계채의 언덕</span>
+    <span class="tag">💎 청의호수</span>
+    <span class="tag">💧 시라히게 폭포</span>
+    <span class="tag">🎢 제트코스터의 길</span>
+  </div>
+</div>
+
+<!-- ==================== 신뢰 앵커 ==================== -->
+<div class="trust">
+  <h3>왜 저희를 선택해야 할까요?</h3>
+  <div class="trust-grid">
+    <div class="trust-item"><span class="check">✓</span> 삿포로 호텔 픽업 (반경 3km)</div>
+    <div class="trust-item"><span class="check">✓</span> 전문 운전 기사 배정</div>
+    <div class="trust-item"><span class="check">✓</span> 소규모 차량 (최대 9인)</div>
+    <div class="trust-item"><span class="check">✓</span> 카시트 무료 대여</div>
+    <div class="trust-item"><span class="check">✓</span> 3일 전 무료 취소</div>
+    <div class="trust-item"><span class="check">✓</span> JNTO 협력 여행사</div>
+  </div>
+</div>
+
+<!-- ==================== 일정 상세 ==================== -->
+<div class="route-section">
+  <div class="section-title"><span class="dot"></span>일정 안내</div>
+  <div class="route-slogan">"하루 만에 후라노+비에이 5대 인생샷 스팟 완주"</div>
+  <div class="route-pain">
+    💡 직접 코스 짜지 않아도, 합차 안 해도, 길 안 찾아도 돼요 — 아침에 호텔에서 픽업, 저녁에 다시 모셔다 드립니다. 중간엔 사진 찍고 즐기기만 하면 돼요!
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="time">08:00 출발</div>
+      <div class="name">삿포로 출발</div>
+      <div class="desc">호텔에서 픽업 후 후라노로 출발. 약 2.5시간 소요, Hokkaido田园 풍경을 감상하며 이동해요.</div>
+    </div>
+
+    <div class="timeline-item peak">
+      <div class="time">10:30 도착</div>
+      <div class="name">팜 토미타 (ファーム富田) <span class="peak-tag">⭐ 하이라이트</span></div>
+      <div class="desc">홋카이도 최고의 라벤더 명소! 7월은 라벤더 만개 시기로, 보랏빛 꽃밭이 끝없이 펼쳐져요. 컬러풀한 꽃밭, 라벤더 아이스크림도 꼭 맛보세요!</div>
+      <div class="photo-tip">📸 포토팁: 꽃밭 가운데 길에서 라벤더 바다를 등지고 역광으로 찍으면 인생샷!</div>
+      <div class="note">약 60분 체류 (11:30까지)</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="time">11:30 이동</div>
+      <div class="name">차창으로 '제트코스터의 길' 감상</div>
+      <div class="desc">비에이의 핫한 도로! 직선 오르막길이 롤러코스터 레일처럼 보여서 차 안에서 찍어도 대박 사진이에요. 기사님이 속도를 줄여서 사진 찍을 시간을 드려요.</div>
+      <div class="note">차창 감상 약 15분</div>
+    </div>
+
+    <div class="timeline-item peak">
+      <div class="time">12:15 도착</div>
+      <div class="name">사계채의 언덕 (四季彩の丘) <span class="peak-tag">⭐ 필수 촬영지</span></div>
+      <div class="desc">15종 이상의 꽃이 펼쳐지는 컬러풀 카펫! 라벤더, 해바라기, 코스모스… 계절마다 다른 색 조합이에요. 멀리 도카치다케 연봉도 보입니다.</div>
+      <div class="photo-tip">📸 포토팁: 높은 곳에서 꽃밭을 내려다보며 광각 촬영하면 최고!</div>
+      <div class="note">약 60분 체류 (13:15까지)</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="time">13:15 점심</div>
+      <div class="name">점심 식사</div>
+      <div class="desc">사계채의 언덕 근처에서 자유 식사. 단지 내 레스토랑에서 징기스칸, 후라노 카레 등 홋카이도 향토 음식을 추천해요!</div>
+      <div class="note">약 60분 자유 시간 (점심비용 별도/自理)</div>
+    </div>
+
+    <div class="timeline-item peak">
+      <div class="time">15:00 도착</div>
+      <div class="name">청의호수 (青い池) <span class="peak-tag">⭐ 비경 스팟</span></div>
+      <div class="desc">비에이에서 가장 신비로운 곳! 광물질 때문에 코발트블루로 빛나는 물과 고목 군락이 마치 다른 세계에 온 듯한 느낌. Apple Mac 배경화면으로도 쓰였어요.</div>
+      <div class="photo-tip">📸 포토팁: 호숫가 데크에서 수면에 비친 반사 촬영이 가장 몽환적!</div>
+      <div class="note">약 30분 체유 (15:30까지)</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="time">15:35 도착</div>
+      <div class="name">시라히게 폭포 (白ひげの滝)</div>
+      <div class="desc">바위 틈에서 솟아나는 지하수가 하얀 폭포를 이루는 곳! 낙차 약 30m. 푸른 강물과 하얀 폭포의 대비가 비에이의 숨겨진 포토스팟이에요.</div>
+      <div class="note">약 25분 체류 (16:00까지)</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="time">16:00 출발</div>
+      <div class="name">삿포로로 귀환</div>
+      <div class="desc">인생샷 가득 담고 삿포로로 복귀. 약 2.5시간, 차에서 오늘의 추억을 정리하며 휴식!</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="time">18:30 도착</div>
+      <div class="name">삿포로 도착</div>
+      <div class="desc">호텔에 모셔다 드립니다. 즐거운 하루 보내셨길 바랍니다! ✨</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 픽업·차량·자격 ==================== -->
+<div class="logistics">
+  <div class="section-title"><span class="dot"></span>픽업 · 차량 · 자격</div>
+
+  <div class="logistics-grid">
+    <div class="logistics-item">
+      <span class="icon">📍</span>
+      <div class="info">
+        <div class="label">픽업 범위</div>
+        <div class="detail">삿포로역 반경 3km 이내 호텔에서上门픽업. 범위 외 호텔은 고객센터로 문의해 주세요.</div>
+      </div>
+    </div>
+    <div class="logistics-item">
+      <span class="icon">🕘</span>
+      <div class="info">
+        <div class="label">픽업 시간</div>
+        <div class="detail">출발 전날 밤, 기사님이 연락드려 정확한 픽업 시간과 장소를 확인해 드려요. 당일 아침 약 08:00 호텔 로비에서 대기해 주세요.</div>
+      </div>
+    </div>
+    <div class="logistics-item">
+      <span class="icon">🚗</span>
+      <div class="info">
+        <div class="label">차량 안내</div>
+        <div class="detail">6명 이하: 토요타 알파드 (7인승) / 6명 이상: 토요타 하이에이스 (9인승). 차량 연식 약 2020년, 정기 점검 완료.</div>
+      </div>
+    </div>
+    <div class="logistics-item">
+      <span class="icon">👨‍✈️</span>
+      <div class="info">
+        <div class="label">기사 안내</div>
+        <div class="detail">전문 운전 기사(화교 일본인), 일본어+영어 가능. 기사님은 차량 운전 위주로 진행하며,全程 관광 해설은 하지 않습니다. 한국어는 불가하지만 번역기로 소통 가능해요.</div>
+      </div>
+    </div>
+    <div class="logistics-item">
+      <span class="icon">👶</span>
+      <div class="info">
+        <div class="label">아동 정책</div>
+        <div class="detail">좌석을 차지하는 아동은 성인과 동일 요금(소규모 차량, 좌석 기준 과금). 카시트 무료 대여 가능하며, 예약 시 메모란에 남겨주세요.</div>
+      </div>
+    </div>
+    <div class="logistics-item">
+      <span class="icon">🏢</span>
+      <div class="info">
+        <div class="label">여행사 자격</div>
+        <div class="detail">PEGASUS観光株式会社<br>大阪府知事登録旅行業第2-3251号<br>JNTO(일본정부관광국) 협력 여행사</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FAQ ==================== -->
+<div class="faq">
+  <div class="section-title"><span class="dot"></span>자주 묻는 질문</div>
+
+  <div class="faq-item">
+    <div class="q">Q. 비가 오면 출발하나요?</div>
+    <div class="a">소량의 비는 정상 출발합니다. 폭우/태풍 시에는 사전에 연락드려 일정 변경 또는 전액 환불 처리해 드려요. 비 오는 날의 홋카이도도 나름의 매력이 있어요!</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q. 점심은 어떻게 하나요?</div>
+    <div class="a">일정 중 약 1시간 자유 식사 시간이 있어요. 사계채의 언덕 근처에 레스토랑이 여러 곳 있어요. 징기스칸(양고기 구이), 후라노 카레 등 홋카이도 향토 음식을 추천해요! 식사비용은自理입니다.</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q. 몇 군데 가나요? 각각 얼마나 체류하나요?</div>
+    <div class="a">총 5곳입니다: 팜 토미타(60분) → 제트코스터의 길(차창 15분) → 사계채의 언덕(60분) → 청의호수(30분) → 시라히게 폭포(25분). 모든 스팟에서 충분한 포토 타임이 있어요!</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q. 라벤더는 언제 가장 예쁘나요?</div>
+    <div class="a">팜 토미타 라벤더 만개 시기는 보통 7월 중순(약 7/10~7/25)입니다. 7월 초와 하순에도 라벤더를 볼 수 있지만, 색 농도에 차이가 있을 수 있어요. 7~8월에는 해바라기, 코스모스 등 다른 꽃들도 만개합니다!</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q. 기사님이 한국어를 하나요?</div>
+    <div class="a">기사님은 주로 일본어와 영어를 사용해요. 한국어는 어렵지만, 번역기로 소통한답니다! 출발 전날 기사님이 번역기를 통해 연락드려 픽업 정보를 확인해 드리니 안심하세요!</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q. 캐리어를 가져갈 수 있나요?</div>
+    <div class="a">네, 차량 트렁크에 캐리어 실을 수 있어요. 다만 당일后续 일정이 있어 짐을 맡겨야 하는 경우, 기사님에게 미리 말씀해 주시면安排해 드려요.</div>
+  </div>
+  <div class="faq-item">
+    <div class="q">Q. 어떻게 취소하나요? 수수료가 있나요?</div>
+    <div class="a">여행일 기준으로: 3일 전까지 취소 → 100% 전액 환불. 2일 전~당일 취소 → 환불 불가. 일정이 확정되면尽早 알려주세요!</div>
+  </div>
+
+  <div class="faq-closing">
+    다른 궁금한 점이 있으신가요? 언제든 연락해 주세요! 💬
+  </div>
+</div>
+
+<!-- ==================== 푸터 ==================== -->
+<div class="footer-note">
+  PEGASUS観光株式会社 · 大阪府知事登録旅行業第2-3251号<br>
+  © 2026 All rights reserved
+</div>
+
+</body>
+</html>
