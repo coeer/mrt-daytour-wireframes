@@ -7,10 +7,13 @@ from tools.furano_assets import ASSETS, decoded_dimensions_are_usable, render_so
 
 
 class AssetContractTests(unittest.TestCase):
-    def test_decoded_original_must_support_web_derivatives_and_be_high_resolution(self):
+    def test_decoded_dimension_mismatch_is_rejected(self):
         asset = next(item for item in ASSETS if item.key == "furano-people")
-        self.assertTrue(decoded_dimensions_are_usable(asset, (3000, 2000)))
-        self.assertFalse(decoded_dimensions_are_usable(asset, (2399, 1600)))
+        self.assertFalse(
+            decoded_dimensions_are_usable(
+                asset, (asset.source_width + 1, asset.source_height)
+            )
+        )
 
     def test_all_sources_meet_resolution_and_license_rules(self):
         self.assertEqual(len(ASSETS), 6)

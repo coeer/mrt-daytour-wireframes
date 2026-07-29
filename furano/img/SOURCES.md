@@ -16,7 +16,7 @@ All derivatives are real photographs, downloaded from the linked source pages an
 - Creator: Cindy Bissig
 - Source page: https://unsplash.com/photos/KzAiQAFcfIc
 - Original download: https://images.unsplash.com/photo-1626911635167-0b3006fbda39?auto=format&fit=max&fm=jpg&q=90&w=4000
-- Original dimensions: 4000×2667px
+- Original dimensions: 3000×2000px
 - License: Unsplash — https://unsplash.com/license
 - Modification: cropped/resized for web and encoded as WebP.
 

@@ -52,8 +52,8 @@ ASSETS = (
         download_url="https://images.unsplash.com/photo-1626911635167-0b3006fbda39?auto=format&fit=max&fm=jpg&q=90&w=4000",
         license_id="Unsplash",
         license_url="https://unsplash.com/license",
-        source_width=4000,
-        source_height=2667,
+        source_width=3000,
+        source_height=2000,
         widths=(1600, 960),
         web_aspect_ratio=2.0,
     ),
@@ -136,8 +136,8 @@ def _download(url: str) -> bytes:
 
 
 def decoded_dimensions_are_usable(asset: AssetSpec, size: tuple[int, int]) -> bool:
-    """Require a decoded source to be high-resolution and fit every requested width."""
-    return max(size) >= 2400 and min(size) > 0 and max(size) >= max(asset.widths)
+    """Require the decoded original to match its audited manifest dimensions exactly."""
+    return size == (asset.source_width, asset.source_height)
 
 
 def _source_image(asset: AssetSpec) -> Image.Image:
