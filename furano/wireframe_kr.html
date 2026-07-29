@@ -97,19 +97,21 @@ a { color: inherit; }
   height: 100%;
 }
 
+.hero__photo { z-index: 0; }
+
 .hero__photo img { object-fit: cover; object-position: center 56%; }
 
 .hero::after {
   content: "";
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   inset: 0;
   background: linear-gradient(180deg, rgba(15, 13, 20, .03) 20%, rgba(15, 13, 20, .78) 100%);
 }
 
 .hero__inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: min(100% - 32px, var(--wide));
   margin: 0 auto;
   padding: clamp(88px, 14vh, 150px) 0 clamp(42px, 7vh, 72px);
@@ -430,7 +432,7 @@ h1 {
   padding: 4px 11px;
   border-radius: 999px;
   background: var(--flower-pink);
-  color: var(--white);
+  color: var(--ink);
   font-size: .75rem;
   font-weight: 800;
 }
@@ -719,7 +721,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <h1>삿포로 출발 후라노·비에이 4인 소그룹 1일 투어</h1>
     <p class="hero__subtitle">보랏빛 라벤더 · 무지개 꽃밭 · 신비로운 파란 연못<br>여름 홋카이도의 세 가지 색을 하루에 💜🌈💙</p>
     <nav class="actions" aria-label="삿포로 출발 후라노·비에이 소그룹 1일 투어">
-      <a class="button" href="#itinerary">행정과 포함 내용 보기</a>
+      <a class="button" href="#itinerary">일정과 포함 내용 보기</a>
       <a class="button button--quiet" href="#pickup">먼저 픽업 범위 보기</a>
     </nav>
   </div>
@@ -973,7 +975,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <p>소그룹의 리듬으로 후라노와 비에이의 여름을 만나고, 돌아오는 길까지 부담을 덜어 보세요.</p>
       <ul class="guarantees"><li>4인 소그룹</li><li>삿포로역 3km 내 숙소 픽업</li><li>미성사 시 전액 환불</li></ul>
       <nav class="actions" aria-label="마지막까지, 조건은 선명하게">
-        <a class="button" href="#itinerary">행정 다시 보기</a>
+        <a class="button" href="#itinerary">일정 다시 보기</a>
         <a class="button button--quiet" href="#top">맨 위로</a>
       </nav>
     </div>

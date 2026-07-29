@@ -39,6 +39,23 @@ class RenderContractTests(unittest.TestCase):
         self.assertIn('loading="lazy"', html)
         self.assertIn('fetchpriority="high"', html)
 
+    def test_hero_layers_and_badge_contrast_are_explicit(self):
+        html = render_single(KR, "ko")
+        self.assertIn(".hero__photo { z-index: 0; }", html)
+        self.assertRegex(html, r"\.hero::after \{[^}]*z-index: 1;")
+        self.assertRegex(html, r"\.hero__inner \{[^}]*z-index: 2;")
+        self.assertRegex(
+            html,
+            r"\.included-badge \{[^}]*background: var\(--flower-pink\);"
+            r"[^}]*color: var\(--ink\);",
+        )
+
+    def test_korean_itinerary_ctas_use_the_correct_word(self):
+        html = render_single(KR, "ko")
+        self.assertIn(">일정과 포함 내용 보기</a>", html)
+        self.assertIn(">일정 다시 보기</a>", html)
+        self.assertNotIn(">행정", html)
+
     def test_build_writes_single_language_files(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             output_dir = Path(temp_dir)
