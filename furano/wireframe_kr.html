@@ -6,172 +6,181 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>후라노·비에이 1일 투어 상세페이지 · 한국어 시안 (2026-07-28)</title>
+<title>후라노·비에이 1일 투어 · 디자인 가이드 와이어프레임 v2 (2026-07-29)</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Noto Sans KR', 'Malgun Gothic', 'Microsoft YaHei', 'PingFang SC', sans-serif;
-    background: #e9edf2;
+    background: #eceff2;
     -webkit-font-smoothing: antialiased;
   }
-  .split {
-    display: flex; gap: 40px; min-height: 100vh;
-    max-width: 920px; margin: 0 auto; padding: 28px 20px;
-    justify-content: center; align-items: flex-start;
+  .page { max-width: 960px; margin: 0 auto; padding: 24px 18px 40px; }
+  .page.single { max-width: 500px; }
+
+  /* 文档头 */
+  .doc-head {
+    background: #fff; border: 1px solid #d8dee5; border-radius: 10px;
+    padding: 16px 18px; margin-bottom: 20px;
   }
-  .split.single { max-width: 480px; }
-  .col {
-    width: 400px; flex-shrink: 0; background: #fff;
-    overflow-x: hidden; border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(61,42,92,.08);
+  .doc-head h1 { font-size: 16px; color: #232a31; margin-bottom: 8px; }
+  .doc-head p { font-size: 12px; color: #5a6672; line-height: 1.8; }
+  .doc-head .global-spec { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #d8dee5; }
+  .doc-head .global-spec li { font-size: 12px; color: #44515e; line-height: 1.8; margin-left: 18px; }
+
+  /* 设计指引条（美工向，每个区块上方通栏） */
+  .spec-bar {
+    background: #fff; border: 1px solid #d8dee5; border-left: 4px solid #8aa0b4;
+    border-radius: 8px; padding: 10px 14px; margin: 18px 0 8px;
   }
-  .col-kr { border-right: 3px solid #d0d8e0; }
-  .split.single .col-kr, .split.single .col-zh { border-right: none; }
+  .spec-bar .spec-title { font-size: 12.5px; font-weight: 700; color: #2f3a44; margin-bottom: 4px; }
+  .spec-bar li { font-size: 11.5px; color: #5a6672; line-height: 1.75; margin-left: 16px; }
+  .spec-bar .do { color: #2e6b4f; }
+  .spec-bar .dont { color: #a05454; }
+
+  /* 双栏行 */
+  .row { display: flex; gap: 28px; align-items: stretch; }
+  .page.single .row { display: block; }
+  .cell {
+    flex: 1; min-width: 0; background: #fff;
+    border: 1px solid #d8dee5; border-radius: 10px; overflow: hidden;
+  }
+  .cell-kr { border-top: 3px solid #4a5560; }
+  .cell-zh { border-top: 3px solid #8a7a55; }
+  .cell-head {
+    padding: 7px 12px; font-size: 10.5px; font-weight: 700; letter-spacing: 1px;
+    color: #fff;
+  }
+  .cell-kr .cell-head { background: #4a5560; }
+  .cell-zh .cell-head { background: #8a7a55; }
+  .cell-body { padding: 14px 16px; }
   @media (max-width: 880px) {
-    .split { flex-direction: column; gap: 20px; padding: 12px; max-width: 420px; }
-    .col { width: 100%; }
-    .col-kr { border-right: none; border-bottom: 3px solid #d0d8e0; }
-  }
-  .col-header {
-    position: sticky; top: 0; z-index: 10;
-    padding: 10px; text-align: center; font-size: 13px; font-weight: 700;
-    letter-spacing: 0.5px;
-  }
-  .col-kr .col-header { background: #1a3a5c; color: #fff; }
-  .col-zh .col-header { background: #5c4a1a; color: #fff; }
-  .phone { max-width: 400px; margin: 0 auto; }
-
-  /* Hero — 薰衣草紫主题 */
-  .hero {
-    background: linear-gradient(160deg, #3d2a5c 0%, #7d5ba6 100%);
-    color: #fff; padding: 0 0 30px; text-align: center;
-  }
-  .hero-img {
-    height: 200px; margin-bottom: 20px; overflow: hidden;
-    border-bottom: 2px solid rgba(255,217,102,.6);
-  }
-  .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hero-inner { padding: 0 22px; }
-  .slogan { font-family: Georgia, serif; font-size: 17px; font-style: italic; letter-spacing: 2px; margin: 14px 0 12px; color: #ffd966; }
-  .hero h1 { font-size: 20px; font-weight: 800; margin-bottom: 8px; line-height: 1.35; }
-  .hero .subtitle { font-size: 12.5px; opacity: 0.88; line-height: 1.65; }
-
-  /* 区块标签 */
-  .section-label {
-    background: #241a33; color: #ffd966; font-size: 10px;
-    padding: 5px 12px; text-align: center; font-weight: 600; letter-spacing: 1.5px;
+    .row { flex-direction: column; gap: 10px; }
   }
 
-  /* 差异化亮点 */
-  .hl { padding: 20px 22px; background: #f6f3fa; }
-  .hl h3 { font-size: 13.5px; margin-bottom: 12px; color: #3d2a5c; }
-  .hl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; }
-  .hl-item { display: flex; align-items: flex-start; gap: 6px; font-size: 11.5px; color: #3a3a4a; line-height: 1.5; }
-  .hl-item .check { color: #7d5ba6; font-weight: 800; flex-shrink: 0; font-size: 13px; }
+  /* 参考图（非成品，需替换实拍） */
+  .ref-img { margin: 8px 0 4px; }
+  .ref-img img {
+    width: 100%; height: 150px; object-fit: cover; display: block;
+    border-radius: 6px; filter: saturate(.85);
+    border: 1px dashed #b8c2cc;
+  }
+  .ref-img.hero-ref img { height: 170px; }
+  .ref-cap { font-size: 10px; color: #98a2ad; margin-top: 4px; }
 
-  /* 痛点钩子 */
-  .pain {
-    font-size: 12.5px; line-height: 1.75; color: #3a3a3a;
-    background: #fff8f0; border-left: 3px solid #ffd966;
-    padding: 13px 14px; border-radius: 0 8px 8px 0;
-    margin: 16px 22px 0;
-  }
-  .pain b { color: #7d5ba6; }
-
-  /* 接送信息 */
-  .pickup { padding: 18px 22px; }
-  .pickup h3 { font-size: 13.5px; margin-bottom: 10px; color: #3d2a5c; }
-  .pickup p { font-size: 12px; color: #4a4a5a; line-height: 1.8; margin-bottom: 4px; }
-  .pickup .em { color: #7d5ba6; font-weight: 700; }
-
-  /* 时间线 */
-  .route-section { padding: 24px 22px; border-top: 1px solid #f0f0f0; }
-  .route-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: #2a2a3a; }
-  .route-hook { font-size: 11.5px; color: #7d5ba6; margin-bottom: 14px; }
-  .timeline { position: relative; padding-left: 20px; }
-  .timeline::before { content: ''; position: absolute; left: 4px; top: 6px; bottom: 6px; width: 2px; background: #e3ddef; }
-  .timeline-item { position: relative; padding-bottom: 16px; }
-  .timeline-item::before {
-    content: ''; position: absolute; left: -20px; top: 4px; width: 9px; height: 9px;
-    border-radius: 50%; background: #fff; border: 2px solid #c9bfe0;
-  }
-  .timeline-item.peak::before { background: #ffd966; border-color: #e8a900; box-shadow: 0 0 0 3px rgba(255,217,102,.25); }
-  .timeline-item .time { font-size: 11px; font-weight: 700; color: #7d5ba6; margin-bottom: 2px; }
-  .timeline-item .name { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.35; }
-  .timeline-item .name .dur { font-weight: 400; color: #8a8a9a; font-size: 11px; }
-  .timeline-item .desc { font-size: 12px; color: #5a5a6a; line-height: 1.65; }
-  .timeline-item .peak-tag {
-    display: inline-block; font-size: 10px; background: #fff3d0; color: #9a7400;
-    padding: 2px 7px; border-radius: 4px; margin-left: 4px; font-weight: 600;
-  }
-  .timeline-item .free-tag {
-    display: inline-block; font-size: 10px; background: #ece5f7; color: #5c3d8a;
-    padding: 2px 7px; border-radius: 4px; margin-left: 4px; font-weight: 600;
-  }
-  .timeline-item .note { font-size: 11px; color: #8a8a9a; margin-top: 4px; line-height: 1.6; }
-  .photo { margin: 8px 0 4px; }
-  .photo img { width: 100%; border-radius: 8px; display: block; }
-  .photo figcaption { font-size: 10px; color: #9a9aaa; margin-top: 4px; }
+  /* 占位框 */
   .placeholder-img {
-    background: linear-gradient(135deg, #ece5f7, #e0d8ef);
-    height: 90px; border-radius: 8px; display: flex;
-    align-items: center; justify-content: center; color: #8a7aa8; font-size: 11px; margin: 8px 0 4px;
-    border: 1px dashed #c4b6dd; text-align: center; padding: 0 10px;
+    background: repeating-linear-gradient(45deg, #f4f6f8, #f4f6f8 8px, #eceff2 8px, #eceff2 16px);
+    min-height: 90px; border-radius: 6px; display: flex;
+    align-items: center; justify-content: center; color: #7a8894; font-size: 11px; margin: 8px 0 4px;
+    border: 1px dashed #b8c2cc; text-align: center; padding: 10px;
   }
 
-  /* 花期卡 */
-  .season {
-    margin: 4px 22px 0; padding: 14px 16px;
-    background: #f3edfa; border-radius: 10px;
+  /* 区块内容（中性灰线框风格） */
+  .blk-slogan { font-family: Georgia, serif; font-size: 13px; font-style: italic; letter-spacing: 1.5px; color: #6a7480; margin: 10px 0 6px; text-align: center; }
+  .blk-h1 { font-size: 18px; font-weight: 800; color: #232a31; text-align: center; line-height: 1.4; margin-bottom: 6px; }
+  .blk-sub { font-size: 12px; color: #5a6672; text-align: center; line-height: 1.7; }
+
+  .hl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; }
+  .hl-item { display: flex; align-items: flex-start; gap: 6px; font-size: 11.5px; color: #3a444d; line-height: 1.55; }
+  .hl-item .check {
+    flex-shrink: 0; width: 14px; height: 14px; border: 1.5px solid #8aa0b4; border-radius: 3px;
+    color: #4a5560; font-size: 10px; line-height: 13px; text-align: center; font-weight: 700;
   }
-  .season h4 { font-size: 12.5px; color: #3d2a5c; margin-bottom: 6px; }
-  .season p { font-size: 12px; color: #4a4a5a; line-height: 1.75; }
 
-  /* 资质 */
-  .logistics { padding: 22px; background: #f6f3fa; border-top: 1px solid #f0f0f0; }
-  .logistics h3 { font-size: 13px; margin-bottom: 10px; line-height: 1.5; color: #3d2a5c; }
-  .logistics p { font-size: 12px; color: #4a4a5a; line-height: 1.8; margin-bottom: 4px; }
+  .pain {
+    font-size: 12.5px; line-height: 1.8; color: #3a444d;
+    background: #f5f7f9; border-left: 3px solid #b0bac4;
+    padding: 12px 14px; border-radius: 0 8px 8px 0;
+  }
+  .pain b { color: #232a31; }
 
-  /* FAQ */
-  .faq { padding: 22px; }
-  .faq h3 { font-size: 14px; margin-bottom: 14px; font-weight: 700; color: #2a2a3a; }
-  .faq-item { margin-bottom: 10px; padding: 10px 12px; background: #f6f3fa; border-radius: 8px; }
-  .faq-item .q { font-size: 12.5px; font-weight: 600; margin-bottom: 4px; }
-  .faq-item .a { font-size: 12px; color: #5a5a6a; line-height: 1.65; }
-  .faq-closing { font-size: 12px; color: #8a8a9a; margin-top: 14px; }
-  .img-credit { font-size: 10px; color: #aaaab5; text-align: center; padding: 14px 22px 18px; line-height: 1.6; }
+  .kv p { font-size: 12px; color: #4a545e; line-height: 1.85; }
+  .kv .em { color: #232a31; font-weight: 700; }
+
+  .route-title { font-size: 14px; font-weight: 700; color: #232a31; margin-bottom: 3px; }
+  .route-hook { font-size: 11px; color: #7a8894; margin-bottom: 12px; }
+  .timeline { position: relative; padding-left: 18px; }
+  .timeline::before { content: ''; position: absolute; left: 4px; top: 6px; bottom: 6px; width: 2px; background: #dde3e9; }
+  .timeline-item { position: relative; padding-bottom: 14px; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -18px; top: 4px; width: 8px; height: 8px;
+    border-radius: 50%; background: #fff; border: 2px solid #b8c2cc;
+  }
+  .timeline-item.peak::before { background: #ffd966; border-color: #d9a400; box-shadow: 0 0 0 3px rgba(255,217,102,.3); }
+  .timeline-item .time { font-size: 11px; font-weight: 700; color: #4a5560; margin-bottom: 2px; }
+  .timeline-item .name { font-size: 13px; font-weight: 600; color: #232a31; margin-bottom: 3px; line-height: 1.4; }
+  .timeline-item .name .dur { font-weight: 400; color: #8a95a0; font-size: 11px; }
+  .timeline-item .desc { font-size: 12px; color: #5a6672; line-height: 1.7; }
+  .peak-tag {
+    display: inline-block; font-size: 10px; background: #fff3d0; color: #8a6d00;
+    padding: 2px 7px; border-radius: 4px; margin-left: 4px; font-weight: 600;
+  }
+  .free-tag {
+    display: inline-block; font-size: 10px; background: #e8edf2; color: #4a5560;
+    padding: 2px 7px; border-radius: 4px; margin-left: 4px; font-weight: 600;
+  }
+  .timeline-item .note { font-size: 11px; color: #8a95a0; margin-top: 4px; line-height: 1.65; }
+
+  .info-card { background: #f5f7f9; border: 1px dashed #c4cdd5; border-radius: 8px; padding: 12px 14px; }
+  .info-card h4 { font-size: 12.5px; color: #2f3a44; margin-bottom: 5px; }
+  .info-card p { font-size: 12px; color: #4a545e; line-height: 1.8; }
+
+  .faq-item { margin-bottom: 8px; padding: 9px 12px; background: #f7f8fa; border: 1px solid #e8ecf0; border-radius: 8px; }
+  .faq-item .q { font-size: 12.5px; font-weight: 600; color: #232a31; margin-bottom: 3px; }
+  .faq-item .a { font-size: 12px; color: #5a6672; line-height: 1.7; }
+  .faq-closing { font-size: 12px; color: #8a95a0; margin-top: 10px; }
+  .img-credit { font-size: 10px; color: #a0a8b1; text-align: center; padding: 16px 10px 4px; line-height: 1.7; }
 </style>
 </head>
 <body>
-<div class="split single">
-<div class="col col-kr"><div class="col-header">🇰🇷 한국어 원문</div><div class="phone">
-<div class="section-label">① 메인 비주얼</div>
-<div class="hero">
-  <div class="hero-img"><img src="img/tomita.jpg" alt="삿포로 출발 후라노·비에이 4인 소그룹 1일 투어"></div>
-  <div class="hero-inner">
-    <div class="slogan">ONE DAY. THREE COLORS OF SUMMER.</div>
-    <h1>삿포로 출발 후라노·비에이 4인 소그룹 1일 투어</h1>
-    <div class="subtitle">보랏빛 라벤더, 무지개 꽃밭, 신비로운 파란 연못.<br>여름 홋카이도의 세 가지 색을 하루에 담는 인생샷 투어</div>
-  </div>
+<div class="page single">
+<div class="doc-head">
+  <h1>후라노·비에이 1일 투어 · 디자인 가이드 와이어프레임 v2 (2026-07-29)</h1>
+  <p>本文档 = 结构骨架 + 文案定稿（韩/中对照）+ 逐区块设计指引。骨架与文案请保持，视觉风格（配色/字体/版式质感）由美工按指引自由发挥。</p>
+  <div class="global-spec"><ul><li>整体气质：夏日、明亮、通透、自然系。这是卖「夏天的颜色」的产品，页面本身要有夏天的感觉。</li>
+<li>配色建议方向：薰衣草紫系为主色 + 白底 + 少量暖金点缀（高光/门票标记），最终配色由你定。</li>
+<li>字体建议：韩文 Noto Sans KR，中文 思源黑体；正文 12-13px，移动端优先、单列阅读。</li>
+<li>全页照片均为占位参考图（标注「氛围参考」），正式版全部替换为自家实拍。</li>
+<li>页面为韩语面向韩国客人，中文列仅供内部对照，成品只需韩语版。</li></ul></div>
 </div>
-<div class="section-label">② 대형 버스투어와 다른 점 6</div>
-<div class="hl"><h3>■ 왜 이 투어인가요?</h3><div class="hl-grid"><div class="hl-item"><span class="check">✓</span><span>삿포로역 3km 이내 숙소 앞 픽업 (이른 아침 집합 장소 이동 NO)</span></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计指引 · ① 主视觉 HERO</div><ul><li>目的：3秒内传达「夏日富良野 + 札幌出发 + 小团」三件事，决定用户要不要往下滑。</li>
+<li><span class='do'>建议</span>：实拍薰衣草花田大图（明亮通透、16:9 或 4:3）；标题可压图也可图下，保证移动端可读。</li>
+<li>层级：h1主标题 &gt; slogan英文小字（氛围用，可弱化）&gt; 副标题一行卖点。</li>
+<li><span class='dont'>避免</span>：暗色滤镜、冬季/雪景素材、厚重渐变遮罩压住花田。</li>
+<li>下方参考图仅为氛围示意，成品须用自家实拍或授权图。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="ref-img hero-ref"><img src="img/tomita.jpg" alt="hero 参考"><div class="ref-cap">氛围参考 · 需替换实拍主视觉</div></div>
+<div class="blk-slogan">ONE DAY. THREE COLORS OF SUMMER.</div>
+<div class="blk-h1">삿포로 출발 후라노·비에이 4인 소그룹 1일 투어</div>
+<div class="blk-sub">보랏빛 라벤더, 무지개 꽃밭, 신비로운 파란 연못.<br>여름 홋카이도의 세 가지 색을 하루에 담는 인생샷 투어</div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计指引 · ② 差异化亮点 ×6</div><ul><li>目的：和49人大巴团划清界限，扫读式对比。</li>
+<li><span class='do'>建议</span>：2列网格、每点一行短句；icon统一线性风格、不要混用面性/3D。</li>
+<li>权重：第1点（住宿门口接送）和第2点（4人小团）是最强卖点，可用icon或排序突出。</li>
+<li><span class='dont'>避免</span>：做成荣誉证书式的勋章墙，太硬。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="hl-grid"><div class="hl-item"><span class="check">✓</span><span>삿포로역 3km 이내 숙소 앞 픽업 (이른 아침 집합 장소 이동 NO)</span></div>
 <div class="hl-item"><span class="check">✓</span><span>최소 4명 출발 · 49인승 대형 버스가 아닌 소그룹</span></div>
 <div class="hl-item"><span class="check">✓</span><span>사계채의 언덕 입장권 포함 · 현지 추가 비용 없음 (식사 제외)</span></div>
 <div class="hl-item"><span class="check">✓</span><span>매 스폿 포토타임 확보 · 제트코스터 로드 차창 감상 포함</span></div>
 <div class="hl-item"><span class="check">✓</span><span>일본어·영어 기사 + 번역 앱 + 카카오톡 한국어 상담</span></div>
-<div class="hl-item"><span class="check">✓</span><span>여행일 3일 전까지 통보 시 100% 전액 환불</span></div></div></div>
-<div class="pain">🤔 "7시 반 집합, 49인승 버스, 좌석은 선착순." 대형 버스투어의 하루는 이렇게 시작합니다. 이 투어는 <b>숙소 앞에서 시작</b>해, 돌아오는 길엔 편하게 잠들 수 있습니다. 운전과 길 찾기는 저희가 할게요. 당신은 창밖의 여름만 담으세요.</div>
-<div class="section-label" style="margin-top:16px">③ 픽업 안내</div>
-<div class="pickup"><h3>■ 픽업 안내</h3><p><span class='em'>예정 8:00 삿포로 출발</span></p>
+<div class="hl-item"><span class="check">✓</span><span>여행일 3일 전까지 통보 시 100% 전액 환불</span></div></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计指引 · ③ 痛点钩子（共鸣段）</div><ul><li>目的：先说出大巴团的痛，再转折「我们不一样」，承上启下。</li>
+<li><span class='do'>建议</span>：对话/引用感样式（引号、气泡或便签感均可），与正文明显区分；情绪克制，不要嘲讽感。</li>
+<li><span class='dont'>避免</span>：大段红字、警告图标堆砌。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="pain">🤔 "7시 반 집합, 49인승 버스, 좌석은 선착순." 대형 버스투어의 하루는 이렇게 시작합니다. 이 투어는 <b>숙소 앞에서 시작</b>해, 돌아오는 길엔 편하게 잠들 수 있습니다. 운전과 길 찾기는 저희가 할게요. 당신은 창밖의 여름만 담으세요.</div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计指引 · ④ 接送信息</div><ul><li>目的：让客人自己判断「我能不能被接」，减少售前咨询。</li>
+<li><span class='do'>建议</span>：条目式即可；如想加分，可画一张「札幌站为中心、3km圈」的简易示意图。</li>
+<li>「预计8:00出发」需视觉强调（加粗或色块），这是客人最关心的数字。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="kv"><p><span class='em'>예정 8:00 삿포로 출발</span></p>
 <p>삿포로역 반경 3km 이내 숙소 → 숙소 앞 픽업</p>
 <p>3km 밖 숙소 → 삿포로역 집합 (상세 장소는 전날 안내)</p>
-<p>정확한 픽업 시간은 출발 전날 단톡방에서 안내드립니다</p></div>
-<div class="section-label">④ 일정 타임라인</div>
-<div class="route-section">
-  <div class="route-title">후라노·비에이 3色 파노라마</div>
-  <div class="route-hook">보라(라벤더) → 무지개(사계채) → 파랑(청의 호수) · 매 스폿 포토타임</div>
-  <div class="timeline"><div class="timeline-item">
+<p>정확한 픽업 시간은 출발 전날 단톡방에서 안내드립니다</p></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计指引 · ⑤ 行程时间线（核心区块）</div><ul><li>目的：整页信息密度最高的部分，要做出「一天的节奏感」。</li>
+<li><span class='do'>建议</span>：竖向时间轴；⭐富田农场是全行程高光，可放大照片或加标记（峰终定律：客人只记得最高点和结尾）。</li>
+<li>配图节奏：富田农场、四季彩之丘、青池、白须瀑布 4 张实拍（16:9）；云霄飞车之路为车窗观赏（不下车），配图需车内视角。</li>
+<li>「含门票」标签建议做成小徽章样式，是打消隐形消费顾虑的信任点。</li>
+<li><span class='dont'>注意</span>：所有时间均为「预计/예정」，设计时不要把时间做成承诺式大字。返程独立收束，含路况免责说明。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="route-title">후라노·비에이 3色 파노라마</div>
+<div class="route-hook">보라(라벤더) → 무지개(사계채) → 파랑(청의 호수) · 매 스폿 포토타임</div>
+<div class="timeline"><div class="timeline-item">
 <div class="time">예정 8:00</div>
 <div class="name">삿포로 출발 🚗 <span class="dur">(숙소 픽업 또는 삿포로역 집합 후)</span></div>
 </div>
@@ -179,7 +188,7 @@
 <div class="time">⭐ 예정 10:30</div>
 <div class="name">팜 토미타 <span class="dur">(약 60분 · 포토타임)</span><span class="peak-tag">⭐ 하이라이트</span></div>
 <div class="desc">여름 홋카이도의 아이콘. 보랏빛 라벤더가 언덕 끝까지 이어지고, 공기 가득 향기가 번집니다. 라벤더 소프트크림도 꼭 드셔 보세요.</div>
-<figure class="photo"><img src="img/tomita.jpg" alt="팜 토미타 라벤더 밭" loading="lazy"><figcaption>팜 토미타 라벤더 밭</figcaption></figure>
+<div class="ref-img"><img src="img/tomita.jpg" alt="팜 토미타 라벤더 밭" loading="lazy"><div class="ref-cap">氛围参考 · 需替换实拍 | 팜 토미타 라벤더 밭</div></div>
 </div>
 <div class="timeline-item">
 <div class="time">예정 11:30</div>
@@ -191,7 +200,7 @@
 <div class="time">예정 12:15</div>
 <div class="name">사계채의 언덕 <span class="dur">(약 60분)</span><span class="free-tag">입장권 포함 🎫</span></div>
 <div class="desc">15헥타르 언덕을 무지개색으로 칠한 꽃밭. 계절마다 다른 꽃이 피어, 언제 와도 새로운 색을 만납니다.</div>
-<figure class="photo"><img src="img/shikisai.jpg" alt="사계채의 언덕 무지개 꽃밭" loading="lazy"><figcaption>사계채의 언덕 무지개 꽃밭</figcaption></figure>
+<div class="ref-img"><img src="img/shikisai.jpg" alt="사계채의 언덕 무지개 꽃밭" loading="lazy"><div class="ref-cap">氛围参考 · 需替换实拍 | 사계채의 언덕 무지개 꽃밭</div></div>
 </div>
 <div class="timeline-item">
 <div class="time">예정 13:15</div>
@@ -202,40 +211,42 @@
 <div class="time">예정 15:00</div>
 <div class="name">청의 호수 <span class="dur">(약 30분 · 포토타임)</span></div>
 <div class="desc">물감을 풀어 놓은 듯한 파란 물빛. SNS에서 가장 많이 공유되는 홋카이도의 블루 스폿에서 오늘의 인생샷을 남기세요.</div>
-<figure class="photo"><img src="img/aoiike.jpg" alt="청의 호수(아오이이케)" loading="lazy"><figcaption>청의 호수(아오이이케)</figcaption></figure>
+<div class="ref-img"><img src="img/aoiike.jpg" alt="청의 호수(아오이이케)" loading="lazy"><div class="ref-cap">氛围参考 · 需替换实拍 | 청의 호수(아오이이케)</div></div>
 </div>
 <div class="timeline-item">
 <div class="time">예정 15:35</div>
 <div class="name">시라히게 폭포 <span class="dur">(약 25분)</span></div>
 <div class="desc">절벽 사이로 지하수가 흰 수염처럼 흘러내리는 드문 잠수 폭포. 코발트블루 비에이강과 함께 감상하세요.</div>
-<figure class="photo"><img src="img/shirahige.jpg" alt="시라히게 폭포" loading="lazy"><figcaption>시라히게 폭포</figcaption></figure>
+<div class="ref-img"><img src="img/shirahige.jpg" alt="시라히게 폭포" loading="lazy"><div class="ref-cap">氛围参考 · 需替换实拍 | 시라히게 폭포</div></div>
 </div>
 <div class="timeline-item">
 <div class="time">▼ 예정 16:00</div>
 <div class="name">삿포로로 출발 → 예정 18:30 삿포로 도착</div>
 <div class="note">⏰ 도로 상황에 따라 도착 시간이 앞뒤로 달라질 수 있습니다. 출발 시간이 정해진 교통편(항공·기차)이나 공연·레스토랑 예약은 가급적 다른 날짜에 잡아 주세요.</div>
-</div></div>
-</div>
-<div class="section-label">⑤ 꽃 시기 안내</div>
-<div class="season" style="margin-top:16px"><h4>🌸 라벤더 시즌 안내</h4><p>라벤더는 보통 6월 말부터 8월 초에 절정을 맞습니다. 개화 시기는 그해 날씨에 따라 앞뒤로 달라질 수 있어요. 라벤더 시즌이 지나도 사계채의 언덕에는 여름 내내 계절 꽃이 차례로 피어, 언제든 꽃밭을 즐기실 수 있습니다.</p></div>
-<div class="section-label" style="margin-top:16px">⑥ 자질·차량·언어 서비스</div>
-<div class="logistics">
-  <h3>🏛️ 일본 오사카부지사 등록 여행사 · JNTO(일본정부관광국) 협력사. 안심하고 맡기세요.</h3><p>🚐 차량: 당일 모객 인원에 맞춘 승합차 배차</p>
+</div></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计指引 · ⑥ 花期说明卡</div><ul><li>目的：管理预期，防止「没赶上盛花期」差评。</li>
+<li><span class='do'>建议</span>：信息卡样式；可配 6-8月横条迷你花期日历（盛花期高亮），一图胜千言。</li>
+<li>语气是贴心提示，不是免责声明，视觉上不要做成小字免责条。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="info-card"><h4>🌸 라벤더 시즌 안내</h4><p>라벤더는 보통 6월 말부터 8월 초에 절정을 맞습니다. 개화 시기는 그해 날씨에 따라 앞뒤로 달라질 수 있어요. 라벤더 시즌이 지나도 사계채의 언덕에는 여름 내내 계절 꽃이 차례로 피어, 언제든 꽃밭을 즐기실 수 있습니다.</p></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计指引 · ⑦ 资质·车辆·语言服务</div><ul><li>目的：信任收尾，临门一脚前打消「这家店靠谱吗」。</li>
+<li><span class='do'>建议</span>：资质证书+车辆实拍横排展示；文字克制，3行以内。</li>
+<li><span class='dont'>避免</span>：证书图过多堆砌，1-2张关键资质即可。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="kv"><p><b>🏛️ 일본 오사카부지사 등록 여행사 · JNTO(일본정부관광국) 협력사. 안심하고 맡기세요.</b></p><p>🚐 차량: 당일 모객 인원에 맞춘 승합차 배차</p>
 <p>📍 픽업 범위: 삿포로역 반경 3km 숙소 앞 픽업 (범위 밖은 삿포로역 집합)</p>
-<p>🗣️ 언어: 일본어·영어 가능 기사 + 번역 앱 지원 + 카카오톡 한국어 상담</p>
-  <div class="placeholder-img" style="height:100px;margin-top:12px">[ 자질증명서 + 차량 실물 사진 ]</div>
-</div>
-<div class="section-label">⑦ FAQ 8문</div>
-<div class="faq"><h3>■ 예약 전, 이것만 알아두세요.</h3><div class="faq-item"><div class="q">Q1. 몇 명부터 출발하나요?</div><div class="a">4명 이상 모이면 출발이 확정됩니다. 전 세계에서 동시에 예약을 받아 모객하기 때문에, 예약이 빠를수록 출발 확정 확률이 높아집니다. 만약 출발이 어렵게 되면 미리 개별로 안내드리며, 취소하실 경우 수수료 없이 전액 환불해 드립니다.</div></div>
+<p>🗣️ 언어: 일본어·영어 가능 기사 + 번역 앱 지원 + 카카오톡 한국어 상담</p></div>
+<div class="placeholder-img" style="margin-top:10px">[ 자질증명서 + 차량 실물 사진 ]</div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计指引 · ⑧ FAQ ×8</div><ul><li>目的：预订前最后答疑，覆盖 成团/车辆/天气/司机/联系/费用/退改/花期。</li>
+<li><span class='do'>建议</span>：手风琴或卡片列表；Q加粗、A降一档；8问完整保留（顺序按客人决策路径排过）。</li>
+<li>Q7退改规则建议视觉最规整（两档制，可做成两行对照），这是纠纷高发点。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="kv" style="margin-bottom:10px"><p><b>■ 예약 전, 이것만 알아두세요.</b></p></div><div class="faq-item"><div class="q">Q1. 몇 명부터 출발하나요?</div><div class="a">4명 이상 모이면 출발이 확정됩니다. 전 세계에서 동시에 예약을 받아 모객하기 때문에, 예약이 빠를수록 출발 확정 확률이 높아집니다. 만약 출발이 어렵게 되면 미리 개별로 안내드리며, 취소하실 경우 수수료 없이 전액 환불해 드립니다.</div></div>
 <div class="faq-item"><div class="q">Q2. 차량은 어떻게 배차되나요? 함께 타는 분은 누구인가요?</div><div class="a">소규모 합승으로 운행되며, 당일 모객 인원에 맞춰 승합차가 배차됩니다. 전 세계 게스트를 모객하기 때문에 다른 국가에서 오신 분들과 동승하실 수 있습니다. 함께하는 시간 동안 서로의 여행 이야기를 나누는 소소한 즐거움이 되기도 합니다. 한 번의 여행은 누구에게나 특별한 계획입니다. 저희는 모든 게스트분을 한 분 한 분 정성스럽게 모시고 있습니다.</div></div>
 <div class="faq-item"><div class="q">Q3. 비가 오거나 날씨가 흐려도 진행되나요?</div><div class="a">네, 진행됩니다. 비가 그친 뒤 꽃밭은 색이 더 선명해지고, 흐린 날에도 청의 호수의 파란색은 그대로입니다. 다만 태풍·폭설 등 악천후로 안전상 진행이 어려운 경우에는 출발 전 안내 후 전액 환불해 드립니다.</div></div>
 <div class="faq-item"><div class="q">Q4. 기사님이 안내도 해 주시나요? 한국어는 가능한가요?</div><div class="a">운전 겸 안내 기사가 동행합니다. 주요 포인트 도착 시 간단한 안내를 드리며, 각 명소에서 하차하여 자유롭게 관람하시면 됩니다. 기사님은 차량에서 대기하며 출발 시간에 맞춰 다음 장소로 이동합니다. 기사님은 일본어·영어가 가능하며, 한국어는 번역 앱으로 소통을 도와드립니다. 예약 후에는 카카오톡으로 한국어 상담이 가능합니다.</div></div>
 <div class="faq-item"><div class="q">Q5. 출발 전 연락은 어떻게 오나요?</div><div class="a">예약 완료 후, 자주 사용하시는 메신저(WhatsApp·LINE·KakaoTalk)를 남겨 주세요. WhatsApp을 가장 추천해 드립니다. 출발 전날, 온라인 여행 그룹(단톡방)을 만들어 드립니다. 그룹에는 기사님과 저희 담당자가 함께 계시며, 당일 이동 일정과 픽업 안내를 드립니다. 출발 당일 아침, 기사님이 약속된 시간에 숙소(또는 삿포로역 집합 장소) 앞으로 모시러 옵니다.</div></div>
 <div class="faq-item"><div class="q">Q6. 식사와 입장료는 포함되어 있나요?</div><div class="a">사계채의 언덕 입장권은 포함되어 있습니다. 팜 토미타·청의 호수·시라히게 폭포는 무료 입장입니다. 식사는 불포함이며, 점심 시간(약 1시간)에 주변 식당에서 개별 결제로 자유롭게 드시면 됩니다. 입장권 외에 현지에서 추가로 결제하실 비용은 없습니다.</div></div>
 <div class="faq-item"><div class="q">Q7. 취소 및 환불 규정은 어떻게 되나요?</div><div class="a">여행일 기준 3일 전까지 통보 시: 100% 전액 환불 / 여행일 기준 2일 전~당일 통보 시: 환불 불가 ※ 여행일은 현지(일본) 시각 기준입니다.</div></div>
-<div class="faq-item"><div class="q">Q8. 라벤더는 언제가 가장 예쁜가요?</div><div class="a">보통 6월 말부터 8월 초가 절정이며, 개화 시기는 그해 날씨에 따라 달라질 수 있습니다. 라벤더 시즌이 지나도 사계채의 언덕에는 여름 내내 계절 꽃이 피어 꽃밭을 즐기실 수 있습니다.</div></div><div class="faq-closing">■ 그 외에 궁금하신 점이 있으시면, 언제든 편하게 문의해 주세요.</div></div>
-<div class="img-credit">※ 본 페이지의 사진은 이해를 돕기 위한 참고 이미지(Wikimedia Commons)이며, 실제 상세페이지는 실사로 교체됩니다.</div>
-</div></div>
+<div class="faq-item"><div class="q">Q8. 라벤더는 언제가 가장 예쁜가요?</div><div class="a">보통 6월 말부터 8월 초가 절정이며, 개화 시기는 그해 날씨에 따라 달라질 수 있습니다. 라벤더 시즌이 지나도 사계채의 언덕에는 여름 내내 계절 꽃이 피어 꽃밭을 즐기실 수 있습니다.</div></div><div class="faq-closing">■ 그 외에 궁금하신 점이 있으시면, 언제든 편하게 문의해 주세요.</div></div></div></div>
+<div class="img-credit">※ 页内照片均为氛围参考图（Wikimedia Commons），仅用于示意画面感觉，正式详情页须全部替换为自家实拍图。</div>
 </div>
 </body>
 </html>
