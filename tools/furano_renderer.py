@@ -732,32 +732,151 @@ h1 {
 }
 """
 
+_BILINGUAL_CSS = """
+.bilingual .section__inner { width: min(100%, var(--wide)); }
+.bilingual .closing__inner { width: min(100% - 32px, var(--wide)); }
+.bilingual h1 { font-size: clamp(2.2rem, 4vw, 4.1rem); }
+.bilingual .timeline::before { display: none; }
+.bilingual .included-grid { grid-template-columns: 1fr; }
+
+.language-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+}
+
+.language-column { min-width: 0; }
+
+.language-column--kr {
+  border-right: 1px solid var(--line);
+}
+
+.language-label {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-bottom: 18px;
+  color: #31536B;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.hero .language-label,
+.closing .language-label { color: var(--white); }
+.language-column--zh .language-label { color: #7A4D2D; }
+.hero .language-column--zh .language-label,
+.closing .language-column--zh .language-label { color: var(--white); }
+
+.bilingual-media {
+  width: min(100%, var(--wide));
+  margin: 0 auto clamp(34px, 6vw, 68px);
+}
+
+.bilingual-media .editorial-photo img { aspect-ratio: 16 / 7; }
+
+.bilingual .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+.bilingual .benefit { min-height: 152px; }
+.bilingual .pickup-copy .lead { margin-bottom: 24px; }
+.bilingual .route-figure { margin-bottom: clamp(34px, 6vw, 68px); }
+
+.bilingual-stop {
+  padding: 0 0 clamp(54px, 9vw, 108px);
+}
+
+.bilingual-stop[data-peak="true"] {
+  padding: clamp(28px, 5vw, 54px);
+  margin-bottom: clamp(54px, 9vw, 108px);
+  border-radius: var(--radius);
+  background: var(--light-lavender);
+}
+
+.bilingual-stop__media { margin-bottom: 28px; }
+.bilingual-stop__media .itinerary-photo { width: 100%; }
+.bilingual-stop__media .itinerary-photo--detail { width: min(100%, 520px); }
+
+.bilingual-stop .stop__time {
+  display: block;
+  padding: 0;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.bilingual-faq summary,
+.bilingual-faq .faq-answer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+}
+
+.bilingual-faq summary { position: relative; padding-right: 34px; }
+.bilingual-faq summary::after { position: absolute; right: 2px; }
+.bilingual-faq .faq-answer { max-width: none; }
+.bilingual-faq .faq-answer p { min-width: 0; }
+.bilingual-faq .faq-answer p:first-child {
+  border-right: 1px solid var(--line);
+}
+
+@media (max-width: 880px) {
+  .language-grid,
+  .bilingual-faq summary,
+  .bilingual-faq .faq-answer { grid-template-columns: 1fr; }
+
+  .language-column--kr {
+    padding: 0 0 32px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .language-column--zh { padding-top: 32px; }
+  .bilingual-faq summary,
+  .bilingual-faq .faq-answer { gap: 12px; }
+  .bilingual-faq .faq-answer p:first-child {
+    padding: 0 0 18px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+"""
+
 
 def _text(value: object) -> str:
     return escape(str(value), quote=True)
 
 
-def picture(key: str, alt: str, *, hero: bool = False) -> str:
+def picture(
+    key: str,
+    alt: str,
+    *,
+    hero: bool = False,
+    small_fallback: bool = False,
+) -> str:
     """Return a responsive licensed-photo picture with explicit dimensions."""
     from tools.build_furano import ASSET_VERSION
 
     if key not in _PICTURES:
         raise KeyError(f"Unknown Furano picture: {key}")
     small, large = _PICTURES[key]
+    fallback = small if small_fallback else large
     loading = 'loading="eager" fetchpriority="high"' if hero else 'loading="lazy"'
     return (
         "<picture>"
         f'<source media="(max-width: 720px)" '
         f'srcset="img/{key}-{small[0]}.webp?v={ASSET_VERSION}">'
         f'<source srcset="img/{key}-{large[0]}.webp?v={ASSET_VERSION}">'
-        f'<img src="img/{key}-{large[0]}.webp?v={ASSET_VERSION}" '
-        f'width="{large[0]}" height="{large[1]}" alt="{_text(alt)}" '
+        f'<img src="img/{key}-{fallback[0]}.webp?v={ASSET_VERSION}" '
+        f'width="{fallback[0]}" height="{fallback[1]}" alt="{_text(alt)}" '
         f'{loading} decoding="async">'
         "</picture>"
     )
 
 
-def document(title: str, lang: str, body: str) -> str:
+def document(
+    title: str,
+    lang: str,
+    body: str,
+    *,
+    extra_css: str = "",
+) -> str:
     """Wrap page content in the shared cache-safe semantic document shell."""
     html = f"""<!doctype html>
 <html lang="{_text(lang)}">
@@ -769,7 +888,7 @@ def document(title: str, lang: str, body: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#202329">
   <title>{_text(title)}</title>
-  <style>{_CSS}</style>
+  <style>{_CSS}{extra_css}</style>
 </head>
 <body>{_DIRECTION_CONTRACT}
 {body}
@@ -779,10 +898,31 @@ def document(title: str, lang: str, body: str) -> str:
     return "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
 
 
-def _route_figure(ui: dict[str, Any]) -> str:
-    stops = "".join(f"<li>{_text(stop)}</li>" for stop in ui["route_stops"])
+def _route_figure(
+    ui: dict[str, Any],
+    secondary_ui: dict[str, Any] | None = None,
+) -> str:
+    if secondary_ui is None:
+        stops = "".join(f"<li>{_text(stop)}</li>" for stop in ui["route_stops"])
+        label = _text(ui["route_label"])
+        caption = _text(ui["route_disclaimer"])
+    else:
+        stops = "".join(
+            f'<li><span lang="ko">{_text(primary)}</span> / '
+            f'<span lang="zh-CN">{_text(secondary)}</span></li>'
+            for primary, secondary in zip(
+                ui["route_stops"],
+                secondary_ui["route_stops"],
+                strict=True,
+            )
+        )
+        label = _text(f'{ui["route_label"]} / {secondary_ui["route_label"]}')
+        caption = (
+            f'<span lang="ko">{_text(ui["route_disclaimer"])}</span> / '
+            f'<span lang="zh-CN">{_text(secondary_ui["route_disclaimer"])}</span>'
+        )
     return f"""
-<figure class="route-figure" role="img" aria-label="{_text(ui['route_label'])}">
+<figure class="route-figure" role="img" aria-label="{label}">
   <div class="route-canvas">
     <svg viewBox="0 0 620 320" aria-hidden="true" focusable="false">
       <path d="M24 282 C95 262 91 193 154 178 S224 52 298 68 S377 154 431 121 S511 25 565 51 S573 239 607 274"
@@ -797,7 +937,7 @@ def _route_figure(ui: dict[str, Any]) -> str:
     </svg>
     <ol class="route-stops">{stops}</ol>
   </div>
-  <figcaption class="route-caption">{_text(ui['route_disclaimer'])}</figcaption>
+  <figcaption class="route-caption">{caption}</figcaption>
 </figure>"""
 
 
@@ -1017,4 +1157,353 @@ def render_single(content: dict[str, object], lang: str) -> str:
     return document(str(ui["page_title"]), lang, body)
 
 
-__all__ = ["TOKENS", "document", "picture", "render_single"]
+def _language_grid(kr_html: str, zh_html: str) -> str:
+    return f"""<div class="language-grid">
+  <section class="language-column language-column--kr" lang="ko">{kr_html}</section>
+  <section class="language-column language-column--zh" lang="zh-CN">{zh_html}</section>
+</div>"""
+
+
+def _language_label(content: dict[str, Any]) -> str:
+    return f'<span class="language-label">{_text(content["header"])}</span>'
+
+
+def _bilingual_benefits(content: dict[str, Any]) -> str:
+    ui = content["editorial"]
+    highlights = content["hl"]
+    benefit_indexes = (0, 1, 2, 5)
+    benefits = "".join(
+        f"""<article class="benefit">
+  <span class="benefit__icon" aria-hidden="true">{_text(highlights[index][0])}</span>
+  <h3>{_text(ui["benefit_titles"][position])}</h3>
+  <p>{_text(highlights[index][1])}</p>
+</article>"""
+        for position, index in enumerate(benefit_indexes)
+    )
+    return f"""
+{_language_label(content)}
+<h2>{_text(ui["benefits_title"])}</h2>
+<p class="lead">{_text(ui["benefits_intro"])}</p>
+<div class="benefit-grid">{benefits}</div>"""
+
+
+def _bilingual_route_figure(
+    kr_ui: dict[str, Any],
+    zh_ui: dict[str, Any],
+) -> str:
+    return _route_figure(kr_ui, zh_ui)
+
+
+def _bilingual_stop_copy(
+    item: dict[str, Any],
+    ui: dict[str, Any],
+    index: int,
+) -> str:
+    duration = item.get("dur", "")
+    description = item.get("desc", "")
+    note = item.get("note", "")
+    extra = ""
+    badge = ""
+    if index == 1:
+        extra = f'<p class="stop__note">{_text(ui["tomita_note"])}</p>'
+    elif index == 3:
+        badge = f'<span class="included-badge">{_text(ui["included_badge"])}</span>'
+    elif index == 4:
+        extra = f'<p class="stop__note">{_text(ui["lunch_note"])}</p>'
+    return f"""
+<time class="stop__time">{_text(item["time"])}</time>
+<h3>{_text(item["name"])}</h3>
+{badge}
+{f'<p class="stop__duration">{_text(duration)}</p>' if duration else ''}
+{f'<p class="stop__description">{_text(description)}</p>' if description else ''}
+{extra}
+{f'<p class="stop__note">{_text(note)}</p>' if note else ''}"""
+
+
+def _bilingual_itinerary(
+    kr: dict[str, Any],
+    zh: dict[str, Any],
+) -> str:
+    kr_ui = kr["editorial"]
+    zh_ui = zh["editorial"]
+    blocks: list[str] = []
+    for index, (kr_item, zh_item) in enumerate(
+        zip(kr["itinerary"], zh["itinerary"], strict=True)
+    ):
+        media = ""
+        if index == 2:
+            shared_road_ui = {
+                "road_label": f'{kr_ui["road_label"]} / {zh_ui["road_label"]}',
+                "road_note": f'{kr_ui["road_note"]} / {zh_ui["road_note"]}',
+            }
+            media = _road_window(shared_road_ui)
+        elif index == 3:
+            media = (
+                '<div class="itinerary-photo">'
+                f'{picture("shikisai", kr_ui["shikisai_alt"], small_fallback=True)}</div>'
+            )
+        elif index == 4:
+            media = (
+                '<div class="itinerary-photo itinerary-photo--detail">'
+                f'{picture("lavender-softserve", kr_ui["softserve_alt"], small_fallback=True)}</div>'
+            )
+        elif index == 5:
+            media = (
+                '<div class="itinerary-photo">'
+                f'{picture("blue-pond", kr_ui["blue_pond_alt"], small_fallback=True)}</div>'
+            )
+        elif index == 6:
+            media = (
+                '<div class="itinerary-photo">'
+                f'{picture("shirahige", kr_ui["shirahige_alt"], small_fallback=True)}</div>'
+            )
+
+        media_html = (
+            f'<div class="bilingual-stop__media">{media}</div>' if media else ""
+        )
+        peak = ' data-peak="true"' if kr_item.get("peak") else ""
+        blocks.append(
+            f"""<article class="bilingual-stop"{peak}>
+  {media_html}
+  {_language_grid(
+      _bilingual_stop_copy(kr_item, kr_ui, index),
+      _bilingual_stop_copy(zh_item, zh_ui, index),
+  )}
+</article>"""
+        )
+    return "\n".join(blocks)
+
+
+def _bilingual_included(content: dict[str, Any]) -> str:
+    ui = content["editorial"]
+    return f"""
+{_language_label(content)}
+<h2>{_text(ui["included_title"])}</h2>
+<div class="included-grid">
+  <section class="included-column">
+    <h3>{_text(ui["included_heading"])}</h3>
+    <ul>{_list(ui["included_items"])}</ul>
+  </section>
+  <section class="included-column">
+    <h3>{_text(ui["not_included_heading"])}</h3>
+    <ul>{_list(ui["not_included_items"])}</ul>
+  </section>
+  <section class="included-column">
+    <h3>{_text(ui["service_heading"])}</h3>
+    <ul>{_list(ui["service_items"])}</ul>
+  </section>
+</div>"""
+
+
+def _bilingual_cancellation(content: dict[str, Any]) -> str:
+    ui = content["editorial"]
+    return f"""
+{_language_label(content)}
+<h2>{_text(ui["cancellation_title"])}</h2>
+<div class="refund-bands">
+  <article class="refund-band refund-band--positive">
+    <h3>{_text(ui["refund_early_title"])}</h3>
+    <p>{_text(ui["refund_early_body"])}</p>
+  </article>
+  <article class="refund-band">
+    <h3>{_text(ui["refund_late_title"])}</h3>
+    <p>{_text(ui["refund_late_body"])}</p>
+  </article>
+</div>
+<div class="refund-notes">
+  <article class="refund-note">
+    <strong>{_text(ui["formation_title"])}</strong>
+    <p>{_text(ui["formation_body"])}</p>
+  </article>
+  <article class="refund-note">
+    <strong>{_text(ui["weather_title"])}</strong>
+    <p>{_text(ui["weather_body"])}</p>
+  </article>
+</div>
+<p class="local-time-note">{_text(ui["local_time_note"])}</p>"""
+
+
+def _bilingual_faq(kr: dict[str, Any], zh: dict[str, Any]) -> str:
+    items = []
+    for index, ((kr_question, kr_answer), (zh_question, zh_answer)) in enumerate(
+        zip(kr["faq"], zh["faq"], strict=True)
+    ):
+        items.append(
+            f"""<details{' open' if index == 0 else ''}>
+  <summary>
+    <span lang="ko">{_text(kr_question)}</span>
+    <span lang="zh-CN">{_text(zh_question)}</span>
+  </summary>
+  <div class="faq-answer">
+    <p lang="ko">{_text(kr_answer)}</p>
+    <p lang="zh-CN">{_text(zh_answer)}</p>
+  </div>
+</details>"""
+        )
+    return "".join(items)
+
+
+def _bilingual_closing(content: dict[str, Any]) -> str:
+    ui = content["editorial"]
+    guarantees = "".join(f"<li>{_text(item)}</li>" for item in ui["guarantees"])
+    return f"""
+{_language_label(content)}
+<h2>{_text(ui["closing_title"])}</h2>
+<p>{_text(ui["closing_body"])}</p>
+<ul class="guarantees">{guarantees}</ul>
+<nav class="actions" aria-label="{_text(ui["closing_title"])}">
+  <a class="button" href="#itinerary">{_text(ui["closing_itinerary"])}</a>
+  <a class="button button--quiet" href="#top">{_text(ui["back_to_top"])}</a>
+</nav>"""
+
+
+def render_bilingual(
+    kr: dict[str, object],
+    zh: dict[str, object],
+) -> str:
+    """Render the Korean-left, Simplified-Chinese-right review page."""
+    kr_ui = kr["editorial"]
+    zh_ui = zh["editorial"]
+    assert isinstance(kr_ui, dict)
+    assert isinstance(zh_ui, dict)
+    kr_pickup = kr["pickup"]
+    zh_pickup = zh["pickup"]
+    assert isinstance(kr_pickup, list)
+    assert isinstance(zh_pickup, list)
+
+    hero = _language_grid(
+        f"""
+{_language_label(kr)}
+<p class="hero__slogan">{_text(kr["slogan"])}</p>
+<h1>{_text(kr["h1"])}</h1>
+<p class="hero__subtitle">{str(kr["subtitle"])}</p>
+<nav class="actions" aria-label="{_text(kr_ui["page_title"])}">
+  <a class="button" href="#itinerary">{_text(kr_ui["primary_cta"])}</a>
+  <a class="button button--quiet" href="#pickup">{_text(kr_ui["secondary_cta"])}</a>
+</nav>""",
+        f"""
+{_language_label(zh)}
+<p class="hero__slogan">{_text(zh["slogan"])}</p>
+<h1>{_text(zh["h1"])}</h1>
+<p class="hero__subtitle">{str(zh["subtitle"])}</p>
+<nav class="actions" aria-label="{_text(zh_ui["page_title"])}">
+  <a class="button" href="#itinerary">{_text(zh_ui["primary_cta"])}</a>
+  <a class="button button--quiet" href="#pickup">{_text(zh_ui["secondary_cta"])}</a>
+</nav>""",
+    )
+
+    pickup = _language_grid(
+        f"""
+{_language_label(kr)}
+<h2>{_text(kr_ui["pickup_title"])}</h2>
+<strong class="pickup-time">{_text(kr["pickup_time"])}</strong>
+<p class="lead">{_text(kr_ui["pickup_intro"])}</p>
+<ul class="plain-list">{_list(kr_pickup)}</ul>""",
+        f"""
+{_language_label(zh)}
+<h2>{_text(zh_ui["pickup_title"])}</h2>
+<strong class="pickup-time">{_text(zh["pickup_time"])}</strong>
+<p class="lead">{_text(zh_ui["pickup_intro"])}</p>
+<ul class="plain-list">{_list(zh_pickup)}</ul>""",
+    )
+
+    itinerary_heading = _language_grid(
+        f"""
+{_language_label(kr)}
+<h2>{_text(kr_ui["itinerary_title"])}</h2>
+<p class="lead">{_text(kr_ui["itinerary_intro"])}</p>""",
+        f"""
+{_language_label(zh)}
+<h2>{_text(zh_ui["itinerary_title"])}</h2>
+<p class="lead">{_text(zh_ui["itinerary_intro"])}</p>""",
+    )
+
+    faq_heading = _language_grid(
+        f"{_language_label(kr)}<h2>{_text(kr['faq_title'])}</h2>",
+        f"{_language_label(zh)}<h2>{_text(zh['faq_title'])}</h2>",
+    )
+
+    body = f"""
+<a class="skip-link" href="#main-content">{_text(kr_ui["skip"])} / {_text(zh_ui["skip"])}</a>
+<div class="bilingual">
+<header class="hero" id="top">
+  <div class="hero__photo">{picture("hero-farm-tomita", kr_ui["hero_alt"], hero=True, small_fallback=True)}</div>
+  <div class="hero__inner">{hero}</div>
+</header>
+
+<main id="main-content">
+  <section class="section benefits" id="benefits">
+    <div class="section__inner">{_language_grid(
+        _bilingual_benefits(kr),
+        _bilingual_benefits(zh),
+    )}</div>
+  </section>
+
+  <section class="section pain-solution" id="pain-solution">
+    <div class="section__inner">
+      <div class="bilingual-media">
+        <div class="editorial-photo">{picture("furano-people", kr_ui["people_alt"], small_fallback=True)}</div>
+      </div>
+      {_language_grid(
+          f'{_language_label(kr)}<h2>{_text(kr_ui["pain_title"])}</h2><p>{_text(kr_ui["pain_body"])}</p>',
+          f'{_language_label(zh)}<h2>{_text(zh_ui["pain_title"])}</h2><p>{_text(zh_ui["pain_body"])}</p>',
+      )}
+    </div>
+  </section>
+
+  <section class="section pickup" id="pickup">
+    <div class="section__inner pickup-copy">
+      {_bilingual_route_figure(kr_ui, zh_ui)}
+      {pickup}
+    </div>
+  </section>
+
+  <section class="section itinerary" id="itinerary">
+    <div class="section__inner">
+      {itinerary_heading}
+      <div class="timeline">{_bilingual_itinerary(kr, zh)}</div>
+    </div>
+  </section>
+
+  <section class="section included" id="included">
+    <div class="section__inner">{_language_grid(
+        _bilingual_included(kr),
+        _bilingual_included(zh),
+    )}</div>
+  </section>
+
+  <section class="section cancellation" id="cancellation">
+    <div class="section__inner">{_language_grid(
+        _bilingual_cancellation(kr),
+        _bilingual_cancellation(zh),
+    )}</div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <div class="section__inner">
+      {faq_heading}
+      <div class="faq-list bilingual-faq">{_bilingual_faq(kr, zh)}</div>
+    </div>
+  </section>
+
+  <section class="closing" id="closing">
+    <div class="closing__photo">{picture("blue-pond", kr_ui["blue_pond_alt"], small_fallback=True)}</div>
+    <div class="closing__inner">{_language_grid(
+        _bilingual_closing(kr),
+        _bilingual_closing(zh),
+    )}</div>
+  </section>
+</main>
+
+<footer class="credits">
+  <a href="img/SOURCES.md">
+    <span lang="ko">{_text(kr_ui["sources"])}</span>&nbsp;/&nbsp;
+    <span lang="zh-CN">{_text(zh_ui["sources"])}</span>
+  </a>
+</footer>
+</div>"""
+    title = f'{kr_ui["page_title"]} / {zh_ui["page_title"]}'
+    return document(title, "ko", body, extra_css=_BILINGUAL_CSS)
+
+
+__all__ = ["TOKENS", "document", "picture", "render_bilingual", "render_single"]

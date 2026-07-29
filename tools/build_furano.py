@@ -279,13 +279,14 @@ ZH["editorial"] = {
 
 
 def build_all(output_dir: Path) -> dict[str, str]:
-    """Render the two single-language pages into *output_dir*."""
-    from tools.furano_renderer import render_single
+    """Render the Chinese, Korean, and bilingual pages into *output_dir*."""
+    from tools.furano_renderer import render_bilingual, render_single
 
     output_dir.mkdir(parents=True, exist_ok=True)
     outputs = {
         "zh": ("index.html", render_single(ZH, "zh-CN")),
         "kr": ("wireframe_kr.html", render_single(KR, "ko")),
+        "bi": ("bilingual.html", render_bilingual(KR, ZH)),
     }
     for _, (filename, html) in outputs.items():
         (output_dir / filename).write_text(html, encoding="utf-8", newline="\n")
