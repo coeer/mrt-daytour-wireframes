@@ -1,5 +1,15 @@
 """Approved bilingual product content for the Furano/Biei day tour."""
 
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 ASSET_VERSION = "20260729-v4"
 ITINERARY_KEYS = (
     "sapporo_depart",
@@ -152,3 +162,149 @@ ZH = {
     "included_ticket": "四季彩之丘门票",
     "refund_summary": "以出行日为准，提前3天及之前通知：100%全额退款。以出行日为准，提前2天至当天通知：不可退款。※ 出行日以当地（日本）时间为准。不成团也无损退款。",
 }
+
+KR["editorial"] = {
+    "page_title": "삿포로 출발 후라노·비에이 소그룹 1일 투어",
+    "skip": "본문으로 바로가기",
+    "hero_alt": "팜 토미타의 보랏빛 라벤더와 여름 꽃밭",
+    "primary_cta": "행정과 포함 내용 보기",
+    "secondary_cta": "먼저 픽업 범위 보기",
+    "benefits_title": "아침의 수고를 덜고, 여름의 색에 더 오래",
+    "benefits_intro": "결정에 필요한 네 가지 조건을 먼저 확인해 보세요.",
+    "benefit_titles": ("숙소 앞 픽업", "4인 소그룹", "입장권 포함", "미성사 전액 환불"),
+    "pain_title": "집합 장소를 찾아 뛰는 아침 대신",
+    "pain_body": "전통적인 대형 버스 투어는 이른 시간에 지정 장소로 이동하고, 짧은 체류 시간에 맞춰 서둘러야 할 수 있습니다. 이 투어는 숙소 가까이에서 시작하고 소그룹 리듬으로 움직여 사진과 관람에 더 집중할 수 있습니다.",
+    "people_alt": "후라노 꽃밭 사이를 걷는 여행객들",
+    "pickup_title": "삿포로에서 시작하는 하루의 동선",
+    "pickup_intro": "정확한 내비게이션 지도가 아닌, 하루의 이동 순서를 보여 주는 안내도입니다.",
+    "route_label": "삿포로에서 후라노와 비에이를 거쳐 돌아오는 안내 동선",
+    "route_stops": ("삿포로", "팜 토미타", "사계채의 언덕", "청의 호수", "시라히게 폭포", "삿포로 귀환"),
+    "itinerary_title": "예정 시간을 따라 읽는 여덟 장면",
+    "itinerary_intro": "관광과 이동 시간을 함께 확인하세요. 당일 도로 상황에 따라 시간은 앞뒤로 달라질 수 있습니다.",
+    "tomita_note": "이 페이지의 가장 선명한 장면. 약 60분 동안 라벤더 밭을 자유롭게 둘러봅니다.",
+    "road_label": "차창으로 이어지는 제트코스터 로드의 오르내림",
+    "road_note": "차창 감상 구간 · 하차 없음",
+    "included_badge": "입장권 포함",
+    "lunch_note": "라벤더 소프트크림은 현지에서 선택할 수 있는 간식 예시이며, 점심이나 투어 포함 식사는 아닙니다.",
+    "softserve_alt": "팜 토미타의 라벤더 소프트크림",
+    "shikisai_alt": "사계채의 언덕에 펼쳐진 여러 색의 꽃밭",
+    "blue_pond_alt": "자작나무 사이로 보이는 비에이 청의 호수",
+    "shirahige_alt": "비에이 강으로 흘러내리는 시라히게 폭포",
+    "included_title": "포함 범위와 현장 운영",
+    "included_heading": "포함",
+    "included_items": ("사계채의 언덕 입장권",),
+    "not_included_heading": "불포함",
+    "not_included_items": ("식사", "개인 소비"),
+    "service_heading": "차량과 안내",
+    "service_items": (
+        "당일 성사 인원에 맞춰 승합차를 배차합니다.",
+        "일본어·영어 가능 기사와 번역 앱을 지원합니다.",
+        "주요 지점에서 짧게 안내한 뒤 자유롭게 관람합니다.",
+    ),
+    "cancellation_title": "계획이 바뀔 때의 환불 기준",
+    "refund_early_title": "여행일 3일 전까지",
+    "refund_early_body": "통보 시 100% 전액 환불",
+    "refund_late_title": "여행일 2일 전부터 당일까지",
+    "refund_late_body": "통보 시 환불 불가",
+    "formation_title": "4인 미성사",
+    "formation_body": "미리 안내 후 수수료 없이 전액 환불",
+    "weather_title": "안전상 운행 불가한 악천후",
+    "weather_body": "출발 전 안내 후 전액 환불",
+    "local_time_note": "여행일은 현지 일본 시각을 기준으로 합니다.",
+    "closing_title": "마지막까지, 조건은 선명하게",
+    "closing_body": "소그룹의 리듬으로 후라노와 비에이의 여름을 만나고, 돌아오는 길까지 부담을 덜어 보세요.",
+    "guarantees": ("4인 소그룹", "삿포로역 3km 내 숙소 픽업", "미성사 시 전액 환불"),
+    "closing_itinerary": "행정 다시 보기",
+    "back_to_top": "맨 위로",
+    "sources": "사진 출처와 라이선스",
+    "route_disclaimer": "노선 개요 · 실제 운행 경로와 다를 수 있습니다.",
+}
+
+ZH["editorial"] = {
+    "page_title": "札幌出发 富良野·美瑛小团一日游",
+    "skip": "跳到正文",
+    "hero_alt": "富田农场紫色薰衣草与夏日花田",
+    "primary_cta": "查看行程与包含内容",
+    "secondary_cta": "先看接送范围",
+    "benefits_title": "少一点清晨奔波，多一点北海道夏色",
+    "benefits_intro": "先看清决定是否适合您的四个条件。",
+    "benefit_titles": ("住宿门口接送", "4人小团", "门票已包含", "不成团全额退款"),
+    "pain_title": "不用一早赶去集合点",
+    "pain_body": "传统大巴团通常需要清晨前往固定集合点，并在紧凑的停留节奏里匆忙拍照。这个行程从住宿附近开始，以小团节奏移动，把更多注意力留给拍照和游览。",
+    "people_alt": "游客走在富良野花田之间",
+    "pickup_title": "从札幌出发的一日动线",
+    "pickup_intro": "这不是精确导航地图，而是帮助理解当天移动顺序的路线示意。",
+    "route_label": "从札幌前往富良野和美瑛后返回的路线示意",
+    "route_stops": ("札幌", "富田农场", "四季彩之丘", "青池", "白须瀑布", "返回札幌"),
+    "itinerary_title": "沿预计时间阅读八段旅程",
+    "itinerary_intro": "请同时查看游览与移动时间。当天时间可能会因路况前后浮动。",
+    "tomita_note": "全页最鲜明的一幕。约60分钟自由欣赏薰衣草花田。",
+    "road_label": "从车窗看云霄飞车之路上下延伸",
+    "road_note": "车窗观赏路段·不下车",
+    "included_badge": "门票包含",
+    "lunch_note": "薰衣草冰淇淋只是当地可自由选择的点心示例，不代表午餐或任何餐食包含在团费内。",
+    "softserve_alt": "富田农场薰衣草冰淇淋",
+    "shikisai_alt": "四季彩之丘多彩花田",
+    "blue_pond_alt": "白桦树之间的美瑛青池",
+    "shirahige_alt": "流入美瑛川的白须瀑布",
+    "included_title": "费用范围与现场服务",
+    "included_heading": "包含",
+    "included_items": ("四季彩之丘门票",),
+    "not_included_heading": "不包含",
+    "not_included_items": ("餐食", "个人消费"),
+    "service_heading": "车辆与服务",
+    "service_items": (
+        "按当天成团人数安排商务车。",
+        "提供日语/英语司机与翻译app支持。",
+        "抵达主要景点后做简短说明，再自由参观。",
+    ),
+    "cancellation_title": "计划变化时的退款标准",
+    "refund_early_title": "出行日前3天及之前",
+    "refund_early_body": "通知可100%全额退款",
+    "refund_late_title": "出行日前2天至当天",
+    "refund_late_body": "通知不可退款",
+    "formation_title": "未达到4人成团",
+    "formation_body": "提前通知，并免手续费全额退款",
+    "weather_title": "恶劣天气导致安全上无法成行",
+    "weather_body": "出发前通知并全额退款",
+    "local_time_note": "出行日以当地（日本）时间为准。",
+    "closing_title": "到最后，条件依然清楚",
+    "closing_body": "以小团节奏走进富良野与美瑛的夏天，也让回程更轻松。",
+    "guarantees": ("4人小团", "札幌站3km内住宿接送", "不成团全额退款"),
+    "closing_itinerary": "再看行程",
+    "back_to_top": "返回顶部",
+    "sources": "照片来源与许可",
+    "route_disclaimer": "路线概览·可能与实际行车路径不同。",
+}
+
+
+def build_all(output_dir: Path) -> dict[str, str]:
+    """Render the two single-language pages into *output_dir*."""
+    from tools.furano_renderer import render_single
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    outputs = {
+        "zh": ("index.html", render_single(ZH, "zh-CN")),
+        "kr": ("wireframe_kr.html", render_single(KR, "ko")),
+    }
+    for _, (filename, html) in outputs.items():
+        (output_dir / filename).write_text(html, encoding="utf-8", newline="\n")
+    return {key: filename for key, (filename, _) in outputs.items()}
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path(__file__).resolve().parents[1] / "furano",
+        help="Output directory (default: <repo>/furano)",
+    )
+    args = parser.parse_args()
+    written = build_all(args.output)
+    for key, filename in written.items():
+        print(f"Wrote {key}: {args.output / filename}")
+
+
+if __name__ == "__main__":
+    main()

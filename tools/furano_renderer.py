@@ -1,14 +1,42 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#202329">
-  <title>札幌出发 富良野·美瑛小团一日游</title>
-  <style>
+"""Shared static renderer for the Furano/Biei editorial detail pages."""
+
+from __future__ import annotations
+
+from html import escape
+from typing import Any
+
+
+TOKENS = {
+    "warm_white": "#F7F5F0",
+    "white": "#FFFFFF",
+    "lavender": "#7C5DAA",
+    "light_lavender": "#E9E0F3",
+    "flower_pink": "#D96B87",
+    "pond_blue": "#2D7F9D",
+    "berry": "#B7445F",
+    "ink": "#202329",
+    "muted": "#62666D",
+}
+
+_PICTURES = {
+    "hero-farm-tomita": ((960, 720), (1600, 1200)),
+    "furano-people": ((960, 480), (1600, 800)),
+    "shikisai": ((960, 640), (1600, 1067)),
+    "blue-pond": ((960, 640), (1600, 1067)),
+    "shirahige": ((960, 640), (1600, 1067)),
+    "lavender-softserve": ((720, 540), (1200, 900)),
+}
+
+_DIRECTION_CONTRACT = """<!--
+THESIS: A Furano day tour reads like a Korean select-shop travel issue, not a card-heavy booking template.
+OWN-WORLD: Warm white editorial fields, disciplined black type, lavender/fuchsia route accents, decisive real photography, and timeline-led geometry.
+STORY: See the landscape, understand the travel effort and safeguards, then inspect the full itinerary or continue to booking.
+FIRST VIEWPORT: Farm Tomita fills the frame; compact Korean or Chinese copy sits low-left, with itinerary and pickup actions above the next-section reveal.
+FORM: Photo-led travel issue; pinned direction overrides the seed assignment; seed 88bbc100.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->"""
+
+_CSS = """
 :root {
   --warm-white: #F7F5F0;
   --white: #FFFFFF;
@@ -700,76 +728,59 @@ h1 {
     transition-duration: .01ms !important;
   }
 }
-</style>
+"""
+
+
+def _text(value: object) -> str:
+    return escape(str(value), quote=True)
+
+
+def picture(key: str, alt: str, *, hero: bool = False) -> str:
+    """Return a responsive licensed-photo picture with explicit dimensions."""
+    from tools.build_furano import ASSET_VERSION
+
+    if key not in _PICTURES:
+        raise KeyError(f"Unknown Furano picture: {key}")
+    small, large = _PICTURES[key]
+    loading = 'loading="eager" fetchpriority="high"' if hero else 'loading="lazy"'
+    return (
+        "<picture>"
+        f'<source media="(max-width: 720px)" '
+        f'srcset="img/{key}-{small[0]}.webp?v={ASSET_VERSION}">'
+        f'<source srcset="img/{key}-{large[0]}.webp?v={ASSET_VERSION}">'
+        f'<img src="img/{key}-{large[0]}.webp?v={ASSET_VERSION}" '
+        f'width="{large[0]}" height="{large[1]}" alt="{_text(alt)}" '
+        f'{loading} decoding="async">'
+        "</picture>"
+    )
+
+
+def document(title: str, lang: str, body: str) -> str:
+    """Wrap page content in the shared cache-safe semantic document shell."""
+    html = f"""<!doctype html>
+<html lang="{_text(lang)}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#202329">
+  <title>{_text(title)}</title>
+  <style>{_CSS}</style>
 </head>
-<body><!--
-THESIS: A Furano day tour reads like a Korean select-shop travel issue, not a card-heavy booking template.
-OWN-WORLD: Warm white editorial fields, disciplined black type, lavender/fuchsia route accents, decisive real photography, and timeline-led geometry.
-STORY: See the landscape, understand the travel effort and safeguards, then inspect the full itinerary or continue to booking.
-FIRST VIEWPORT: Farm Tomita fills the frame; compact Korean or Chinese copy sits low-left, with itinerary and pickup actions above the next-section reveal.
-FORM: Photo-led travel issue; pinned direction overrides the seed assignment; seed 88bbc100.
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
--->
+<body>{_DIRECTION_CONTRACT}
+{body}
+</body>
+</html>
+"""
+    return "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
 
-<a class="skip-link" href="#main-content">跳到正文</a>
-<header class="hero" id="top">
-  <div class="hero__photo"><picture><source media="(max-width: 720px)" srcset="img/hero-farm-tomita-960.webp?v=20260729-v4"><source srcset="img/hero-farm-tomita-1600.webp?v=20260729-v4"><img src="img/hero-farm-tomita-1600.webp?v=20260729-v4" width="1600" height="1200" alt="富田农场紫色薰衣草与夏日花田" loading="eager" fetchpriority="high" decoding="async"></picture></div>
-  <div class="hero__inner">
-    <p class="hero__slogan">ONE DAY. THREE COLORS OF SUMMER.（一天，收集夏天的三种颜色）</p>
-    <h1>札幌出发 富良野·美瑛4人小团1日游</h1>
-    <p class="hero__subtitle">紫色薰衣草 · 彩虹花田 · 神秘的蓝色池塘<br>一天收集夏日北海道的三种颜色 💜🌈💙</p>
-    <nav class="actions" aria-label="札幌出发 富良野·美瑛小团一日游">
-      <a class="button" href="#itinerary">查看行程与包含内容</a>
-      <a class="button button--quiet" href="#pickup">先看接送范围</a>
-    </nav>
-  </div>
-</header>
 
-<main id="main-content">
-  <section class="section benefits" id="benefits">
-    <div class="section__inner section__inner--wide">
-      <h2>少一点清晨奔波，多一点北海道夏色</h2>
-      <p class="lead">先看清决定是否适合您的四个条件。</p>
-      <div class="benefit-grid"><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true">🚗</span>
-  <h3>住宿门口接送</h3>
-  <p>札幌站3km内住宿门口接送（不用一早赶去集合点）</p>
-</article><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true">👨‍👩‍👧‍👦</span>
-  <h3>4人小团</h3>
-  <p>4人成团·不是49座大巴的小团</p>
-</article><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true">🎫</span>
-  <h3>门票已包含</h3>
-  <p>含四季彩之丘门票·当地无额外费用（餐食除外）</p>
-</article><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true">💰</span>
-  <h3>不成团全额退款</h3>
-  <p>出行日前3天通知可100%全额退款·不成团也无损退款</p>
-</article></div>
-    </div>
-  </section>
-
-  <section class="section pain-solution" id="pain-solution">
-    <div class="section__inner section__inner--wide story-split">
-      <div class="story-split__copy">
-        <h2>不用一早赶去集合点</h2>
-        <p>传统大巴团通常需要清晨前往固定集合点，并在紧凑的停留节奏里匆忙拍照。这个行程从住宿附近开始，以小团节奏移动，把更多注意力留给拍照和游览。</p>
-      </div>
-      <div class="editorial-photo"><picture><source media="(max-width: 720px)" srcset="img/furano-people-960.webp?v=20260729-v4"><source srcset="img/furano-people-1600.webp?v=20260729-v4"><img src="img/furano-people-1600.webp?v=20260729-v4" width="1600" height="800" alt="游客走在富良野花田之间" loading="lazy" decoding="async"></picture></div>
-    </div>
-  </section>
-
-  <section class="section pickup" id="pickup">
-    <div class="section__inner section__inner--wide pickup-grid">
-      <div>
-        <h2>从札幌出发的一日动线</h2>
-        <strong class="pickup-time">预计 08:00 札幌出发</strong>
-        <p class="lead">这不是精确导航地图，而是帮助理解当天移动顺序的路线示意。</p>
-        <ul class="plain-list"><li>🏠 札幌站半径3km内住宿 → 住宿门口接送</li><li>🚉 3km范围外住宿 → 札幌站集合（详细地点前一天告知）</li><li>💬 准确接送时间会在出发前一天通过群聊通知</li></ul>
-      </div>
-
-<figure class="route-figure" role="img" aria-label="从札幌前往富良野和美瑛后返回的路线示意">
+def _route_figure(ui: dict[str, Any]) -> str:
+    stops = "".join(f"<li>{_text(stop)}</li>" for stop in ui["route_stops"])
+    return f"""
+<figure class="route-figure" role="img" aria-label="{_text(ui['route_label'])}">
   <div class="route-canvas">
     <svg viewBox="0 0 620 320" aria-hidden="true" focusable="false">
       <path d="M24 282 C95 262 91 193 154 178 S224 52 298 68 S377 154 431 121 S511 25 565 51 S573 239 607 274"
@@ -782,127 +793,169 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <circle cx="565" cy="51" r="8"/><circle cx="607" cy="274" r="8"/>
       </g>
     </svg>
-    <ol class="route-stops"><li>札幌</li><li>富田农场</li><li>四季彩之丘</li><li>青池</li><li>白须瀑布</li><li>返回札幌</li></ol>
+    <ol class="route-stops">{stops}</ol>
   </div>
-  <figcaption class="route-caption">路线概览·可能与实际行车路径不同。</figcaption>
-</figure>
+  <figcaption class="route-caption">{_text(ui['route_disclaimer'])}</figcaption>
+</figure>"""
+
+
+def _road_window(ui: dict[str, Any]) -> str:
+    return f"""
+<div class="road-window" role="img" aria-label="{_text(ui['road_label'])}">
+  <span class="road-line" aria-hidden="true"></span>
+  <span class="road-label">{_text(ui['road_note'])}</span>
+</div>"""
+
+
+def _itinerary(content: dict[str, Any], ui: dict[str, Any]) -> str:
+    items = content["itinerary"]
+    blocks: list[str] = []
+    for index, item in enumerate(items):
+        peak = ' data-peak="true"' if item.get("peak") else ""
+        description = item.get("desc", "")
+        duration = item.get("dur", "")
+        note = item.get("note", "")
+        media = ""
+        extra = ""
+
+        if index == 1:
+            extra = f'<p class="stop__note">{_text(ui["tomita_note"])}</p>'
+        elif index == 2:
+            media = _road_window(ui)
+        elif index == 3:
+            media = (
+                f'<span class="included-badge">{_text(ui["included_badge"])}</span>'
+                f'<div class="itinerary-photo">{picture("shikisai", ui["shikisai_alt"])}</div>'
+            )
+        elif index == 4:
+            media = (
+                f'<div class="itinerary-photo itinerary-photo--detail">'
+                f'{picture("lavender-softserve", ui["softserve_alt"])}</div>'
+            )
+            extra = f'<p class="stop__note">{_text(ui["lunch_note"])}</p>'
+        elif index == 5:
+            media = f'<div class="itinerary-photo">{picture("blue-pond", ui["blue_pond_alt"])}</div>'
+        elif index == 6:
+            media = f'<div class="itinerary-photo">{picture("shirahige", ui["shirahige_alt"])}</div>'
+
+        blocks.append(
+            f"""<article class="stop"{peak}>
+  <time class="stop__time">{_text(item["time"])}</time>
+  <div class="stop__content">
+    <h3>{_text(item["name"])}</h3>
+    {f'<p class="stop__duration">{_text(duration)}</p>' if duration else ''}
+    {f'<p class="stop__description">{_text(description)}</p>' if description else ''}
+    {extra}
+    {media}
+    {f'<p class="stop__note">{_text(note)}</p>' if note else ''}
+  </div>
+</article>"""
+        )
+    return "\n".join(blocks)
+
+
+def _list(items: tuple[str, ...] | list[str]) -> str:
+    return "".join(f"<li>{_text(item)}</li>" for item in items)
+
+
+def render_single(content: dict[str, object], lang: str) -> str:
+    """Render one Korean or Simplified Chinese editorial page."""
+    ui = content["editorial"]
+    assert isinstance(ui, dict)
+    highlights = content["hl"]
+    assert isinstance(highlights, list)
+    benefit_indexes = (0, 1, 2, 5)
+    benefits = "".join(
+        f"""<article class="benefit">
+  <span class="benefit__icon" aria-hidden="true">{_text(highlights[index][0])}</span>
+  <h3>{_text(ui["benefit_titles"][position])}</h3>
+  <p>{_text(highlights[index][1])}</p>
+</article>"""
+        for position, index in enumerate(benefit_indexes)
+    )
+
+    pickup_items = content["pickup"]
+    assert isinstance(pickup_items, list)
+    faq_items = content["faq"]
+    assert isinstance(faq_items, list)
+    faq = "".join(
+        f"""<details{' open' if index == 0 else ''}>
+  <summary>{_text(question)}</summary>
+  <div class="faq-answer"><p>{_text(answer)}</p></div>
+</details>"""
+        for index, (question, answer) in enumerate(faq_items)
+    )
+
+    guarantees = "".join(f"<li>{_text(item)}</li>" for item in ui["guarantees"])
+    body = f"""
+<a class="skip-link" href="#main-content">{_text(ui["skip"])}</a>
+<header class="hero" id="top">
+  <div class="hero__photo">{picture("hero-farm-tomita", ui["hero_alt"], hero=True)}</div>
+  <div class="hero__inner">
+    <p class="hero__slogan">{_text(content["slogan"])}</p>
+    <h1>{_text(content["h1"])}</h1>
+    <p class="hero__subtitle">{str(content["subtitle"])}</p>
+    <nav class="actions" aria-label="{_text(ui["page_title"])}">
+      <a class="button" href="#itinerary">{_text(ui["primary_cta"])}</a>
+      <a class="button button--quiet" href="#pickup">{_text(ui["secondary_cta"])}</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="section benefits" id="benefits">
+    <div class="section__inner section__inner--wide">
+      <h2>{_text(ui["benefits_title"])}</h2>
+      <p class="lead">{_text(ui["benefits_intro"])}</p>
+      <div class="benefit-grid">{benefits}</div>
+    </div>
+  </section>
+
+  <section class="section pain-solution" id="pain-solution">
+    <div class="section__inner section__inner--wide story-split">
+      <div class="story-split__copy">
+        <h2>{_text(ui["pain_title"])}</h2>
+        <p>{_text(ui["pain_body"])}</p>
+      </div>
+      <div class="editorial-photo">{picture("furano-people", ui["people_alt"])}</div>
+    </div>
+  </section>
+
+  <section class="section pickup" id="pickup">
+    <div class="section__inner section__inner--wide pickup-grid">
+      <div>
+        <h2>{_text(ui["pickup_title"])}</h2>
+        <strong class="pickup-time">{_text(content["pickup_time"])}</strong>
+        <p class="lead">{_text(ui["pickup_intro"])}</p>
+        <ul class="plain-list">{_list(pickup_items)}</ul>
+      </div>
+      {_route_figure(ui)}
     </div>
   </section>
 
   <section class="section itinerary" id="itinerary">
     <div class="section__inner">
-      <h2>沿预计时间阅读八段旅程</h2>
-      <p class="lead">请同时查看游览与移动时间。当天时间可能会因路况前后浮动。</p>
-      <div class="timeline"><article class="stop">
-  <time class="stop__time">预计 08:00</time>
-  <div class="stop__content">
-    <h3>札幌出发 🚗</h3>
-    <p class="stop__duration">(住宿接送或札幌站集合后)</p>
-
-
-
-
-  </div>
-</article>
-<article class="stop" data-peak="true">
-  <time class="stop__time">预计 10:30</time>
-  <div class="stop__content">
-    <h3>富田农场</h3>
-    <p class="stop__duration">(约60分钟·拍照时间)</p>
-    <p class="stop__description">紫色薰衣草一路铺到山坡尽头 💜 薰衣草冰淇淋必尝!</p>
-    <p class="stop__note">全页最鲜明的一幕。约60分钟自由欣赏薰衣草花田。</p>
-
-
-  </div>
-</article>
-<article class="stop">
-  <time class="stop__time">预计 11:30</time>
-  <div class="stop__content">
-    <h3>车窗观赏：云霄飞车之路</h3>
-    <p class="stop__duration">(约15分钟·不下车)</p>
-    <p class="stop__description">像过山车一样起伏的坡道，窗外流动的夏天 🎢</p>
-
-
-<div class="road-window" role="img" aria-label="从车窗看云霄飞车之路上下延伸">
-  <span class="road-line" aria-hidden="true"></span>
-  <span class="road-label">车窗观赏路段·不下车</span>
-</div>
-
-  </div>
-</article>
-<article class="stop">
-  <time class="stop__time">预计 12:15</time>
-  <div class="stop__content">
-    <h3>四季彩之丘</h3>
-    <p class="stop__duration">(约60分钟)</p>
-    <p class="stop__description">15公顷彩虹花田，每个季节都有新颜色 🌈</p>
-
-    <span class="included-badge">门票包含</span><div class="itinerary-photo"><picture><source media="(max-width: 720px)" srcset="img/shikisai-960.webp?v=20260729-v4"><source srcset="img/shikisai-1600.webp?v=20260729-v4"><img src="img/shikisai-1600.webp?v=20260729-v4" width="1600" height="1067" alt="四季彩之丘多彩花田" loading="lazy" decoding="async"></picture></div>
-
-  </div>
-</article>
-<article class="stop">
-  <time class="stop__time">预计 13:15</time>
-  <div class="stop__content">
-    <h3>自由午餐 🍽️</h3>
-    <p class="stop__duration">(约1小时·各自结账)</p>
-    <p class="stop__description">不是固定的团餐，是自己选的午餐</p>
-    <p class="stop__note">薰衣草冰淇淋只是当地可自由选择的点心示例，不代表午餐或任何餐食包含在团费内。</p>
-    <div class="itinerary-photo itinerary-photo--detail"><picture><source media="(max-width: 720px)" srcset="img/lavender-softserve-720.webp?v=20260729-v4"><source srcset="img/lavender-softserve-1200.webp?v=20260729-v4"><img src="img/lavender-softserve-1200.webp?v=20260729-v4" width="1200" height="900" alt="富田农场薰衣草冰淇淋" loading="lazy" decoding="async"></picture></div>
-
-  </div>
-</article>
-<article class="stop">
-  <time class="stop__time">预计 15:00</time>
-  <div class="stop__content">
-    <h3>青池</h3>
-    <p class="stop__duration">(约30分钟·拍照时间)</p>
-    <p class="stop__description">SNS上被分享最多的蓝色景点，拍出今天的人生照片 📸</p>
-
-    <div class="itinerary-photo"><picture><source media="(max-width: 720px)" srcset="img/blue-pond-960.webp?v=20260729-v4"><source srcset="img/blue-pond-1600.webp?v=20260729-v4"><img src="img/blue-pond-1600.webp?v=20260729-v4" width="1600" height="1067" alt="白桦树之间的美瑛青池" loading="lazy" decoding="async"></picture></div>
-
-  </div>
-</article>
-<article class="stop">
-  <time class="stop__time">预计 15:35</time>
-  <div class="stop__content">
-    <h3>白须瀑布</h3>
-    <p class="stop__duration">(约25分钟)</p>
-    <p class="stop__description">像白色胡须一样流下的罕见&quot;潜水瀑布&quot; 💧</p>
-
-    <div class="itinerary-photo"><picture><source media="(max-width: 720px)" srcset="img/shirahige-960.webp?v=20260729-v4"><source srcset="img/shirahige-1600.webp?v=20260729-v4"><img src="img/shirahige-1600.webp?v=20260729-v4" width="1600" height="1067" alt="流入美瑛川的白须瀑布" loading="lazy" decoding="async"></picture></div>
-
-  </div>
-</article>
-<article class="stop">
-  <time class="stop__time">预计 16:00</time>
-  <div class="stop__content">
-    <h3>返程回札幌 → 预计18:30左右抵达札幌</h3>
-
-
-
-
-    <p class="stop__note">⏰ 根据当天路况，抵达时间可能前后浮动。有固定出发时间的交通工具（航班·火车）或演出、餐厅预约，建议您尽量安排在其他日期。</p>
-  </div>
-</article></div>
+      <h2>{_text(ui["itinerary_title"])}</h2>
+      <p class="lead">{_text(ui["itinerary_intro"])}</p>
+      <div class="timeline">{_itinerary(content, ui)}</div>
     </div>
   </section>
 
   <section class="section included" id="included">
     <div class="section__inner section__inner--wide">
-      <h2>费用范围与现场服务</h2>
+      <h2>{_text(ui["included_title"])}</h2>
       <div class="included-grid">
         <section class="included-column">
-          <h3>包含</h3>
-          <ul><li>四季彩之丘门票</li></ul>
+          <h3>{_text(ui["included_heading"])}</h3>
+          <ul>{_list(ui["included_items"])}</ul>
         </section>
         <section class="included-column">
-          <h3>不包含</h3>
-          <ul><li>餐食</li><li>个人消费</li></ul>
+          <h3>{_text(ui["not_included_heading"])}</h3>
+          <ul>{_list(ui["not_included_items"])}</ul>
         </section>
         <section class="included-column">
-          <h3>车辆与服务</h3>
-          <ul><li>按当天成团人数安排商务车。</li><li>提供日语/英语司机与翻译app支持。</li><li>抵达主要景点后做简短说明，再自由参观。</li></ul>
+          <h3>{_text(ui["service_heading"])}</h3>
+          <ul>{_list(ui["service_items"])}</ul>
         </section>
       </div>
     </div>
@@ -910,78 +963,56 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
   <section class="section cancellation" id="cancellation">
     <div class="section__inner">
-      <h2>计划变化时的退款标准</h2>
+      <h2>{_text(ui["cancellation_title"])}</h2>
       <div class="refund-bands">
         <article class="refund-band refund-band--positive">
-          <h3>出行日前3天及之前</h3>
-          <p>通知可100%全额退款</p>
+          <h3>{_text(ui["refund_early_title"])}</h3>
+          <p>{_text(ui["refund_early_body"])}</p>
         </article>
         <article class="refund-band">
-          <h3>出行日前2天至当天</h3>
-          <p>通知不可退款</p>
+          <h3>{_text(ui["refund_late_title"])}</h3>
+          <p>{_text(ui["refund_late_body"])}</p>
         </article>
       </div>
       <div class="refund-notes">
         <article class="refund-note">
-          <strong>未达到4人成团</strong>
-          <p>提前通知，并免手续费全额退款</p>
+          <strong>{_text(ui["formation_title"])}</strong>
+          <p>{_text(ui["formation_body"])}</p>
         </article>
         <article class="refund-note">
-          <strong>恶劣天气导致安全上无法成行</strong>
-          <p>出发前通知并全额退款</p>
+          <strong>{_text(ui["weather_title"])}</strong>
+          <p>{_text(ui["weather_body"])}</p>
         </article>
       </div>
-      <p class="local-time-note">出行日以当地（日本）时间为准。</p>
+      <p class="local-time-note">{_text(ui["local_time_note"])}</p>
     </div>
   </section>
 
   <section class="section faq" id="faq">
     <div class="section__inner">
-      <h2>■ 预订前，这些请先了解一下 💡</h2>
-      <div class="faq-list"><details open>
-  <summary>Q1. 几个人成团出发？</summary>
-  <div class="faq-answer"><p>4人成团。我们在全球同步收客拼团，越早预订成团概率越大。如果最终未能成团，会提前单独通知您；取消的话不收取任何手续费，全额退款。</p></div>
-</details><details>
-  <summary>Q2. 车辆怎么安排？同车的是谁？</summary>
-  <div class="faq-answer"><p>本行程为小团拼车，按当日成团人数安排商务车。因为面向全球收客，车上可能有来自其他国家的客人。同行时光里分享彼此的旅途故事，也是一种小小的乐趣。一次旅行对每个人来说都是特别的计划，我们会一位一位用心接待每位客人。</p></div>
-</details><details>
-  <summary>Q3. 下雨或阴天行程还进行吗？</summary>
-  <div class="faq-answer"><p>是的，照常进行。雨后的花田颜色更鲜艳，阴天青池的蓝色也依然如故。但因台风、暴雪等恶劣天气导致安全上难以进行时，会在出发前通知并全额退款。</p></div>
-</details><details>
-  <summary>Q4. 司机也做讲解吗？</summary>
-  <div class="faq-answer"><p>司机兼向导陪同。到达主要景点时做简短介绍，各景点下车后自由参观。司机在车内等候，按出发时间前往下一站。司机可使用日语·英语。</p></div>
-</details><details>
-  <summary>Q5. 出发前怎么联系？</summary>
-  <div class="faq-answer"><p>预订完成后，请留下您常用的即时通讯账号（WhatsApp·LINE·KakaoTalk），我们最推荐WhatsApp。出发前一天，我们会建立线上旅行群（群聊），群里有司机和我们的负责人，会发送当天的行程安排和接送信息。出发当天早上，司机会按约定时间到住宿（或札幌站集合地点）门口来接。</p></div>
-</details><details>
-  <summary>Q6. 餐费和门票包含吗？</summary>
-  <div class="faq-answer"><p>四季彩之丘门票已包含。富田农场·青池·白须瀑布均为免费入场。餐食不含，午餐时间（约1小时）在附近餐厅自行点单结账即可。除餐食外，当地没有任何额外费用。</p></div>
-</details><details>
-  <summary>Q7. 取消退款规定？</summary>
-  <div class="faq-answer"><p>以出行日为准，提前3天及之前通知：100%全额退款。以出行日为准，提前2天至当天通知：不可退款。※ 出行日以当地（日本）时间为准。</p></div>
-</details><details>
-  <summary>Q8. 薰衣草什么时候最好看？</summary>
-  <div class="faq-answer"><p>通常6月底到8月初是盛花期，开花时间会因当年天气有所浮动。即使过了薰衣草季，四季彩之丘整个夏天都有应季花卉，任何时间都能欣赏花田。</p></div>
-</details></div>
+      <h2>{_text(content["faq_title"])}</h2>
+      <div class="faq-list">{faq}</div>
     </div>
   </section>
 
   <section class="closing" id="closing">
-    <div class="closing__photo"><picture><source media="(max-width: 720px)" srcset="img/blue-pond-960.webp?v=20260729-v4"><source srcset="img/blue-pond-1600.webp?v=20260729-v4"><img src="img/blue-pond-1600.webp?v=20260729-v4" width="1600" height="1067" alt="白桦树之间的美瑛青池" loading="lazy" decoding="async"></picture></div>
+    <div class="closing__photo">{picture("blue-pond", ui["blue_pond_alt"])}</div>
     <div class="closing__inner">
-      <h2>到最后，条件依然清楚</h2>
-      <p>以小团节奏走进富良野与美瑛的夏天，也让回程更轻松。</p>
-      <ul class="guarantees"><li>4人小团</li><li>札幌站3km内住宿接送</li><li>不成团全额退款</li></ul>
-      <nav class="actions" aria-label="到最后，条件依然清楚">
-        <a class="button" href="#itinerary">再看行程</a>
-        <a class="button button--quiet" href="#top">返回顶部</a>
+      <h2>{_text(ui["closing_title"])}</h2>
+      <p>{_text(ui["closing_body"])}</p>
+      <ul class="guarantees">{guarantees}</ul>
+      <nav class="actions" aria-label="{_text(ui["closing_title"])}">
+        <a class="button" href="#itinerary">{_text(ui["closing_itinerary"])}</a>
+        <a class="button button--quiet" href="#top">{_text(ui["back_to_top"])}</a>
       </nav>
     </div>
   </section>
 </main>
 
 <footer class="credits">
-  <a href="img/SOURCES.md">照片来源与许可</a>
-</footer>
-</body>
-</html>
+  <a href="img/SOURCES.md">{_text(ui["sources"])}</a>
+</footer>"""
+    return document(str(ui["page_title"]), lang, body)
+
+
+__all__ = ["TOKENS", "document", "picture", "render_single"]
