@@ -140,24 +140,7 @@
     padding: 10px 13px; margin-bottom: 12px;
   }
 
-  /* ⑥ 花期卡 + 迷你日历条 */
-  .season-card {
-    background: linear-gradient(135deg, #f3e8ff, #ffe3ec);
-    border-radius: 16px; padding: 13px 15px;
-  }
-  .season-card h4 { font-size: 13px; color: #3d2a5c; margin-bottom: 6px; }
-  .season-card p { font-size: 12px; color: #4a4458; line-height: 1.75; }
-  .cal-bar { display: flex; gap: 5px; margin-top: 9px; }
-  .cal-cell {
-    flex: 1; text-align: center; font-size: 10.5px; font-weight: 700;
-    padding: 6px 2px; border-radius: 9px; background: rgba(255,255,255,.75); color: #6a6280;
-  }
-  .cal-cell.peak {
-    background: linear-gradient(135deg, #9b5de5, #c77dff); color: #fff;
-    box-shadow: 0 2px 8px rgba(155,93,229,.4); transform: scale(1.05);
-  }
-
-  /* ⑦ 资质 */
+  /* ⑥ 资质 */
   .logi-card {
     background: #fff; border: 2px solid #ece5fa; border-radius: 16px; padding: 12px 14px;
   }
@@ -168,7 +151,7 @@
     border: 1px dashed #c9bce4; text-align: center; padding: 10px;
   }
 
-  /* ⑧ FAQ 彩色卡 */
+  /* ⑦ FAQ 彩色卡 */
   .faq-item { margin-bottom: 8px; padding: 10px 13px; border-radius: 14px; }
   .faq-item:nth-child(6n+1) { background: #f3e8ff; }
   .faq-item:nth-child(6n+2) { background: #ffe3ec; }
@@ -231,26 +214,20 @@
 <li>出发/午餐/返程用虚线轻卡（无图），视觉上和景点大卡拉开层级。</li>
 <li><span class='dont'>注意</span>：所有时间均为「预计/예정」，不要做承诺式处理；返程保留路况免责小字。</li></ul></div>
 <div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 08:00</span><div class="stop-name">삿포로 출발 🚗 <span class="dur">(숙소 픽업 또는 삿포로역 집합 후)</span></div></div>
-<div class="stop-card peak" style="border-color:#9b5de5"><img class="stop-img" src="img/tomita.jpg?v=20260729" alt="팜 토미타 라벤더 밭" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#9b5de5">예정 10:30</span><div class="stop-name">팜 토미타 <span class="dur">(약 60분 · 포토타임)</span><span class="sticker sticker-peak">⭐ 하이라이트</span></div><div class="stop-desc">보랏빛 라벤더가 언덕 끝까지 🪻 라벤더 소프트크림은 필수!</div><div class="ref-cap">氛围参考 · 需替换实拍 | 팜 토미타 라벤더 밭</div></div></div>
+<div class="stop-card peak" style="border-color:#9b5de5"><img class="stop-img" src="img/tomita.jpg?v=20260729" alt="팜 토미타 라벤더 밭" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#9b5de5">예정 10:30</span><div class="stop-name">팜 토미타 <span class="dur">(약 60분 · 포토타임)</span><span class="sticker sticker-peak">⭐ 하이라이트</span></div><div class="stop-desc">보랏빛 라벤더가 언덕 끝까지 💜 라벤더 소프트크림은 필수!</div><div class="ref-cap">氛围参考 · 需替换实拍 | 팜 토미타 라벤더 밭</div></div></div>
 <div class="stop-card" style="border-color:#06d6a0"><div class="stop-placeholder">[ 제트코스터 로드 차창 시점 사진 ]</div><div class="stop-body"><span class="time-badge" style="background:#06d6a0">예정 11:30</span><div class="stop-name">차창 감상: 제트코스터 로드 <span class="dur">(약 15분 · 하차 없음)</span></div><div class="stop-desc">롤러코스터처럼 오르내리는 언덕길, 창밖으로 흐르는 여름 🎢</div></div></div>
 <div class="stop-card" style="border-color:#ff5d8f"><img class="stop-img" src="img/shikisai.jpg?v=20260729" alt="사계채의 언덕 무지개 꽃밭" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#ff5d8f">예정 12:15</span><div class="stop-name">사계채의 언덕 <span class="dur">(약 60분)</span><span class="sticker sticker-free">🎫 입장권 포함</span></div><div class="stop-desc">15헥타르 무지개 꽃밭, 계절마다 새로운 색 🌈</div><div class="ref-cap">氛围参考 · 需替换实拍 | 사계채의 언덕 무지개 꽃밭</div></div></div>
 <div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 13:15</span><div class="stop-name">자유 점심 🍽️ <span class="dur">(약 1시간 · 개별 결제)</span></div><div class="stop-desc">정해진 단체 식사 NO, 내가 고르는 자유 점심</div></div>
 <div class="stop-card" style="border-color:#00b4d8"><img class="stop-img" src="img/aoiike.jpg?v=20260729" alt="청의 호수(아오이이케)" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#00b4d8">예정 15:00</span><div class="stop-name">청의 호수 <span class="dur">(약 30분 · 포토타임)</span></div><div class="stop-desc">SNS 최다 공유 블루 스폿, 오늘의 인생샷 📸</div><div class="ref-cap">氛围参考 · 需替换实拍 | 청의 호수(아오이이케)</div></div></div>
 <div class="stop-card" style="border-color:#2ec4b6"><img class="stop-img" src="img/shirahige.jpg?v=20260729" alt="시라히게 폭포" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#2ec4b6">예정 15:35</span><div class="stop-name">시라히게 폭포 <span class="dur">(약 25분)</span></div><div class="stop-desc">흰 수염처럼 흘러내리는 드문 잠수 폭포 💧</div><div class="ref-cap">氛围参考 · 需替换实拍 | 시라히게 폭포</div></div></div>
 <div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 16:00</span><div class="stop-name">삿포로로 출발 → 예정 18:30 삿포로 도착</div><div class="stop-note">⏰ 도로 상황에 따라 도착 시간이 앞뒤로 달라질 수 있습니다. 출발 시간이 정해진 교통편(항공·기차)이나 공연·레스토랑 예약은 가급적 다른 날짜에 잡아 주세요.</div></div></div></div></div>
-<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑥ 花期说明卡（含迷你日历条）</div><ul><li>目的：管理预期，防「没赶上盛花期」差评。</li>
-<li><span class='do'>建议</span>：粉紫渐变卡 + 6-8月迷你日历条，盛花期（7月）高亮放大，一图胜千言。</li>
-<li>语气是贴心提示，不要做成小字免责条。</li></ul></div>
-<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="season-card"><h4>🌸 라벤더 시즌 안내</h4><p>라벤더는 보통 6월 말부터 8월 초에 절정! 개화 시기는 그해 날씨에 따라 달라질 수 있어요. 시즌이 지나도 사계채의 언덕에는 여름 내내 계절 꽃이 핍니다 🌼</p><div class="cal-bar"><div class="cal-cell">6월 하순</div>
-<div class="cal-cell peak">7월 · 절정 🪻</div>
-<div class="cal-cell">8월 초</div></div></div></div></div></div>
-<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑦ 资质·车辆·语言服务</div><ul><li>目的：信任收尾。3行图标短句 + 证书/车辆实拍位。</li>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑥ 资质·车辆·语言服务</div><ul><li>目的：信任收尾。3行图标短句 + 证书/车辆实拍位。</li>
 <li><span class='dont'>避免</span>：证书堆砌，1-2张关键资质即可。</li></ul></div>
 <div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="logi-card"><div class="kv"><p><b>🏛️ 일본 오사카부지사 등록 여행사 · JNTO(일본정부관광국) 협력사</b></p><p>🚐 차량: 당일 모객 인원에 맞춘 승합차 배차</p>
 <p>📍 픽업: 삿포로역 반경 3km 숙소 앞 (범위 밖은 삿포로역 집합)</p>
 <p>🗣️ 언어: 일본어·영어 가능 기사 + 번역 앱 지원</p></div>
 <div class="placeholder-img">[ 자질증명서 + 차량 실물 사진 ]</div></div></div></div></div>
-<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑧ FAQ ×8（彩色问答卡）</div><ul><li>目的：预订前最后答疑。多巴胺处理：问答卡糖果色循环。</li>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑦ FAQ ×8（彩色问答卡）</div><ul><li>目的：预订前最后答疑。多巴胺处理：问答卡糖果色循环。</li>
 <li><span class='do'>建议</span>：可做成手风琴（默认收起，省版面）；Q加粗、A降一档；8问完整保留。</li>
 <li>Q7退改规则视觉最规整（两档对照），纠纷高发点。</li></ul></div>
 <div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="faq-title">■ 예약 전, 이것만 알아두세요 💡</div><div class="faq-item"><div class="q">Q1. 몇 명부터 출발하나요?</div><div class="a">4명 이상 모이면 출발이 확정됩니다. 전 세계에서 동시에 예약을 받아 모객하기 때문에, 예약이 빠를수록 출발 확정 확률이 높아집니다. 만약 출발이 어렵게 되면 미리 개별로 안내드리며, 취소하실 경우 수수료 없이 전액 환불해 드립니다.</div></div>
