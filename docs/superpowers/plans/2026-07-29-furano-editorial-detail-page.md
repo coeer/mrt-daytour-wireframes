@@ -24,6 +24,7 @@
 - Use static HTML/CSS with no application framework; FAQ uses native `<details>` and animations respect `prefers-reduced-motion`.
 - All three pages include no-cache meta tags and asset query version `20260729-v4`.
 - Generate all three HTML files from the same `tools/build_furano.py`; never hand-edit generated HTML.
+- The first child of every generated `<body>` must be the same auditable direction contract comment with the seed key `88bbc100`, the pinned Korean select-shop editorial direction, and the exact Impeccable FINISH sentence.
 - Preserve the canonical local workflow by copying the reviewed `tools/build_furano.py` plus its imported modules to `C:\Users\38185\ZCodeProject\` only after final review.
 - Push each reviewed task commit to the remote feature branch; publish to `main` only after the whole-feature review passes.
 
@@ -444,6 +445,19 @@ In `tools/furano_renderer.py`, define `TOKENS` with the exact global colors, a `
 
 Use Pretendard first for Korean and a CJK system fallback for Chinese. Add a visible “skip to content” link, semantic `<main>`, and `scroll-behavior: smooth` only outside reduced-motion mode.
 
+Make this comment the first child of `<body>` in all outputs:
+
+```html
+<!--
+THESIS: A Furano day tour reads like a Korean select-shop travel issue, not a card-heavy booking template.
+OWN-WORLD: Warm white editorial fields, disciplined black type, lavender/fuchsia route accents, decisive real photography, and timeline-led geometry.
+STORY: See the landscape, understand the travel effort and safeguards, then inspect the full itinerary or continue to booking.
+FIRST VIEWPORT: Farm Tomita fills the frame; compact Korean or Chinese copy sits low-left, with itinerary and pickup actions above the next-section reveal.
+FORM: Photo-led travel issue; pinned direction overrides the seed assignment; seed 88bbc100.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+```
+
 - [ ] **Step 4: Implement the approved section sequence**
 
 Implement `render_single` in this exact order:
@@ -615,6 +629,8 @@ git commit -m "feat: add responsive Furano bilingual page"
 ### Task 5: Complete visual QA, canonical sync, and remote publication
 
 **Files:**
+- Create at finish: `DESIGN.md`
+- Create at finish: `DESIGN.sidecar.json` if required by the documenter
 - Create: `tests/verify_furano_remote.py`
 - Modify if findings require it: `tools/furano_renderer.py`
 - Regenerate after fixes: `furano/index.html`
@@ -693,15 +709,19 @@ git add tools tests furano
 git commit -m "test: verify Furano editorial detail pages"
 ```
 
-- [ ] **Step 6: Copy the reviewed canonical source modules**
+- [ ] **Step 6: Run the finish review and document the built system**
+
+Capture desktop and mobile screenshots for all three pages, then dispatch an Impeccable finish reviewer with the original brief, direction contract, changed targets, detector output, and screenshot paths. Apply material findings in one batch, rebuild, recapture, and return the recaptures to the same reviewer for the final verdict. After the verdict, dispatch the Impeccable documenter with the built artifact, `PRODUCT.md`, direction contract, and `impeccable/reference/document.md`; commit the resulting `DESIGN.md` and sidecar. Completion requires the generated HTML to retain the seed `88bbc100` contract comment.
+
+- [ ] **Step 7: Copy the reviewed canonical source modules**
 
 Copy the three reviewed Python source files from `tools/` to `C:\Users\38185\ZCodeProject\`, keeping all language content and the sole command entry point in `build_furano.py`. Run the canonical entry point from `ZCodeProject` and compare SHA-256 hashes of its three outputs with the repository’s three generated HTML files; all three hashes must match.
 
-- [ ] **Step 7: Push the reviewed feature branch and publish**
+- [ ] **Step 8: Push the reviewed feature branch and publish**
 
 Push `codex/furano-editorial-v4`, then fast-forward or merge its reviewed commits to `main` and push `main`. Do not force-push.
 
-- [ ] **Step 8: Verify the live GitHub Pages content**
+- [ ] **Step 9: Verify the live GitHub Pages content**
 
 GitHub Pages may cache for up to ten minutes. Run:
 
@@ -711,7 +731,7 @@ GitHub Pages may cache for up to ten minutes. Run:
 
 Repeat only while the response still proves the old version and remain within the monitoring budget. Completion requires three page HTTP 200 results, required v4 markers on all pages, banned markers absent, and five large WebP asset HTTP 200 results.
 
-- [ ] **Step 9: Final commit/push consistency check**
+- [ ] **Step 10: Final commit/push consistency check**
 
 Verify:
 
