@@ -180,6 +180,11 @@
     box-shadow: 4px 4px 0 rgba(155,93,229,.16);
   }
 
+  /* 站点图放大减少裁切（3:2 原图在 720px 容器下 150px 高会裁掉近 70%） */
+  .stop-card .stop-img { height: 260px; }
+  .stop-card.peak .stop-img { height: 300px; }
+  .stop-placeholder { height: 140px; }
+
   /* 正文放大至真实档位（字号4档中的 14px 档） */
   .chip { font-size: 13px; line-height: 1.6; }
   .pain { font-size: 14px; line-height: 1.85; }
