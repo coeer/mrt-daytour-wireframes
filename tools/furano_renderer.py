@@ -887,6 +887,8 @@ _BILINGUAL_CSS = """
   .bilingual-faq summary,
   .bilingual-faq .faq-answer { grid-template-columns: 1fr; }
 
+  .bilingual .hero__inner { gap: 0; }
+
   .language-column--kr {
     padding: 0 0 32px;
     border-right: 0;
@@ -894,12 +896,56 @@ _BILINGUAL_CSS = """
   }
 
   .language-column--zh { padding-top: 32px; }
+  .bilingual .hero .language-column--kr { padding-bottom: 16px; }
+  .bilingual .hero .language-column--zh { padding-top: 16px; }
   .bilingual-faq summary,
   .bilingual-faq .faq-answer { gap: 12px; }
   .bilingual-faq .faq-answer p:first-child {
     padding: 0 0 18px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 560px) {
+  .bilingual .hero__inner {
+    padding: 36px 0 20px;
+  }
+
+  .bilingual .hero .language-label {
+    min-height: 0;
+    margin-bottom: 6px;
+    font-size: .7rem;
+    line-height: 1.2;
+  }
+
+  .bilingual .hero__slogan {
+    margin-bottom: 6px;
+    font-size: .7rem;
+    line-height: 1.3;
+  }
+
+  .bilingual .hero h1 {
+    margin-bottom: 8px;
+    font-size: clamp(1.85rem, 8vw, 2rem);
+    line-height: 1;
+  }
+
+  .bilingual .hero__subtitle {
+    margin-bottom: 12px;
+    font-size: .84rem;
+    line-height: 1.35;
+  }
+
+  .bilingual .hero .actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .bilingual .hero .button {
+    min-height: 44px;
+    padding: 8px 10px;
+    font-size: .78rem;
   }
 }
 """

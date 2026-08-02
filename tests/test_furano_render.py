@@ -150,6 +150,51 @@ class RenderContractTests(unittest.TestCase):
         pickup = html[html.index('id="pickup"') : html.index('id="itinerary"')]
         self.assertLess(pickup.index("route-canvas"), pickup.index("language-grid"))
 
+    def test_bilingual_mobile_hero_compacts_only_its_language_separator(self):
+        html = render_bilingual(KR, ZH)
+        mobile_css = html[html.index("@media (max-width: 880px)") :]
+        self.assertIn(".bilingual .hero__inner { gap: 0; }", mobile_css)
+        self.assertRegex(
+            mobile_css,
+            r"\.bilingual \.hero \.language-column--kr \{\s*"
+            r"padding-bottom: 16px;\s*\}",
+        )
+        self.assertRegex(
+            mobile_css,
+            r"\.bilingual \.hero \.language-column--zh \{\s*"
+            r"padding-top: 16px;\s*\}",
+        )
+
+    def test_bilingual_phone_hero_keeps_both_actions_in_compact_rows(self):
+        html = render_bilingual(KR, ZH)
+        hero = html[html.index('<header class="hero"') : html.index("</header>")]
+        self.assertEqual(hero.count('class="language-column'), 2)
+        self.assertEqual(hero.count('class="button'), 4)
+
+        phone_css = html[html.rindex("@media (max-width: 560px)") :]
+        self.assertRegex(
+            phone_css,
+            r"\.bilingual \.hero__inner \{\s*padding: 36px 0 20px;\s*\}",
+        )
+        self.assertRegex(
+            phone_css,
+            r"\.bilingual \.hero \.language-label \{[^}]*min-height: 0;",
+        )
+        self.assertRegex(
+            phone_css,
+            r"\.bilingual \.hero h1 \{[^}]*"
+            r"font-size: clamp\(1\.85rem, 8vw, 2rem\);",
+        )
+        self.assertRegex(
+            phone_css,
+            r"\.bilingual \.hero \.actions \{[^}]*"
+            r"grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);",
+        )
+        self.assertRegex(
+            phone_css,
+            r"\.bilingual \.hero \.button \{[^}]*min-height: 44px;",
+        )
+
     def test_bilingual_section_order_faq_state_and_direction_contract(self):
         html = render_bilingual(KR, ZH)
         section_ids = (
