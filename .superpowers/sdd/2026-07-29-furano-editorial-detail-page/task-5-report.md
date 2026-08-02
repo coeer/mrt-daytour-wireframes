@@ -232,3 +232,14 @@ Full-page screenshots from this browser backend were rejected as evidence becaus
 - Final finish review verdict: pass with no regressions after corrections `5db2c9c` and `8b553b9`.
 - `DESIGN.md` and `.impeccable/design.json` were generated and validated against the renderer tokens, layout constants, component patterns, and canonical document structure.
 - The local Task 5 evidence is complete; remote verification remains pending explicit publication authorization.
+
+## Final whole-branch review corrections
+
+- TDD RED: the six focused contracts failed on missing itinerary keys/digests, key-driven media mapping, bilingual photo names, hidden full language names, and hero preload. After correcting two assertions to report failures rather than missing-key errors, the focused run failed 6/6 for the expected missing behavior.
+- TDD GREEN: the same focused run passed 6/6 after the minimal renderer and content changes. The final full local suite passed 36/36 in `0.183s`.
+- All eight Korean and Chinese itinerary records now carry the exact `ITINERARY_KEYS` sequence. Media, badge, note, and peak rendering dispatch by key rather than position; a reorder contract proves the mapping remains attached to the intended stop.
+- Authoritative itinerary SHA-256 baselines are Korean `58a84d0897f5a713c6805250a98fdab8f3145f807fb02950e629f8a0f1414455` and Chinese `c623354ee406268b3625e7880b38e414eb20076973fe96f0fc250da925ece65a`. FAQ digests remain unchanged at Korean `695302d0c97aecf11c71e198146914d9e41103a43b874bf3694d498b6cddb5d2` and Chinese `42f2716a4131be3401c3d6ec94ec022960da5331efa35035422be6d57e87a97a`.
+- The bilingual output contains seven shared-photo `role="img"` wrappers, seven empty image alts, and fourteen unique referenced Korean/Chinese hidden-label IDs. Visible `KR`/`CN` codes remain while full language names are present as hidden owned text.
+- Each of all three modes has exactly one responsive versioned hero preload, one eager high-priority hero image, lazy nonhero images, exact canonical section order, and one itinerary peak. The explicit height-only source-dimension regression is covered.
+- Fresh regeneration wrote all three pages; a second temporary build was byte-identical 3/3. `DESIGN.md` and the sidecar now document the bilingual `<=560px` 92svh/two-column 44px-action exception.
+- The remote verifier now bans `카카오톡 한국어 상담` and `KakaoTalk韩语咨询`; syntax was validated but the verifier was not executed. The Impeccable detector was not rerun. Publication verification remains pending explicit authorization.

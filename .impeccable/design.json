@@ -30,7 +30,7 @@
     ],
     "breakpoints": [
       { "name": "tablet", "value": "820px" },
-      { "name": "mobile", "value": "560px" },
+      { "name": "mobile", "value": "560px", "description": "Single-language actions stack full-width; the bilingual hero remains a 92svh minimum with two compact 44px action columns per language." },
       { "name": "bilingual", "value": "880px" }
     ]
   },
@@ -92,6 +92,7 @@
       { "name": "The Route-Color Rule", "body": "Lavender is the default navigational signal; flower pink is reserved for a true peak or state, never a second general-purpose CTA color.", "section": "colors" },
       { "name": "The Paper-First Rule", "body": "Use warm paper or white as the dominant field. Strong color belongs to photography, route diagrams, and compact emphasis.", "section": "colors" },
       { "name": "The Compact Promise Rule", "body": "Keep hero and section headings short enough to retain a deliberate, low-left editorial block; do not expand them into marketing paragraphs.", "section": "typography" },
+      { "name": "The Bilingual Phone Hero Rule", "body": "At 560px and below, retain the 92svh bilingual hero minimum and keep each language's two actions in compact 44px-high columns so all four actions remain visible.", "section": "layout" },
       { "name": "The Timeline-First Rule", "body": "When describing a day, show movement and time as a continuous reading spine instead of scattering stops into unrelated cards.", "section": "layout" },
       { "name": "The No-Floating-Card Rule", "body": "Do not add ambient shadows to ordinary cards or information panels; use a border, tonal field, or photo crop first.", "section": "elevation" }
     ],

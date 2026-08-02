@@ -15,6 +15,14 @@ class AssetContractTests(unittest.TestCase):
             )
         )
 
+    def test_decoded_height_only_mismatch_is_rejected(self):
+        asset = next(item for item in ASSETS if item.key == "furano-people")
+        self.assertFalse(
+            decoded_dimensions_are_usable(
+                asset, (asset.source_width, asset.source_height + 1)
+            )
+        )
+
     def test_all_sources_meet_resolution_and_license_rules(self):
         self.assertEqual(len(ASSETS), 6)
         for asset in ASSETS:

@@ -15,7 +15,14 @@ REQUIRED = (
     'id="itinerary"',
     'id="faq"',
 )
-BANNED = ("spec-bar", "设计建议", "한국어 기사", "司机会韩语")
+BANNED = (
+    "spec-bar",
+    "设计建议",
+    "한국어 기사",
+    "司机会韩语",
+    "카카오톡 한국어 상담",
+    "KakaoTalk韩语咨询",
+)
 IMAGE_URLS = tuple(
     f"{BASE}/img/{name}-1600.webp?v=4"
     for name in (

@@ -1077,6 +1077,18 @@ def picture(
     )
 
 
+def _hero_preload() -> str:
+    from tools.build_furano import ASSET_VERSION
+
+    return (
+        '<link rel="preload" as="image" '
+        f'href="img/hero-farm-tomita-1600.webp?v={ASSET_VERSION}" '
+        f'imagesrcset="img/hero-farm-tomita-960.webp?v={ASSET_VERSION} 960w, '
+        f'img/hero-farm-tomita-1600.webp?v={ASSET_VERSION} 1600w" '
+        'imagesizes="100vw">'
+    )
+
+
 def document(
     title: str,
     lang: str,
@@ -1094,6 +1106,7 @@ def document(
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#202329">
+  {_hero_preload()}
   <title>{_text(title)}</title>
   <style>{_CSS}{extra_css}</style>
 </head>
@@ -1183,36 +1196,37 @@ def _road_window(
 def _itinerary(content: dict[str, Any], ui: dict[str, Any]) -> str:
     items = content["itinerary"]
     blocks: list[str] = []
-    for index, item in enumerate(items):
-        peak = ' data-peak="true"' if item.get("peak") else ""
+    for item in items:
+        key = str(item["key"])
+        peak = ' data-peak="true"' if key == "farm_tomita" else ""
         description = item.get("desc", "")
         duration = item.get("dur", "")
         note = item.get("note", "")
         media = ""
         extra = ""
 
-        if index == 1:
+        if key == "farm_tomita":
             extra = f'<p class="stop__note">{_text(ui["tomita_note"])}</p>'
-        elif index == 2:
+        elif key == "roller_coaster_road":
             media = _road_window(ui)
-        elif index == 3:
+        elif key == "shikisai_no_oka":
             media = (
                 f'<span class="included-badge">{_text(ui["included_badge"])}</span>'
                 f'<div class="itinerary-photo">{picture("shikisai", ui["shikisai_alt"])}</div>'
             )
-        elif index == 4:
+        elif key == "free_lunch":
             media = (
                 f'<div class="itinerary-photo itinerary-photo--detail">'
                 f'{picture("lavender-softserve", ui["softserve_alt"])}</div>'
             )
             extra = f'<p class="stop__note">{_text(ui["lunch_note"])}</p>'
-        elif index == 5:
+        elif key == "blue_pond":
             media = f'<div class="itinerary-photo">{picture("blue-pond", ui["blue_pond_alt"])}</div>'
-        elif index == 6:
+        elif key == "shirahige_falls":
             media = f'<div class="itinerary-photo">{picture("shirahige", ui["shirahige_alt"])}</div>'
 
         blocks.append(
-            f"""<article class="stop"{peak}>
+            f"""<article class="stop" data-itinerary-key="{_text(key)}"{peak}>
   <time class="stop__time">{_copy_with_low_salience_emoji(item["time"])}</time>
   <div class="stop__content">
     <h3>{_copy_with_low_salience_emoji(item["name"])}</h3>
@@ -1412,11 +1426,47 @@ def _shared_geometry(kind: str) -> str:
     )
 
 
-def _language_label(content: dict[str, Any]) -> str:
+def _shared_picture(
+    key: str,
+    kr_alt: object,
+    zh_alt: object,
+    *,
+    label_key: str,
+    wrapper_class: str,
+    inner_class: str = "",
+    hero: bool = False,
+) -> str:
+    ko_id = f"shared-photo-{label_key}-ko"
+    zh_id = f"shared-photo-{label_key}-zh"
+    rendered_picture = picture(
+        key,
+        "",
+        hero=hero,
+        small_fallback=True,
+    )
+    if inner_class:
+        rendered_picture = (
+            f'<div class="{_text(inner_class)}">{rendered_picture}</div>'
+        )
     return (
-        f'<span class="language-label" aria-label="{_text(content["header"])}">'
+        f'<div class="{_text(wrapper_class)} shared-photo" role="img" '
+        f'aria-labelledby="{ko_id} {zh_id}" data-shared-media>'
+        f'<span class="visually-hidden" id="{ko_id}" lang="ko">'
+        f'{_text(kr_alt)}</span>'
+        f'<span class="visually-hidden" id="{zh_id}" lang="zh-CN">'
+        f'{_text(zh_alt)}</span>'
+        f'{rendered_picture}</div>'
+    )
+
+
+def _language_label(content: dict[str, Any]) -> str:
+    language = {"KR": "ko", "CN": "zh-CN"}[str(content["language_code"])]
+    return (
+        '<span class="language-label">'
         f'<span class="language-code" aria-hidden="true">'
-        f'{_text(content["language_code"])}</span></span>'
+        f'{_text(content["language_code"])}</span>'
+        f'<span class="visually-hidden" lang="{language}">'
+        f'{_text(content["header"])}</span></span>'
     )
 
 
@@ -1449,18 +1499,18 @@ def _bilingual_route_figure(
 def _bilingual_stop_copy(
     item: dict[str, Any],
     ui: dict[str, Any],
-    index: int,
+    key: str,
 ) -> str:
     duration = item.get("dur", "")
     description = item.get("desc", "")
     note = item.get("note", "")
     extra = ""
     badge = ""
-    if index == 1:
+    if key == "farm_tomita":
         extra = f'<p class="stop__note">{_text(ui["tomita_note"])}</p>'
-    elif index == 3:
+    elif key == "shikisai_no_oka":
         badge = f'<span class="included-badge">{_text(ui["included_badge"])}</span>'
-    elif index == 4:
+    elif key == "free_lunch":
         extra = f'<p class="stop__note">{_text(ui["lunch_note"])}</p>'
     return f"""
 <time class="stop__time">{_copy_with_low_salience_emoji(item["time"])}</time>
@@ -1479,44 +1529,60 @@ def _bilingual_itinerary(
     kr_ui = kr["editorial"]
     zh_ui = zh["editorial"]
     blocks: list[str] = []
-    for index, (kr_item, zh_item) in enumerate(
-        zip(kr["itinerary"], zh["itinerary"], strict=True)
+    for kr_item, zh_item in zip(
+        kr["itinerary"], zh["itinerary"], strict=True
     ):
-        if index == 0:
+        key = str(kr_item["key"])
+        if key != str(zh_item["key"]):
+            raise ValueError("bilingual itinerary keys must align")
+        if key == "sapporo_depart":
             media = _shared_geometry("departure")
-        elif index == 1:
+        elif key == "farm_tomita":
             media = _shared_geometry("flower")
-        elif index == 2:
+        elif key == "roller_coaster_road":
             media = _road_window(kr_ui, zh_ui)
-        elif index == 3:
-            media = (
-                '<div class="bilingual-stop__media itinerary-photo" data-shared-media>'
-                f'{picture("shikisai", kr_ui["shikisai_alt"], small_fallback=True)}</div>'
+        elif key == "shikisai_no_oka":
+            media = _shared_picture(
+                "shikisai",
+                kr_ui["shikisai_alt"],
+                zh_ui["shikisai_alt"],
+                label_key="itinerary-shikisai",
+                wrapper_class="bilingual-stop__media itinerary-photo",
             )
-        elif index == 4:
-            media = (
-                '<div class="bilingual-stop__media itinerary-photo itinerary-photo--detail" '
-                'data-shared-media>'
-                f'{picture("lavender-softserve", kr_ui["softserve_alt"], small_fallback=True)}</div>'
+        elif key == "free_lunch":
+            media = _shared_picture(
+                "lavender-softserve",
+                kr_ui["softserve_alt"],
+                zh_ui["softserve_alt"],
+                label_key="itinerary-softserve",
+                wrapper_class=(
+                    "bilingual-stop__media itinerary-photo itinerary-photo--detail"
+                ),
             )
-        elif index == 5:
-            media = (
-                '<div class="bilingual-stop__media itinerary-photo" data-shared-media>'
-                f'{picture("blue-pond", kr_ui["blue_pond_alt"], small_fallback=True)}</div>'
+        elif key == "blue_pond":
+            media = _shared_picture(
+                "blue-pond",
+                kr_ui["blue_pond_alt"],
+                zh_ui["blue_pond_alt"],
+                label_key="itinerary-blue-pond",
+                wrapper_class="bilingual-stop__media itinerary-photo",
             )
-        elif index == 6:
-            media = (
-                '<div class="bilingual-stop__media itinerary-photo" data-shared-media>'
-                f'{picture("shirahige", kr_ui["shirahige_alt"], small_fallback=True)}</div>'
+        elif key == "shirahige_falls":
+            media = _shared_picture(
+                "shirahige",
+                kr_ui["shirahige_alt"],
+                zh_ui["shirahige_alt"],
+                label_key="itinerary-shirahige",
+                wrapper_class="bilingual-stop__media itinerary-photo",
             )
         else:
             media = _shared_geometry("return")
-        peak = ' data-peak="true"' if kr_item.get("peak") else ""
+        peak = ' data-peak="true"' if key == "farm_tomita" else ""
         blocks.append(
-            f"""<article class="bilingual-stop"{peak}>
+            f"""<article class="bilingual-stop" data-itinerary-key="{_text(key)}"{peak}>
   {_language_grid(
-      _bilingual_stop_copy(kr_item, kr_ui, index),
-      _bilingual_stop_copy(zh_item, zh_ui, index),
+      _bilingual_stop_copy(kr_item, kr_ui, key),
+      _bilingual_stop_copy(zh_item, zh_ui, key),
       shared_media=media,
   )}
 </article>"""
@@ -1621,10 +1687,13 @@ def render_bilingual(
     assert isinstance(kr_pickup, list)
     assert isinstance(zh_pickup, list)
 
-    hero_media = (
-        '<div class="hero__photo" data-shared-media>'
-        f'{picture("hero-farm-tomita", kr_ui["hero_alt"], hero=True, small_fallback=True)}'
-        "</div>"
+    hero_media = _shared_picture(
+        "hero-farm-tomita",
+        kr_ui["hero_alt"],
+        zh_ui["hero_alt"],
+        label_key="hero",
+        wrapper_class="hero__photo",
+        hero=True,
     )
     hero = _language_grid(
         f"""
@@ -1708,10 +1777,13 @@ def render_bilingual(
       {_language_grid(
           f'{_language_label(kr)}<h2>{_text(kr_ui["pain_title"])}</h2><p>{_text(kr_ui["pain_body"])}</p>',
           f'{_language_label(zh)}<h2>{_text(zh_ui["pain_title"])}</h2><p>{_text(zh_ui["pain_body"])}</p>',
-          shared_media=(
-              '<div class="bilingual-media" data-shared-media>'
-              f'<div class="editorial-photo">{picture("furano-people", kr_ui["people_alt"], small_fallback=True)}</div>'
-              "</div>"
+          shared_media=_shared_picture(
+              "furano-people",
+              kr_ui["people_alt"],
+              zh_ui["people_alt"],
+              label_key="people",
+              wrapper_class="bilingual-media",
+              inner_class="editorial-photo",
           ),
       )}
     </div>
@@ -1757,10 +1829,12 @@ def render_bilingual(
     {_language_grid(
         _bilingual_closing(kr),
         _bilingual_closing(zh),
-        shared_media=(
-            '<div class="closing__photo" data-shared-media>'
-            f'{picture("blue-pond", kr_ui["blue_pond_alt"], small_fallback=True)}'
-            "</div>"
+        shared_media=_shared_picture(
+            "blue-pond",
+            kr_ui["blue_pond_alt"],
+            zh_ui["blue_pond_alt"],
+            label_key="closing-blue-pond",
+            wrapper_class="closing__photo",
         ),
         modifier="closing__inner",
     )}

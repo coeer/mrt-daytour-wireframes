@@ -2,6 +2,7 @@ from copy import deepcopy
 import hashlib
 from html import escape as html_escape
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -9,7 +10,7 @@ import unittest
 from html.parser import HTMLParser
 from pathlib import Path
 
-from tools.build_furano import KR, ZH, build_all
+from tools.build_furano import ITINERARY_KEYS, KR, ZH, build_all
 from tools.furano_renderer import render_bilingual, render_single
 
 
@@ -148,7 +149,6 @@ class RenderContractTests(unittest.TestCase):
             html,
         )
         self.assertLess(html.index("language-column--kr"), html.index("language-column--zh"))
-        self.assertEqual(html.count("hero-farm-tomita-1600.webp"), 1)
         self.assertEqual(html.count("<picture"), 7)
         self.assertIn("gap: 40px", html)
         self.assertIn("border-right: 1px solid var(--line)", html)
@@ -159,6 +159,67 @@ class RenderContractTests(unittest.TestCase):
         self.assertIn(".bilingual .timeline::before { display: none; }", html)
         pickup = html[html.index('id="pickup"') : html.index('id="itinerary"')]
         self.assertLess(pickup.index("route-canvas"), pickup.index("language-grid"))
+
+    def test_bilingual_shared_photos_have_unique_two_language_names(self):
+        root = _parse(render_bilingual(KR, ZH))
+        photos = root.find_all("shared-photo")
+        self.assertEqual(len(photos), 7)
+        ids = {
+            node.attrs["id"]: node
+            for node in root.find_all()
+            if "id" in node.attrs
+        }
+        referenced_ids: list[str] = []
+        for photo in photos:
+            self.assertEqual(photo.attrs.get("role"), "img")
+            self.assertIn("data-shared-media", photo.attrs)
+            self.assertNotIn("aria-label", photo.attrs)
+            references = (photo.attrs.get("aria-labelledby") or "").split()
+            self.assertEqual(len(references), 2)
+            referenced_ids.extend(references)
+            self.assertEqual(
+                [ids[reference].attrs.get("lang") for reference in references],
+                ["ko", "zh-CN"],
+            )
+            self.assertTrue(
+                all("visually-hidden" in ids[reference].classes for reference in references)
+            )
+            images = [node for node in photo.find_all() if node.tag == "img"]
+            self.assertEqual(len(images), 1)
+            self.assertEqual(images[0].attrs.get("alt"), "")
+        self.assertEqual(len(referenced_ids), 14)
+        self.assertEqual(len(referenced_ids), len(set(referenced_ids)))
+
+    def test_single_language_photos_keep_language_owned_alt_text(self):
+        for content, lang in ((KR, "ko"), (ZH, "zh-CN")):
+            ui = content["editorial"]
+            images = [
+                node for node in _parse(render_single(content, lang)).find_all()
+                if node.tag == "img"
+            ]
+            self.assertEqual(
+                [node.attrs.get("alt") for node in images],
+                [
+                    ui["hero_alt"],
+                    ui["people_alt"],
+                    ui["shikisai_alt"],
+                    ui["softserve_alt"],
+                    ui["blue_pond_alt"],
+                    ui["shirahige_alt"],
+                    ui["blue_pond_alt"],
+                ],
+            )
+
+    def test_bilingual_language_markers_include_hidden_full_language_names(self):
+        root = _parse(render_bilingual(KR, ZH))
+        labels = root.find_all("language-label")
+        self.assertGreater(len(labels), 0)
+        for label in labels:
+            visible = [child for child in label.children if "language-code" in child.classes]
+            hidden = [child for child in label.children if "visually-hidden" in child.classes]
+            self.assertEqual(len(visible), 1)
+            self.assertEqual(len(hidden), 1)
+            self.assertIn(hidden[0].attrs.get("lang"), {"ko", "zh-CN"})
 
     def test_bilingual_mobile_hero_compacts_only_its_language_separator(self):
         html = render_bilingual(KR, ZH)
@@ -218,8 +279,14 @@ class RenderContractTests(unittest.TestCase):
             '<span class="language-code" aria-hidden="true">CN</span>',
             bilingual,
         )
-        self.assertIn('aria-label="한국어 원문"', bilingual)
-        self.assertIn('aria-label="中文对照"', bilingual)
+        self.assertIn(
+            '<span class="visually-hidden" lang="ko">한국어 원문</span>',
+            bilingual,
+        )
+        self.assertIn(
+            '<span class="visually-hidden" lang="zh-CN">中文对照</span>',
+            bilingual,
+        )
 
         for html in (single_kr, single_zh, bilingual):
             outside_itinerary = _outside_itinerary(html)
@@ -272,6 +339,27 @@ class RenderContractTests(unittest.TestCase):
                 self.assertEqual(html.count(glyph), expected_count)
                 self.assertEqual(html.count(wrapped), expected_count)
 
+    def test_itinerary_media_and_peak_follow_stable_keys_after_reorder(self):
+        content = deepcopy(KR)
+        for key, item in zip(ITINERARY_KEYS, content["itinerary"], strict=True):
+            item["key"] = key
+        content["itinerary"] = content["itinerary"][3:] + content["itinerary"][:3]
+        html = render_single(content, "ko")
+
+        def stop(key: str) -> str:
+            self.assertIn(f'data-itinerary-key="{key}"', html)
+            start = html.index(f'data-itinerary-key="{key}"')
+            return html[start : html.index("</article>", start)]
+
+        self.assertIn('data-peak="true"', stop("farm_tomita"))
+        self.assertNotIn('data-peak="true"', stop("shikisai_no_oka"))
+        self.assertIn("road-window", stop("roller_coaster_road"))
+        self.assertIn("shikisai-1600.webp", stop("shikisai_no_oka"))
+        self.assertIn("included-badge", stop("shikisai_no_oka"))
+        self.assertIn("lavender-softserve-1200.webp", stop("free_lunch"))
+        self.assertIn("blue-pond-1600.webp", stop("blue_pond"))
+        self.assertIn("shirahige-1600.webp", stop("shirahige_falls"))
+
     def test_finish_review_removes_faq_title_emoji_without_changing_qa(self):
         expected = (
             (
@@ -304,9 +392,8 @@ class RenderContractTests(unittest.TestCase):
                 self.assertIn(html_escape(question), faq)
                 self.assertIn(html_escape(answer), faq)
 
-    def test_bilingual_section_order_faq_state_and_direction_contract(self):
-        html = render_bilingual(KR, ZH)
-        section_ids = (
+    def test_all_modes_have_exact_section_order_and_direction_contract(self):
+        section_ids = [
             "top",
             "benefits",
             "pain-solution",
@@ -316,12 +403,73 @@ class RenderContractTests(unittest.TestCase):
             "cancellation",
             "faq",
             "closing",
-        )
-        positions = [html.index(f'id="{section_id}"') for section_id in section_ids]
-        self.assertEqual(positions, sorted(positions))
-        self.assertEqual(html.count("<details open>"), 1)
-        self.assertIn("seed 88bbc100", html)
-        self.assertRegex(html, r"<body><!--\s*THESIS:")
+        ]
+        for html in (
+            render_single(KR, "ko"),
+            render_single(ZH, "zh-CN"),
+            render_bilingual(KR, ZH),
+        ):
+            rendered_ids = re.findall(
+                r'<(?:header|section)\b[^>]*\bid="([^"]+)"',
+                html,
+            )
+            self.assertEqual(rendered_ids, section_ids)
+            self.assertEqual(html.count("<details open>"), 1)
+            self.assertIn("seed 88bbc100", html)
+            self.assertRegex(html, r"<body><!--\s*THESIS:")
+
+    def test_each_page_preloads_exactly_one_responsive_hero(self):
+        for html in (
+            render_single(KR, "ko"),
+            render_single(ZH, "zh-CN"),
+            render_bilingual(KR, ZH),
+        ):
+            root = _parse(html)
+            preloads = [
+                node for node in root.find_all()
+                if node.tag == "link"
+                and node.attrs.get("rel") == "preload"
+                and node.attrs.get("as") == "image"
+            ]
+            self.assertEqual(len(preloads), 1)
+            self.assertEqual(
+                preloads[0].attrs.get("href"),
+                "img/hero-farm-tomita-1600.webp?v=20260729-v4",
+            )
+            self.assertEqual(preloads[0].attrs.get("imagesizes"), "100vw")
+            self.assertEqual(
+                preloads[0].attrs.get("imagesrcset"),
+                "img/hero-farm-tomita-960.webp?v=20260729-v4 960w, "
+                "img/hero-farm-tomita-1600.webp?v=20260729-v4 1600w",
+            )
+
+    def test_hero_alone_has_priority_and_nonhero_photos_are_lazy(self):
+        for html in (
+            render_single(KR, "ko"),
+            render_single(ZH, "zh-CN"),
+            render_bilingual(KR, ZH),
+        ):
+            images = [node for node in _parse(html).find_all() if node.tag == "img"]
+            priority = [node for node in images if node.attrs.get("fetchpriority") == "high"]
+            self.assertEqual(len(priority), 1)
+            self.assertIn("hero-farm-tomita", priority[0].attrs["src"])
+            self.assertEqual(priority[0].attrs.get("loading"), "eager")
+            nonhero = [node for node in images if node is not priority[0]]
+            self.assertTrue(nonhero)
+            self.assertTrue(all(node.attrs.get("loading") == "lazy" for node in nonhero))
+            self.assertTrue(all("fetchpriority" not in node.attrs for node in nonhero))
+
+    def test_each_mode_has_exactly_one_itinerary_peak(self):
+        for html in (
+            render_single(KR, "ko"),
+            render_single(ZH, "zh-CN"),
+            render_bilingual(KR, ZH),
+        ):
+            itinerary = html[
+                html.index('<section class="section itinerary"') :
+                html.index('<section class="section included"')
+            ]
+            self.assertEqual(itinerary.count('data-peak="true"'), 1)
 
     def test_every_bilingual_grid_has_one_immediately_preceding_shared_media(self):
         root = _parse(render_bilingual(KR, ZH))

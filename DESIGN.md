@@ -132,7 +132,7 @@ The palette is a warm-paper editorial base punctuated by the colors of Furano an
 
 Desktop content is held to an 860px reading column, with hero and selected overview grids extending to 1180px. Sections use `clamp(76px, 10vw, 130px)` vertical padding and a 16px outer gutter. The hero occupies 96svh, drops copy to the lower edge, and places actions immediately below the subtitle.
 
-Four benefit tiles establish conditions at desktop width; split editorial and pickup areas use asymmetric two-column grids. The itinerary is the signature layout: an 86px time rail, 54px gap, lavender vertical rule, and 14px circular markers. At 820px, story grids stack, benefit tiles become two columns, and the timeline rail tightens. At 560px, actions become full-width, the rail becomes 42px with a 30px gap, and cards retain a dense two-column benefit rhythm.
+Four benefit tiles establish conditions at desktop width; split editorial and pickup areas use asymmetric two-column grids. The itinerary is the signature layout: an 86px time rail, 54px gap, lavender vertical rule, and 14px circular markers. At 820px, story grids stack, benefit tiles become two columns, and the timeline rail tightens. At 560px, single-language actions become full-width, the rail becomes 42px with a 30px gap, and cards retain a dense two-column benefit rhythm. The bilingual hero is the deliberate phone exception: at 560px and below it uses a 92svh minimum, compact type and spacing, and two 44px-high action columns per language so all four actions remain above the next-section reveal.
 
 **The Timeline-First Rule.** When describing a day, show movement and time as a continuous reading spine instead of scattering stops into unrelated cards.
 
@@ -173,7 +173,7 @@ Compact and weighty pills keep the next action close to the hero copy.
 
 ### Navigation
 
-The primary navigation is a two-action hero group rather than a persistent top bar. It wraps horizontally on larger screens and becomes a one-column, full-width stack on small screens. A fixed skip link appears only on keyboard focus.
+The primary navigation is a two-action hero group rather than a persistent top bar. It wraps horizontally on larger screens and becomes a one-column, full-width stack on small single-language screens. In the bilingual phone hero, each language keeps its two actions in compact 44px-high columns. A fixed skip link appears only on keyboard focus.
 
 ### Timeline Stops
 

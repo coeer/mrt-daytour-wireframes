@@ -1,3 +1,5 @@
+import hashlib
+import json
 import unittest
 
 from tools.build_furano import ASSET_VERSION, FAQ_COUNT, ITINERARY_KEYS, KR, ZH
@@ -36,6 +38,28 @@ class ContentContractTests(unittest.TestCase):
             self.assertIn("예정", item["time"])
         for item in ZH["itinerary"]:
             self.assertIn("预计", item["time"])
+
+    def test_itinerary_records_keep_the_canonical_stable_key_sequence(self):
+        for content in (KR, ZH):
+            self.assertEqual(
+                tuple(item.get("key") for item in content["itinerary"]),
+                ITINERARY_KEYS,
+            )
+
+    def test_itinerary_records_match_the_authoritative_baseline_digests(self):
+        expected = (
+            (KR, "58a84d0897f5a713c6805250a98fdab8f3145f807fb02950e629f8a0f1414455"),
+            (ZH, "c623354ee406268b3625e7880b38e414eb20076973fe96f0fc250da925ece65a"),
+        )
+        for content, expected_digest in expected:
+            digest = hashlib.sha256(
+                json.dumps(
+                    content["itinerary"],
+                    ensure_ascii=False,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            ).hexdigest()
+            self.assertEqual(digest, expected_digest)
 
     def test_language_redlines(self):
         korean_blob = repr(KR)
