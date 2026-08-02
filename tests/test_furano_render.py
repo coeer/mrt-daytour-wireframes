@@ -442,6 +442,24 @@ class RenderContractTests(unittest.TestCase):
                 "img/hero-farm-tomita-960.webp?v=20260729-v4 960w, "
                 "img/hero-farm-tomita-1600.webp?v=20260729-v4 1600w",
             )
+            hero_images = [
+                node for node in root.find_all()
+                if node.tag == "img" and node.attrs.get("fetchpriority") == "high"
+            ]
+            self.assertEqual(len(hero_images), 1)
+            self.assertEqual(
+                hero_images[0].attrs.get("srcset"),
+                preloads[0].attrs.get("imagesrcset"),
+            )
+            self.assertEqual(
+                hero_images[0].attrs.get("sizes"),
+                preloads[0].attrs.get("imagesizes"),
+            )
+            assert hero_images[0].parent is not None
+            self.assertEqual(hero_images[0].parent.tag, "picture")
+            self.assertFalse(
+                any(child.tag == "source" for child in hero_images[0].parent.children)
+            )
 
     def test_hero_alone_has_priority_and_nonhero_photos_are_lazy(self):
         for html in (

@@ -13,3 +13,4 @@ Task 5: complete — local suite 26/26; responsive and semantic browser checks p
 Task 5: finish review round 1 corrected in 5db2c9c; final correction 8b553b9; final verdict pass with no regressions.
 Task 5: DESIGN.md and .impeccable/design.json generated and validated against the renderer; remote publication verification remains pending explicit publication authorization.
 Final whole-branch review: bilingual shared photos now have unique KR+ZH accessible names with empty image alts; itinerary identity, authoritative digests, and key-driven dispatch are locked; responsive hero preload and remote redlines added; final suite 36/36. Detector not rerun; remote publication verification remains pending authorization.
+Final preload re-review: hero preload and rendered hero now share the exact versioned `960w, 1600w` candidate string and `100vw` sizing with no conflicting hero source; focused test and full suite 36/36 passed, build parity 3/3.

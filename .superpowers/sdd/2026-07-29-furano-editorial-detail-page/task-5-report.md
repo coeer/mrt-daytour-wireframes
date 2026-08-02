@@ -243,3 +243,10 @@ Full-page screenshots from this browser backend were rejected as evidence becaus
 - Each of all three modes has exactly one responsive versioned hero preload, one eager high-priority hero image, lazy nonhero images, exact canonical section order, and one itinerary peak. The explicit height-only source-dimension regression is covered.
 - Fresh regeneration wrote all three pages; a second temporary build was byte-identical 3/3. `DESIGN.md` and the sidecar now document the bilingual `<=560px` 92svh/two-column 44px-action exception.
 - The remote verifier now bans `카카오톡 한국어 상담` and `KakaoTalk韩语咨询`; syntax was validated but the verifier was not executed. The Impeccable detector was not rerun. Publication verification remains pending explicit authorization.
+
+## Final hero preload candidate correction
+
+- TDD RED: the exact preload/hero-candidate contract failed because the eager hero image exposed no width-descriptor `srcset` or `sizes`, while the preload used `960w, 1600w` with `100vw`.
+- TDD GREEN: the focused contract passed after both the preload and hero image began consuming one shared, versioned candidate string. The hero remains inside `picture` with no conflicting `source`; eager loading, `fetchpriority="high"`, dimensions, CSS, and single/bilingual alt semantics are unchanged.
+- Fresh regeneration wrote all three pages. The full suite passed 36/36 in `0.179s`, a second temporary build was byte-identical 3/3, and `git diff --check` passed.
+- The detector and remote verifier were not run; nothing was pushed or copied to the canonical project.

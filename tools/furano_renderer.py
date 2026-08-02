@@ -1050,6 +1050,16 @@ def _copy_with_low_salience_emoji(value: object) -> str:
     return rendered
 
 
+def _picture_srcset(key: str) -> str:
+    from tools.build_furano import ASSET_VERSION
+
+    small, large = _PICTURES[key]
+    return (
+        f"img/{key}-{small[0]}.webp?v={ASSET_VERSION} {small[0]}w, "
+        f"img/{key}-{large[0]}.webp?v={ASSET_VERSION} {large[0]}w"
+    )
+
+
 def picture(
     key: str,
     alt: str,
@@ -1065,14 +1075,24 @@ def picture(
     small, large = _PICTURES[key]
     fallback = small if small_fallback else large
     loading = 'loading="eager" fetchpriority="high"' if hero else 'loading="lazy"'
+    sources = ""
+    responsive_attributes = ""
+    if hero:
+        responsive_attributes = (
+            f' srcset="{_picture_srcset(key)}" sizes="100vw"'
+        )
+    else:
+        sources = (
+            f'<source media="(max-width: 720px)" '
+            f'srcset="img/{key}-{small[0]}.webp?v={ASSET_VERSION}">'
+            f'<source srcset="img/{key}-{large[0]}.webp?v={ASSET_VERSION}">'
+        )
     return (
         "<picture>"
-        f'<source media="(max-width: 720px)" '
-        f'srcset="img/{key}-{small[0]}.webp?v={ASSET_VERSION}">'
-        f'<source srcset="img/{key}-{large[0]}.webp?v={ASSET_VERSION}">'
+        f"{sources}"
         f'<img src="img/{key}-{fallback[0]}.webp?v={ASSET_VERSION}" '
         f'width="{fallback[0]}" height="{fallback[1]}" alt="{_text(alt)}" '
-        f'{loading} decoding="async">'
+        f'{loading} decoding="async"{responsive_attributes}>'
         "</picture>"
     )
 
@@ -1083,8 +1103,7 @@ def _hero_preload() -> str:
     return (
         '<link rel="preload" as="image" '
         f'href="img/hero-farm-tomita-1600.webp?v={ASSET_VERSION}" '
-        f'imagesrcset="img/hero-farm-tomita-960.webp?v={ASSET_VERSION} 960w, '
-        f'img/hero-farm-tomita-1600.webp?v={ASSET_VERSION} 1600w" '
+        f'imagesrcset="{_picture_srcset("hero-farm-tomita")}" '
         'imagesizes="100vw">'
     )
 
