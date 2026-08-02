@@ -739,6 +739,18 @@ _BILINGUAL_CSS = """
 .bilingual .timeline::before { display: none; }
 .bilingual .included-grid { grid-template-columns: 1fr; }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .language-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -774,6 +786,59 @@ _BILINGUAL_CSS = """
 
 .bilingual-media .editorial-photo img { aspect-ratio: 16 / 7; }
 
+.shared-visual {
+  position: relative;
+  height: 58px;
+  margin-bottom: clamp(26px, 4vw, 42px);
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.shared-visual span {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--lavender);
+  transform: translateY(-50%);
+}
+
+.shared-visual::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 7%;
+  right: 7%;
+  height: 2px;
+  background: var(--lavender);
+  transform: translateY(-50%);
+}
+
+.shared-visual span:nth-child(1) { left: 7%; }
+.shared-visual span:nth-child(2) { left: calc(50% - 6px); background: var(--flower-pink); }
+.shared-visual span:nth-child(3) { right: 7%; background: var(--pond-blue); }
+
+.shared-visual--decision span:nth-child(1) { left: 14%; }
+.shared-visual--decision span:nth-child(2) { left: 42%; }
+.shared-visual--decision span:nth-child(3) { right: 14%; }
+
+.shared-visual--flower::before {
+  height: 8px;
+  background: linear-gradient(90deg, var(--lavender) 0 32%, var(--flower-pink) 32% 64%, var(--pond-blue) 64%);
+}
+
+.shared-visual--ticket {
+  border: 1px dashed var(--lavender);
+  border-radius: var(--radius);
+}
+
+.shared-visual--refund span:nth-child(1) { background: var(--light-lavender); border: 2px solid var(--lavender); }
+.shared-visual--return::before { background: linear-gradient(90deg, var(--pond-blue), var(--lavender)); }
+.shared-visual--faq span { width: 8px; height: 8px; }
+.shared-visual--faq::before { height: 1px; background: var(--ink); }
+
 .bilingual .benefit-grid { grid-template-columns: repeat(2, 1fr); }
 .bilingual .benefit { min-height: 152px; }
 .bilingual .pickup-copy .lead { margin-bottom: 24px; }
@@ -791,6 +856,7 @@ _BILINGUAL_CSS = """
 }
 
 .bilingual-stop__media { margin-bottom: 28px; }
+.bilingual-stop > .shared-visual { margin-bottom: 28px; }
 .bilingual-stop__media .itinerary-photo { width: 100%; }
 .bilingual-stop__media .itinerary-photo--detail { width: min(100%, 520px); }
 
@@ -904,8 +970,10 @@ def _route_figure(
 ) -> str:
     if secondary_ui is None:
         stops = "".join(f"<li>{_text(stop)}</li>" for stop in ui["route_stops"])
-        label = _text(ui["route_label"])
+        label_attributes = f'aria-label="{_text(ui["route_label"])}"'
+        language_labels = ""
         caption = _text(ui["route_disclaimer"])
+        shared_media = ""
     else:
         stops = "".join(
             f'<li><span lang="ko">{_text(primary)}</span> / '
@@ -916,13 +984,20 @@ def _route_figure(
                 strict=True,
             )
         )
-        label = _text(f'{ui["route_label"]} / {secondary_ui["route_label"]}')
+        label_attributes = 'aria-labelledby="route-label-ko route-label-zh"'
+        language_labels = (
+            f'\n  <span class="visually-hidden" id="route-label-ko" lang="ko">'
+            f'{_text(ui["route_label"])}</span>'
+            f'<span class="visually-hidden" id="route-label-zh" lang="zh-CN">'
+            f'{_text(secondary_ui["route_label"])}</span>'
+        )
         caption = (
             f'<span lang="ko">{_text(ui["route_disclaimer"])}</span> / '
             f'<span lang="zh-CN">{_text(secondary_ui["route_disclaimer"])}</span>'
         )
+        shared_media = " data-shared-media"
     return f"""
-<figure class="route-figure" role="img" aria-label="{label}">
+<figure class="route-figure" role="img" {label_attributes}{shared_media}>{language_labels}
   <div class="route-canvas">
     <svg viewBox="0 0 620 320" aria-hidden="true" focusable="false">
       <path d="M24 282 C95 262 91 193 154 178 S224 52 298 68 S377 154 431 121 S511 25 565 51 S573 239 607 274"
@@ -941,11 +1016,26 @@ def _route_figure(
 </figure>"""
 
 
-def _road_window(ui: dict[str, Any]) -> str:
-    return f"""
+def _road_window(
+    ui: dict[str, Any],
+    secondary_ui: dict[str, Any] | None = None,
+) -> str:
+    if secondary_ui is None:
+        return f"""
 <div class="road-window" role="img" aria-label="{_text(ui['road_label'])}">
   <span class="road-line" aria-hidden="true"></span>
   <span class="road-label">{_text(ui['road_note'])}</span>
+</div>"""
+    return f"""
+<div class="road-window bilingual-stop__media" role="img"
+  aria-labelledby="road-label-ko road-label-zh" data-shared-media>
+  <span class="visually-hidden" id="road-label-ko" lang="ko">{_text(ui["road_label"])}</span>
+  <span class="visually-hidden" id="road-label-zh" lang="zh-CN">{_text(secondary_ui["road_label"])}</span>
+  <span class="road-line" aria-hidden="true"></span>
+  <span class="road-label">
+    <span lang="ko">{_text(ui["road_note"])}</span> /
+    <span lang="zh-CN">{_text(secondary_ui["road_note"])}</span>
+  </span>
 </div>"""
 
 
@@ -1157,11 +1247,28 @@ def render_single(content: dict[str, object], lang: str) -> str:
     return document(str(ui["page_title"]), lang, body)
 
 
-def _language_grid(kr_html: str, zh_html: str) -> str:
-    return f"""<div class="language-grid">
+def _language_grid(
+    kr_html: str,
+    zh_html: str,
+    *,
+    shared_media: str,
+    modifier: str = "",
+) -> str:
+    grid_class = f"language-grid {modifier}" if modifier else "language-grid"
+    return f"""{shared_media}
+<div class="{grid_class}">
   <section class="language-column language-column--kr" lang="ko">{kr_html}</section>
   <section class="language-column language-column--zh" lang="zh-CN">{zh_html}</section>
 </div>"""
+
+
+def _shared_geometry(kind: str) -> str:
+    return (
+        f'<div class="shared-visual shared-visual--{_text(kind)}" '
+        'data-shared-media aria-hidden="true">'
+        "<span></span><span></span><span></span>"
+        "</div>"
+    )
 
 
 def _language_label(content: dict[str, Any]) -> str:
@@ -1230,44 +1337,42 @@ def _bilingual_itinerary(
     for index, (kr_item, zh_item) in enumerate(
         zip(kr["itinerary"], zh["itinerary"], strict=True)
     ):
-        media = ""
-        if index == 2:
-            shared_road_ui = {
-                "road_label": f'{kr_ui["road_label"]} / {zh_ui["road_label"]}',
-                "road_note": f'{kr_ui["road_note"]} / {zh_ui["road_note"]}',
-            }
-            media = _road_window(shared_road_ui)
+        if index == 0:
+            media = _shared_geometry("departure")
+        elif index == 1:
+            media = _shared_geometry("flower")
+        elif index == 2:
+            media = _road_window(kr_ui, zh_ui)
         elif index == 3:
             media = (
-                '<div class="itinerary-photo">'
+                '<div class="bilingual-stop__media itinerary-photo" data-shared-media>'
                 f'{picture("shikisai", kr_ui["shikisai_alt"], small_fallback=True)}</div>'
             )
         elif index == 4:
             media = (
-                '<div class="itinerary-photo itinerary-photo--detail">'
+                '<div class="bilingual-stop__media itinerary-photo itinerary-photo--detail" '
+                'data-shared-media>'
                 f'{picture("lavender-softserve", kr_ui["softserve_alt"], small_fallback=True)}</div>'
             )
         elif index == 5:
             media = (
-                '<div class="itinerary-photo">'
+                '<div class="bilingual-stop__media itinerary-photo" data-shared-media>'
                 f'{picture("blue-pond", kr_ui["blue_pond_alt"], small_fallback=True)}</div>'
             )
         elif index == 6:
             media = (
-                '<div class="itinerary-photo">'
+                '<div class="bilingual-stop__media itinerary-photo" data-shared-media>'
                 f'{picture("shirahige", kr_ui["shirahige_alt"], small_fallback=True)}</div>'
             )
-
-        media_html = (
-            f'<div class="bilingual-stop__media">{media}</div>' if media else ""
-        )
+        else:
+            media = _shared_geometry("return")
         peak = ' data-peak="true"' if kr_item.get("peak") else ""
         blocks.append(
             f"""<article class="bilingual-stop"{peak}>
-  {media_html}
   {_language_grid(
       _bilingual_stop_copy(kr_item, kr_ui, index),
       _bilingual_stop_copy(zh_item, zh_ui, index),
+      shared_media=media,
   )}
 </article>"""
         )
@@ -1371,6 +1476,11 @@ def render_bilingual(
     assert isinstance(kr_pickup, list)
     assert isinstance(zh_pickup, list)
 
+    hero_media = (
+        '<div class="hero__photo" data-shared-media>'
+        f'{picture("hero-farm-tomita", kr_ui["hero_alt"], hero=True, small_fallback=True)}'
+        "</div>"
+    )
     hero = _language_grid(
         f"""
 {_language_label(kr)}
@@ -1390,6 +1500,8 @@ def render_bilingual(
   <a class="button" href="#itinerary">{_text(zh_ui["primary_cta"])}</a>
   <a class="button button--quiet" href="#pickup">{_text(zh_ui["secondary_cta"])}</a>
 </nav>""",
+        shared_media=hero_media,
+        modifier="hero__inner",
     )
 
     pickup = _language_grid(
@@ -1405,6 +1517,7 @@ def render_bilingual(
 <strong class="pickup-time">{_text(zh["pickup_time"])}</strong>
 <p class="lead">{_text(zh_ui["pickup_intro"])}</p>
 <ul class="plain-list">{_list(zh_pickup)}</ul>""",
+        shared_media=_bilingual_route_figure(kr_ui, zh_ui),
     )
 
     itinerary_heading = _language_grid(
@@ -1416,19 +1529,24 @@ def render_bilingual(
 {_language_label(zh)}
 <h2>{_text(zh_ui["itinerary_title"])}</h2>
 <p class="lead">{_text(zh_ui["itinerary_intro"])}</p>""",
+        shared_media=_shared_geometry("route"),
     )
 
     faq_heading = _language_grid(
         f"{_language_label(kr)}<h2>{_text(kr['faq_title'])}</h2>",
         f"{_language_label(zh)}<h2>{_text(zh['faq_title'])}</h2>",
+        shared_media=_shared_geometry("faq"),
     )
 
     body = f"""
-<a class="skip-link" href="#main-content">{_text(kr_ui["skip"])} / {_text(zh_ui["skip"])}</a>
+<a class="skip-link" href="#main-content">
+  <span lang="ko">{_text(kr_ui["skip"])}</span>
+  <span aria-hidden="true"> / </span>
+  <span lang="zh-CN">{_text(zh_ui["skip"])}</span>
+</a>
 <div class="bilingual">
 <header class="hero" id="top">
-  <div class="hero__photo">{picture("hero-farm-tomita", kr_ui["hero_alt"], hero=True, small_fallback=True)}</div>
-  <div class="hero__inner">{hero}</div>
+  {hero}
 </header>
 
 <main id="main-content">
@@ -1436,24 +1554,26 @@ def render_bilingual(
     <div class="section__inner">{_language_grid(
         _bilingual_benefits(kr),
         _bilingual_benefits(zh),
+        shared_media=_shared_geometry("decision"),
     )}</div>
   </section>
 
   <section class="section pain-solution" id="pain-solution">
     <div class="section__inner">
-      <div class="bilingual-media">
-        <div class="editorial-photo">{picture("furano-people", kr_ui["people_alt"], small_fallback=True)}</div>
-      </div>
       {_language_grid(
           f'{_language_label(kr)}<h2>{_text(kr_ui["pain_title"])}</h2><p>{_text(kr_ui["pain_body"])}</p>',
           f'{_language_label(zh)}<h2>{_text(zh_ui["pain_title"])}</h2><p>{_text(zh_ui["pain_body"])}</p>',
+          shared_media=(
+              '<div class="bilingual-media" data-shared-media>'
+              f'<div class="editorial-photo">{picture("furano-people", kr_ui["people_alt"], small_fallback=True)}</div>'
+              "</div>"
+          ),
       )}
     </div>
   </section>
 
   <section class="section pickup" id="pickup">
     <div class="section__inner pickup-copy">
-      {_bilingual_route_figure(kr_ui, zh_ui)}
       {pickup}
     </div>
   </section>
@@ -1469,6 +1589,7 @@ def render_bilingual(
     <div class="section__inner">{_language_grid(
         _bilingual_included(kr),
         _bilingual_included(zh),
+        shared_media=_shared_geometry("ticket"),
     )}</div>
   </section>
 
@@ -1476,6 +1597,7 @@ def render_bilingual(
     <div class="section__inner">{_language_grid(
         _bilingual_cancellation(kr),
         _bilingual_cancellation(zh),
+        shared_media=_shared_geometry("refund"),
     )}</div>
   </section>
 
@@ -1487,11 +1609,16 @@ def render_bilingual(
   </section>
 
   <section class="closing" id="closing">
-    <div class="closing__photo">{picture("blue-pond", kr_ui["blue_pond_alt"], small_fallback=True)}</div>
-    <div class="closing__inner">{_language_grid(
+    {_language_grid(
         _bilingual_closing(kr),
         _bilingual_closing(zh),
-    )}</div>
+        shared_media=(
+            '<div class="closing__photo" data-shared-media>'
+            f'{picture("blue-pond", kr_ui["blue_pond_alt"], small_fallback=True)}'
+            "</div>"
+        ),
+        modifier="closing__inner",
+    )}
   </section>
 </main>
 

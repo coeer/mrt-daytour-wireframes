@@ -2,10 +2,77 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
 
 from tools.build_furano import KR, ZH, build_all
 from tools.furano_renderer import render_bilingual, render_single
+
+
+class _Element:
+    def __init__(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+        parent: "_Element | None" = None,
+    ) -> None:
+        self.tag = tag
+        self.attrs = dict(attrs)
+        self.parent = parent
+        self.children: list[_Element] = []
+
+    @property
+    def classes(self) -> set[str]:
+        return set((self.attrs.get("class") or "").split())
+
+    def find_all(self, class_name: str | None = None) -> list["_Element"]:
+        found = []
+        if class_name is None or class_name in self.classes:
+            found.append(self)
+        for child in self.children:
+            found.extend(child.find_all(class_name))
+        return found
+
+
+class _ContractParser(HTMLParser):
+    _VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input",
+                  "link", "meta", "param", "source", "track", "wbr"}
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.root = _Element("document", [])
+        self.stack = [self.root]
+
+    def handle_starttag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        node = _Element(tag, attrs, self.stack[-1])
+        self.stack[-1].children.append(node)
+        if tag not in self._VOID_TAGS:
+            self.stack.append(node)
+
+    def handle_startendtag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        self.handle_starttag(tag, attrs)
+        if tag not in self._VOID_TAGS:
+            self.stack.pop()
+
+    def handle_endtag(self, tag: str) -> None:
+        for index in range(len(self.stack) - 1, 0, -1):
+            if self.stack[index].tag == tag:
+                del self.stack[index:]
+                return
+
+
+def _parse(html: str) -> _Element:
+    parser = _ContractParser()
+    parser.feed(html)
+    return parser.root
 
 
 class RenderContractTests(unittest.TestCase):
@@ -27,6 +94,10 @@ class RenderContractTests(unittest.TestCase):
             self.assertNotIn("spec-bar", html)
             self.assertNotIn("设计建议", html)
             self.assertIn("20260729-v4", html)
+            self.assertNotRegex(
+                html,
+                r'<figure class="route-figure"[^>]*>\n\n',
+            )
 
     def test_single_pages_use_responsive_real_photos(self):
         html = render_single(KR, "ko")
@@ -97,6 +168,74 @@ class RenderContractTests(unittest.TestCase):
         self.assertEqual(html.count("<details open>"), 1)
         self.assertIn("seed 88bbc100", html)
         self.assertRegex(html, r"<body><!--\s*THESIS:")
+
+    def test_every_bilingual_grid_has_one_immediately_preceding_shared_media(self):
+        root = _parse(render_bilingual(KR, ZH))
+        grids = root.find_all("language-grid")
+        shared_media = [
+            node
+            for node in root.find_all()
+            if "data-shared-media" in node.attrs
+        ]
+        self.assertEqual(len(grids), 17)
+        self.assertEqual(len(shared_media), len(grids))
+        for grid in grids:
+            assert grid.parent is not None
+            index = grid.parent.children.index(grid)
+            self.assertGreater(index, 0)
+            self.assertIn(
+                "data-shared-media",
+                grid.parent.children[index - 1].attrs,
+            )
+
+        stops = root.find_all("bilingual-stop")
+        self.assertEqual(len(stops), 8)
+        for stop in stops:
+            direct_shared = [
+                child for child in stop.children if "data-shared-media" in child.attrs
+            ]
+            direct_grids = [
+                child for child in stop.children if "language-grid" in child.classes
+            ]
+            self.assertEqual(len(direct_shared), 1)
+            self.assertEqual(len(direct_grids), 1)
+            self.assertEqual(
+                stop.children.index(direct_shared[0]) + 1,
+                stop.children.index(direct_grids[0]),
+            )
+
+    def test_bilingual_mixed_language_controls_have_owned_accessible_names(self):
+        root = _parse(render_bilingual(KR, ZH))
+        skip_links = root.find_all("skip-link")
+        self.assertEqual(len(skip_links), 1)
+        self.assertEqual(
+            [child.attrs.get("lang") for child in skip_links[0].children],
+            ["ko", None, "zh-CN"],
+        )
+
+        labelled_media = [
+            node
+            for node in root.find_all()
+            if node.attrs.get("role") == "img"
+            and ({"route-figure", "road-window"} & node.classes)
+        ]
+        self.assertEqual(len(labelled_media), 2)
+        ids = {
+            node.attrs["id"]: node
+            for node in root.find_all()
+            if "id" in node.attrs
+        }
+        referenced_ids: list[str] = []
+        for media in labelled_media:
+            self.assertNotIn("aria-label", media.attrs)
+            references = (media.attrs.get("aria-labelledby") or "").split()
+            self.assertEqual(len(references), 2)
+            referenced_ids.extend(references)
+            self.assertEqual(
+                [ids[reference].attrs.get("lang") for reference in references],
+                ["ko", "zh-CN"],
+            )
+        self.assertEqual(len(referenced_ids), len(set(referenced_ids)))
 
     def test_faq_and_motion_are_accessible(self):
         for html in (
