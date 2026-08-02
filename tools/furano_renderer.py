@@ -1042,7 +1042,7 @@ def _benefit_icon(kind: object) -> str:
 
 def _copy_with_low_salience_emoji(value: object) -> str:
     rendered = _text(value)
-    for glyph in ("💜", "🌈", "💧"):
+    for glyph in ("🚗", "💜", "🎢", "🌈", "🍽️", "📸", "💧", "⏰"):
         rendered = rendered.replace(
             glyph,
             f'<span class="copy-emoji" aria-hidden="true">{glyph}</span>',
@@ -1213,14 +1213,14 @@ def _itinerary(content: dict[str, Any], ui: dict[str, Any]) -> str:
 
         blocks.append(
             f"""<article class="stop"{peak}>
-  <time class="stop__time">{_text(item["time"])}</time>
+  <time class="stop__time">{_copy_with_low_salience_emoji(item["time"])}</time>
   <div class="stop__content">
-    <h3>{_text(item["name"])}</h3>
-    {f'<p class="stop__duration">{_text(duration)}</p>' if duration else ''}
+    <h3>{_copy_with_low_salience_emoji(item["name"])}</h3>
+    {f'<p class="stop__duration">{_copy_with_low_salience_emoji(duration)}</p>' if duration else ''}
     {f'<p class="stop__description">{_copy_with_low_salience_emoji(description)}</p>' if description else ''}
     {extra}
     {media}
-    {f'<p class="stop__note">{_text(note)}</p>' if note else ''}
+    {f'<p class="stop__note">{_copy_with_low_salience_emoji(note)}</p>' if note else ''}
   </div>
 </article>"""
         )
@@ -1463,13 +1463,13 @@ def _bilingual_stop_copy(
     elif index == 4:
         extra = f'<p class="stop__note">{_text(ui["lunch_note"])}</p>'
     return f"""
-<time class="stop__time">{_text(item["time"])}</time>
-<h3>{_text(item["name"])}</h3>
+<time class="stop__time">{_copy_with_low_salience_emoji(item["time"])}</time>
+<h3>{_copy_with_low_salience_emoji(item["name"])}</h3>
 {badge}
-{f'<p class="stop__duration">{_text(duration)}</p>' if duration else ''}
+{f'<p class="stop__duration">{_copy_with_low_salience_emoji(duration)}</p>' if duration else ''}
 {f'<p class="stop__description">{_copy_with_low_salience_emoji(description)}</p>' if description else ''}
 {extra}
-{f'<p class="stop__note">{_text(note)}</p>' if note else ''}"""
+{f'<p class="stop__note">{_copy_with_low_salience_emoji(note)}</p>' if note else ''}"""
 
 
 def _bilingual_itinerary(

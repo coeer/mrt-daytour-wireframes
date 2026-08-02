@@ -258,13 +258,13 @@ class RenderContractTests(unittest.TestCase):
         self.assertIn("second &amp; line", hero)
         self.assertEqual(hero.count('class="hero-color-dot"'), 3)
 
-    def test_finish_review_keeps_itinerary_color_emoji_low_salience(self):
+    def test_finish_review_keeps_all_itinerary_emoji_low_salience(self):
         for html, expected_count in (
             (render_single(KR, "ko"), 1),
             (render_single(ZH, "zh-CN"), 1),
             (render_bilingual(KR, ZH), 2),
         ):
-            for glyph in ("💜", "🌈", "💧"):
+            for glyph in ("🚗", "💜", "🎢", "🌈", "🍽️", "📸", "💧", "⏰"):
                 wrapped = (
                     '<span class="copy-emoji" aria-hidden="true">'
                     f"{glyph}</span>"
