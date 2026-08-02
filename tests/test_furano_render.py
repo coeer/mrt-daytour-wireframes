@@ -1,3 +1,7 @@
+from copy import deepcopy
+import hashlib
+from html import escape as html_escape
+import json
 import subprocess
 import sys
 import tempfile
@@ -73,6 +77,12 @@ def _parse(html: str) -> _Element:
     parser = _ContractParser()
     parser.feed(html)
     return parser.root
+
+
+def _outside_itinerary(html: str) -> str:
+    start = html.index('<section class="section itinerary"')
+    end = html.index('<section class="section included"', start)
+    return html[:start] + html[end:]
 
 
 class RenderContractTests(unittest.TestCase):
@@ -194,6 +204,105 @@ class RenderContractTests(unittest.TestCase):
             phone_css,
             r"\.bilingual \.hero \.button \{[^}]*min-height: 44px;",
         )
+
+    def test_finish_review_uses_renderer_authored_typographic_devices(self):
+        single_kr = render_single(KR, "ko")
+        single_zh = render_single(ZH, "zh-CN")
+        bilingual = render_bilingual(KR, ZH)
+
+        self.assertIn(
+            '<span class="language-code" aria-hidden="true">KR</span>',
+            bilingual,
+        )
+        self.assertIn(
+            '<span class="language-code" aria-hidden="true">CN</span>',
+            bilingual,
+        )
+        self.assertIn('aria-label="한국어 원문"', bilingual)
+        self.assertIn('aria-label="中文对照"', bilingual)
+
+        for html in (single_kr, single_zh, bilingual):
+            outside_itinerary = _outside_itinerary(html)
+            for glyph in (
+                "🇰🇷",
+                "🇨🇳",
+                "💜",
+                "🌈",
+                "💙",
+                "🚗",
+                "👨‍👩‍👧‍👦",
+                "🎫",
+                "💰",
+                "🏠",
+                "🚉",
+                "🚐",
+                "📍",
+                "🗣️",
+                "💡",
+                "💬",
+            ):
+                self.assertNotIn(glyph, outside_itinerary)
+            self.assertIn('class="hero-color-dots"', html)
+            self.assertIn('data-icon="ticket"', html)
+
+    def test_finish_review_structures_and_escapes_hero_subtitle(self):
+        content = deepcopy(KR)
+        content["subtitle"] = ("<strong>first line</strong>", "second & line")
+        html = render_single(content, "ko")
+        hero = html[html.index('<header class="hero"') : html.index("</header>")]
+
+        self.assertEqual(hero.count('class="hero__subtitle-line"'), 2)
+        self.assertNotIn("<br>", hero)
+        self.assertNotIn("<strong>first line</strong>", hero)
+        self.assertIn("&lt;strong&gt;first line&lt;/strong&gt;", hero)
+        self.assertIn("second &amp; line", hero)
+        self.assertEqual(hero.count('class="hero-color-dot"'), 3)
+
+    def test_finish_review_keeps_itinerary_color_emoji_low_salience(self):
+        for html, expected_count in (
+            (render_single(KR, "ko"), 1),
+            (render_single(ZH, "zh-CN"), 1),
+            (render_bilingual(KR, ZH), 2),
+        ):
+            for glyph in ("💜", "🌈", "💧"):
+                wrapped = (
+                    '<span class="copy-emoji" aria-hidden="true">'
+                    f"{glyph}</span>"
+                )
+                self.assertEqual(html.count(glyph), expected_count)
+                self.assertEqual(html.count(wrapped), expected_count)
+
+    def test_finish_review_removes_faq_title_emoji_without_changing_qa(self):
+        expected = (
+            (
+                KR,
+                render_single(KR, "ko"),
+                "695302d0c97aecf11c71e198146914d9e41103a43b874bf3694d498b6cddb5d2",
+            ),
+            (
+                ZH,
+                render_single(ZH, "zh-CN"),
+                "42f2716a4131be3401c3d6ec94ec022960da5331efa35035422be6d57e87a97a",
+            ),
+        )
+        for content, html, expected_digest in expected:
+            digest = hashlib.sha256(
+                json.dumps(
+                    content["faq"],
+                    ensure_ascii=False,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            ).hexdigest()
+            self.assertEqual(digest, expected_digest)
+
+            faq = html[html.index('<section class="section faq"') : html.index(
+                '<section class="closing"'
+            )]
+            self.assertEqual(faq.count("<details"), 8)
+            self.assertNotIn("💡", faq)
+            for question, answer in content["faq"]:
+                self.assertIn(html_escape(question), faq)
+                self.assertIn(html_escape(answer), faq)
 
     def test_bilingual_section_order_faq_state_and_direction_contract(self):
         html = render_bilingual(KR, ZH)

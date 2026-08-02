@@ -174,6 +174,25 @@ h1 {
   line-height: 1.55;
 }
 
+.hero__subtitle-line { display: block; }
+
+.hero-color-dots {
+  display: inline-flex;
+  gap: 5px;
+  margin-inline-start: 8px;
+  vertical-align: .12em;
+}
+
+.hero-color-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lavender);
+}
+
+.hero-color-dot:nth-child(2) { background: var(--flower-pink); }
+.hero-color-dot:nth-child(3) { background: var(--pond-blue); }
+
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -256,7 +275,15 @@ h1 {
   background: var(--white);
 }
 
-.benefit__icon { display: block; margin-bottom: 20px; font-size: 1.45rem; }
+.benefit__icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin-bottom: 20px;
+  color: var(--lavender);
+}
+
+.benefit__line-icon { display: block; width: 100%; height: 100%; }
 .benefit h3 { margin-bottom: 8px; font-size: 1.05rem; line-height: 1.25; }
 .benefit p { margin-bottom: 0; color: var(--muted); font-size: .86rem; line-height: 1.55; }
 
@@ -431,6 +458,7 @@ h1 {
 .stop__duration { margin-bottom: 14px; color: var(--muted); font-size: .88rem; }
 .stop__description { max-width: 62ch; margin-bottom: 22px; }
 .stop__note { max-width: 62ch; margin-bottom: 0; color: var(--muted); font-size: .87rem; }
+.copy-emoji { opacity: .46; font-size: .78em; }
 
 .stop[data-peak="true"] .stop__content {
   padding: clamp(28px, 5vw, 54px);
@@ -773,6 +801,12 @@ _BILINGUAL_CSS = """
   font-weight: 800;
 }
 
+.language-code {
+  padding-bottom: 2px;
+  border-bottom: 1px solid currentColor;
+  letter-spacing: .14em;
+}
+
 .hero .language-label,
 .closing .language-label { color: var(--white); }
 .language-column--zh .language-label { color: #7A4D2D; }
@@ -955,6 +989,67 @@ def _text(value: object) -> str:
     return escape(str(value), quote=True)
 
 
+def _hero_color_dots() -> str:
+    return (
+        '<span class="hero-color-dots" aria-hidden="true">'
+        '<span class="hero-color-dot"></span>'
+        '<span class="hero-color-dot"></span>'
+        '<span class="hero-color-dot"></span>'
+        "</span>"
+    )
+
+
+def _hero_subtitle(content: dict[str, Any]) -> str:
+    lines = content["subtitle"]
+    if not isinstance(lines, (tuple, list)) or len(lines) != 2:
+        raise ValueError("hero subtitle must contain exactly two structured lines")
+    return (
+        '<p class="hero__subtitle">'
+        f'<span class="hero__subtitle-line">{_text(lines[0])}</span>'
+        f'<span class="hero__subtitle-line">{_text(lines[1])}{_hero_color_dots()}</span>'
+        "</p>"
+    )
+
+
+def _benefit_icon(kind: object) -> str:
+    geometry = {
+        "pickup": '<path d="M4 18V9l8-5 8 5v9"/><path d="M8 20h8"/>',
+        "group": (
+            '<circle cx="8" cy="9" r="2.5"/><circle cx="16" cy="9" r="2.5"/>'
+            '<path d="M3.5 19c.5-3 2-4.5 4.5-4.5S12 16 12.5 19"/>'
+            '<path d="M11.5 19c.5-3 2-4.5 4.5-4.5s4 1.5 4.5 4.5"/>'
+        ),
+        "ticket": (
+            '<path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4V7Z"/>'
+            '<path d="M12 8.5v7" stroke-dasharray="1.5 2"/>'
+        ),
+        "refund": (
+            '<path d="M6.5 8.5H3.5v-3"/><path d="M4 8a8 8 0 1 1-.3 7"/>'
+            '<path d="M9 12h6"/><path d="m12 9 3 3-3 3"/>'
+        ),
+    }
+    key = str(kind)
+    if key not in geometry:
+        raise ValueError(f"unknown benefit icon: {key}")
+    return (
+        '<span class="benefit__icon" aria-hidden="true">'
+        '<svg class="benefit__line-icon" viewBox="0 0 24 24" '
+        f'data-icon="{_text(key)}" fill="none" stroke="currentColor" '
+        'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'
+        f'{geometry[key]}</svg></span>'
+    )
+
+
+def _copy_with_low_salience_emoji(value: object) -> str:
+    rendered = _text(value)
+    for glyph in ("💜", "🌈", "💧"):
+        rendered = rendered.replace(
+            glyph,
+            f'<span class="copy-emoji" aria-hidden="true">{glyph}</span>',
+        )
+    return rendered
+
+
 def picture(
     key: str,
     alt: str,
@@ -1122,7 +1217,7 @@ def _itinerary(content: dict[str, Any], ui: dict[str, Any]) -> str:
   <div class="stop__content">
     <h3>{_text(item["name"])}</h3>
     {f'<p class="stop__duration">{_text(duration)}</p>' if duration else ''}
-    {f'<p class="stop__description">{_text(description)}</p>' if description else ''}
+    {f'<p class="stop__description">{_copy_with_low_salience_emoji(description)}</p>' if description else ''}
     {extra}
     {media}
     {f'<p class="stop__note">{_text(note)}</p>' if note else ''}
@@ -1145,7 +1240,7 @@ def render_single(content: dict[str, object], lang: str) -> str:
     benefit_indexes = (0, 1, 2, 5)
     benefits = "".join(
         f"""<article class="benefit">
-  <span class="benefit__icon" aria-hidden="true">{_text(highlights[index][0])}</span>
+  {_benefit_icon(highlights[index][0])}
   <h3>{_text(ui["benefit_titles"][position])}</h3>
   <p>{_text(highlights[index][1])}</p>
 </article>"""
@@ -1172,7 +1267,7 @@ def render_single(content: dict[str, object], lang: str) -> str:
   <div class="hero__inner">
     <p class="hero__slogan">{_text(content["slogan"])}</p>
     <h1>{_text(content["h1"])}</h1>
-    <p class="hero__subtitle">{str(content["subtitle"])}</p>
+    {_hero_subtitle(content)}
     <nav class="actions" aria-label="{_text(ui["page_title"])}">
       <a class="button" href="#itinerary">{_text(ui["primary_cta"])}</a>
       <a class="button button--quiet" href="#pickup">{_text(ui["secondary_cta"])}</a>
@@ -1318,7 +1413,11 @@ def _shared_geometry(kind: str) -> str:
 
 
 def _language_label(content: dict[str, Any]) -> str:
-    return f'<span class="language-label">{_text(content["header"])}</span>'
+    return (
+        f'<span class="language-label" aria-label="{_text(content["header"])}">'
+        f'<span class="language-code" aria-hidden="true">'
+        f'{_text(content["language_code"])}</span></span>'
+    )
 
 
 def _bilingual_benefits(content: dict[str, Any]) -> str:
@@ -1327,7 +1426,7 @@ def _bilingual_benefits(content: dict[str, Any]) -> str:
     benefit_indexes = (0, 1, 2, 5)
     benefits = "".join(
         f"""<article class="benefit">
-  <span class="benefit__icon" aria-hidden="true">{_text(highlights[index][0])}</span>
+  {_benefit_icon(highlights[index][0])}
   <h3>{_text(ui["benefit_titles"][position])}</h3>
   <p>{_text(highlights[index][1])}</p>
 </article>"""
@@ -1368,7 +1467,7 @@ def _bilingual_stop_copy(
 <h3>{_text(item["name"])}</h3>
 {badge}
 {f'<p class="stop__duration">{_text(duration)}</p>' if duration else ''}
-{f'<p class="stop__description">{_text(description)}</p>' if description else ''}
+{f'<p class="stop__description">{_copy_with_low_salience_emoji(description)}</p>' if description else ''}
 {extra}
 {f'<p class="stop__note">{_text(note)}</p>' if note else ''}"""
 
@@ -1532,7 +1631,7 @@ def render_bilingual(
 {_language_label(kr)}
 <p class="hero__slogan">{_text(kr["slogan"])}</p>
 <h1>{_text(kr["h1"])}</h1>
-<p class="hero__subtitle">{str(kr["subtitle"])}</p>
+{_hero_subtitle(kr)}
 <nav class="actions" aria-label="{_text(kr_ui["page_title"])}">
   <a class="button" href="#itinerary">{_text(kr_ui["primary_cta"])}</a>
   <a class="button button--quiet" href="#pickup">{_text(kr_ui["secondary_cta"])}</a>
@@ -1541,7 +1640,7 @@ def render_bilingual(
 {_language_label(zh)}
 <p class="hero__slogan">{_text(zh["slogan"])}</p>
 <h1>{_text(zh["h1"])}</h1>
-<p class="hero__subtitle">{str(zh["subtitle"])}</p>
+{_hero_subtitle(zh)}
 <nav class="actions" aria-label="{_text(zh_ui["page_title"])}">
   <a class="button" href="#itinerary">{_text(zh_ui["primary_cta"])}</a>
   <a class="button button--quiet" href="#pickup">{_text(zh_ui["secondary_cta"])}</a>
