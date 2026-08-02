@@ -250,3 +250,12 @@ Full-page screenshots from this browser backend were rejected as evidence becaus
 - TDD GREEN: the focused contract passed after both the preload and hero image began consuming one shared, versioned candidate string. The hero remains inside `picture` with no conflicting `source`; eager loading, `fetchpriority="high"`, dimensions, CSS, and single/bilingual alt semantics are unchanged.
 - Fresh regeneration wrote all three pages. The full suite passed 36/36 in `0.179s`, a second temporary build was byte-identical 3/3, and `git diff --check` passed.
 - The detector and remote verifier were not run; nothing was pushed or copied to the canonical project.
+
+## Publication evidence
+
+- Remote `main` advanced to `5703871` during the work and was merged safely without force. Merge/main commit `0e10a20` preserved `furano/live_kr.html` and both `v6-editorial-*` files while the canonical generator rebuilt the three formal outputs.
+- The full suite on merged `main` passed 36/36.
+- Canonical sync copied `tools/build_furano.py`, `tools/furano_assets.py`, and `tools/furano_renderer.py` to `C:\Users\38185\ZCodeProject\tools`, then generated `C:\Users\38185\ZCodeProject\furano`. Output hashes matched the repository: index `0387599C...`, Korean `74E6EF97...`, and bilingual `1EAAF24B...`.
+- Push `5703871..0e10a20 main -> main` succeeded. GitHub Pages workflow run `30751240435` completed successfully.
+- The remote verifier passed all three v4 pages and all five WebP assets; all banned strings were absent.
+- Task 5 and publication are complete. No remote verification or publication gate remains pending.
