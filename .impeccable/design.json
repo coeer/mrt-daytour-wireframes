@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-02T00:00:00+08:00",
+  "title": "Design System: Furano & Biei Day Tour",
+  "extensions": {
+    "colorMeta": {
+      "warm-white": { "role": "neutral", "displayName": "Warm Paper", "canonical": "#F7F5F0", "tonalRamp": ["oklch(15% 0.008 85)", "oklch(27% 0.008 85)", "oklch(39% 0.008 85)", "oklch(51% 0.008 85)", "oklch(63% 0.008 85)", "oklch(75% 0.008 85)", "oklch(87% 0.008 85)", "oklch(95% 0.008 85)"] },
+      "white": { "role": "neutral", "displayName": "White Surface", "canonical": "#FFFFFF", "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(95% 0 0)"] },
+      "line": { "role": "neutral", "displayName": "Soft Ink Line", "canonical": "rgba(32, 35, 41, .18)", "tonalRamp": ["rgba(32, 35, 41, .08)", "rgba(32, 35, 41, .12)", "rgba(32, 35, 41, .18)", "rgba(32, 35, 41, .24)", "rgba(32, 35, 41, .32)", "rgba(32, 35, 41, .44)", "rgba(32, 35, 41, .60)", "rgba(32, 35, 41, .78)"] },
+      "ink": { "role": "neutral", "displayName": "Editorial Ink", "canonical": "#202329", "tonalRamp": ["oklch(15% 0.01 265)", "oklch(27% 0.01 265)", "oklch(39% 0.01 265)", "oklch(51% 0.01 265)", "oklch(63% 0.01 265)", "oklch(75% 0.01 265)", "oklch(87% 0.01 265)", "oklch(95% 0.01 265)"] },
+      "muted": { "role": "neutral", "displayName": "Quiet Ink", "canonical": "#62666D", "tonalRamp": ["oklch(15% 0.012 265)", "oklch(27% 0.012 265)", "oklch(39% 0.012 265)", "oklch(51% 0.012 265)", "oklch(63% 0.012 265)", "oklch(75% 0.012 265)", "oklch(87% 0.012 265)", "oklch(95% 0.012 265)"] },
+      "lavender": { "role": "secondary", "displayName": "Route Lavender", "canonical": "#7C5DAA", "tonalRamp": ["oklch(15% 0.09 307)", "oklch(27% 0.09 307)", "oklch(39% 0.09 307)", "oklch(51% 0.09 307)", "oklch(63% 0.09 307)", "oklch(75% 0.09 307)", "oklch(87% 0.09 307)", "oklch(95% 0.09 307)"] },
+      "light-lavender": { "role": "tertiary", "displayName": "Lavender Field", "canonical": "#E9E0F3", "tonalRamp": ["oklch(15% 0.03 307)", "oklch(27% 0.03 307)", "oklch(39% 0.03 307)", "oklch(51% 0.03 307)", "oklch(63% 0.03 307)", "oklch(75% 0.03 307)", "oklch(87% 0.03 307)", "oklch(95% 0.03 307)"] },
+      "flower-pink": { "role": "secondary", "displayName": "Flower Pink", "canonical": "#D96B87", "tonalRamp": ["oklch(15% 0.12 8)", "oklch(27% 0.12 8)", "oklch(39% 0.12 8)", "oklch(51% 0.12 8)", "oklch(63% 0.12 8)", "oklch(75% 0.12 8)", "oklch(87% 0.12 8)", "oklch(95% 0.12 8)"] },
+      "berry": { "role": "primary", "displayName": "Booking Berry", "canonical": "#B7445F", "tonalRamp": ["oklch(15% 0.13 12)", "oklch(27% 0.13 12)", "oklch(39% 0.13 12)", "oklch(51% 0.13 12)", "oklch(63% 0.13 12)", "oklch(75% 0.13 12)", "oklch(87% 0.13 12)", "oklch(95% 0.13 12)"] },
+      "pond-blue": { "role": "secondary", "displayName": "Blue Pond", "canonical": "#2D7F9D", "tonalRamp": ["oklch(15% 0.09 220)", "oklch(27% 0.09 220)", "oklch(39% 0.09 220)", "oklch(51% 0.09 220)", "oklch(63% 0.09 220)", "oklch(75% 0.09 220)", "oklch(87% 0.09 220)", "oklch(95% 0.09 220)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Hero Display", "purpose": "Compact hero destination promise." },
+      "headline": { "displayName": "Section Headline", "purpose": "Narrative section transitions." },
+      "body": { "displayName": "CJK Body", "purpose": "Travel, policy, and explanatory copy." },
+      "label": { "displayName": "Route Label", "purpose": "Times, guarantees, and small operational signals." }
+    },
+    "shadows": [
+      { "name": "route-marker-halo", "value": "0 4px 14px rgba(32, 35, 41, .18)", "purpose": "Anchors a timeline marker on the white itinerary field." }
+    ],
+    "motion": [
+      { "name": "button-state", "value": "background-color 160ms ease-out, color 160ms ease-out", "purpose": "Button hover inversion and primary darkening." },
+      { "name": "hero-arrival", "value": "1100ms cubic-bezier(.16, 1, .3, 1)", "purpose": "Subtle hero image settle when reduced motion is not requested." }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "820px" },
+      { "name": "mobile", "value": "560px" },
+      { "name": "bilingual", "value": "880px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Affirmative itinerary or booking action.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">일정 보기</a>",
+      "css": ".ds-btn-primary { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; padding: 11px 18px; border: 1px solid transparent; border-radius: 999px; background: #B7445F; color: #FFFFFF; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: .92rem; font-weight: 750; line-height: 1.35; text-decoration: none; transition: background-color 160ms ease-out, color 160ms ease-out; } .ds-btn-primary:hover { background: #98364E; } .ds-btn-primary:focus-visible { outline: 3px solid #D96B87; outline-offset: 3px; }"
+    },
+    {
+      "name": "Quiet Hero Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary hero action that recedes over photography.",
+      "html": "<a class=\"ds-btn-quiet\" href=\"#\">픽업 범위 보기</a>",
+      "css": ".ds-btn-quiet { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; padding: 11px 18px; border: 1px solid rgba(255,255,255,.72); border-radius: 999px; background: rgba(32,35,41,.42); color: #FFFFFF; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: .92rem; font-weight: 750; line-height: 1.35; text-decoration: none; transition: background-color 160ms ease-out, color 160ms ease-out; } .ds-btn-quiet:hover { background: #FFFFFF; color: #202329; } .ds-btn-quiet:focus-visible { outline: 3px solid #D96B87; outline-offset: 3px; }"
+    },
+    {
+      "name": "Benefit Card",
+      "kind": "card",
+      "refersTo": "card-editorial",
+      "description": "Compact proof point for the tour's practical conditions.",
+      "html": "<article class=\"ds-benefit\"><span class=\"ds-benefit-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"9\" r=\"2.5\"/><circle cx=\"16\" cy=\"9\" r=\"2.5\"/><path d=\"M3.5 19c.5-3 2-4.5 4.5-4.5S12 16 12.5 19\"/><path d=\"M11.5 19c.5-3 2-4.5 4.5-4.5s4 1.5 4.5 4.5\"/></svg></span><h3>4인 소그룹</h3><p>여행 리듬과 관람 시간을 지킵니다.</p></article>",
+      "css": ".ds-benefit { min-height: 168px; padding: 20px; border: 1px solid rgba(32,35,41,.18); border-radius: 14px; background: #FFFFFF; color: #202329; font-family: Pretendard, 'Noto Sans KR', sans-serif; } .ds-benefit-icon { width: 30px; height: 30px; display: block; margin-bottom: 20px; color: #7C5DAA; } .ds-benefit-icon svg { display: block; width: 100%; height: 100%; } .ds-benefit h3 { margin: 0 0 8px; font-size: 1.05rem; line-height: 1.25; } .ds-benefit p { margin: 0; color: #62666D; font-size: .86rem; line-height: 1.55; } .ds-benefit:focus-within { outline: 3px solid #D96B87; outline-offset: 3px; }"
+    },
+    {
+      "name": "Timeline Stop",
+      "kind": "custom",
+      "refersTo": "timeline-stop",
+      "description": "A time-led itinerary moment with a highlighted peak variant.",
+      "html": "<article class=\"ds-stop ds-stop-peak\"><time>10:30</time><div class=\"ds-stop-copy\"><h3>팜 토미타</h3><p>라벤더 밭을 자유롭게 둘러보는 가장 선명한 장면.</p></div></article>",
+      "css": ".ds-stop { position: relative; display: grid; grid-template-columns: 86px minmax(0,1fr); gap: 54px; padding: 0 0 54px; color: #202329; font-family: Pretendard, 'Noto Sans KR', sans-serif; } .ds-stop::before { content: ''; position: absolute; top: 7px; left: 104px; width: 14px; height: 14px; border: 3px solid #FFFFFF; border-radius: 50%; background: #7C5DAA; box-shadow: 0 4px 14px rgba(32,35,41,.18); } .ds-stop time { padding-top: 2px; color: #7C5DAA; font-size: .8rem; font-weight: 850; line-height: 1.35; text-align: right; } .ds-stop-copy h3 { margin: 0 0 9px; font-size: clamp(1.25rem,3vw,1.85rem); line-height: 1.18; letter-spacing: -.018em; } .ds-stop-copy p { max-width: 62ch; margin: 0; line-height: 1.7; } .ds-stop-peak::before { background: #D96B87; } .ds-stop-peak .ds-stop-copy { padding: 28px; border-radius: 14px; background: #E9E0F3; } @media (max-width:560px) { .ds-stop { grid-template-columns: 42px minmax(0,1fr); gap: 30px; } .ds-stop::before { left: 50px; } }"
+    },
+    {
+      "name": "Route Canvas",
+      "kind": "custom",
+      "refersTo": "route-canvas",
+      "description": "An explanatory dark-panel route diagram, rather than a navigational map.",
+      "html": "<figure class=\"ds-route\" role=\"img\" aria-label=\"삿포로에서 후라노와 비에이로 이어지는 당일 경로\"><svg viewBox=\"0 0 620 320\" aria-hidden=\"true\"><path d=\"M24 282 C95 262 91 193 154 178 S224 52 298 68 S377 154 431 121 S511 25 565 51 S573 239 607 274\" fill=\"none\" stroke=\"#E9E0F3\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M24 282 C95 262 91 193 154 178 S224 52 298 68 S377 154 431 121 S511 25 565 51 S573 239 607 274\" fill=\"none\" stroke=\"#D96B87\" stroke-width=\"2\" stroke-dasharray=\"3 11\" stroke-linecap=\"round\"/></svg><ol><li>삿포로</li><li>팜 토미타</li><li>비에이</li></ol></figure>",
+      "css": ".ds-route { position: relative; min-height: 390px; padding: 28px; overflow: hidden; border-radius: 14px; background: #202329; color: #FFFFFF; font-family: Pretendard, 'Noto Sans KR', sans-serif; font-size: .76rem; font-weight: 750; line-height: 1.25; } .ds-route svg { position: absolute; inset: 34px 28px 56px; width: calc(100% - 56px); height: calc(100% - 90px); } .ds-route ol { position: relative; z-index: 1; display: flex; min-height: 304px; align-items: center; justify-content: space-between; margin: 0; padding: 8px 0; list-style: none; } .ds-route:focus-visible { outline: 3px solid #D96B87; outline-offset: 3px; } @media (max-width:560px) { .ds-route { min-height: 350px; padding: 22px; } .ds-route ol { min-height: 270px; } }"
+    },
+    {
+      "name": "FAQ Disclosure",
+      "kind": "custom",
+      "refersTo": "faq-disclosure",
+      "description": "Operational detail revealed in a calm, ruled disclosure row.",
+      "html": "<details class=\"ds-faq\"><summary>비가 와도 진행하나요?</summary><p>안전상 운행이 어려운 악천후에는 출발 전 안내 후 전액 환불합니다.</p></details>",
+      "css": ".ds-faq { border-top: 1px solid #202329; border-bottom: 1px solid rgba(32,35,41,.18); color: #202329; font-family: Pretendard, 'Noto Sans KR', sans-serif; } .ds-faq summary { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 2px; cursor: pointer; font-weight: 750; list-style: none; } .ds-faq summary::-webkit-details-marker { display: none; } .ds-faq summary::after { content: '+'; flex: 0 0 auto; color: #7C5DAA; font-size: 1.5rem; } .ds-faq[open] summary::after { content: '−'; } .ds-faq p { max-width: 72ch; margin: 0; padding: 0 2px 24px; color: #62666D; line-height: 1.7; } .ds-faq summary:focus-visible { outline: 3px solid #D96B87; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Summer Route Issue",
+    "overview": "This is a Korean select-shop travel issue built around real destination photography, not a card-heavy booking template. Warm-white editorial fields and disciplined near-black type give the facts room to breathe; lavender, fuchsia, and pond blue work as geographic signals drawn from the day itself. The reading experience moves from a full-bleed landscape to the travel effort and safeguards, then into a time-led itinerary. It is direct and mobile-minded: substantial vertical intervals, concise copy measures, evident route geometry, and a small set of decisive actions. Evidence, timing, and conditions stay legible without turning the page into a dashboard.",
+    "keyCharacteristics": ["Real photography carries the emotional peak and closes the journey.", "Lavender route geometry and fuchsia peak markers make the day scannable.", "Flat editorial surfaces use borders and tonal fields before shadow.", "Korean and Chinese text share one compact CJK-first sans-serif voice."],
+    "rules": [
+      { "name": "The Route-Color Rule", "body": "Lavender is the default navigational signal; flower pink is reserved for a true peak or state, never a second general-purpose CTA color.", "section": "colors" },
+      { "name": "The Paper-First Rule", "body": "Use warm paper or white as the dominant field. Strong color belongs to photography, route diagrams, and compact emphasis.", "section": "colors" },
+      { "name": "The Compact Promise Rule", "body": "Keep hero and section headings short enough to retain a deliberate, low-left editorial block; do not expand them into marketing paragraphs.", "section": "typography" },
+      { "name": "The Timeline-First Rule", "body": "When describing a day, show movement and time as a continuous reading spine instead of scattering stops into unrelated cards.", "section": "layout" },
+      { "name": "The No-Floating-Card Rule", "body": "Do not add ambient shadows to ordinary cards or information panels; use a border, tonal field, or photo crop first.", "section": "elevation" }
+    ],
+    "dos": ["Do let licensed, real destination photography carry large emotional moments, especially the hero and closing field.", "Do preserve the 860px reading measure, 1180px wide measure, and `clamp(76px, 10vw, 130px)` section rhythm when extending the issue.", "Do use lavender for ordinary route/time signals and Flower Pink only for a highlight, state, or visible focus treatment.", "Do keep travel conditions in direct, scan-friendly groups before the detailed itinerary."],
+    "donts": ["Don't replace the timeline with a grid of generic destination cards.", "Don't add ratings, prices, availability, urgency, certificates, or vehicle imagery without verified product evidence.", "Don't use decorative shadows to make standard content panels float.", "Don't let Korean or Chinese text clip; retain the compact CJK stack, flexible grids, and mobile full-width actions."]
+  }
+}
