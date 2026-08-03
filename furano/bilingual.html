@@ -1,1498 +1,280 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#202329">
-  <link rel="preload" as="image" href="img/hero-farm-tomita-1600.webp?v=20260729-v4" imagesrcset="img/hero-farm-tomita-960.webp?v=20260729-v4 960w, img/hero-farm-tomita-1600.webp?v=20260729-v4 1600w" imagesizes="100vw">
-  <title>삿포로 출발 후라노·비에이 소그룹 1일 투어 / 札幌出发 富良野·美瑛小团一日游</title>
-  <style>
-:root {
-  --warm-white: #F7F5F0;
-  --white: #FFFFFF;
-  --lavender: #7C5DAA;
-  --light-lavender: #E9E0F3;
-  --flower-pink: #D96B87;
-  --pond-blue: #2D7F9D;
-  --berry: #B7445F;
-  --ink: #202329;
-  --muted: #62666D;
-  --line: rgba(32, 35, 41, .18);
-  --content: 860px;
-  --wide: 1180px;
-  --radius: 14px;
-}
-
-* { box-sizing: border-box; }
-
-html { color-scheme: light; }
-
-@media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
-  .hero__photo img { animation: hero-arrival 1100ms cubic-bezier(.16, 1, .3, 1) both; }
-}
-
-@keyframes hero-arrival {
-  from { transform: scale(1.025); filter: saturate(.88); }
-  to { transform: scale(1); filter: saturate(1); }
-}
-
-body {
-  margin: 0;
-  overflow-x: hidden;
-  background: var(--warm-white);
-  color: var(--ink);
-  font-family: Pretendard, "Noto Sans KR", "Noto Sans CJK SC", "Source Han Sans SC",
-    "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 16px;
-  line-height: 1.7;
-  word-break: keep-all;
-  overflow-wrap: anywhere;
-}
-
-html[lang="zh-CN"] body { word-break: normal; }
-
-img { display: block; width: 100%; height: auto; }
-
-a { color: inherit; }
-
-.skip-link {
-  position: fixed;
-  z-index: 100;
-  top: 10px;
-  left: 10px;
-  min-height: 44px;
-  padding: 10px 16px;
-  background: var(--ink);
-  color: var(--white);
-  transform: translateY(-160%);
-}
-
-.skip-link:focus { transform: translateY(0); }
-
-:focus-visible {
-  outline: 3px solid var(--flower-pink);
-  outline-offset: 3px;
-}
-
-.hero {
-  position: relative;
-  min-height: 96svh;
-  display: grid;
-  align-items: end;
-  isolation: isolate;
-  overflow: hidden;
-  color: var(--white);
-  background: var(--ink);
-}
-
-.hero__photo,
-.hero__photo picture,
-.hero__photo img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hero__photo { z-index: 0; }
-
-.hero__photo img { object-fit: cover; object-position: center 56%; }
-
-.hero::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(15, 13, 20, .03) 20%, rgba(15, 13, 20, .78) 100%);
-}
-
-.hero__inner {
-  position: relative;
-  z-index: 2;
-  width: min(100% - 32px, var(--wide));
-  margin: 0 auto;
-  padding: clamp(88px, 14vh, 150px) 0 clamp(42px, 7vh, 72px);
-}
-
-.hero__slogan {
-  max-width: 34ch;
-  margin: 0 0 14px;
-  font-size: clamp(.76rem, 1.6vw, .9rem);
-  font-weight: 750;
-  letter-spacing: .12em;
-}
-
-h1,
-h2,
-h3,
-p { margin-top: 0; }
-
-h1 {
-  max-width: 14ch;
-  margin-bottom: 16px;
-  font-size: clamp(2.5rem, 7vw, 5.6rem);
-  line-height: 1.02;
-  letter-spacing: -.035em;
-  text-wrap: balance;
-}
-
-.hero__subtitle {
-  max-width: 48ch;
-  margin-bottom: 26px;
-  font-size: clamp(.95rem, 2vw, 1.15rem);
-  line-height: 1.55;
-}
-
-.hero__subtitle-line { display: block; }
-
-.hero-color-dots {
-  display: inline-flex;
-  gap: 5px;
-  margin-inline-start: 8px;
-  vertical-align: .12em;
-}
-
-.hero-color-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--lavender);
-}
-
-.hero-color-dot:nth-child(2) { background: var(--flower-pink); }
-.hero-color-dot:nth-child(3) { background: var(--pond-blue); }
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.button {
-  min-height: 46px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 11px 18px;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  background: var(--berry);
-  color: var(--white);
-  font-size: .92rem;
-  font-weight: 750;
-  line-height: 1.35;
-  text-decoration: none;
-  transition: background-color 160ms ease-out, color 160ms ease-out;
-}
-
-.button:hover { background: #98364E; }
-
-.button--quiet {
-  border-color: rgba(255, 255, 255, .72);
-  background: rgba(32, 35, 41, .42);
-}
-
-.button--quiet:hover { background: var(--white); color: var(--ink); }
-
-.button--ink { background: var(--ink); }
-.button--ink:hover { background: #3A3E46; }
-
-.section {
-  padding: clamp(76px, 10vw, 130px) 16px;
-}
-
-.section__inner {
-  width: min(100%, var(--content));
-  margin: 0 auto;
-}
-
-.section__inner--wide { width: min(100%, var(--wide)); }
-
-.section h2 {
-  max-width: 18ch;
-  margin-bottom: 18px;
-  font-size: clamp(1.75rem, 4.2vw, 2.8rem);
-  line-height: 1.12;
-  letter-spacing: -.025em;
-  text-wrap: balance;
-}
-
-.lead {
-  max-width: 68ch;
-  margin-bottom: 38px;
-  color: var(--muted);
-}
-
-.benefits {
-  position: relative;
-  z-index: 2;
-  margin-top: -1px;
-  background: var(--white);
-}
-
-.benefit-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-.benefit {
-  min-height: 168px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--white);
-}
-
-.benefit__icon {
-  width: 30px;
-  height: 30px;
-  display: block;
-  margin-bottom: 20px;
-  color: var(--lavender);
-}
-
-.benefit__line-icon { display: block; width: 100%; height: 100%; }
-.benefit h3 { margin-bottom: 8px; font-size: 1.05rem; line-height: 1.25; }
-.benefit p { margin-bottom: 0; color: var(--muted); font-size: .86rem; line-height: 1.55; }
-
-.pain-solution { background: var(--light-lavender); }
-
-.story-split {
-  display: grid;
-  grid-template-columns: minmax(0, .78fr) minmax(0, 1.4fr);
-  gap: clamp(28px, 6vw, 76px);
-  align-items: center;
-}
-
-.story-split__copy p { max-width: 36ch; margin-bottom: 0; }
-
-.editorial-photo {
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: #DDD8D1;
-}
-
-.editorial-photo img { aspect-ratio: 2 / 1; object-fit: cover; }
-
-.pickup { background: var(--warm-white); }
-
-.pickup-grid {
-  display: grid;
-  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
-  gap: clamp(34px, 7vw, 84px);
-  align-items: center;
-}
-
-.pickup-time {
-  display: inline-block;
-  margin-bottom: 22px;
-  color: var(--lavender);
-  font-size: clamp(1.35rem, 3vw, 2rem);
-  font-weight: 850;
-}
-
-.plain-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.plain-list li {
-  position: relative;
-  padding: 13px 0 13px 23px;
-  border-bottom: 1px solid var(--line);
-}
-
-.plain-list li::before {
-  content: "";
-  position: absolute;
-  top: 24px;
-  left: 1px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--lavender);
-}
-
-.route-figure { margin: 0; }
-
-.route-canvas {
-  position: relative;
-  min-height: 390px;
-  padding: 28px;
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--ink);
-  color: var(--white);
-}
-
-.route-canvas svg {
-  position: absolute;
-  inset: 34px 28px 56px;
-  width: calc(100% - 56px);
-  height: calc(100% - 90px);
-}
-
-.route-stops {
-  position: relative;
-  z-index: 1;
-  min-height: 304px;
-  margin: 0;
-  padding: 8px 0;
-  list-style: none;
-}
-
-.route-stops li {
-  position: absolute;
-  max-width: 118px;
-  font-size: .76rem;
-  font-weight: 750;
-  line-height: 1.25;
-}
-
-.route-stops li:nth-child(1) { left: 0; bottom: 2%; }
-.route-stops li:nth-child(2) { left: 17%; top: 40%; }
-.route-stops li:nth-child(3) { left: 36%; top: 9%; }
-.route-stops li:nth-child(4) { right: 28%; top: 28%; }
-.route-stops li:nth-child(5) { right: 6%; top: 4%; }
-.route-stops li:nth-child(6) { right: 0; bottom: 6%; }
-
-.route-caption {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: .76rem;
-}
-
-.itinerary {
-  padding-bottom: clamp(90px, 14vw, 170px);
-  background: var(--white);
-}
-
-.timeline {
-  position: relative;
-  margin-top: 52px;
-}
-
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 12px;
-  bottom: 0;
-  left: 110px;
-  width: 2px;
-  background: var(--lavender);
-}
-
-.stop {
-  position: relative;
-  display: grid;
-  grid-template-columns: 86px minmax(0, 1fr);
-  gap: 54px;
-  padding: 0 0 clamp(54px, 9vw, 108px);
-}
-
-.stop::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  top: 7px;
-  left: 104px;
-  width: 14px;
-  height: 14px;
-  border: 3px solid var(--white);
-  border-radius: 50%;
-  background: var(--lavender);
-  box-shadow: 0 4px 14px rgba(32, 35, 41, .18);
-}
-
-.stop__time {
-  padding-top: 2px;
-  color: var(--lavender);
-  font-size: .8rem;
-  font-weight: 850;
-  line-height: 1.35;
-  text-align: right;
-}
-
-.stop__content { min-width: 0; }
-
-.stop__content h3 {
-  margin-bottom: 9px;
-  font-size: clamp(1.25rem, 3vw, 1.85rem);
-  line-height: 1.18;
-  letter-spacing: -.018em;
-}
-
-.stop__duration { margin-bottom: 14px; color: var(--muted); font-size: .88rem; }
-.stop__description { max-width: 62ch; margin-bottom: 22px; }
-.stop__note { max-width: 62ch; margin-bottom: 0; color: var(--muted); font-size: .87rem; }
-.copy-emoji { opacity: .46; font-size: .78em; }
-
-.stop[data-peak="true"] .stop__content {
-  padding: clamp(28px, 5vw, 54px);
-  border-radius: var(--radius);
-  background: var(--light-lavender);
-}
-
-.stop[data-peak="true"]::before { background: var(--flower-pink); }
-
-.itinerary-photo {
-  width: min(100%, 700px);
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: #E7E2DB;
-}
-
-.itinerary-photo img { aspect-ratio: 3 / 2; object-fit: cover; }
-
-.itinerary-photo--detail { width: min(100%, 420px); }
-.itinerary-photo--detail img { aspect-ratio: 4 / 3; }
-
-.included-badge {
-  display: inline-flex;
-  min-height: 32px;
-  align-items: center;
-  margin: 0 0 16px;
-  padding: 4px 11px;
-  border-radius: 999px;
-  background: var(--flower-pink);
-  color: var(--ink);
-  font-size: .75rem;
-  font-weight: 800;
-}
-
-.road-window {
-  position: relative;
-  width: min(100%, 700px);
-  aspect-ratio: 16 / 8;
-  overflow: hidden;
-  border: 12px solid var(--ink);
-  border-radius: 44px 44px 18px 18px;
-  background: var(--warm-white);
-}
-
-.road-window::after {
-  content: "";
-  position: absolute;
-  inset: 0 50% 0 auto;
-  width: 1px;
-  background: rgba(32, 35, 41, .28);
-}
-
-.road-line {
-  position: absolute;
-  left: -8%;
-  right: -8%;
-  bottom: -28%;
-  height: 76%;
-  border: 4px solid var(--lavender);
-  border-bottom: 0;
-  border-radius: 50% 50% 0 0;
-  transform: perspective(300px) rotateX(58deg);
-}
-
-.road-line::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -80%;
-  width: 3px;
-  height: 240%;
-  background: var(--flower-pink);
-  transform: translateX(-50%);
-}
-
-.road-label {
-  position: absolute;
-  z-index: 1;
-  right: 18px;
-  bottom: 14px;
-  max-width: 25ch;
-  padding: 7px 10px;
-  background: var(--white);
-  font-size: .7rem;
-  font-weight: 750;
-  line-height: 1.3;
-}
-
-.included { background: var(--ink); color: var(--white); }
-
-.included-grid {
-  display: grid;
-  grid-template-columns: .8fr .8fr 1.4fr;
-  gap: 1px;
-  margin-top: 44px;
-  background: rgba(255, 255, 255, .23);
-}
-
-.included-column {
-  padding: clamp(24px, 4vw, 38px);
-  background: var(--ink);
-}
-
-.included-column h3 { margin-bottom: 18px; font-size: 1.15rem; }
-
-.included-column ul {
-  padding-left: 20px;
-  margin: 0;
-  color: #E8E7E3;
-}
-
-.included-column li + li { margin-top: 10px; }
-
-.cancellation { background: var(--warm-white); }
-
-.refund-bands {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 42px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-.refund-band { padding: clamp(28px, 5vw, 50px); background: var(--white); }
-.refund-band + .refund-band { border-left: 1px solid var(--line); }
-.refund-band--positive { background: var(--light-lavender); }
-.refund-band h3 { margin-bottom: 10px; font-size: 1.18rem; }
-.refund-band p { margin-bottom: 0; }
-
-.refund-notes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 14px;
-}
-
-.refund-note {
-  padding: 24px;
-  border-radius: var(--radius);
-  background: var(--white);
-}
-
-.refund-note strong { display: block; margin-bottom: 7px; }
-.refund-note p { margin-bottom: 0; color: var(--muted); }
-.local-time-note { margin-top: 18px; color: var(--muted); font-size: .82rem; }
-
-.faq { background: var(--white); }
-
-.faq-list {
-  margin-top: 42px;
-  border-top: 1px solid var(--ink);
-}
-
-.faq-list details { border-bottom: 1px solid var(--line); }
-
-.faq-list summary {
-  min-height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 16px 2px;
-  cursor: pointer;
-  font-weight: 750;
-  list-style: none;
-}
-
-.faq-list summary::-webkit-details-marker { display: none; }
-.faq-list summary::after { content: "+"; flex: 0 0 auto; color: var(--lavender); font-size: 1.5rem; }
-.faq-list details[open] summary::after { content: "−"; }
-
-.faq-answer {
-  max-width: 72ch;
-  padding: 0 2px 24px;
-  color: var(--muted);
-}
-
-.faq-answer p { margin-bottom: 0; }
-
-.closing {
-  position: relative;
-  min-height: 66svh;
-  display: grid;
-  align-items: end;
-  overflow: hidden;
-  color: var(--white);
-  background: var(--pond-blue);
-}
-
-.closing__photo,
-.closing__photo picture,
-.closing__photo img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.closing__photo img { object-fit: cover; object-position: center 58%; }
-
-.closing::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(15, 36, 43, .08), rgba(15, 36, 43, .82));
-}
-
-.closing__inner {
-  position: relative;
-  z-index: 1;
-  width: min(100% - 32px, var(--content));
-  margin: 0 auto;
-  padding: 110px 0 50px;
-}
-
-.closing__inner h2 { max-width: 15ch; }
-.closing__inner > p { max-width: 54ch; }
-
-.guarantees {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 0;
-  margin: 28px 0;
-  list-style: none;
-}
-
-.guarantees li {
-  padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, .54);
-  border-radius: 999px;
-  font-size: .8rem;
-  font-weight: 750;
-}
-
-.credits {
-  padding: 28px 16px;
-  background: var(--ink);
-  color: #E8E7E3;
-  text-align: center;
-}
-
-.credits a {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  color: inherit;
-  font-size: .82rem;
-  text-underline-offset: 4px;
-}
-
-@media (max-width: 820px) {
-  .benefit-grid { grid-template-columns: repeat(2, 1fr); }
-  .story-split,
-  .pickup-grid { grid-template-columns: 1fr; }
-  .story-split__copy p { max-width: 65ch; }
-  .included-grid { grid-template-columns: 1fr; }
-  .timeline::before { left: 76px; }
-  .stop { grid-template-columns: 60px minmax(0, 1fr); gap: 34px; }
-  .stop::before { left: 70px; }
-}
-
-@media (max-width: 560px) {
-  .hero { min-height: 92svh; }
-  .hero__photo img { object-position: 58% center; }
-  .hero__inner { padding-bottom: 36px; }
-  h1 { font-size: clamp(2.4rem, 11vw, 3.4rem); }
-  .actions { display: grid; grid-template-columns: 1fr; }
-  .button { width: 100%; }
-  .section { padding-inline: 16px; }
-  .benefit-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .benefit { min-height: 152px; padding: 16px; }
-  .benefit__icon { margin-bottom: 16px; }
-  .route-canvas { min-height: 350px; padding: 22px; }
-  .route-stops { min-height: 270px; }
-  .route-stops li { max-width: 86px; font-size: .68rem; }
-  .timeline::before { left: 56px; }
-  .stop { grid-template-columns: 42px minmax(0, 1fr); gap: 30px; }
-  .stop::before { left: 50px; }
-  .stop__time { font-size: .68rem; overflow-wrap: normal; word-break: normal; }
-  .stop[data-peak="true"] .stop__content { padding: 24px 20px; }
-  .road-window { border-width: 8px; border-radius: 30px 30px 14px 14px; }
-  .refund-bands,
-  .refund-notes { grid-template-columns: 1fr; }
-  .refund-band + .refund-band { border-top: 1px solid var(--line); border-left: 0; }
-  .closing { min-height: 72svh; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>富良野·美瑛一日游详情页 · 多巴胺风设计稿（韩中对照）v3 · 2026-07-29</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background: #faf8ff;
+    -webkit-font-smoothing: antialiased;
   }
-}
+  .page { max-width: 960px; margin: 0 auto; padding: 24px 18px 40px; }
+  .page.single { max-width: 500px; }
 
-.bilingual .section__inner { width: min(100%, var(--wide)); }
-.bilingual .closing__inner { width: min(100% - 32px, var(--wide)); }
-.bilingual h1 { font-size: clamp(2.2rem, 4vw, 4.1rem); }
-.bilingual .timeline::before { display: none; }
-.bilingual .included-grid { grid-template-columns: 1fr; }
+  /* 文档头（meta 层，保持干净） */
+  .doc-head {
+    background: #fff; border: 1px solid #e3dcf5; border-radius: 14px;
+    padding: 16px 18px; margin-bottom: 20px;
+  }
+  .doc-head h1 { font-size: 16px; color: #232a31; margin-bottom: 8px; }
+  .doc-head p { font-size: 12px; color: #5a6672; line-height: 1.8; }
+  .doc-head .global-spec { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e3dcf5; }
+  .doc-head .global-spec li { font-size: 12px; color: #44515e; line-height: 1.8; margin-left: 18px; }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
+  /* 设计建议条（meta 层） */
+  .spec-bar {
+    background: #fff; border: 1px solid #e3dcf5; border-left: 4px solid #9b5de5;
+    border-radius: 10px; padding: 10px 14px; margin: 20px 0 8px;
+  }
+  .spec-bar .spec-title { font-size: 12.5px; font-weight: 700; color: #2f3a44; margin-bottom: 4px; }
+  .spec-bar li { font-size: 11.5px; color: #5a6672; line-height: 1.75; margin-left: 16px; }
+  .spec-bar .do { color: #2e6b4f; }
+  .spec-bar .dont { color: #a05454; }
 
-.language-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 40px;
-}
-
-.language-column { min-width: 0; }
-
-.language-column--kr {
-  border-right: 1px solid var(--line);
-}
-
-.language-label {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  margin-bottom: 18px;
-  color: #31536B;
-  font-size: .78rem;
-  font-weight: 800;
-}
-
-.language-code {
-  padding-bottom: 2px;
-  border-bottom: 1px solid currentColor;
-  letter-spacing: .14em;
-}
-
-.hero .language-label,
-.closing .language-label { color: var(--white); }
-.language-column--zh .language-label { color: #7A4D2D; }
-.hero .language-column--zh .language-label,
-.closing .language-column--zh .language-label { color: var(--white); }
-
-.bilingual-media {
-  width: min(100%, var(--wide));
-  margin: 0 auto clamp(34px, 6vw, 68px);
-}
-
-.bilingual-media .editorial-photo img { aspect-ratio: 16 / 7; }
-
-.shared-visual {
-  position: relative;
-  height: 58px;
-  margin-bottom: clamp(26px, 4vw, 42px);
-  overflow: hidden;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.shared-visual span {
-  position: absolute;
-  top: 50%;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--lavender);
-  transform: translateY(-50%);
-}
-
-.shared-visual::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 7%;
-  right: 7%;
-  height: 2px;
-  background: var(--lavender);
-  transform: translateY(-50%);
-}
-
-.shared-visual span:nth-child(1) { left: 7%; }
-.shared-visual span:nth-child(2) { left: calc(50% - 6px); background: var(--flower-pink); }
-.shared-visual span:nth-child(3) { right: 7%; background: var(--pond-blue); }
-
-.shared-visual--decision span:nth-child(1) { left: 14%; }
-.shared-visual--decision span:nth-child(2) { left: 42%; }
-.shared-visual--decision span:nth-child(3) { right: 14%; }
-
-.shared-visual--flower::before {
-  height: 8px;
-  background: linear-gradient(90deg, var(--lavender) 0 32%, var(--flower-pink) 32% 64%, var(--pond-blue) 64%);
-}
-
-.shared-visual--ticket {
-  border: 1px dashed var(--lavender);
-  border-radius: var(--radius);
-}
-
-.shared-visual--refund span:nth-child(1) { background: var(--light-lavender); border: 2px solid var(--lavender); }
-.shared-visual--return::before { background: linear-gradient(90deg, var(--pond-blue), var(--lavender)); }
-.shared-visual--faq span { width: 8px; height: 8px; }
-.shared-visual--faq::before { height: 1px; background: var(--ink); }
-
-.bilingual .benefit-grid { grid-template-columns: repeat(2, 1fr); }
-.bilingual .benefit { min-height: 152px; }
-.bilingual .pickup-copy .lead { margin-bottom: 24px; }
-.bilingual .route-figure { margin-bottom: clamp(34px, 6vw, 68px); }
-
-.bilingual-stop {
-  padding: 0 0 clamp(54px, 9vw, 108px);
-}
-
-.bilingual-stop[data-peak="true"] {
-  padding: clamp(28px, 5vw, 54px);
-  margin-bottom: clamp(54px, 9vw, 108px);
-  border-radius: var(--radius);
-  background: var(--light-lavender);
-}
-
-.bilingual-stop__media { margin-bottom: 28px; }
-.bilingual-stop > .shared-visual { margin-bottom: 28px; }
-.bilingual-stop__media .itinerary-photo { width: 100%; }
-.bilingual-stop__media .itinerary-photo--detail { width: min(100%, 520px); }
-
-.bilingual-stop .stop__time {
-  display: block;
-  padding: 0;
-  margin-bottom: 8px;
-  text-align: left;
-}
-
-.bilingual-faq summary,
-.bilingual-faq .faq-answer {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 40px;
-}
-
-.bilingual-faq summary { position: relative; padding-right: 34px; }
-.bilingual-faq summary::after { position: absolute; right: 2px; }
-.bilingual-faq .faq-answer { max-width: none; }
-.bilingual-faq .faq-answer p { min-width: 0; }
-.bilingual-faq .faq-answer p:first-child {
-  border-right: 1px solid var(--line);
-}
-
-@media (max-width: 880px) {
-  .language-grid,
-  .bilingual-faq summary,
-  .bilingual-faq .faq-answer { grid-template-columns: 1fr; }
-
-  .bilingual .hero__inner { gap: 0; }
-
-  .language-column--kr {
-    padding: 0 0 32px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
+  /* 双栏行 */
+  .row { display: flex; gap: 28px; align-items: stretch; }
+  .page.single .row { display: block; }
+  .cell {
+    flex: 1; min-width: 0; background: #fff;
+    border: 1px solid #ece5fa; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 3px 14px rgba(155,93,229,.07);
+  }
+  .cell-kr { border-top: 4px solid #4a5560; }
+  .cell-zh { border-top: 4px solid #8a7a55; }
+  .cell-head { padding: 7px 12px; font-size: 10.5px; font-weight: 700; letter-spacing: 1px; color: #fff; }
+  .cell-kr .cell-head { background: #4a5560; }
+  .cell-zh .cell-head { background: #8a7a55; }
+  .cell-body { padding: 14px 14px 16px; }
+  @media (max-width: 880px) {
+    .row { flex-direction: column; gap: 10px; }
   }
 
-  .language-column--zh { padding-top: 32px; }
-  .bilingual .hero .language-column--kr { padding-bottom: 16px; }
-  .bilingual .hero .language-column--zh { padding-top: 16px; }
-  .bilingual-faq summary,
-  .bilingual-faq .faq-answer { gap: 12px; }
-  .bilingual-faq .faq-answer p:first-child {
-    padding: 0 0 18px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-}
+  /* ── 多巴胺组件 ── */
 
-@media (max-width: 560px) {
-  .bilingual .hero__inner {
-    padding: 36px 0 20px;
+  /* ① Hero：大图压标题 */
+  .hero-card { position: relative; border-radius: 18px; overflow: hidden; }
+  .hero-card img { width: 100%; height: 230px; object-fit: cover; display: block; }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(60,20,90,.05) 40%, rgba(46,16,80,.78) 100%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 14px 16px;
   }
-
-  .bilingual .hero .language-label {
-    min-height: 0;
-    margin-bottom: 6px;
-    font-size: .7rem;
-    line-height: 1.2;
+  .slogan-chip {
+    position: absolute; top: 12px; left: 12px;
+    background: #ffd166; color: #5a3d00; font-size: 10.5px; font-weight: 800;
+    padding: 5px 11px; border-radius: 999px; letter-spacing: .5px;
+    transform: rotate(-2deg); box-shadow: 0 2px 8px rgba(0,0,0,.18);
   }
+  .hero-overlay h1 { color: #fff; font-size: 19px; font-weight: 900; line-height: 1.4; text-shadow: 0 2px 8px rgba(0,0,0,.35); margin-bottom: 4px; }
+  .hero-overlay .sub { color: rgba(255,255,255,.92); font-size: 11.5px; line-height: 1.6; }
+  .hero-ref-cap { font-size: 10px; color: #b0a6c4; margin-top: 5px; }
 
-  .bilingual .hero__slogan {
-    margin-bottom: 6px;
-    font-size: .7rem;
-    line-height: 1.3;
+  /* ② 亮点 chips：彩色贴纸 */
+  .hl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .chip {
+    border-radius: 14px; padding: 10px 11px; font-size: 11.5px; font-weight: 600;
+    line-height: 1.55; color: #33303d; display: flex; gap: 6px; align-items: flex-start;
   }
+  .chip .em { font-size: 14px; line-height: 1.3; }
+  .chip-1 { background: #f3e8ff; } .chip-2 { background: #ffe3ec; }
+  .chip-3 { background: #fff3d6; } .chip-4 { background: #dcf5ee; }
+  .chip-5 { background: #e0f2fe; } .chip-6 { background: #ffe9d6; }
 
-  .bilingual .hero h1 {
+  /* ③ 痛点：便签气泡 */
+  .pain {
+    background: #fff6d9; border-radius: 16px; padding: 13px 15px;
+    font-size: 12.5px; line-height: 1.8; color: #4a4033;
+    box-shadow: 0 2px 8px rgba(255,209,102,.25);
+  }
+  .pain b { color: #8a5a00; }
+
+  /* ④ 接送：大数字时刻 */
+  .pickup-time {
+    font-size: 26px; font-weight: 900; letter-spacing: .5px;
+    background: linear-gradient(90deg, #9b5de5, #ff5d8f);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
     margin-bottom: 8px;
-    font-size: clamp(1.85rem, 8vw, 2rem);
-    line-height: 1;
+  }
+  .kv p { font-size: 12px; color: #4a545e; line-height: 1.9; }
+
+  /* ⑤ 站点卡：每站主题色 + 大图 + 一句话 */
+  .stop-card {
+    background: #fff; border: 2px solid #ddd; border-radius: 18px;
+    overflow: hidden; margin-bottom: 12px;
+    box-shadow: 0 3px 10px rgba(60,30,90,.06);
+  }
+  .stop-card .stop-img { width: 100%; height: 150px; object-fit: cover; display: block; }
+  .stop-card.peak .stop-img { height: 175px; }
+  .stop-body { padding: 10px 13px 12px; }
+  .time-badge {
+    display: inline-block; color: #fff; font-size: 11px; font-weight: 800;
+    padding: 3px 10px; border-radius: 999px; transform: rotate(-2deg);
+    box-shadow: 0 2px 6px rgba(0,0,0,.15); margin-bottom: 5px;
+  }
+  .stop-name { font-size: 14px; font-weight: 800; color: #232a31; line-height: 1.4; }
+  .stop-name .dur { font-weight: 500; color: #8a95a0; font-size: 11px; }
+  .stop-desc { font-size: 12px; color: #5a6672; line-height: 1.65; margin-top: 3px; }
+  .sticker {
+    display: inline-block; font-size: 10px; font-weight: 800;
+    padding: 2px 8px; border-radius: 999px; margin-left: 5px; vertical-align: 1px;
+  }
+  .sticker-peak { background: #ffd166; color: #5a3d00; transform: rotate(2deg); box-shadow: 0 2px 5px rgba(255,209,102,.5); }
+  .sticker-free { background: #06d6a0; color: #fff; transform: rotate(-2deg); }
+  .stop-placeholder {
+    height: 90px; display: flex; align-items: center; justify-content: center;
+    background: repeating-linear-gradient(45deg, #f6f2fc, #f6f2fc 10px, #efe8fa 10px, #efe8fa 20px);
+    color: #8a7aa8; font-size: 11px; text-align: center; padding: 8px;
+  }
+  .stop-note { font-size: 11px; color: #8a95a0; line-height: 1.65; margin-top: 4px; }
+  .ref-cap { font-size: 10px; color: #b0a6c4; margin-top: 5px; }
+
+  /* 中转卡（出发/午餐/返程，无图） */
+  .pass-card {
+    background: #fff; border: 2px dashed #d8cef0; border-radius: 16px;
+    padding: 10px 13px; margin-bottom: 12px;
   }
 
-  .bilingual .hero__subtitle {
-    margin-bottom: 12px;
-    font-size: .84rem;
-    line-height: 1.35;
+  /* ⑥ 资质 */
+  .logi-card {
+    background: #fff; border: 2px solid #ece5fa; border-radius: 16px; padding: 12px 14px;
+  }
+  .placeholder-img {
+    background: repeating-linear-gradient(45deg, #f6f2fc, #f6f2fc 10px, #efe8fa 10px, #efe8fa 20px);
+    min-height: 90px; border-radius: 14px; display: flex;
+    align-items: center; justify-content: center; color: #8a7aa8; font-size: 11px; margin-top: 10px;
+    border: 1px dashed #c9bce4; text-align: center; padding: 10px;
   }
 
-  .bilingual .hero .actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
+  /* ⑦ FAQ 彩色卡 */
+  .faq-item { margin-bottom: 8px; padding: 10px 13px; border-radius: 14px; }
+  .faq-item:nth-child(6n+1) { background: #f3e8ff; }
+  .faq-item:nth-child(6n+2) { background: #ffe3ec; }
+  .faq-item:nth-child(6n+3) { background: #fff3d6; }
+  .faq-item:nth-child(6n+4) { background: #dcf5ee; }
+  .faq-item:nth-child(6n+5) { background: #e0f2fe; }
+  .faq-item:nth-child(6n+6) { background: #ffe9d6; }
+  .faq-item .q { font-size: 12.5px; font-weight: 800; color: #232a31; margin-bottom: 3px; }
+  .faq-item .a { font-size: 12px; color: #4a4a58; line-height: 1.7; }
+  .faq-closing { font-size: 12px; color: #8a95a0; margin-top: 10px; }
+  .faq-title { font-size: 13.5px; font-weight: 800; color: #232a31; margin-bottom: 10px; }
 
-  .bilingual .hero .button {
-    min-height: 44px;
-    padding: 8px 10px;
-    font-size: .78rem;
-  }
-}
+  .img-credit { font-size: 10px; color: #a89ec0; text-align: center; padding: 16px 10px 4px; line-height: 1.7; }
 </style>
 </head>
-<body><!--
-THESIS: A Furano day tour reads like a Korean select-shop travel issue, not a card-heavy booking template.
-OWN-WORLD: Warm white editorial fields, disciplined black type, lavender/fuchsia route accents, decisive real photography, and timeline-led geometry.
-STORY: See the landscape, understand the travel effort and safeguards, then inspect the full itinerary or continue to booking.
-FIRST VIEWPORT: Farm Tomita fills the frame; compact Korean or Chinese copy sits low-left, with itinerary and pickup actions above the next-section reveal.
-FORM: Photo-led travel issue; pinned direction overrides the seed assignment; seed 88bbc100.
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
--->
-
-<a class="skip-link" href="#main-content">
-  <span lang="ko">본문으로 바로가기</span>
-  <span aria-hidden="true"> / </span>
-  <span lang="zh-CN">跳到正文</span>
-</a>
-<div class="bilingual">
-<header class="hero" id="top">
-  <div class="hero__photo shared-photo" role="img" aria-labelledby="shared-photo-hero-ko shared-photo-hero-zh" data-shared-media><span class="visually-hidden" id="shared-photo-hero-ko" lang="ko">팜 토미타의 보랏빛 라벤더와 여름 꽃밭</span><span class="visually-hidden" id="shared-photo-hero-zh" lang="zh-CN">富田农场紫色薰衣草与夏日花田</span><picture><img src="img/hero-farm-tomita-960.webp?v=20260729-v4" width="960" height="720" alt="" loading="eager" fetchpriority="high" decoding="async" srcset="img/hero-farm-tomita-960.webp?v=20260729-v4 960w, img/hero-farm-tomita-1600.webp?v=20260729-v4 1600w" sizes="100vw"></picture></div>
-<div class="language-grid hero__inner">
-  <section class="language-column language-column--kr" lang="ko">
-<span class="language-label"><span class="language-code" aria-hidden="true">KR</span><span class="visually-hidden" lang="ko">한국어 원문</span></span>
-<p class="hero__slogan">ONE DAY. THREE COLORS OF SUMMER.</p>
-<h1>삿포로 출발 후라노·비에이 4인 소그룹 1일 투어</h1>
-<p class="hero__subtitle"><span class="hero__subtitle-line">보랏빛 라벤더 · 무지개 꽃밭 · 신비로운 파란 연못</span><span class="hero__subtitle-line">여름 홋카이도의 세 가지 색을 하루에<span class="hero-color-dots" aria-hidden="true"><span class="hero-color-dot"></span><span class="hero-color-dot"></span><span class="hero-color-dot"></span></span></span></p>
-<nav class="actions" aria-label="삿포로 출발 후라노·비에이 소그룹 1일 투어">
-  <a class="button" href="#itinerary">일정과 포함 내용 보기</a>
-  <a class="button button--quiet" href="#pickup">먼저 픽업 범위 보기</a>
-</nav></section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<span class="language-label"><span class="language-code" aria-hidden="true">CN</span><span class="visually-hidden" lang="zh-CN">中文对照</span></span>
-<p class="hero__slogan">ONE DAY. THREE COLORS OF SUMMER.（一天，收集夏天的三种颜色）</p>
-<h1>札幌出发 富良野·美瑛4人小团1日游</h1>
-<p class="hero__subtitle"><span class="hero__subtitle-line">紫色薰衣草 · 彩虹花田 · 神秘的蓝色池塘</span><span class="hero__subtitle-line">一天收集夏日北海道的三种颜色<span class="hero-color-dots" aria-hidden="true"><span class="hero-color-dot"></span><span class="hero-color-dot"></span><span class="hero-color-dot"></span></span></span></p>
-<nav class="actions" aria-label="札幌出发 富良野·美瑛小团一日游">
-  <a class="button" href="#itinerary">查看行程与包含内容</a>
-  <a class="button button--quiet" href="#pickup">先看接送范围</a>
-</nav></section>
+<body>
+<div class="page">
+<div class="doc-head">
+  <h1>富良野·美瑛一日游详情页 · 多巴胺风设计稿（韩中对照）v3 · 2026-07-29</h1>
+  <p>本文档 = 结构骨架 + 文案定稿（韩/中对照）+ 逐区块设计建议。风格方向（多巴胺年轻风 · 多图少字）已按需求定稿，本稿直接呈现目标气质；细节质感（字体/圆角/动效）美工可继续打磨。</p>
+  <div class="global-spec"><ul><li>风格已定稿：多巴胺年轻风 = 高饱和撞色 + 大圆角卡片 + 贴纸标签 + emoji + 大字重标题。</li>
+<li>核心概念「三色之旅」：薰衣草紫 → 四季彩粉/彩虹 → 青池蓝，每站配一个主题色贯穿全页。</li>
+<li>多图少字原则：景点正文一句话，信息靠图片承载；全页照片均为占位参考图，正式版全部替换自家实拍。</li>
+<li>字体建议：韩文 Noto Sans KR（标题 800-900 字重），中文 思源黑体；移动端优先、单列阅读。</li>
+<li>页面为韩语面向韩国客人，中文列仅供内部对照，成品只需韩语版。</li></ul></div>
 </div>
-</header>
-
-<main id="main-content">
-  <section class="section benefits" id="benefits">
-    <div class="section__inner"><div class="shared-visual shared-visual--decision" data-shared-media aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<span class="language-label"><span class="language-code" aria-hidden="true">KR</span><span class="visually-hidden" lang="ko">한국어 원문</span></span>
-<h2>아침의 수고를 덜고, 여름의 색에 더 오래</h2>
-<p class="lead">결정에 필요한 네 가지 조건을 먼저 확인해 보세요.</p>
-<div class="benefit-grid"><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true"><svg class="benefit__line-icon" viewBox="0 0 24 24" data-icon="pickup" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9l8-5 8 5v9"/><path d="M8 20h8"/></svg></span>
-  <h3>숙소 앞 픽업</h3>
-  <p>삿포로역 3km 이내 숙소 앞 픽업 (이른 아침 집합 장소 이동 NO)</p>
-</article><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true"><svg class="benefit__line-icon" viewBox="0 0 24 24" data-icon="group" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="2.5"/><circle cx="16" cy="9" r="2.5"/><path d="M3.5 19c.5-3 2-4.5 4.5-4.5S12 16 12.5 19"/><path d="M11.5 19c.5-3 2-4.5 4.5-4.5s4 1.5 4.5 4.5"/></svg></span>
-  <h3>4인 소그룹</h3>
-  <p>최소 4명 출발 · 49인승 대형 버스가 아닌 소그룹</p>
-</article><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true"><svg class="benefit__line-icon" viewBox="0 0 24 24" data-icon="ticket" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4V7Z"/><path d="M12 8.5v7" stroke-dasharray="1.5 2"/></svg></span>
-  <h3>입장권 포함</h3>
-  <p>사계채의 언덕 입장권 포함 · 현지 추가 비용 없음 (식사 제외)</p>
-</article><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true"><svg class="benefit__line-icon" viewBox="0 0 24 24" data-icon="refund" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8.5H3.5v-3"/><path d="M4 8a8 8 0 1 1-.3 7"/><path d="M9 12h6"/><path d="m12 9 3 3-3 3"/></svg></span>
-  <h3>미성사 전액 환불</h3>
-  <p>여행일 3일 전까지 통보 시 100% 전액 환불 · 미성사 시에도 전액 환불</p>
-</article></div></section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<span class="language-label"><span class="language-code" aria-hidden="true">CN</span><span class="visually-hidden" lang="zh-CN">中文对照</span></span>
-<h2>少一点清晨奔波，多一点北海道夏色</h2>
-<p class="lead">先看清决定是否适合您的四个条件。</p>
-<div class="benefit-grid"><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true"><svg class="benefit__line-icon" viewBox="0 0 24 24" data-icon="pickup" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9l8-5 8 5v9"/><path d="M8 20h8"/></svg></span>
-  <h3>住宿门口接送</h3>
-  <p>札幌站3km内住宿门口接送（不用一早赶去集合点）</p>
-</article><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true"><svg class="benefit__line-icon" viewBox="0 0 24 24" data-icon="group" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="2.5"/><circle cx="16" cy="9" r="2.5"/><path d="M3.5 19c.5-3 2-4.5 4.5-4.5S12 16 12.5 19"/><path d="M11.5 19c.5-3 2-4.5 4.5-4.5s4 1.5 4.5 4.5"/></svg></span>
-  <h3>4人小团</h3>
-  <p>4人成团·不是49座大巴的小团</p>
-</article><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true"><svg class="benefit__line-icon" viewBox="0 0 24 24" data-icon="ticket" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4V7Z"/><path d="M12 8.5v7" stroke-dasharray="1.5 2"/></svg></span>
-  <h3>门票已包含</h3>
-  <p>含四季彩之丘门票·当地无额外费用（餐食除外）</p>
-</article><article class="benefit">
-  <span class="benefit__icon" aria-hidden="true"><svg class="benefit__line-icon" viewBox="0 0 24 24" data-icon="refund" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8.5H3.5v-3"/><path d="M4 8a8 8 0 1 1-.3 7"/><path d="M9 12h6"/><path d="m12 9 3 3-3 3"/></svg></span>
-  <h3>不成团全额退款</h3>
-  <p>出行日前3天通知可100%全额退款·不成团也无损退款</p>
-</article></div></section>
-</div></div>
-  </section>
-
-  <section class="section pain-solution" id="pain-solution">
-    <div class="section__inner">
-      <div class="bilingual-media shared-photo" role="img" aria-labelledby="shared-photo-people-ko shared-photo-people-zh" data-shared-media><span class="visually-hidden" id="shared-photo-people-ko" lang="ko">후라노 꽃밭 사이를 걷는 여행객들</span><span class="visually-hidden" id="shared-photo-people-zh" lang="zh-CN">游客走在富良野花田之间</span><div class="editorial-photo"><picture><source media="(max-width: 720px)" srcset="img/furano-people-960.webp?v=20260729-v4"><source srcset="img/furano-people-1600.webp?v=20260729-v4"><img src="img/furano-people-960.webp?v=20260729-v4" width="960" height="480" alt="" loading="lazy" decoding="async"></picture></div></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko"><span class="language-label"><span class="language-code" aria-hidden="true">KR</span><span class="visually-hidden" lang="ko">한국어 원문</span></span><h2>집합 장소를 찾아 뛰는 아침 대신</h2><p>전통적인 대형 버스 투어는 이른 시간에 지정 장소로 이동하고, 짧은 체류 시간에 맞춰 서둘러야 할 수 있습니다. 이 투어는 숙소 가까이에서 시작하고 소그룹 리듬으로 움직여 사진과 관람에 더 집중할 수 있습니다.</p></section>
-  <section class="language-column language-column--zh" lang="zh-CN"><span class="language-label"><span class="language-code" aria-hidden="true">CN</span><span class="visually-hidden" lang="zh-CN">中文对照</span></span><h2>不用一早赶去集合点</h2><p>传统大巴团通常需要清晨前往固定集合点，并在紧凑的停留节奏里匆忙拍照。这个行程从住宿附近开始，以小团节奏移动，把更多注意力留给拍照和游览。</p></section>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ① 主视觉 HERO</div><ul><li>风格已定为多巴胺年轻风：大图压字、高饱和、圆角。标题白字压图，slogan 做成黄色贴纸标签。</li>
+<li><span class='do'>建议</span>：实拍薰衣草花田大图（明亮通透、16:9）；渐变遮罩只在底部、保证标题可读。</li>
+<li>层级：贴纸slogan &gt; h1大标题 &gt; 一行副标题，字要少，靠画面说话。</li>
+<li><span class='dont'>避免</span>：冬季素材、暗色滤镜、文字超过3行。参考图仅为氛围示意，成品须实拍替换。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="hero-card">
+  <img src="img/tomita.jpg?v=20260729" alt="hero 参考">
+  <div class="slogan-chip">ONE DAY. THREE COLORS OF SUMMER.</div>
+  <div class="hero-overlay"><h1>삿포로 출발 후라노·비에이 4인 소그룹 1일 투어</h1><div class="sub">보랏빛 라벤더 · 무지개 꽃밭 · 신비로운 파란 연못<br>여름 홋카이도의 세 가지 색을 하루에 💜</div></div>
 </div>
-    </div>
-  </section>
-
-  <section class="section pickup" id="pickup">
-    <div class="section__inner pickup-copy">
-
-<figure class="route-figure" role="img" aria-labelledby="route-label-ko route-label-zh" data-shared-media>
-  <span class="visually-hidden" id="route-label-ko" lang="ko">삿포로에서 후라노와 비에이를 거쳐 돌아오는 안내 동선</span><span class="visually-hidden" id="route-label-zh" lang="zh-CN">从札幌前往富良野和美瑛后返回的路线示意</span>
-  <div class="route-canvas">
-    <svg viewBox="0 0 620 320" aria-hidden="true" focusable="false">
-      <path d="M24 282 C95 262 91 193 154 178 S224 52 298 68 S377 154 431 121 S511 25 565 51 S573 239 607 274"
-        fill="none" stroke="#E9E0F3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M24 282 C95 262 91 193 154 178 S224 52 298 68 S377 154 431 121 S511 25 565 51 S573 239 607 274"
-        fill="none" stroke="#D96B87" stroke-width="2" stroke-dasharray="3 11" stroke-linecap="round"/>
-      <g fill="#FFFFFF" stroke="#7C5DAA" stroke-width="5">
-        <circle cx="24" cy="282" r="8"/><circle cx="154" cy="178" r="8"/>
-        <circle cx="298" cy="68" r="8"/><circle cx="431" cy="121" r="8"/>
-        <circle cx="565" cy="51" r="8"/><circle cx="607" cy="274" r="8"/>
-      </g>
-    </svg>
-    <ol class="route-stops"><li><span lang="ko">삿포로</span> / <span lang="zh-CN">札幌</span></li><li><span lang="ko">팜 토미타</span> / <span lang="zh-CN">富田农场</span></li><li><span lang="ko">사계채의 언덕</span> / <span lang="zh-CN">四季彩之丘</span></li><li><span lang="ko">청의 호수</span> / <span lang="zh-CN">青池</span></li><li><span lang="ko">시라히게 폭포</span> / <span lang="zh-CN">白须瀑布</span></li><li><span lang="ko">삿포로 귀환</span> / <span lang="zh-CN">返回札幌</span></li></ol>
-  </div>
-  <figcaption class="route-caption"><span lang="ko">노선 개요 · 실제 운행 경로와 다를 수 있습니다.</span> / <span lang="zh-CN">路线概览·可能与实际行车路径不同。</span></figcaption>
-</figure>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<span class="language-label"><span class="language-code" aria-hidden="true">KR</span><span class="visually-hidden" lang="ko">한국어 원문</span></span>
-<h2>삿포로에서 시작하는 하루의 동선</h2>
-<strong class="pickup-time">예정 08:00 삿포로 출발</strong>
-<p class="lead">정확한 내비게이션 지도가 아닌, 하루의 이동 순서를 보여 주는 안내도입니다.</p>
-<ul class="plain-list"><li>삿포로역 반경 3km 이내 숙소 → 숙소 앞 픽업</li><li>3km 밖 숙소 → 삿포로역 집합 (상세 장소는 전날 안내)</li><li>정확한 픽업 시간은 출발 전날 단톡방에서 안내드립니다</li></ul></section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<span class="language-label"><span class="language-code" aria-hidden="true">CN</span><span class="visually-hidden" lang="zh-CN">中文对照</span></span>
-<h2>从札幌出发的一日动线</h2>
-<strong class="pickup-time">预计 08:00 札幌出发</strong>
-<p class="lead">这不是精确导航地图，而是帮助理解当天移动顺序的路线示意。</p>
-<ul class="plain-list"><li>札幌站半径3km内住宿 → 住宿门口接送</li><li>3km范围外住宿 → 札幌站集合（详细地点前一天告知）</li><li>准确接送时间会在出发前一天通过群聊通知</li></ul></section>
+<div class="hero-ref-cap">氛围参考 · 需替换实拍主视觉</div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="hero-card">
+  <img src="img/tomita.jpg?v=20260729" alt="hero 参考">
+  <div class="slogan-chip">ONE DAY. THREE COLORS OF SUMMER.（一天，收集夏天的三种颜色）</div>
+  <div class="hero-overlay"><h1>札幌出发 富良野·美瑛4人小团1日游</h1><div class="sub">紫色薰衣草 · 彩虹花田 · 神秘的蓝色池塘<br>一天收集夏日北海道的三种颜色 💜</div></div>
 </div>
-    </div>
-  </section>
-
-  <section class="section itinerary" id="itinerary">
-    <div class="section__inner">
-      <div class="shared-visual shared-visual--route" data-shared-media aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<span class="language-label"><span class="language-code" aria-hidden="true">KR</span><span class="visually-hidden" lang="ko">한국어 원문</span></span>
-<h2>예정 시간을 따라 읽는 여덟 장면</h2>
-<p class="lead">관광과 이동 시간을 함께 확인하세요. 당일 도로 상황에 따라 시간은 앞뒤로 달라질 수 있습니다.</p></section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<span class="language-label"><span class="language-code" aria-hidden="true">CN</span><span class="visually-hidden" lang="zh-CN">中文对照</span></span>
-<h2>沿预计时间阅读八段旅程</h2>
-<p class="lead">请同时查看游览与移动时间。当天时间可能会因路况前后浮动。</p></section>
-</div>
-      <div class="timeline"><article class="bilingual-stop" data-itinerary-key="sapporo_depart">
-  <div class="shared-visual shared-visual--departure" data-shared-media aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<time class="stop__time">예정 08:00</time>
-<h3>삿포로 출발 <span class="copy-emoji" aria-hidden="true">🚗</span></h3>
-
-<p class="stop__duration">(숙소 픽업 또는 삿포로역 집합 후)</p>
-
-
-</section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<time class="stop__time">预计 08:00</time>
-<h3>札幌出发 <span class="copy-emoji" aria-hidden="true">🚗</span></h3>
-
-<p class="stop__duration">(住宿接送或札幌站集合后)</p>
-
-
-</section>
-</div>
-</article>
-<article class="bilingual-stop" data-itinerary-key="farm_tomita" data-peak="true">
-  <div class="shared-visual shared-visual--flower" data-shared-media aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<time class="stop__time">예정 10:30</time>
-<h3>팜 토미타</h3>
-
-<p class="stop__duration">(약 60분 · 포토타임)</p>
-<p class="stop__description">보랏빛 라벤더가 언덕 끝까지 <span class="copy-emoji" aria-hidden="true">💜</span> 라벤더 소프트크림은 필수!</p>
-<p class="stop__note">이 페이지의 가장 선명한 장면. 약 60분 동안 라벤더 밭을 자유롭게 둘러봅니다.</p>
-</section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<time class="stop__time">预计 10:30</time>
-<h3>富田农场</h3>
-
-<p class="stop__duration">(约60分钟·拍照时间)</p>
-<p class="stop__description">紫色薰衣草一路铺到山坡尽头 <span class="copy-emoji" aria-hidden="true">💜</span> 薰衣草冰淇淋必尝!</p>
-<p class="stop__note">全页最鲜明的一幕。约60分钟自由欣赏薰衣草花田。</p>
-</section>
-</div>
-</article>
-<article class="bilingual-stop" data-itinerary-key="roller_coaster_road">
-
-<div class="road-window bilingual-stop__media" role="img"
-  aria-labelledby="road-label-ko road-label-zh" data-shared-media>
-  <span class="visually-hidden" id="road-label-ko" lang="ko">차창으로 이어지는 제트코스터 로드의 오르내림</span>
-  <span class="visually-hidden" id="road-label-zh" lang="zh-CN">从车窗看云霄飞车之路上下延伸</span>
-  <span class="road-line" aria-hidden="true"></span>
-  <span class="road-label">
-    <span lang="ko">차창 감상 구간 · 하차 없음</span> /
-    <span lang="zh-CN">车窗观赏路段·不下车</span>
-  </span>
-</div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<time class="stop__time">예정 11:30</time>
-<h3>차창 감상: 제트코스터 로드</h3>
-
-<p class="stop__duration">(약 15분 · 하차 없음)</p>
-<p class="stop__description">롤러코스터처럼 오르내리는 언덕길, 창밖으로 흐르는 여름 <span class="copy-emoji" aria-hidden="true">🎢</span></p>
-
-</section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<time class="stop__time">预计 11:30</time>
-<h3>车窗观赏：云霄飞车之路</h3>
-
-<p class="stop__duration">(约15分钟·不下车)</p>
-<p class="stop__description">像过山车一样起伏的坡道，窗外流动的夏天 <span class="copy-emoji" aria-hidden="true">🎢</span></p>
-
-</section>
-</div>
-</article>
-<article class="bilingual-stop" data-itinerary-key="shikisai_no_oka">
-  <div class="bilingual-stop__media itinerary-photo shared-photo" role="img" aria-labelledby="shared-photo-itinerary-shikisai-ko shared-photo-itinerary-shikisai-zh" data-shared-media><span class="visually-hidden" id="shared-photo-itinerary-shikisai-ko" lang="ko">사계채의 언덕에 펼쳐진 여러 색의 꽃밭</span><span class="visually-hidden" id="shared-photo-itinerary-shikisai-zh" lang="zh-CN">四季彩之丘多彩花田</span><picture><source media="(max-width: 720px)" srcset="img/shikisai-960.webp?v=20260729-v4"><source srcset="img/shikisai-1600.webp?v=20260729-v4"><img src="img/shikisai-960.webp?v=20260729-v4" width="960" height="640" alt="" loading="lazy" decoding="async"></picture></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<time class="stop__time">예정 12:15</time>
-<h3>사계채의 언덕</h3>
-<span class="included-badge">입장권 포함</span>
-<p class="stop__duration">(약 60분)</p>
-<p class="stop__description">15헥타르 무지개 꽃밭, 계절마다 새로운 색 <span class="copy-emoji" aria-hidden="true">🌈</span></p>
-
-</section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<time class="stop__time">预计 12:15</time>
-<h3>四季彩之丘</h3>
-<span class="included-badge">门票包含</span>
-<p class="stop__duration">(约60分钟)</p>
-<p class="stop__description">15公顷彩虹花田，每个季节都有新颜色 <span class="copy-emoji" aria-hidden="true">🌈</span></p>
-
-</section>
-</div>
-</article>
-<article class="bilingual-stop" data-itinerary-key="free_lunch">
-  <div class="bilingual-stop__media itinerary-photo itinerary-photo--detail shared-photo" role="img" aria-labelledby="shared-photo-itinerary-softserve-ko shared-photo-itinerary-softserve-zh" data-shared-media><span class="visually-hidden" id="shared-photo-itinerary-softserve-ko" lang="ko">팜 토미타의 라벤더 소프트크림</span><span class="visually-hidden" id="shared-photo-itinerary-softserve-zh" lang="zh-CN">富田农场薰衣草冰淇淋</span><picture><source media="(max-width: 720px)" srcset="img/lavender-softserve-720.webp?v=20260729-v4"><source srcset="img/lavender-softserve-1200.webp?v=20260729-v4"><img src="img/lavender-softserve-720.webp?v=20260729-v4" width="720" height="540" alt="" loading="lazy" decoding="async"></picture></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<time class="stop__time">예정 13:15</time>
-<h3>자유 점심 <span class="copy-emoji" aria-hidden="true">🍽️</span></h3>
-
-<p class="stop__duration">(약 1시간 · 개별 결제)</p>
-<p class="stop__description">정해진 단체 식사 NO, 내가 고르는 자유 점심</p>
-<p class="stop__note">라벤더 소프트크림은 현지에서 선택할 수 있는 간식 예시이며, 점심이나 투어 포함 식사는 아닙니다.</p>
-</section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<time class="stop__time">预计 13:15</time>
-<h3>自由午餐 <span class="copy-emoji" aria-hidden="true">🍽️</span></h3>
-
-<p class="stop__duration">(约1小时·各自结账)</p>
-<p class="stop__description">不是固定的团餐，是自己选的午餐</p>
-<p class="stop__note">薰衣草冰淇淋只是当地可自由选择的点心示例，不代表午餐或任何餐食包含在团费内。</p>
-</section>
-</div>
-</article>
-<article class="bilingual-stop" data-itinerary-key="blue_pond">
-  <div class="bilingual-stop__media itinerary-photo shared-photo" role="img" aria-labelledby="shared-photo-itinerary-blue-pond-ko shared-photo-itinerary-blue-pond-zh" data-shared-media><span class="visually-hidden" id="shared-photo-itinerary-blue-pond-ko" lang="ko">자작나무 사이로 보이는 비에이 청의 호수</span><span class="visually-hidden" id="shared-photo-itinerary-blue-pond-zh" lang="zh-CN">白桦树之间的美瑛青池</span><picture><source media="(max-width: 720px)" srcset="img/blue-pond-960.webp?v=20260729-v4"><source srcset="img/blue-pond-1600.webp?v=20260729-v4"><img src="img/blue-pond-960.webp?v=20260729-v4" width="960" height="640" alt="" loading="lazy" decoding="async"></picture></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<time class="stop__time">예정 15:00</time>
-<h3>청의 호수</h3>
-
-<p class="stop__duration">(약 30분 · 포토타임)</p>
-<p class="stop__description">SNS 최다 공유 블루 스폿, 오늘의 인생샷 <span class="copy-emoji" aria-hidden="true">📸</span></p>
-
-</section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<time class="stop__time">预计 15:00</time>
-<h3>青池</h3>
-
-<p class="stop__duration">(约30分钟·拍照时间)</p>
-<p class="stop__description">SNS上被分享最多的蓝色景点，拍出今天的人生照片 <span class="copy-emoji" aria-hidden="true">📸</span></p>
-
-</section>
-</div>
-</article>
-<article class="bilingual-stop" data-itinerary-key="shirahige_falls">
-  <div class="bilingual-stop__media itinerary-photo shared-photo" role="img" aria-labelledby="shared-photo-itinerary-shirahige-ko shared-photo-itinerary-shirahige-zh" data-shared-media><span class="visually-hidden" id="shared-photo-itinerary-shirahige-ko" lang="ko">비에이 강으로 흘러내리는 시라히게 폭포</span><span class="visually-hidden" id="shared-photo-itinerary-shirahige-zh" lang="zh-CN">流入美瑛川的白须瀑布</span><picture><source media="(max-width: 720px)" srcset="img/shirahige-960.webp?v=20260729-v4"><source srcset="img/shirahige-1600.webp?v=20260729-v4"><img src="img/shirahige-960.webp?v=20260729-v4" width="960" height="640" alt="" loading="lazy" decoding="async"></picture></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<time class="stop__time">예정 15:35</time>
-<h3>시라히게 폭포</h3>
-
-<p class="stop__duration">(약 25분)</p>
-<p class="stop__description">흰 수염처럼 흘러내리는 드문 잠수 폭포 <span class="copy-emoji" aria-hidden="true">💧</span></p>
-
-</section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<time class="stop__time">预计 15:35</time>
-<h3>白须瀑布</h3>
-
-<p class="stop__duration">(约25分钟)</p>
-<p class="stop__description">像白色胡须一样流下的罕见&quot;潜水瀑布&quot; <span class="copy-emoji" aria-hidden="true">💧</span></p>
-
-</section>
-</div>
-</article>
-<article class="bilingual-stop" data-itinerary-key="sapporo_return">
-  <div class="shared-visual shared-visual--return" data-shared-media aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<time class="stop__time">예정 16:00</time>
-<h3>삿포로로 출발 → 예정 18:30 삿포로 도착</h3>
-
-
-
-
-<p class="stop__note"><span class="copy-emoji" aria-hidden="true">⏰</span> 도로 상황에 따라 도착 시간이 앞뒤로 달라질 수 있습니다. 출발 시간이 정해진 교통편(항공·기차)이나 공연·레스토랑 예약은 가급적 다른 날짜에 잡아 주세요.</p></section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<time class="stop__time">预计 16:00</time>
-<h3>返程回札幌 → 预计18:30左右抵达札幌</h3>
-
-
-
-
-<p class="stop__note"><span class="copy-emoji" aria-hidden="true">⏰</span> 根据当天路况，抵达时间可能前后浮动。有固定出发时间的交通工具（航班·火车）或演出、餐厅预约，建议您尽量安排在其他日期。</p></section>
-</div>
-</article></div>
-    </div>
-  </section>
-
-  <section class="section included" id="included">
-    <div class="section__inner"><div class="shared-visual shared-visual--ticket" data-shared-media aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<span class="language-label"><span class="language-code" aria-hidden="true">KR</span><span class="visually-hidden" lang="ko">한국어 원문</span></span>
-<h2>포함 범위와 현장 운영</h2>
-<div class="included-grid">
-  <section class="included-column">
-    <h3>포함</h3>
-    <ul><li>사계채의 언덕 입장권</li></ul>
-  </section>
-  <section class="included-column">
-    <h3>불포함</h3>
-    <ul><li>식사</li><li>개인 소비</li></ul>
-  </section>
-  <section class="included-column">
-    <h3>차량과 안내</h3>
-    <ul><li>당일 성사 인원에 맞춰 승합차를 배차합니다.</li><li>일본어·영어 가능 기사와 번역 앱을 지원합니다.</li><li>주요 지점에서 짧게 안내한 뒤 자유롭게 관람합니다.</li></ul>
-  </section>
-</div></section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<span class="language-label"><span class="language-code" aria-hidden="true">CN</span><span class="visually-hidden" lang="zh-CN">中文对照</span></span>
-<h2>费用范围与现场服务</h2>
-<div class="included-grid">
-  <section class="included-column">
-    <h3>包含</h3>
-    <ul><li>四季彩之丘门票</li></ul>
-  </section>
-  <section class="included-column">
-    <h3>不包含</h3>
-    <ul><li>餐食</li><li>个人消费</li></ul>
-  </section>
-  <section class="included-column">
-    <h3>车辆与服务</h3>
-    <ul><li>按当天成团人数安排商务车。</li><li>提供日语/英语司机与翻译app支持。</li><li>抵达主要景点后做简短说明，再自由参观。</li></ul>
-  </section>
-</div></section>
-</div></div>
-  </section>
-
-  <section class="section cancellation" id="cancellation">
-    <div class="section__inner"><div class="shared-visual shared-visual--refund" data-shared-media aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko">
-<span class="language-label"><span class="language-code" aria-hidden="true">KR</span><span class="visually-hidden" lang="ko">한국어 원문</span></span>
-<h2>계획이 바뀔 때의 환불 기준</h2>
-<div class="refund-bands">
-  <article class="refund-band refund-band--positive">
-    <h3>여행일 3일 전까지</h3>
-    <p>통보 시 100% 전액 환불</p>
-  </article>
-  <article class="refund-band">
-    <h3>여행일 2일 전부터 당일까지</h3>
-    <p>통보 시 환불 불가</p>
-  </article>
-</div>
-<div class="refund-notes">
-  <article class="refund-note">
-    <strong>4인 미성사</strong>
-    <p>미리 안내 후 수수료 없이 전액 환불</p>
-  </article>
-  <article class="refund-note">
-    <strong>안전상 운행 불가한 악천후</strong>
-    <p>출발 전 안내 후 전액 환불</p>
-  </article>
-</div>
-<p class="local-time-note">여행일은 현지 일본 시각을 기준으로 합니다.</p></section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<span class="language-label"><span class="language-code" aria-hidden="true">CN</span><span class="visually-hidden" lang="zh-CN">中文对照</span></span>
-<h2>计划变化时的退款标准</h2>
-<div class="refund-bands">
-  <article class="refund-band refund-band--positive">
-    <h3>出行日前3天及之前</h3>
-    <p>通知可100%全额退款</p>
-  </article>
-  <article class="refund-band">
-    <h3>出行日前2天至当天</h3>
-    <p>通知不可退款</p>
-  </article>
-</div>
-<div class="refund-notes">
-  <article class="refund-note">
-    <strong>未达到4人成团</strong>
-    <p>提前通知，并免手续费全额退款</p>
-  </article>
-  <article class="refund-note">
-    <strong>恶劣天气导致安全上无法成行</strong>
-    <p>出发前通知并全额退款</p>
-  </article>
-</div>
-<p class="local-time-note">出行日以当地（日本）时间为准。</p></section>
-</div></div>
-  </section>
-
-  <section class="section faq" id="faq">
-    <div class="section__inner">
-      <div class="shared-visual shared-visual--faq" data-shared-media aria-hidden="true"><span></span><span></span><span></span></div>
-<div class="language-grid">
-  <section class="language-column language-column--kr" lang="ko"><span class="language-label"><span class="language-code" aria-hidden="true">KR</span><span class="visually-hidden" lang="ko">한국어 원문</span></span><h2>■ 예약 전, 이것만 알아두세요</h2></section>
-  <section class="language-column language-column--zh" lang="zh-CN"><span class="language-label"><span class="language-code" aria-hidden="true">CN</span><span class="visually-hidden" lang="zh-CN">中文对照</span></span><h2>■ 预订前，这些请先了解一下</h2></section>
-</div>
-      <div class="faq-list bilingual-faq"><details open>
-  <summary>
-    <span lang="ko">Q1. 몇 명부터 출발하나요?</span>
-    <span lang="zh-CN">Q1. 几个人成团出发？</span>
-  </summary>
-  <div class="faq-answer">
-    <p lang="ko">4명 이상 모이면 출발이 확정됩니다. 전 세계에서 동시에 예약을 받아 모객하기 때문에, 예약이 빠를수록 출발 확정 확률이 높아집니다. 만약 출발이 어렵게 되면 미리 개별로 안내드리며, 취소하실 경우 수수료 없이 전액 환불해 드립니다.</p>
-    <p lang="zh-CN">4人成团。我们在全球同步收客拼团，越早预订成团概率越大。如果最终未能成团，会提前单独通知您；取消的话不收取任何手续费，全额退款。</p>
-  </div>
-</details><details>
-  <summary>
-    <span lang="ko">Q2. 차량은 어떻게 배차되나요? 함께 타는 분은 누구인가요?</span>
-    <span lang="zh-CN">Q2. 车辆怎么安排？同车的是谁？</span>
-  </summary>
-  <div class="faq-answer">
-    <p lang="ko">소규모 합승으로 운행되며, 당일 모객 인원에 맞춰 승합차가 배차됩니다. 전 세계 게스트를 모객하기 때문에 다른 국가에서 오신 분들과 동승하실 수 있습니다. 함께하는 시간 동안 서로의 여행 이야기를 나누는 소소한 즐거움이 되기도 합니다. 한 번의 여행은 누구에게나 특별한 계획입니다. 저희는 모든 게스트분을 한 분 한 분 정성스럽게 모시고 있습니다.</p>
-    <p lang="zh-CN">本行程为小团拼车，按当日成团人数安排商务车。因为面向全球收客，车上可能有来自其他国家的客人。同行时光里分享彼此的旅途故事，也是一种小小的乐趣。一次旅行对每个人来说都是特别的计划，我们会一位一位用心接待每位客人。</p>
-  </div>
-</details><details>
-  <summary>
-    <span lang="ko">Q3. 비가 오거나 날씨가 흐려도 진행되나요?</span>
-    <span lang="zh-CN">Q3. 下雨或阴天行程还进行吗？</span>
-  </summary>
-  <div class="faq-answer">
-    <p lang="ko">네, 진행됩니다. 비가 그친 뒤 꽃밭은 색이 더 선명해지고, 흐린 날에도 청의 호수의 파란색은 그대로입니다. 다만 태풍·폭설 등 악천후로 안전상 진행이 어려운 경우에는 출발 전 안내 후 전액 환불해 드립니다.</p>
-    <p lang="zh-CN">是的，照常进行。雨后的花田颜色更鲜艳，阴天青池的蓝色也依然如故。但因台风、暴雪等恶劣天气导致安全上难以进行时，会在出发前通知并全额退款。</p>
-  </div>
-</details><details>
-  <summary>
-    <span lang="ko">Q4. 기사님이 안내도 해 주시나요?</span>
-    <span lang="zh-CN">Q4. 司机也做讲解吗？</span>
-  </summary>
-  <div class="faq-answer">
-    <p lang="ko">운전 겸 안내 기사가 동행합니다. 주요 포인트 도착 시 간단한 안내를 드리며, 각 명소에서 하차하여 자유롭게 관람하시면 됩니다. 기사님은 차량에서 대기하며 출발 시간에 맞춰 다음 장소로 이동합니다. 기사님은 일본어·영어가 가능합니다.</p>
-    <p lang="zh-CN">司机兼向导陪同。到达主要景点时做简短介绍，各景点下车后自由参观。司机在车内等候，按出发时间前往下一站。司机可使用日语·英语。</p>
-  </div>
-</details><details>
-  <summary>
-    <span lang="ko">Q5. 출발 전 연락은 어떻게 오나요?</span>
-    <span lang="zh-CN">Q5. 出发前怎么联系？</span>
-  </summary>
-  <div class="faq-answer">
-    <p lang="ko">예약 완료 후, 자주 사용하시는 메신저(WhatsApp·LINE·KakaoTalk)를 남겨 주세요. WhatsApp을 가장 추천해 드립니다. 출발 전날, 온라인 여행 그룹(단톡방)을 만들어 드립니다. 그룹에는 기사님과 저희 담당자가 함께 계시며, 당일 이동 일정과 픽업 안내를 드립니다. 출발 당일 아침, 기사님이 약속된 시간에 숙소(또는 삿포로역 집합 장소) 앞으로 모시러 옵니다.</p>
-    <p lang="zh-CN">预订完成后，请留下您常用的即时通讯账号（WhatsApp·LINE·KakaoTalk），我们最推荐WhatsApp。出发前一天，我们会建立线上旅行群（群聊），群里有司机和我们的负责人，会发送当天的行程安排和接送信息。出发当天早上，司机会按约定时间到住宿（或札幌站集合地点）门口来接。</p>
-  </div>
-</details><details>
-  <summary>
-    <span lang="ko">Q6. 식사와 입장료는 포함되어 있나요?</span>
-    <span lang="zh-CN">Q6. 餐费和门票包含吗？</span>
-  </summary>
-  <div class="faq-answer">
-    <p lang="ko">사계채의 언덕 입장권은 포함되어 있습니다. 팜 토미타·청의 호수·시라히게 폭포는 무료 입장입니다. 식사는 불포함이며, 점심 시간(약 1시간)에 주변 식당에서 개별 결제로 자유롭게 드시면 됩니다. 입장권 외에 현지에서 추가로 결제하실 비용은 없습니다.</p>
-    <p lang="zh-CN">四季彩之丘门票已包含。富田农场·青池·白须瀑布均为免费入场。餐食不含，午餐时间（约1小时）在附近餐厅自行点单结账即可。除餐食外，当地没有任何额外费用。</p>
-  </div>
-</details><details>
-  <summary>
-    <span lang="ko">Q7. 취소 및 환불 규정은 어떻게 되나요?</span>
-    <span lang="zh-CN">Q7. 取消退款规定？</span>
-  </summary>
-  <div class="faq-answer">
-    <p lang="ko">여행일 기준 3일 전까지 통보 시: 100% 전액 환불 / 여행일 기준 2일 전~당일 통보 시: 환불 불가 ※ 여행일은 현지(일본) 시각 기준입니다.</p>
-    <p lang="zh-CN">以出行日为准，提前3天及之前通知：100%全额退款。以出行日为准，提前2天至当天通知：不可退款。※ 出行日以当地（日本）时间为准。</p>
-  </div>
-</details><details>
-  <summary>
-    <span lang="ko">Q8. 라벤더는 언제가 가장 예쁜가요?</span>
-    <span lang="zh-CN">Q8. 薰衣草什么时候最好看？</span>
-  </summary>
-  <div class="faq-answer">
-    <p lang="ko">보통 6월 말부터 8월 초가 절정이며, 개화 시기는 그해 날씨에 따라 달라질 수 있습니다. 라벤더 시즌이 지나도 사계채의 언덕에는 여름 내내 계절 꽃이 피어 꽃밭을 즐기실 수 있습니다.</p>
-    <p lang="zh-CN">通常6月底到8月初是盛花期，开花时间会因当年天气有所浮动。即使过了薰衣草季，四季彩之丘整个夏天都有应季花卉，任何时间都能欣赏花田。</p>
-  </div>
-</details></div>
-    </div>
-  </section>
-
-  <section class="closing" id="closing">
-    <div class="closing__photo shared-photo" role="img" aria-labelledby="shared-photo-closing-blue-pond-ko shared-photo-closing-blue-pond-zh" data-shared-media><span class="visually-hidden" id="shared-photo-closing-blue-pond-ko" lang="ko">자작나무 사이로 보이는 비에이 청의 호수</span><span class="visually-hidden" id="shared-photo-closing-blue-pond-zh" lang="zh-CN">白桦树之间的美瑛青池</span><picture><source media="(max-width: 720px)" srcset="img/blue-pond-960.webp?v=20260729-v4"><source srcset="img/blue-pond-1600.webp?v=20260729-v4"><img src="img/blue-pond-960.webp?v=20260729-v4" width="960" height="640" alt="" loading="lazy" decoding="async"></picture></div>
-<div class="language-grid closing__inner">
-  <section class="language-column language-column--kr" lang="ko">
-<span class="language-label"><span class="language-code" aria-hidden="true">KR</span><span class="visually-hidden" lang="ko">한국어 원문</span></span>
-<h2>마지막까지, 조건은 선명하게</h2>
-<p>소그룹의 리듬으로 후라노와 비에이의 여름을 만나고, 돌아오는 길까지 부담을 덜어 보세요.</p>
-<ul class="guarantees"><li>4인 소그룹</li><li>삿포로역 3km 내 숙소 픽업</li><li>미성사 시 전액 환불</li></ul>
-<nav class="actions" aria-label="마지막까지, 조건은 선명하게">
-  <a class="button" href="#itinerary">일정 다시 보기</a>
-  <a class="button button--quiet" href="#top">맨 위로</a>
-</nav></section>
-  <section class="language-column language-column--zh" lang="zh-CN">
-<span class="language-label"><span class="language-code" aria-hidden="true">CN</span><span class="visually-hidden" lang="zh-CN">中文对照</span></span>
-<h2>到最后，条件依然清楚</h2>
-<p>以小团节奏走进富良野与美瑛的夏天，也让回程更轻松。</p>
-<ul class="guarantees"><li>4人小团</li><li>札幌站3km内住宿接送</li><li>不成团全额退款</li></ul>
-<nav class="actions" aria-label="到最后，条件依然清楚">
-  <a class="button" href="#itinerary">再看行程</a>
-  <a class="button button--quiet" href="#top">返回顶部</a>
-</nav></section>
-</div>
-  </section>
-</main>
-
-<footer class="credits">
-  <a href="img/SOURCES.md">
-    <span lang="ko">사진 출처와 라이선스</span>&nbsp;/&nbsp;
-    <span lang="zh-CN">照片来源与许可</span>
-  </a>
-</footer>
+<div class="hero-ref-cap">氛围参考 · 需替换实拍主视觉</div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ② 差异化亮点 ×6（贴纸卡）</div><ul><li>目的：和49人大巴团划清界限，扫读式对比。多巴胺处理：6张不同亮色的贴纸卡。</li>
+<li><span class='do'>建议</span>：每张卡一个 emoji 打头 + 一句短文案；6色糖果色系循环（紫/粉/黄/薄荷/蓝/橙）。</li>
+<li>权重：第1张（住宿门口接送）和第2张（4人小团）是最强卖点。</li>
+<li><span class='dont'>避免</span>：长句、勋章墙式严肃 icon。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="hl-grid"><div class="chip chip-1"><span class="em">🚗</span><span>삿포로역 3km 이내 숙소 앞 픽업 (이른 아침 집합 장소 이동 NO)</span></div>
+<div class="chip chip-2"><span class="em">👨‍👩‍👧‍👦</span><span>최소 4명 출발 · 49인승 대형 버스가 아닌 소그룹</span></div>
+<div class="chip chip-3"><span class="em"></span><span>사계채의 언덕 입장권 포함 · 현지 추가 비용 없음 (식사 제외)</span></div>
+<div class="chip chip-4"><span class="em"></span><span>소그룹 운행이라 사진·관람 시간이 넉넉합니다</span></div>
+<div class="chip chip-5"><span class="em"></span><span>일본어·영어 기사 + 번역 앱</span></div>
+<div class="chip chip-6"><span class="em">💰</span><span>여행일 3일 전까지 통보 시 100% 전액 환불 · 미성사 시에도 전액 환불</span></div></div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="hl-grid"><div class="chip chip-1"><span class="em">🚗</span><span>札幌站3km内住宿门口接送（不用一早赶去集合点）</span></div>
+<div class="chip chip-2"><span class="em">👨‍👩‍👧‍👦</span><span>4人成团·不是49座大巴的小团</span></div>
+<div class="chip chip-3"><span class="em"></span><span>含四季彩之丘门票·当地无额外费用（餐食除外）</span></div>
+<div class="chip chip-4"><span class="em"></span><span>因为我们是小团，拍照游玩时间会很充裕</span></div>
+<div class="chip chip-5"><span class="em"></span><span>日语/英语司机+翻译app</span></div>
+<div class="chip chip-6"><span class="em">💰</span><span>出行日前3天通知可100%全额退款·不成团也无损退款</span></div></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ③ 痛点钩子（便签气泡）</div><ul><li>目的：先说出大巴团的痛，再转折「我们不一样」。</li>
+<li><span class='do'>建议</span>：黄色便签/气泡样式，轻松吐槽感；情绪克制不嘲讽。</li>
+<li><span class='dont'>避免</span>：红字警告、大段文字。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="pain">🤔 "7시 반 집합, 49인승 버스, 좌석은 선착순." 대형 버스투어의 하루는 이렇게 시작합니다.<br>이 투어는 <b>숙소 앞에서 시작</b>해, 돌아오는 길엔 편하게 잠들 수 있습니다. 운전과 길 찾기는 저희가 할게요. 당신은 창밖의 여름만 담으세요</div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="pain">🤔 "7点半集合、49座大巴、座位先到先得。"大巴团的一天是这样开始的。<br>这个团从<b>住宿门口开始</b>，回程路上可以安心睡一觉。开车和找路交给我们，你只管把夏天装进相机</div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ④ 接送信息（大数字时刻）</div><ul><li>目的：让客人一眼判断「我能不能被接」。</li>
+<li><span class='do'>建议</span>：08:00 做成渐变大数字，是全页最重要的时间锚点；下面3行短句说清规则。</li>
+<li>如想加分，可配「札幌站为中心、3km圈」简易示意图。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="kv"><div class="pickup-time">예정 08:00 삿포로 출발</div><p>🏠 삿포로역 반경 3km 이내 숙소 → 숙소 앞 픽업</p>
+<p>🚉 3km 밖 숙소 → 삿포로역 집합 (상세 장소는 전날 안내)</p>
+<p>💬 정확한 픽업 시간은 출발 전날 단톡방에서 안내드립니다</p></div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="kv"><div class="pickup-time">预计 08:00 札幌出发</div><p>🏠 札幌站半径3km内住宿 → 住宿门口接送</p>
+<p>🚉 3km范围外住宿 → 札幌站集合（详细地点前一天告知）</p>
+<p>💬 准确接送时间会在出发前一天通过群聊通知</p></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑤ 行程时间线（站点大卡 · 核心区块）</div><ul><li>多图少字的核心体现：每站一张大图卡，时间做成贴纸徽章，正文只有一句话。</li>
+<li>每站一个主题色（富田紫→云霄飞车薄荷绿→四季彩粉→青池蓝→白须瀑布青），呼应「三色之旅」。</li>
+<li>⭐富田农场是全行程高光：卡片放大 + 金色⭐贴纸（峰终定律）。🎫「含门票」薄荷绿贴纸是信任点。</li>
+<li>出发/午餐/返程用虚线轻卡（无图），视觉上和景点大卡拉开层级。</li>
+<li><span class='dont'>注意</span>：所有时间均为「预计/예정」，不要做承诺式处理；返程保留路况免责小字。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 08:00</span><div class="stop-name">삿포로 출발 <span class="dur">(숙소 픽업 또는 삿포로역 집합 후)</span></div></div>
+<div class="stop-card peak" style="border-color:#9b5de5"><img class="stop-img" src="img/tomita.jpg?v=20260729" alt="팜 토미타 라벤더 밭" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#9b5de5">예정 10:30</span><div class="stop-name">팜 토미타 <span class="dur">(약 60분 · 포토타임)</span><span class="sticker sticker-peak">⭐ 하이라이트</span></div><div class="stop-desc">보랏빛 라벤더가 언덕 끝까지 💜 라벤더 소프트크림은 필수!</div><div class="ref-cap">氛围参考 · 需替换实拍 | 팜 토미타 라벤더 밭</div></div></div>
+<div class="stop-card" style="border-color:#06d6a0"><div class="stop-placeholder">[ 제트코스터 로드 차창 시점 사진 ]</div><div class="stop-body"><span class="time-badge" style="background:#06d6a0">예정 11:30</span><div class="stop-name">차창 감상: 제트코스터 로드 <span class="dur">(약 15분 · 하차 없음)</span></div><div class="stop-desc">롤러코스터처럼 오르내리는 언덕길, 창밖으로 흐르는 여름</div></div></div>
+<div class="stop-card" style="border-color:#ff5d8f"><img class="stop-img" src="img/shikisai.jpg?v=20260729" alt="사계채의 언덕 무지개 꽃밭" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#ff5d8f">예정 12:15</span><div class="stop-name">사계채의 언덕 <span class="dur">(약 60분)</span><span class="sticker sticker-free">🎫 입장권 포함</span></div><div class="stop-desc">15헥타르 무지개 꽃밭, 계절마다 새로운 색</div><div class="ref-cap">氛围参考 · 需替换实拍 | 사계채의 언덕 무지개 꽃밭</div></div></div>
+<div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 13:15</span><div class="stop-name">자유 점심 <span class="dur">(약 1시간 · 개별 결제)</span></div><div class="stop-desc">정해진 단체 식사 NO, 내가 고르는 자유 점심</div></div>
+<div class="stop-card" style="border-color:#00b4d8"><img class="stop-img" src="img/aoiike.jpg?v=20260729" alt="청의 호수(아오이이케)" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#00b4d8">예정 15:00</span><div class="stop-name">청의 호수 <span class="dur">(약 30분 · 포토타임)</span></div><div class="stop-desc">SNS 최다 공유 블루 스폿, 오늘의 인생샷 📸</div><div class="ref-cap">氛围参考 · 需替换实拍 | 청의 호수(아오이이케)</div></div></div>
+<div class="stop-card" style="border-color:#2ec4b6"><img class="stop-img" src="img/shirahige.jpg?v=20260729" alt="시라히게 폭포" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#2ec4b6">예정 15:35</span><div class="stop-name">시라히게 폭포 <span class="dur">(약 25분)</span></div><div class="stop-desc">흰 수염처럼 흘러내리는 드문 잠수 폭포</div><div class="ref-cap">氛围参考 · 需替换实拍 | 시라히게 폭포</div></div></div>
+<div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 16:00</span><div class="stop-name">삿포로로 출발 → 예정 18:30 삿포로 도착</div><div class="stop-note">⏰ 도로 상황에 따라 도착 시간이 앞뒤로 달라질 수 있습니다. 출발 시간이 정해진 교통편(항공·기차)이나 공연·레스토랑 예약은 가급적 다른 날짜에 잡아 주세요.</div></div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="pass-card"><span class="time-badge" style="background:#8a95a0">预计 08:00</span><div class="stop-name">札幌出发 <span class="dur">(住宿接送或札幌站集合后)</span></div></div>
+<div class="stop-card peak" style="border-color:#9b5de5"><img class="stop-img" src="img/tomita.jpg?v=20260729" alt="富田农场薰衣草花田" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#9b5de5">预计 10:30</span><div class="stop-name">富田农场 <span class="dur">(约60分钟·拍照时间)</span><span class="sticker sticker-peak">⭐ 高光时刻</span></div><div class="stop-desc">紫色薰衣草一路铺到山坡尽头 💜 薰衣草冰淇淋必尝!</div><div class="ref-cap">氛围参考 · 需替换实拍 | 富田农场薰衣草花田</div></div></div>
+<div class="stop-card" style="border-color:#06d6a0"><div class="stop-placeholder">[ 云霄飞车之路 车内视角照片 ]</div><div class="stop-body"><span class="time-badge" style="background:#06d6a0">预计 11:30</span><div class="stop-name">车窗观赏：云霄飞车之路 <span class="dur">(约15分钟·不下车)</span></div><div class="stop-desc">像过山车一样起伏的坡道，窗外流动的夏天</div></div></div>
+<div class="stop-card" style="border-color:#ff5d8f"><img class="stop-img" src="img/shikisai.jpg?v=20260729" alt="四季彩之丘彩虹花田" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#ff5d8f">预计 12:15</span><div class="stop-name">四季彩之丘 <span class="dur">(约60分钟)</span><span class="sticker sticker-free">🎫 含门票</span></div><div class="stop-desc">15公顷彩虹花田，每个季节都有新颜色</div><div class="ref-cap">氛围参考 · 需替换实拍 | 四季彩之丘彩虹花田</div></div></div>
+<div class="pass-card"><span class="time-badge" style="background:#8a95a0">预计 13:15</span><div class="stop-name">自由午餐 <span class="dur">(约1小时·各自结账)</span></div><div class="stop-desc">不是固定的团餐，是自己选的午餐</div></div>
+<div class="stop-card" style="border-color:#00b4d8"><img class="stop-img" src="img/aoiike.jpg?v=20260729" alt="青池" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#00b4d8">预计 15:00</span><div class="stop-name">青池 <span class="dur">(约30分钟·拍照时间)</span></div><div class="stop-desc">SNS上被分享最多的蓝色景点，拍出今天的人生照片 📸</div><div class="ref-cap">氛围参考 · 需替换实拍 | 青池</div></div></div>
+<div class="stop-card" style="border-color:#2ec4b6"><img class="stop-img" src="img/shirahige.jpg?v=20260729" alt="白须瀑布" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#2ec4b6">预计 15:35</span><div class="stop-name">白须瀑布 <span class="dur">(约25分钟)</span></div><div class="stop-desc">像白色胡须一样流下的罕见"潜水瀑布"</div><div class="ref-cap">氛围参考 · 需替换实拍 | 白须瀑布</div></div></div>
+<div class="pass-card"><span class="time-badge" style="background:#8a95a0">预计 16:00</span><div class="stop-name">返程回札幌 → 预计18:30左右抵达札幌</div><div class="stop-note">⏰ 根据当天路况，抵达时间可能前后浮动。有固定出发时间的交通工具（航班·火车）或演出、餐厅预约，建议您尽量安排在其他日期。</div></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑥ 资质·车辆·语言服务</div><ul><li>目的：信任收尾。3行图标短句 + 证书/车辆实拍位。</li>
+<li><span class='dont'>避免</span>：证书堆砌，1-2张关键资质即可。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="logi-card"><div class="kv"><p><b>일본 오사카부지사 등록 여행사 · JNTO(일본정부관광국) 협력사</b></p><p>🚐 차량: 당일 모객 인원에 맞춘 승합차 배차</p>
+<p>📍 픽업: 삿포로역 반경 3km 숙소 앞 (범위 밖은 삿포로역 집합)</p>
+<p>언어: 일본어·영어 가능 기사 + 번역 앱 지원</p></div>
+<div class="placeholder-img">[ 자질증명서 + 차량 실물 사진 ]</div></div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="logi-card"><div class="kv"><p><b>日本大阪府知事登记旅行社·JNTO（日本政府观光局）合作方</b></p><p>🚐 车辆：按当日成团人数安排商务车</p>
+<p>📍 接送：札幌站半径3km内住宿门口（范围外为札幌站集合）</p>
+<p>语言：日语/英语司机+翻译app支持</p></div>
+<div class="placeholder-img">[ 资质证书+车辆实拍 ]</div></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑦ FAQ ×8（彩色问答卡）</div><ul><li>目的：预订前最后答疑。多巴胺处理：问答卡糖果色循环。</li>
+<li><span class='do'>建议</span>：可做成手风琴（默认收起，省版面）；Q加粗、A降一档；8问完整保留。</li>
+<li>Q7退改规则视觉最规整（两档对照），纠纷高发点。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="faq-title">■ 예약 전, 이것만 알아두세요 💡</div><div class="faq-item"><div class="q">Q1. 몇 명부터 출발하나요?</div><div class="a">4명 이상 모이면 출발이 확정됩니다. 전 세계에서 동시에 예약을 받아 모객하기 때문에, 예약이 빠를수록 출발 확정 확률이 높아집니다. 만약 출발이 어렵게 되면 미리 개별로 안내드리며, 취소하실 경우 수수료 없이 전액 환불해 드립니다.</div></div>
+<div class="faq-item"><div class="q">Q2. 차량은 어떻게 배차되나요? 함께 타는 분은 누구인가요?</div><div class="a">소규모 합승으로 운행되며, 당일 모객 인원에 맞춰 승합차가 배차됩니다. 전 세계 게스트를 모객하기 때문에 다른 국가에서 오신 분들과 동승하실 수 있습니다. 함께하는 시간 동안 서로의 여행 이야기를 나누는 소소한 즐거움이 되기도 합니다. 한 번의 여행은 누구에게나 특별한 계획입니다. 저희는 모든 게스트분을 한 분 한 분 정성스럽게 모시고 있습니다.</div></div>
+<div class="faq-item"><div class="q">Q3. 비가 오거나 날씨가 흐려도 진행되나요?</div><div class="a">네, 진행됩니다. 비가 그친 뒤 꽃밭은 색이 더 선명해지고, 흐린 날에도 청의 호수의 파란색은 그대로입니다. 다만 태풍·폭설 등 악천후로 안전상 진행이 어려운 경우에는 출발 전 안내 후 전액 환불해 드립니다.</div></div>
+<div class="faq-item"><div class="q">Q4. 기사님이 안내도 해 주시나요?</div><div class="a">운전 겸 안내 기사가 동행합니다. 주요 포인트 도착 시 간단한 안내를 드리며, 각 명소에서 하차하여 자유롭게 관람하시면 됩니다. 기사님은 차량에서 대기하며 출발 시간에 맞춰 다음 장소로 이동합니다. 기사님은 일본어·영어가 가능합니다.</div></div>
+<div class="faq-item"><div class="q">Q5. 출발 전 연락은 어떻게 오나요?</div><div class="a">예약 완료 후, 자주 사용하시는 메신저(WhatsApp·LINE·KakaoTalk)를 남겨 주세요. WhatsApp을 가장 추천해 드립니다. 출발 전날, 온라인 여행 그룹(단톡방)을 만들어 드립니다. 그룹에는 기사님과 저희 담당자가 함께 계시며, 당일 이동 일정과 픽업 안내를 드립니다. 출발 당일 아침, 기사님이 약속된 시간에 숙소(또는 삿포로역 집합 장소) 앞으로 모시러 옵니다.</div></div>
+<div class="faq-item"><div class="q">Q6. 식사와 입장료는 포함되어 있나요?</div><div class="a">사계채의 언덕 입장권은 포함되어 있습니다. 팜 토미타·청의 호수·시라히게 폭포는 무료 입장입니다. 식사는 불포함이며, 점심 시간(약 1시간)에 주변 식당에서 개별 결제로 자유롭게 드시면 됩니다. 입장권 외에 현지에서 추가로 결제하실 비용은 없습니다.</div></div>
+<div class="faq-item"><div class="q">Q7. 취소 및 환불 규정은 어떻게 되나요?</div><div class="a">여행일 기준 3일 전까지 통보 시: 100% 전액 환불 / 여행일 기준 2일 전~당일 통보 시: 환불 불가 ※ 여행일은 현지(일본) 시각 기준입니다.</div></div>
+<div class="faq-item"><div class="q">Q8. 라벤더는 언제가 가장 예쁜가요?</div><div class="a">보통 6월 말부터 8월 초가 절정이며, 개화 시기는 그해 날씨에 따라 달라질 수 있습니다. 라벤더 시즌이 지나도 사계채의 언덕에는 여름 내내 계절 꽃이 피어 꽃밭을 즐기실 수 있습니다.</div></div><div class="faq-closing">■ 그 외에 궁금하신 점이 있으시면, 언제든 편하게 문의해 주세요 💬</div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="faq-title">■ 预订前，这些请先了解一下 💡</div><div class="faq-item"><div class="q">Q1. 几个人成团出发？</div><div class="a">4人成团。我们在全球同步收客拼团，越早预订成团概率越大。如果最终未能成团，会提前单独通知您；取消的话不收取任何手续费，全额退款。</div></div>
+<div class="faq-item"><div class="q">Q2. 车辆怎么安排？同车的是谁？</div><div class="a">本行程为小团拼车，按当日成团人数安排商务车。因为面向全球收客，车上可能有来自其他国家的客人。同行时光里分享彼此的旅途故事，也是一种小小的乐趣。一次旅行对每个人来说都是特别的计划，我们会一位一位用心接待每位客人。</div></div>
+<div class="faq-item"><div class="q">Q3. 下雨或阴天行程还进行吗？</div><div class="a">是的，照常进行。雨后的花田颜色更鲜艳，阴天青池的蓝色也依然如故。但因台风、暴雪等恶劣天气导致安全上难以进行时，会在出发前通知并全额退款。</div></div>
+<div class="faq-item"><div class="q">Q4. 司机也做讲解吗？</div><div class="a">司机兼向导陪同。到达主要景点时做简短介绍，各景点下车后自由参观。司机在车内等候，按出发时间前往下一站。司机可使用日语·英语。</div></div>
+<div class="faq-item"><div class="q">Q5. 出发前怎么联系？</div><div class="a">预订完成后，请留下您常用的即时通讯账号（WhatsApp·LINE·KakaoTalk），我们最推荐WhatsApp。出发前一天，我们会建立线上旅行群（群聊），群里有司机和我们的负责人，会发送当天的行程安排和接送信息。出发当天早上，司机会按约定时间到住宿（或札幌站集合地点）门口来接。</div></div>
+<div class="faq-item"><div class="q">Q6. 餐费和门票包含吗？</div><div class="a">四季彩之丘门票已包含。富田农场·青池·白须瀑布均为免费入场。餐食不含，午餐时间（约1小时）在附近餐厅自行点单结账即可。除餐食外，当地没有任何额外费用。</div></div>
+<div class="faq-item"><div class="q">Q7. 取消退款规定？</div><div class="a">以出行日为准，提前3天及之前通知：100%全额退款。以出行日为准，提前2天至当天通知：不可退款。※ 出行日以当地（日本）时间为准。</div></div>
+<div class="faq-item"><div class="q">Q8. 薰衣草什么时候最好看？</div><div class="a">通常6月底到8月初是盛花期，开花时间会因当年天气有所浮动。即使过了薰衣草季，四季彩之丘整个夏天都有应季花卉，任何时间都能欣赏花田。</div></div><div class="faq-closing">■ 如有其他疑问，请随时咨询 💬</div></div></div></div>
+<div class="img-credit">※ 页内照片均为氛围参考图（Wikimedia Commons），仅用于示意画面感觉，正式详情页须全部替换为自家实拍图。</div>
 </div>
 </body>
 </html>
