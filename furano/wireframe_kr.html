@@ -140,6 +140,23 @@
   .stop-note { font-size: 11px; color: #8a95a0; line-height: 1.65; margin-top: 4px; }
   .ref-cap { font-size: 10px; color: #b0a6c4; margin-top: 5px; }
 
+  /* 双季双图（夏景+秋景并列） */
+  .stop-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .season-frame { position: relative; border-radius: 10px; overflow: hidden; }
+  .season-frame img { width: 100%; height: 120px; object-fit: cover; display: block; }
+  .season-frame.ph-autumn {
+    height: 120px; border-radius: 10px;
+    background: repeating-linear-gradient(45deg, #fdf1e3, #fdf1e3 10px, #fbe4cd 10px, #fbe4cd 20px);
+    border: 1.5px dashed #e8a265; display: flex; align-items: center; justify-content: center;
+    color: #b0762e; font-size: 10.5px; font-weight: 600; text-align: center; padding: 8px;
+  }
+  .season-tag {
+    position: absolute; bottom: 6px; left: 6px; font-size: 9.5px; font-weight: 800;
+    padding: 2px 8px; border-radius: 999px; color: #fff; z-index: 2;
+  }
+  .tag-summer { background: rgba(46,160,90,.88); }
+  .tag-autumn { background: linear-gradient(135deg, #ff8c42, #e85d3d); }
+
   /* 中转卡（出发/午餐/返程，无图） */
   .pass-card {
     background: #fff; border: 2px dashed #d8cef0; border-radius: 16px;
@@ -202,15 +219,15 @@
 <div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="kv"><div class="pickup-time">예정 07:30~08:00 숙소 앞 픽업 → 픽업 후 삿포로 출발</div><p>🏠 삿포로역 반경 3km 이내 숙소 → 숙소 앞 픽업</p>
 <p>🚉 3km 범위 밖 숙소 → 삿포로역 집합</p>
 <p>💬 정확한 픽업 시간은 출발 전날 단톡방에서 안내드립니다</p></div></div></div></div>
-<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑤ 行程时间线（站点大卡 · 核心区块）</div><ul><li>每站一大卡一句话，文案体现「夏天×秋天都好看」。富田农场是全行程高光；出发/午餐/返程轻处理。</li>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑤ 行程时间线（站点大卡 · 核心区块）</div><ul><li>每站一大卡一句话，文案体现「夏天×秋天都好看」。每站夏景+秋景双图并列（左夏☀️右秋🍁带季节角标，本稿已示例），正式版两图都用自家实拍。富田农场是全行程高光；出发/午餐/返程轻处理。</li>
 <li>必守：所有时间均为「预计/예정」；返程保留路况免责小字。其余版式自由。</li></ul></div>
 <div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 08:00</span><div class="stop-name">삿포로 출발 <span class="dur">(숙소 픽업 또는 삿포로역 집합 후)</span></div></div>
-<div class="stop-card peak" style="border-color:#9b5de5"><img class="stop-img" src="img/tomita.jpg?v=20260729" alt="팜 토미타 라벤더 밭" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#9b5de5">예정 10:30</span><div class="stop-name">팜 토미타 <span class="dur">(약 60분 · 포토타임)</span><span class="sticker sticker-peak">⭐ 하이라이트</span></div><div class="stop-desc">여름엔 보랏빛 라벤더 💜 가을엔 샐비어·코스모스와 단풍 🍁 라벤더 소프트크림은 필수!</div><div class="ref-cap">氛围参考 · 需替换实拍 | 팜 토미타 라벤더 밭</div></div></div>
+<div class="stop-card peak" style="border-color:#9b5de5"><div class="stop-img-pair"><div class="season-frame"><img src="img/tomita.jpg?v=20260729" alt="팜 토미타 라벤더 밭" loading="lazy"><span class="season-tag tag-summer">☀️ 여름</span></div><div class="season-frame ph-autumn"><span>[ 가을 단풍 실사진 자리 ]</span><span class="season-tag tag-autumn">🍁 가을</span></div></div><div class="stop-body"><span class="time-badge" style="background:#9b5de5">예정 10:30</span><div class="stop-name">팜 토미타 <span class="dur">(약 60분 · 포토타임)</span><span class="sticker sticker-peak">⭐ 하이라이트</span></div><div class="stop-desc">여름엔 보랏빛 라벤더 💜 가을엔 샐비어·코스모스와 단풍 🍁 라벤더 소프트크림은 필수!</div><div class="ref-cap">左=夏景氛围参考，右=秋景占位 · 正式版两图都换自家实拍 | 팜 토미타 라벤더 밭</div></div></div>
 <div class="stop-card" style="border-color:#06d6a0"><div class="stop-placeholder">[ 제트코스터 로드 차창 시점 사진 ]</div><div class="stop-body"><span class="time-badge" style="background:#06d6a0">예정 11:30</span><div class="stop-name">차창 감상: 제트코스터 로드 <span class="dur">(약 15분 · 하차 없음)</span></div><div class="stop-desc">롤러코스터처럼 오르내리는 언덕길, 여름엔 초록 · 가을엔 단풍</div></div></div>
-<div class="stop-card" style="border-color:#ff5d8f"><img class="stop-img" src="img/shikisai.jpg?v=20260729" alt="사계채의 언덕 무지개 꽃밭" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#ff5d8f">예정 12:15</span><div class="stop-name">사계채의 언덕 <span class="dur">(약 60분)</span><span class="sticker sticker-free">🎫 입장권 포함</span></div><div class="stop-desc">여름엔 15헥타르 무지개 꽃밭, 가을엔 단풍과 어우러진 오색 풍경 🍁</div><div class="ref-cap">氛围参考 · 需替换实拍 | 사계채의 언덕 무지개 꽃밭</div></div></div>
+<div class="stop-card" style="border-color:#ff5d8f"><div class="stop-img-pair"><div class="season-frame"><img src="img/shikisai.jpg?v=20260729" alt="사계채의 언덕 무지개 꽃밭" loading="lazy"><span class="season-tag tag-summer">☀️ 여름</span></div><div class="season-frame ph-autumn"><span>[ 가을 단풍 실사진 자리 ]</span><span class="season-tag tag-autumn">🍁 가을</span></div></div><div class="stop-body"><span class="time-badge" style="background:#ff5d8f">예정 12:15</span><div class="stop-name">사계채의 언덕 <span class="dur">(약 60분)</span><span class="sticker sticker-free">🎫 입장권 포함</span></div><div class="stop-desc">여름엔 15헥타르 무지개 꽃밭, 가을엔 단풍과 어우러진 오색 풍경 🍁</div><div class="ref-cap">左=夏景氛围参考，右=秋景占位 · 正式版两图都换自家实拍 | 사계채의 언덕 무지개 꽃밭</div></div></div>
 <div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 13:15</span><div class="stop-name">자유 점심 <span class="dur">(약 1시간 · 개별 결제)</span></div><div class="stop-desc">정해진 단체 식사 NO, 내가 고르는 자유 점심</div></div>
-<div class="stop-card" style="border-color:#00b4d8"><img class="stop-img" src="img/aoiike.jpg?v=20260729" alt="청의 호수(아오이이케)" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#00b4d8">예정 15:00</span><div class="stop-name">청의 호수 <span class="dur">(약 30분 · 포토타임)</span></div><div class="stop-desc">여름엔 신비로운 블루, 가을엔 단풍이 비친 블루 미러 📸</div><div class="ref-cap">氛围参考 · 需替换实拍 | 청의 호수(아오이이케)</div></div></div>
-<div class="stop-card" style="border-color:#2ec4b6"><img class="stop-img" src="img/shirahige.jpg?v=20260729" alt="시라히게 폭포" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#2ec4b6">예정 15:35</span><div class="stop-name">시라히게 폭포 <span class="dur">(약 25분)</span></div><div class="stop-desc">지하수가 스며 나와 흰 수염처럼 흘러내리는 드문 폭포, 가을엔 단풍 계곡도 함께</div><div class="ref-cap">氛围参考 · 需替换实拍 | 시라히게 폭포</div></div></div>
+<div class="stop-card" style="border-color:#00b4d8"><div class="stop-img-pair"><div class="season-frame"><img src="img/aoiike.jpg?v=20260729" alt="청의 호수(아오이이케)" loading="lazy"><span class="season-tag tag-summer">☀️ 여름</span></div><div class="season-frame ph-autumn"><span>[ 가을 단풍 실사진 자리 ]</span><span class="season-tag tag-autumn">🍁 가을</span></div></div><div class="stop-body"><span class="time-badge" style="background:#00b4d8">예정 15:00</span><div class="stop-name">청의 호수 <span class="dur">(약 30분 · 포토타임)</span></div><div class="stop-desc">여름엔 신비로운 블루, 가을엔 단풍이 비친 블루 미러 📸</div><div class="ref-cap">左=夏景氛围参考，右=秋景占位 · 正式版两图都换自家实拍 | 청의 호수(아오이이케)</div></div></div>
+<div class="stop-card" style="border-color:#2ec4b6"><div class="stop-img-pair"><div class="season-frame"><img src="img/shirahige.jpg?v=20260729" alt="시라히게 폭포" loading="lazy"><span class="season-tag tag-summer">☀️ 여름</span></div><div class="season-frame ph-autumn"><span>[ 가을 단풍 실사진 자리 ]</span><span class="season-tag tag-autumn">🍁 가을</span></div></div><div class="stop-body"><span class="time-badge" style="background:#2ec4b6">예정 15:35</span><div class="stop-name">시라히게 폭포 <span class="dur">(약 25분)</span></div><div class="stop-desc">지하수가 스며 나와 흰 수염처럼 흘러내리는 드문 폭포, 가을엔 단풍 계곡도 함께</div><div class="ref-cap">左=夏景氛围参考，右=秋景占位 · 正式版两图都换自家实拍 | 시라히게 폭포</div></div></div>
 <div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 16:00</span><div class="stop-name">삿포로로 출발 → 예정 18:30 삿포로 도착</div><div class="stop-note">⏰ 도로 상황에 따라 도착 시간이 앞뒤로 달라질 수 있습니다. 출발 시간이 정해진 교통편(항공·기차)이나 공연·레스토랑 예약은 가급적 다른 날짜에 잡아 주세요.</div></div></div></div></div>
 <div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑥ 资质·车辆·语言服务</div><ul><li>信任收尾，1-2张关键资质即可。形式自由。</li></ul></div>
 <div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="logi-card"><div class="kv"><p><b>일본 오사카부 지사 등록 여행사 · JNTO(일본정부관광국) 협력사</b></p><p>🚐 차량: 당일 모객 인원에 맞춘 승합차 배차</p>
