@@ -14,6 +14,8 @@
     background: #faf8ff;
     -webkit-font-smoothing: antialiased;
   }
+  /* 美工交付保障：全页文字均可选中复制（默认为 auto，此处显式锁死防意外） */
+  body, body * { user-select: text !important; -webkit-user-select: text !important; }
   .page { max-width: 960px; margin: 0 auto; padding: 24px 18px 40px; }
 
   /* 文档头（meta 层，保持干净） */
