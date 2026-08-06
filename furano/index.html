@@ -140,6 +140,23 @@
   .stop-note { font-size: 11px; color: #8a95a0; line-height: 1.65; margin-top: 4px; }
   .ref-cap { font-size: 10px; color: #b0a6c4; margin-top: 5px; }
 
+  /* 双季双图（夏景+秋景并列） */
+  .stop-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .season-frame { position: relative; border-radius: 10px; overflow: hidden; }
+  .season-frame img { width: 100%; height: 120px; object-fit: cover; display: block; }
+  .season-frame.ph-autumn {
+    height: 120px; border-radius: 10px;
+    background: repeating-linear-gradient(45deg, #fdf1e3, #fdf1e3 10px, #fbe4cd 10px, #fbe4cd 20px);
+    border: 1.5px dashed #e8a265; display: flex; align-items: center; justify-content: center;
+    color: #b0762e; font-size: 10.5px; font-weight: 600; text-align: center; padding: 8px;
+  }
+  .season-tag {
+    position: absolute; bottom: 6px; left: 6px; font-size: 9.5px; font-weight: 800;
+    padding: 2px 8px; border-radius: 999px; color: #fff; z-index: 2;
+  }
+  .tag-summer { background: rgba(46,160,90,.88); }
+  .tag-autumn { background: linear-gradient(135deg, #ff8c42, #e85d3d); }
+
   /* 中转卡（出发/午餐/返程，无图） */
   .pass-card {
     background: #fff; border: 2px dashed #d8cef0; border-radius: 16px;
@@ -202,15 +219,15 @@
 <div class="row"><div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="kv"><div class="pickup-time">预计 07:30~08:00 住宿门口接送 → 接齐后札幌出发</div><p>🏠 札幌站半径3km内住宿 → 住宿门口接送</p>
 <p>🚉 3km范围外住宿 → 札幌站集合</p>
 <p>💬 准确接送时间会在出发前一天通过群聊通知</p></div></div></div></div>
-<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑤ 行程时间线（站点大卡 · 核心区块）</div><ul><li>每站一大卡一句话，文案体现「夏天×秋天都好看」。富田农场是全行程高光；出发/午餐/返程轻处理。</li>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑤ 行程时间线（站点大卡 · 核心区块）</div><ul><li>每站一大卡一句话，文案体现「夏天×秋天都好看」。每站夏景+秋景双图并列（左夏☀️右秋🍁带季节角标，本稿已示例），正式版两图都用自家实拍。富田农场是全行程高光；出发/午餐/返程轻处理。</li>
 <li>必守：所有时间均为「预计/예정」；返程保留路况免责小字。其余版式自由。</li></ul></div>
 <div class="row"><div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="pass-card"><span class="time-badge" style="background:#8a95a0">预计 08:00</span><div class="stop-name">札幌出发 <span class="dur">(住宿接送或札幌站集合后)</span></div></div>
-<div class="stop-card peak" style="border-color:#9b5de5"><img class="stop-img" src="img/tomita.jpg?v=20260729" alt="富田农场薰衣草花田" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#9b5de5">预计 10:30</span><div class="stop-name">富田农场 <span class="dur">(约60分钟·拍照时间)</span><span class="sticker sticker-peak">⭐ 高光时刻</span></div><div class="stop-desc">夏天紫色薰衣草 💜 秋天鼠尾草·波斯菊和红叶 🍁 薰衣草冰淇淋必尝!</div><div class="ref-cap">氛围参考 · 需替换实拍 | 富田农场薰衣草花田</div></div></div>
+<div class="stop-card peak" style="border-color:#9b5de5"><div class="stop-img-pair"><div class="season-frame"><img src="img/tomita.jpg?v=20260729" alt="富田农场薰衣草花田" loading="lazy"><span class="season-tag tag-summer">☀️ 夏天</span></div><div class="season-frame ph-autumn"><span>[ 秋景红叶实拍占位 ]</span><span class="season-tag tag-autumn">🍁 秋天</span></div></div><div class="stop-body"><span class="time-badge" style="background:#9b5de5">预计 10:30</span><div class="stop-name">富田农场 <span class="dur">(约60分钟·拍照时间)</span><span class="sticker sticker-peak">⭐ 高光时刻</span></div><div class="stop-desc">夏天紫色薰衣草 💜 秋天鼠尾草·波斯菊和红叶 🍁 薰衣草冰淇淋必尝!</div><div class="ref-cap">左=夏景氛围参考，右=秋景占位 · 正式版两图都换自家实拍 | 富田农场薰衣草花田</div></div></div>
 <div class="stop-card" style="border-color:#06d6a0"><div class="stop-placeholder">[ 云霄飞车之路 车内视角照片 ]</div><div class="stop-body"><span class="time-badge" style="background:#06d6a0">预计 11:30</span><div class="stop-name">车窗观赏：云霄飞车之路 <span class="dur">(约15分钟·不下车)</span></div><div class="stop-desc">像过山车一样起伏的坡道，夏天绿野 · 秋天红叶</div></div></div>
-<div class="stop-card" style="border-color:#ff5d8f"><img class="stop-img" src="img/shikisai.jpg?v=20260729" alt="四季彩之丘彩虹花田" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#ff5d8f">预计 12:15</span><div class="stop-name">四季彩之丘 <span class="dur">(约60分钟)</span><span class="sticker sticker-free">🎫 含门票</span></div><div class="stop-desc">夏天15公顷彩虹花田，秋天与红叶交相辉映 🍁</div><div class="ref-cap">氛围参考 · 需替换实拍 | 四季彩之丘彩虹花田</div></div></div>
+<div class="stop-card" style="border-color:#ff5d8f"><div class="stop-img-pair"><div class="season-frame"><img src="img/shikisai.jpg?v=20260729" alt="四季彩之丘彩虹花田" loading="lazy"><span class="season-tag tag-summer">☀️ 夏天</span></div><div class="season-frame ph-autumn"><span>[ 秋景红叶实拍占位 ]</span><span class="season-tag tag-autumn">🍁 秋天</span></div></div><div class="stop-body"><span class="time-badge" style="background:#ff5d8f">预计 12:15</span><div class="stop-name">四季彩之丘 <span class="dur">(约60分钟)</span><span class="sticker sticker-free">🎫 含门票</span></div><div class="stop-desc">夏天15公顷彩虹花田，秋天与红叶交相辉映 🍁</div><div class="ref-cap">左=夏景氛围参考，右=秋景占位 · 正式版两图都换自家实拍 | 四季彩之丘彩虹花田</div></div></div>
 <div class="pass-card"><span class="time-badge" style="background:#8a95a0">预计 13:15</span><div class="stop-name">自由午餐 <span class="dur">(约1小时·各自结账)</span></div><div class="stop-desc">不是固定的团餐，是自己选的午餐</div></div>
-<div class="stop-card" style="border-color:#00b4d8"><img class="stop-img" src="img/aoiike.jpg?v=20260729" alt="青池" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#00b4d8">预计 15:00</span><div class="stop-name">青池 <span class="dur">(约30分钟·拍照时间)</span></div><div class="stop-desc">夏天神秘蓝色，秋天红叶倒映水面 📸</div><div class="ref-cap">氛围参考 · 需替换实拍 | 青池</div></div></div>
-<div class="stop-card" style="border-color:#2ec4b6"><img class="stop-img" src="img/shirahige.jpg?v=20260729" alt="白须瀑布" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#2ec4b6">预计 15:35</span><div class="stop-name">白须瀑布 <span class="dur">(约25分钟)</span></div><div class="stop-desc">地下水从岩缝渗出、像白色胡须一样流下的罕见瀑布，秋天还有红叶溪谷</div><div class="ref-cap">氛围参考 · 需替换实拍 | 白须瀑布</div></div></div>
+<div class="stop-card" style="border-color:#00b4d8"><div class="stop-img-pair"><div class="season-frame"><img src="img/aoiike.jpg?v=20260729" alt="青池" loading="lazy"><span class="season-tag tag-summer">☀️ 夏天</span></div><div class="season-frame ph-autumn"><span>[ 秋景红叶实拍占位 ]</span><span class="season-tag tag-autumn">🍁 秋天</span></div></div><div class="stop-body"><span class="time-badge" style="background:#00b4d8">预计 15:00</span><div class="stop-name">青池 <span class="dur">(约30分钟·拍照时间)</span></div><div class="stop-desc">夏天神秘蓝色，秋天红叶倒映水面 📸</div><div class="ref-cap">左=夏景氛围参考，右=秋景占位 · 正式版两图都换自家实拍 | 青池</div></div></div>
+<div class="stop-card" style="border-color:#2ec4b6"><div class="stop-img-pair"><div class="season-frame"><img src="img/shirahige.jpg?v=20260729" alt="白须瀑布" loading="lazy"><span class="season-tag tag-summer">☀️ 夏天</span></div><div class="season-frame ph-autumn"><span>[ 秋景红叶实拍占位 ]</span><span class="season-tag tag-autumn">🍁 秋天</span></div></div><div class="stop-body"><span class="time-badge" style="background:#2ec4b6">预计 15:35</span><div class="stop-name">白须瀑布 <span class="dur">(约25分钟)</span></div><div class="stop-desc">地下水从岩缝渗出、像白色胡须一样流下的罕见瀑布，秋天还有红叶溪谷</div><div class="ref-cap">左=夏景氛围参考，右=秋景占位 · 正式版两图都换自家实拍 | 白须瀑布</div></div></div>
 <div class="pass-card"><span class="time-badge" style="background:#8a95a0">预计 16:00</span><div class="stop-name">返程回札幌 → 预计18:30左右抵达札幌</div><div class="stop-note">⏰ 根据当天路况，抵达时间可能前后浮动。有固定出发时间的交通工具（航班·火车）或演出、餐厅预约，建议您尽量安排在其他日期。</div></div></div></div></div>
 <div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑥ 资质·车辆·语言服务</div><ul><li>信任收尾，1-2张关键资质即可。形式自由。</li></ul></div>
 <div class="row"><div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="logi-card"><div class="kv"><p><b>日本大阪府知事登记旅行社·JNTO（日本政府观光局）合作方</b></p><p>🚐 车辆：按当日成团人数安排商务车</p>
