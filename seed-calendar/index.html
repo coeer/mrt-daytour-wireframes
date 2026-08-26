@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>种子单执行日历 v26（下单日·连排混合版）</title>
+<title>种子单执行日历 v27（在线工作台）</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   :root {
@@ -12,6 +12,7 @@
     --mrt:#1F6FEB; --mrt-ink:#164FAE; --mrt-bg:#E7EEFC;
     --trip:#00838F; --trip-ink:#005F68; --trip-bg:#E2EFF1;
     --done:#3E7C4F; --done-bg:#E8F1E9;
+    --traveled:#46539B; --traveled-ink:#333D78; --traveled-bg:#E9EBF7;
   }
   html,body { width:100%; min-height:100%; background:var(--paper);
     font-family:"Microsoft YaHei","微软雅黑",sans-serif; color:var(--ink); }
@@ -92,31 +93,136 @@
   .sw.t { --c:var(--trip); --cb:var(--trip-bg); } .sw.ok { --c:var(--done); --cb:var(--done-bg); }
   .lg .st5 { color:var(--gold); font-weight:700; font-size:13px; }
   .ft .src { text-align:right; letter-spacing:.2px; }
+
+  /* ---------- v27 interactive additions ---------- */
+  .banner { display:none; background:#B3261E; color:#FFFEFA; font-size:13.5px; font-weight:700;
+    letter-spacing:1.5px; text-align:center; padding:8px 12px; border-radius:4px; margin-bottom:10px; }
+  .banner.show { display:block; }
+  .mast-tools { display:flex; flex-direction:column; align-items:flex-end; gap:8px; margin-bottom:8px; }
+  .save-state { font-family:"Bahnschrift","Microsoft YaHei",sans-serif; font-size:12px; font-weight:700;
+    letter-spacing:1px; color:var(--ink2); border:1px solid var(--hair); border-radius:4px;
+    padding:4px 10px; background:var(--panel); white-space:nowrap; }
+  .save-state.saving { color:var(--gold); border-color:var(--gold); }
+  .save-state.fail { color:#B3261E; border-color:#B3261E; cursor:pointer; }
+  .save-state.off { color:#B3261E; border-color:#B3261E; }
+  .btn-add { font-family:inherit; font-size:13px; font-weight:700; letter-spacing:2px;
+    color:var(--paper); background:var(--ink); border:none; border-radius:4px;
+    padding:7px 18px; cursor:pointer; }
+  .btn-add:disabled { opacity:.35; cursor:not-allowed; }
+
+  .fbar { display:flex; align-items:center; gap:10px; margin-bottom:9px; }
+  .fgrp { display:flex; gap:6px; }
+  .chip { font-family:inherit; font-size:12px; font-weight:700; color:var(--ink2);
+    background:var(--panel); border:1px solid var(--hair); border-radius:20px;
+    padding:4px 13px; cursor:pointer; letter-spacing:.5px; }
+  .chip.on { color:var(--paper); background:var(--ink); border-color:var(--ink); }
+  .fsep { width:1px; height:18px; background:var(--hair); }
+  .fbar select { font-family:inherit; font-size:12px; font-weight:700; color:var(--ink2);
+    background:var(--panel); border:1px solid var(--hair); border-radius:4px; padding:4px 8px; }
+  .fhit { font-family:"Bahnschrift","Microsoft YaHei",sans-serif; font-size:12.5px; font-weight:700;
+    color:var(--ink2); letter-spacing:1px; }
+
+  .ev { cursor:pointer; }
+  .ev.fd { opacity:.2; }
+  .ev.od { box-shadow:inset 0 0 0 2px var(--gold); }
+  .ev.tv { --c:var(--traveled); --cb:var(--traveled-bg); --ci:var(--traveled-ink); }
+  .ev.lock { cursor:default; }
+
+  .sw.pd { --c:var(--ink3); --cb:var(--panel); }
+  .sw.od { --c:var(--gold); --cb:#FBF3DD; box-shadow:inset 0 0 0 1.5px var(--gold); }
+  .sw.tv { --c:var(--traveled); --cb:var(--traveled-bg); }
+  .ft-r { text-align:right; }
+  .ft .dline { margin-top:3px; color:var(--ink3); letter-spacing:.2px; }
+
+  /* ---------- dialog ---------- */
+  dialog#dlg { border:1px solid var(--hair); border-radius:6px; background:var(--panel);
+    color:var(--ink); padding:0; width:540px; font-family:inherit; }
+  dialog#dlg::backdrop { background:rgba(35,32,27,.45); }
+  .dlg-head { display:flex; align-items:center; justify-content:space-between;
+    padding:13px 18px 11px; border-bottom:1px solid var(--hair); }
+  .dlg-head .t { font-size:17px; font-weight:700; letter-spacing:1px; }
+  .dlg-head .t .no { font-family:"Bahnschrift",sans-serif; color:var(--ink2); margin-left:8px; }
+  .dlg-x { font-family:inherit; font-size:18px; line-height:1; color:var(--ink2); background:none;
+    border:none; cursor:pointer; padding:2px 6px; }
+  .dlg-body { padding:14px 18px 16px; }
+  .dlg-err { display:none; background:#FBEDEB; color:#B3261E; border:1px solid #E5B7B2;
+    border-radius:4px; font-size:12.5px; font-weight:600; padding:7px 11px; margin-bottom:11px; }
+  .dlg-err.show { display:block; }
+  .dlg-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 14px; }
+  .dlg-grid label { display:flex; flex-direction:column; gap:4px; font-size:11.5px; font-weight:700;
+    color:var(--ink2); letter-spacing:1px; }
+  .dlg-grid label.wide { grid-column:1 / -1; }
+  .dlg-grid input,.dlg-grid select,.dlg-grid textarea { font-family:inherit; font-size:13.5px;
+    font-weight:600; color:var(--ink); background:#FFF; border:1px solid var(--hair);
+    border-radius:4px; padding:6px 9px; }
+  .dlg-grid input:focus,.dlg-grid select:focus,.dlg-grid textarea:focus { outline:2px solid var(--mrt); outline-offset:-1px; }
+  .dlg-grid .ck { flex-direction:row; align-items:center; gap:8px; font-size:13px; color:var(--ink); }
+  .dlg-grid .ck input { width:16px; height:16px; }
+  .linkview { font-size:12px; font-weight:600; margin-top:4px; }
+  .linkview a { color:var(--mrt-ink); }
+  .linkview .none { color:var(--ink3); }
+  .stgrp { display:flex; gap:8px; margin-top:14px; }
+  .stbtn { flex:1; font-family:inherit; font-size:12.5px; font-weight:700; letter-spacing:1px;
+    color:var(--ink2); background:var(--paper); border:1px solid var(--hair); border-radius:4px;
+    padding:7px 0; cursor:pointer; }
+  .stbtn.on { color:var(--paper); background:var(--ink); border-color:var(--ink); }
+  .dlg-foot { display:flex; gap:10px; align-items:center; margin-top:16px;
+    padding-top:13px; border-top:1px solid var(--hair); }
+  .btn { font-family:inherit; font-size:13px; font-weight:700; letter-spacing:1px;
+    border-radius:4px; padding:8px 18px; cursor:pointer; border:1px solid var(--ink); }
+  .btn.pri { color:var(--paper); background:var(--ink); }
+  .btn.sec { color:var(--ink); background:var(--panel); }
+  .btn.danger { color:#B3261E; background:var(--panel); border-color:#B3261E; margin-left:auto; }
+
+  #toast { position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
+    background:var(--ink); color:var(--paper); font-size:13px; font-weight:700; letter-spacing:1px;
+    padding:9px 22px; border-radius:4px; opacity:0; transition:opacity .25s; pointer-events:none; }
+  #toast.show { opacity:.96; }
 </style>
 </head>
 <body>
 <div class="page">
 
+  <div class="banner" id="banner">离线模式：展示内嵌快照 <span id="bannerVer"></span>，改动无法保存</div>
+
   <div class="mast">
     <div>
       <div class="kicker">SEED ORDER EXECUTION CALENDAR · ORDER-DATE VIEW</div>
-      <h1>种子单执行日历<span class="v">V26</span></h1>
-      <div class="sub">下单窗口 8/26 – 11/4 · 连排(2-3天)+间隔混合 · 无规律 · 每日 ≤1 单 · 数据制表 2026-08-26</div>
+      <h1>种子单执行日历<span class="v" id="vBadge">V27</span></h1>
+      <div class="sub" id="subLine"></div>
     </div>
     <div class="mast-r">
+      <div class="mast-tools">
+        <div class="save-state off" id="saveState">离线</div>
+        <button class="btn-add" id="addBtn" disabled>＋ 加单</button>
+      </div>
       <div class="stamp">已拍板 APPROVED</div>
       <div class="stats">
-        <div class="st"><div class="n">31<span class="u">单</span></div><div class="l">总单数 TOTAL</div></div>
-        <div class="st"><div class="n"><span class="g">19</span>·<span class="m">7</span>·<span class="t">5</span></div><div class="l">GYG · MRT · TRIP</div></div>
-        <div class="st"><div class="n">11<span class="u">单</span></div><div class="l">富士 FUJI（★ 新品 7）</div></div>
-        <div class="st"><div class="n">15<span class="u">/</span>16</div><div class="l">单人 / 双人 PAX</div></div>
+        <div class="st"><div class="n" id="stTotal">0<span class="u">单</span></div><div class="l">总单数 TOTAL</div></div>
+        <div class="st"><div class="n" id="stPlat"></div><div class="l">GYG · MRT · TRIP</div></div>
+        <div class="st"><div class="n" id="stFuji">0<span class="u">单</span></div><div class="l" id="stFujiL">富士 FUJI</div></div>
+        <div class="st"><div class="n" id="stPax"></div><div class="l">单人 / 双人 PAX</div></div>
       </div>
     </div>
   </div>
   <div class="rule"></div>
   <div class="rule2"></div>
 
-  <div class="cal">
+  <div class="fbar">
+    <span class="fgrp" id="fPlat">
+      <button class="chip on" data-v="all">全部</button><button class="chip" data-v="GYG">GYG</button><button class="chip" data-v="MRT">MRT</button><button class="chip" data-v="TRIP">TRIP</button>
+    </span>
+    <span class="fsep"></span>
+    <span class="fgrp" id="fStatus">
+      <button class="chip on" data-v="all">全部</button><button class="chip" data-v="pending">待下单</button><button class="chip" data-v="ordered">已下单</button><button class="chip" data-v="traveled">已出行</button><button class="chip" data-v="reviewed">已评价</button>
+    </span>
+    <span class="fsep"></span>
+    <select id="fProd"><option value="all">全部产品</option></select>
+    <span class="fhit" id="fHit"></span>
+    <button class="chip" id="fClear">清除筛选</button>
+  </div>
+
+  <div class="cal" id="cal">
     <div class="wk"></div>
     <div class="wk">周一<span class="en">MON</span></div>
     <div class="wk">周二<span class="en">TUE</span></div>
@@ -125,138 +231,6 @@
     <div class="wk">周五<span class="en">FRI</span></div>
     <div class="wk hd-we">周六<span class="en">SAT</span></div>
     <div class="wk hd-we">周日<span class="en">SUN</span></div>
-
-    <!-- W1 -->
-    <div class="gut"><div class="w">01</div><div class="n"><em>2</em> 单</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">8/24</span><span class="mo">AUG</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">8/25</span></div></div>
-    <div class="cell"><div class="drow"><span class="d today">8/26</span><span class="td">今天</span></div>
-      <div class="ev t"><span class="pl">TRIP</span>日光·2</div>
-      <div class="ev ok">✓ 已下单</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">8/27</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">8/28</span></div></div>
-    <div class="cell we"><div class="drow"><span class="d">8/29</span></div>
-      <div class="ev g"><span class="pl">GYG</span>花海·2</div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">8/30</span></div></div>
-    <!-- W2 -->
-    <div class="gut"><div class="w">02</div><div class="n"><em>3</em> 单</div></div>
-    <div class="cell"><div class="drow"><span class="d">8/31</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士三湖·2</div></div>
-    <div class="cell"><div class="drow"><span class="d">9/1</span><span class="mo">SEP</span></div>
-      <div class="ev m"><span class="pl">MRT</span>富良野·2</div></div>
-    <div class="cell"><div class="drow"><span class="d">9/2</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士双湖·1<span class="s">★</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/3</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/4</span></div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">9/5</span></div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">9/6</span></div></div>
-    <!-- W3 -->
-    <div class="gut"><div class="w">03</div><div class="n"><em>3</em> 单</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/7</span></div></div>
-    <div class="cell"><div class="drow"><span class="d">9/8</span></div>
-      <div class="ev g"><span class="pl">GYG</span>贵船·1</div></div>
-    <div class="cell"><div class="drow"><span class="d">9/9</span></div>
-      <div class="ev m"><span class="pl">MRT</span>富士山·2</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/10</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/11</span></div></div>
-    <div class="cell we"><div class="drow"><span class="d">9/12</span></div>
-      <div class="ev g"><span class="pl">GYG</span>花海·1</div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">9/13</span></div></div>
-    <!-- W4 -->
-    <div class="gut"><div class="w">04</div><div class="n"><em>3</em> 单</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/14</span></div></div>
-    <div class="cell"><div class="drow"><span class="d">9/15</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士三湖·2<span class="s">★</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/16</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/17</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/18</span></div></div>
-    <div class="cell we"><div class="drow"><span class="d">9/19</span></div>
-      <div class="ev g"><span class="pl">GYG</span>伊豆列车·2</div></div>
-    <div class="cell we"><div class="drow"><span class="d">9/20</span></div>
-      <div class="ev m"><span class="pl">MRT</span>贵船·2</div></div>
-    <!-- W5 -->
-    <div class="gut"><div class="w">05</div><div class="n"><em>3</em> 单</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/21</span></div></div>
-    <div class="cell"><div class="drow"><span class="d">9/22</span></div>
-      <div class="ev t"><span class="pl">TRIP</span>伊豆·2</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/23</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/24</span></div></div>
-    <div class="cell"><div class="drow"><span class="d">9/25</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士双湖·2<span class="s">★</span></div></div>
-    <div class="cell we"><div class="drow"><span class="d">9/26</span></div>
-      <div class="ev m"><span class="pl">MRT</span>富良野·1</div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">9/27</span></div></div>
-    <!-- W6 -->
-    <div class="gut"><div class="w">06</div><div class="n"><em>3</em> 单</div></div>
-    <div class="cell"><div class="drow"><span class="d">9/28</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士双湖·1<span class="s">★</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">9/29</span></div></div>
-    <div class="cell"><div class="drow"><span class="d">9/30</span></div>
-      <div class="ev g"><span class="pl">GYG</span>花海·2</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/1</span><span class="mo">OCT</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/2</span></div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">10/3</span></div></div>
-    <div class="cell we"><div class="drow"><span class="d">10/4</span></div>
-      <div class="ev g"><span class="pl">GYG</span>花海·1</div></div>
-    <!-- W7 -->
-    <div class="gut"><div class="w">07</div><div class="n"><em>3</em> 单</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/5</span></div></div>
-    <div class="cell"><div class="drow"><span class="d">10/6</span></div>
-      <div class="ev m"><span class="pl">MRT</span>富士山·1</div></div>
-    <div class="cell"><div class="drow"><span class="d">10/7</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士三湖·1<span class="s">★</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/8</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/9</span></div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">10/10</span></div></div>
-    <div class="cell we"><div class="drow"><span class="d">10/11</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士双湖·2</div></div>
-    <!-- W8 -->
-    <div class="gut"><div class="w">08</div><div class="n"><em>2</em> 单</div></div>
-    <div class="cell"><div class="drow"><span class="d">10/12</span></div>
-      <div class="ev t"><span class="pl">TRIP</span>JDM夜游·1</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/13</span></div></div>
-    <div class="cell"><div class="drow"><span class="d">10/14</span></div>
-      <div class="ev m"><span class="pl">MRT</span>贵船·1</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/15</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/16</span></div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">10/17</span></div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">10/18</span></div></div>
-    <!-- W9 -->
-    <div class="gut"><div class="w">09</div><div class="n"><em>3</em> 单</div></div>
-    <div class="cell"><div class="drow"><span class="d">10/19</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士双湖·2<span class="s">★</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/20</span></div></div>
-    <div class="cell"><div class="drow"><span class="d">10/21</span></div>
-      <div class="ev m"><span class="pl">MRT</span>日光·1</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/22</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/23</span></div></div>
-    <div class="cell we"><div class="drow"><span class="d">10/24</span></div>
-      <div class="ev t"><span class="pl">TRIP</span>伊豆·1</div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">10/25</span></div></div>
-    <!-- W10 -->
-    <div class="gut"><div class="w">10</div><div class="n"><em>3</em> 单</div></div>
-    <div class="cell"><div class="drow"><span class="d">10/26</span></div>
-      <div class="ev g"><span class="pl">GYG</span>贵船·2</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/27</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/28</span></div></div>
-    <div class="cell"><div class="drow"><span class="d">10/29</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士双湖·2</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">10/30</span></div></div>
-    <div class="cell we"><div class="drow"><span class="d">10/31</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士双湖·1<span class="s">★</span></div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">11/1</span><span class="mo">NOV</span></div></div>
-    <!-- W11 -->
-    <div class="gut"><div class="w">11</div><div class="n"><em>3</em> 单</div></div>
-    <div class="cell"><div class="drow"><span class="d">11/2</span></div>
-      <div class="ev g"><span class="pl">GYG</span>日光·1</div></div>
-    <div class="cell"><div class="drow"><span class="d">11/3</span></div>
-      <div class="ev t"><span class="pl">TRIP</span>JDM夜游·1</div></div>
-    <div class="cell"><div class="drow"><span class="d">11/4</span></div>
-      <div class="ev g"><span class="pl">GYG</span>富士双湖·2</div></div>
-    <div class="cell dim"><div class="drow"><span class="d">11/5</span></div></div>
-    <div class="cell dim"><div class="drow"><span class="d">11/6</span></div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">11/7</span></div></div>
-    <div class="cell we dim"><div class="drow"><span class="d">11/8</span></div></div>
   </div>
 
   <div class="ft">
@@ -264,11 +238,393 @@
       <span class="it"><span class="sw g"></span>GYG</span>
       <span class="it"><span class="sw m"></span>MRT</span>
       <span class="it"><span class="sw t"></span>Trip</span>
-      <span class="it"><span class="st5">★</span>本次新增富士 t1169538 · 7 单</span>
-      <span class="it"><span class="sw ok"></span>已下单</span>
+      <span class="it"><span class="st5">★</span><span id="lgStar">本次新增富士 t1169538</span></span>
+      <span class="it"><span class="sw pd"></span>待下单</span>
+      <span class="it"><span class="sw od"></span>已下单</span>
+      <span class="it"><span class="sw tv"></span>已出行</span>
+      <span class="it"><span class="sw ok"></span>已评价</span>
     </div>
-    <div class="src">首单 8/26 已下单（香菜手改并入）· 富士 t1169538 现 3.9 分/26 评（12:20 实拉）· 9–11 月全月可订（14:47 实拉，过去日禁用校准✓）</div>
+    <div class="ft-r">
+      <div class="src">首单 8/26 已下单（香菜手改并入）· 富士 t1169538 现 3.9 分/26 评（12:20 实拉）· 9–11 月全月可订（14:47 实拉，过去日禁用校准✓）</div>
+      <div class="dline" id="dataLine"></div>
+    </div>
   </div>
 </div>
+
+<dialog id="dlg">
+  <div class="dlg-head">
+    <div class="t"><span id="dlgTitle">订单</span><span class="no" id="dlgNo"></span></div>
+    <button class="dlg-x" id="dlgX" title="关闭">✕</button>
+  </div>
+  <div class="dlg-body">
+    <div class="dlg-err" id="dlgErr"></div>
+    <div class="dlg-grid">
+      <label>平台
+        <select id="f-plat"><option>GYG</option><option>MRT</option><option>TRIP</option></select>
+      </label>
+      <label>产品
+        <input id="f-prod" list="prodList" placeholder="如：富士双湖">
+        <datalist id="prodList"></datalist>
+      </label>
+      <label>人数
+        <input type="number" id="f-pax" min="1" max="30" step="1">
+      </label>
+      <label>★ 新品
+        <span class="ck"><input type="checkbox" id="f-star"> 富士 t1169538 新品</span>
+      </label>
+      <label>下单日
+        <input type="date" id="f-order">
+      </label>
+      <label>出行日
+        <input type="date" id="f-travel">
+      </label>
+      <label class="wide">直客链接
+        <input type="text" id="f-link" placeholder="待补">
+        <span class="linkview" id="linkView"><span class="none">待补</span></span>
+      </label>
+      <label class="wide">备注
+        <textarea id="f-note" rows="2" placeholder="无"></textarea>
+      </label>
+    </div>
+    <div class="stgrp" id="stGrp">
+      <button class="stbtn" data-v="pending">待下单</button><button class="stbtn" data-v="ordered">已下单</button><button class="stbtn" data-v="traveled">已出行</button><button class="stbtn" data-v="reviewed">已评价</button>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn sec" id="btnAdvance">推进到下一状态</button>
+      <button class="btn pri" id="btnSave">保存</button>
+      <button class="btn danger" id="btnDelete">删除此单</button>
+    </div>
+  </div>
+</dialog>
+
+<div id="toast"></div>
+
+<script id="seed-data" type="application/json">/*DATA:BEGIN*/{"meta":{"version":"v27","generatedAt":"2026-08-26 21:47","updatedAt":"2026-08-26 22:14:02","window":["2026-08-24","2026-11-08"]},"orders":[{"no":1,"order":"2026-08-26","travel":"2026-08-28","plat":"TRIP","prod":"日光","pax":2,"star":false,"status":"ordered","link":null,"note":null},{"no":2,"order":"2026-08-29","travel":"2026-09-01","plat":"GYG","prod":"花海","pax":2,"star":false,"status":"pending","link":null,"note":null},{"no":3,"order":"2026-08-31","travel":"2026-09-07","plat":"GYG","prod":"富士三湖","pax":2,"star":false,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":4,"order":"2026-09-01","travel":"2026-09-05","plat":"MRT","prod":"富良野","pax":2,"star":false,"status":"pending","link":null,"note":null},{"no":5,"order":"2026-09-02","travel":"2026-09-06","plat":"GYG","prod":"富士双湖","pax":1,"star":true,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":6,"order":"2026-09-08","travel":"2026-09-12","plat":"GYG","prod":"贵船","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":7,"order":"2026-09-09","travel":"2026-09-13","plat":"MRT","prod":"富士山","pax":2,"star":false,"status":"pending","link":null,"note":null},{"no":8,"order":"2026-09-12","travel":"2026-09-16","plat":"GYG","prod":"花海","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":9,"order":"2026-09-15","travel":"2026-09-18","plat":"GYG","prod":"富士三湖","pax":2,"star":true,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":10,"order":"2026-09-19","travel":"2026-09-22","plat":"GYG","prod":"伊豆列车","pax":2,"star":false,"status":"pending","link":null,"note":null},{"no":11,"order":"2026-09-20","travel":"2026-09-23","plat":"MRT","prod":"贵船","pax":2,"star":false,"status":"pending","link":null,"note":null},{"no":12,"order":"2026-09-22","travel":"2026-09-28","plat":"TRIP","prod":"伊豆","pax":2,"star":false,"status":"pending","link":null,"note":null},{"no":13,"order":"2026-09-25","travel":"2026-09-27","plat":"GYG","prod":"富士双湖","pax":2,"star":true,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":14,"order":"2026-09-26","travel":"2026-10-03","plat":"MRT","prod":"富良野","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":15,"order":"2026-09-28","travel":"2026-10-04","plat":"GYG","prod":"富士双湖","pax":1,"star":true,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":16,"order":"2026-09-30","travel":"2026-10-02","plat":"GYG","prod":"花海","pax":2,"star":false,"status":"pending","link":null,"note":null},{"no":17,"order":"2026-10-04","travel":"2026-10-10","plat":"GYG","prod":"花海","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":18,"order":"2026-10-06","travel":"2026-10-09","plat":"MRT","prod":"富士山","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":19,"order":"2026-10-07","travel":"2026-10-11","plat":"GYG","prod":"富士三湖","pax":1,"star":true,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":20,"order":"2026-10-11","travel":"2026-10-16","plat":"GYG","prod":"富士双湖","pax":2,"star":false,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":21,"order":"2026-10-12","travel":"2026-10-14","plat":"TRIP","prod":"JDM夜游","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":22,"order":"2026-10-14","travel":"2026-10-21","plat":"MRT","prod":"贵船","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":23,"order":"2026-10-19","travel":"2026-10-22","plat":"GYG","prod":"富士双湖","pax":2,"star":true,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":24,"order":"2026-10-21","travel":"2026-10-26","plat":"MRT","prod":"日光","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":25,"order":"2026-10-24","travel":"2026-10-29","plat":"TRIP","prod":"伊豆","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":26,"order":"2026-10-26","travel":"2026-10-28","plat":"GYG","prod":"贵船","pax":2,"star":false,"status":"pending","link":null,"note":null},{"no":27,"order":"2026-10-29","travel":"2026-10-31","plat":"GYG","prod":"富士双湖","pax":2,"star":false,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":28,"order":"2026-10-31","travel":"2026-11-03","plat":"GYG","prod":"富士双湖","pax":1,"star":true,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null},{"no":29,"order":"2026-11-02","travel":"2026-11-04","plat":"GYG","prod":"日光","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":30,"order":"2026-11-03","travel":"2026-11-08","plat":"TRIP","prod":"JDM夜游","pax":1,"star":false,"status":"pending","link":null,"note":null},{"no":31,"order":"2026-11-04","travel":"2026-11-09","plat":"GYG","prod":"富士双湖","pax":2,"star":false,"status":"pending","link":"https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/","note":null}]}/*DATA:END*/</script>
+<script>
+(function(){
+'use strict';
+/* ================= data & state ================= */
+var STATUS=['pending','ordered','traveled','reviewed'];
+var ST_LABEL={pending:'待下单',ordered:'已下单',traveled:'已出行',reviewed:'已评价'};
+var ST_CLS={pending:'',ordered:'od',traveled:'tv',reviewed:'ok'};
+var PLAT_CLS={GYG:'g',MRT:'m',TRIP:'t'};
+var MO=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+var FUJI_PRODS={'富士三湖':1,'富士双湖':1};
+
+var seedRaw=document.getElementById('seed-data').textContent;
+var doc=JSON.parse(seedRaw.replace('/*DATA:BEGIN*/','').replace('/*DATA:END*/',''));
+var apiBase=null, online=false, saving=false, pendingRemote=null;
+var filters={plat:'all',status:'all',prod:'all'};
+var dlgNo=null; // null = create mode
+var dlgStatus='pending';
+
+var $=function(id){return document.getElementById(id);};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function p2(n){return (n<10?'0':'')+n;}
+function iso(d){return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());}
+function parseISO(s){return new Date(+s.slice(0,4),+s.slice(5,7)-1,+s.slice(8,10));}
+function md(s){return (+s.slice(5,7))+'/'+(+s.slice(8,10));}
+function nowHM(){var d=new Date();return p2(d.getHours())+':'+p2(d.getMinutes())+':'+p2(d.getSeconds());}
+var todayISO=iso(new Date());
+
+function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._tm);t._tm=setTimeout(function(){t.classList.remove('show');},3000);}
+
+/* ================= save-state indicator ================= */
+function setSaveState(st){
+  var el=$('saveState');
+  el.classList.remove('saving','fail','off');
+  if(st==='saving'){el.classList.add('saving');el.textContent='保存中…';}
+  else if(st==='fail'){el.classList.add('fail');el.textContent='保存失败（点击重试）';}
+  else if(st==='off'){el.classList.add('off');el.textContent='离线';}
+  else{el.textContent='已保存 '+nowHM();}
+}
+$('saveState').addEventListener('click',function(){
+  if(this.classList.contains('fail')&&online&&!saving)saveDoc();
+});
+
+/* ================= render ================= */
+function ordersByDate(){var m={};doc.orders.forEach(function(o){m[o.order]=o;});return m;}
+
+function renderMast(){
+  var os=doc.orders;
+  $('vBadge').textContent=(doc.meta.version||'').toUpperCase();
+  var ds=os.map(function(o){return o.order;}).sort();
+  $('subLine').textContent='下单窗口 '+md(ds[0])+' – '+md(ds[ds.length-1])+
+    ' · 连排(2-3天)+间隔混合 · 无规律 · 每日 ≤1 单 · 数据制表 '+(doc.meta.generatedAt||'').slice(0,10);
+  var pc={GYG:0,MRT:0,TRIP:0},fuji=0,star=0,p1=0,p2p=0;
+  os.forEach(function(o){
+    if(pc[o.plat]!=null)pc[o.plat]++;
+    if(FUJI_PRODS[o.prod])fuji++;
+    if(o.star)star++;
+    if(o.pax===1)p1++;else p2p++;
+  });
+  $('stTotal').innerHTML=os.length+'<span class="u">单</span>';
+  $('stPlat').innerHTML='<span class="g">'+pc.GYG+'</span>·<span class="m">'+pc.MRT+'</span>·<span class="t">'+pc.TRIP+'</span>';
+  $('stFuji').innerHTML=fuji+'<span class="u">单</span>';
+  $('stFujiL').textContent='富士 FUJI（★ 新品 '+star+'）';
+  $('stPax').innerHTML=p1+'<span class="u">/</span>'+p2p;
+  $('lgStar').textContent='本次新增富士 t1169538 · '+star+' 单';
+  $('dataLine').textContent='数据 '+doc.meta.version+' · 更新于 '+doc.meta.updatedAt+' · '+(online?'在线':'离线');
+}
+
+function renderCal(){
+  var cal=$('cal');
+  while(cal.children.length>8)cal.removeChild(cal.lastChild);
+  var start=parseISO(doc.meta.window[0]),endS=doc.meta.window[1];
+  var byDate=ordersByDate();
+  var html='';
+  for(var w=0;w<11;w++){
+    var wcount=0,cells='';
+    for(var d=0;d<7;d++){
+      var dt=new Date(start.getFullYear(),start.getMonth(),start.getDate()+w*7+d);
+      var s=iso(dt),o=byDate[s]||null;
+      if(o)wcount++;
+      var dow=dt.getDay();
+      var cls='cell';
+      if(dow===0||dow===6)cls+=' we';
+      if(!o||s>endS)cls+=' dim';
+      var prev=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()-1);
+      var moTag=(w===0&&d===0)||dt.getMonth()!==prev.getMonth();
+      var isToday=(s===todayISO);
+      var right=isToday?'<span class="td">今天</span>':(moTag?'<span class="mo">'+MO[dt.getMonth()]+'</span>':'');
+      var ev='';
+      if(o){
+        var sc=ST_CLS[o.status];
+        ev='<div class="ev '+PLAT_CLS[o.plat]+(sc?' '+sc:'')+(online?'':' lock')+'" data-no="'+o.no+'">'+
+          '<span class="pl">'+o.plat+'</span>'+(o.status==='ordered'?'✓ ':'')+esc(o.prod)+'·'+o.pax+
+          (o.star?'<span class="s">★</span>':'')+'</div>';
+      }
+      cells+='<div class="'+cls+'"><div class="drow"><span class="'+(isToday?'d today':'d')+'">'+md(s)+'</span>'+right+'</div>'+ev+'</div>';
+    }
+    html+='<div class="gut"><div class="w">'+p2(w+1)+'</div><div class="n"><em>'+wcount+'</em> 单</div></div>'+cells;
+  }
+  cal.insertAdjacentHTML('beforeend',html);
+}
+
+function renderProdOptions(){
+  var seen={},list=[];
+  doc.orders.forEach(function(o){if(!seen[o.prod]){seen[o.prod]=1;list.push(o.prod);}});
+  list.sort();
+  var sel=$('fProd'),cur=sel.value||'all';
+  sel.innerHTML='<option value="all">全部产品</option>'+list.map(function(p){
+    return '<option value="'+esc(p)+'">'+esc(p)+'</option>';}).join('');
+  sel.value=list.indexOf(cur)>=0?cur:'all';filters.prod=sel.value;
+  $('prodList').innerHTML=list.map(function(p){return '<option value="'+esc(p)+'">';}).join('');
+}
+
+function applyFilters(){
+  var hit=0,byNo={};
+  doc.orders.forEach(function(o){
+    var ok=(filters.plat==='all'||o.plat===filters.plat)&&
+           (filters.status==='all'||o.status===filters.status)&&
+           (filters.prod==='all'||o.prod===filters.prod);
+    byNo[o.no]=ok;if(ok)hit++;
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#cal .ev'),function(el){
+    el.classList.toggle('fd',!byNo[+el.dataset.no]);
+  });
+  $('fHit').textContent='命中 '+hit+'/'+doc.orders.length;
+}
+
+function render(){renderMast();renderProdOptions();renderCal();applyFilters();}
+
+/* ================= filter events ================= */
+function bindChips(gid,key){
+  $(gid).addEventListener('click',function(e){
+    var b=e.target.closest('.chip');if(!b)return;
+    Array.prototype.forEach.call(this.querySelectorAll('.chip'),function(c){c.classList.remove('on');});
+    b.classList.add('on');filters[key]=b.dataset.v;applyFilters();
+  });
+}
+bindChips('fPlat','plat');bindChips('fStatus','status');
+$('fProd').addEventListener('change',function(){filters.prod=this.value;applyFilters();});
+$('fClear').addEventListener('click',function(){
+  filters={plat:'all',status:'all',prod:'all'};
+  ['fPlat','fStatus'].forEach(function(gid){
+    Array.prototype.forEach.call($(gid).querySelectorAll('.chip'),function(c){
+      c.classList.toggle('on',c.dataset.v==='all');});
+  });
+  $('fProd').value='all';applyFilters();
+});
+
+/* ================= network ================= */
+function fetchJSON(url){return fetch(url).then(function(r){
+  if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});}
+
+function goOffline(){
+  online=false;
+  $('bannerVer').textContent=doc.meta.version;
+  $('banner').classList.add('show');
+  $('addBtn').disabled=true;
+  setSaveState('off');
+  render();
+}
+
+function saveDoc(){
+  if(!online||saving)return;
+  saving=true;setSaveState('saving');
+  putDoc(apiBase).then(function(saved){
+    doc=saved;saving=false;setSaveState('saved');render();
+  }).catch(function(err){
+    if(err&&err.validation){saving=false;setSaveState('fail');toast('保存失败：'+err.message);return;}
+    // retry once after re-fetching api.json pointer
+    fetchJSON('api.json?t='+Date.now()).then(function(p){
+      apiBase=p.api;return putDoc(apiBase);
+    }).then(function(saved){
+      doc=saved;saving=false;setSaveState('saved');render();
+    }).catch(function(err2){
+      saving=false;setSaveState('fail');
+      toast('保存失败，请检查网络');
+    });
+  });
+}
+function putDoc(base){
+  return fetch(base+'/data',{method:'PUT',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(doc)}).then(function(r){
+    if(r.status===422)return r.json().then(function(e){
+      var err=new Error(e.error||'数据校验失败');err.validation=true;throw err;});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    return r.json();
+  });
+}
+
+function poll(){
+  if(!online||saving)return;
+  fetchJSON(apiBase+'/data').then(function(remote){
+    if(remote.meta.updatedAt!==doc.meta.updatedAt){
+      if($('dlg').open){pendingRemote=remote;}
+      else{doc=remote;render();toast('数据已更新（他人改动）');}
+    }
+  }).catch(function(){});
+}
+
+/* ================= dialog ================= */
+var dlg=$('dlg');
+function getOrder(no){for(var i=0;i<doc.orders.length;i++)if(doc.orders[i].no===no)return doc.orders[i];return null;}
+
+function refreshLinkView(){
+  var v=$('f-link').value.trim();
+  $('linkView').innerHTML=v?'<a href="'+esc(v)+'" target="_blank" rel="noopener">打开直客链接 ↗</a>':'<span class="none">待补</span>';
+}
+$('f-link').addEventListener('input',refreshLinkView);
+
+function markStatus(){
+  Array.prototype.forEach.call($('stGrp').querySelectorAll('.stbtn'),function(b){
+    b.classList.toggle('on',b.dataset.v===dlgStatus);});
+  var next=STATUS[(STATUS.indexOf(dlgStatus)+1)%4];
+  $('btnAdvance').textContent='推进到下一状态（'+ST_LABEL[next]+'）';
+}
+$('stGrp').addEventListener('click',function(e){
+  var b=e.target.closest('.stbtn');if(!b)return;
+  dlgStatus=b.dataset.v;markStatus();
+  if(dlgNo!=null){var o=getOrder(dlgNo);if(o&&o.status!==dlgStatus){o.status=dlgStatus;render();saveDoc();}}
+});
+$('btnAdvance').addEventListener('click',function(){
+  dlgStatus=STATUS[(STATUS.indexOf(dlgStatus)+1)%4];markStatus();
+  if(dlgNo!=null){var o=getOrder(dlgNo);if(o){o.status=dlgStatus;render();saveDoc();}}
+});
+
+function dlgError(msg){var e=$('dlgErr');e.textContent=msg;e.classList.add('show');}
+function dlgClearErr(){$('dlgErr').classList.remove('show');}
+
+function openDialog(no){
+  if(!online){toast('离线模式，无法编辑');return;}
+  dlgNo=no;dlgClearErr();
+  var o=no!=null?getOrder(no):null;
+  $('dlgTitle').textContent=no!=null?'订单':'新建订单';
+  $('dlgNo').textContent=no!=null?'#'+no:'（保存后分配 no）';
+  $('f-plat').value=o?o.plat:'GYG';
+  $('f-prod').value=o?o.prod:'';
+  $('f-pax').value=o?o.pax:2;
+  $('f-star').checked=o?!!o.star:false;
+  $('f-order').value=o?o.order:'';
+  $('f-travel').value=o?o.travel:'';
+  $('f-link').value=o?(o.link||''):'';
+  $('f-note').value=o?(o.note||''):'';
+  dlgStatus=o?o.status:'pending';
+  markStatus();refreshLinkView();
+  $('btnDelete').style.display=no!=null?'':'none';
+  dlg.showModal();
+}
+$('cal').addEventListener('click',function(e){
+  var ev=e.target.closest('.ev');if(ev)openDialog(+ev.dataset.no);
+});
+$('addBtn').addEventListener('click',function(){openDialog(null);});
+$('dlgX').addEventListener('click',function(){dlg.close();});
+
+function validateForm(){
+  var v={
+    plat:$('f-plat').value,
+    prod:$('f-prod').value.trim(),
+    pax:parseInt($('f-pax').value,10),
+    star:$('f-star').checked,
+    order:$('f-order').value,
+    travel:$('f-travel').value,
+    link:$('f-link').value.trim(),
+    note:$('f-note').value.trim()
+  };
+  if(!v.prod)return '产品名不能为空';
+  if(!/^(GYG|MRT|TRIP)$/.test(v.plat))return '平台必须是 GYG / MRT / TRIP';
+  if(!(v.pax>=1&&v.pax<=30))return '人数必须是 1-30 的整数';
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(v.order))return '请选择下单日';
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(v.travel))return '请选择出行日';
+  if(v.order<doc.meta.window[0]||v.order>doc.meta.window[1])
+    return '下单日必须在窗口 '+doc.meta.window[0]+' ～ '+doc.meta.window[1]+' 内';
+  if(v.travel<v.order)return '出行日不能早于下单日（'+md(v.order)+'）';
+  for(var i=0;i<doc.orders.length;i++){
+    var o=doc.orders[i];
+    if(o.no!==dlgNo&&o.order===v.order)
+      return '下单日冲突：'+md(v.order)+' 已有订单 #'+o.no+'（每日 ≤1 单）';
+  }
+  if(v.link&&v.link.indexOf('http')!==0)return '直客链接必须以 http 开头';
+  v.link=v.link||null;v.note=v.note||null;
+  return v;
+}
+
+$('btnSave').addEventListener('click',function(){
+  dlgClearErr();
+  var v=validateForm();
+  if(typeof v==='string'){dlgError(v);return;}
+  if(dlgNo!=null){
+    var o=getOrder(dlgNo);
+    o.plat=v.plat;o.prod=v.prod;o.pax=v.pax;o.star=v.star;
+    o.order=v.order;o.travel=v.travel;o.link=v.link;o.note=v.note;o.status=dlgStatus;
+  }else{
+    var maxNo=0;doc.orders.forEach(function(o){if(o.no>maxNo)maxNo=o.no;});
+    doc.orders.push({no:maxNo+1,order:v.order,travel:v.travel,plat:v.plat,prod:v.prod,
+      pax:v.pax,star:v.star,status:dlgStatus,link:v.link,note:v.note});
+  }
+  render();dlg.close();saveDoc();
+});
+
+$('btnDelete').addEventListener('click',function(){
+  if(dlgNo==null)return;
+  if(!confirm('确认删除订单 #'+dlgNo+'？此操作会立即保存。'))return;
+  doc.orders=doc.orders.filter(function(o){return o.no!==dlgNo;});
+  render();dlg.close();saveDoc();
+});
+
+dlg.addEventListener('close',function(){
+  if(pendingRemote){doc=pendingRemote;pendingRemote=null;render();toast('数据已更新（他人改动）');}
+});
+
+/* ================= boot ================= */
+setSaveState('off');
+render();
+fetchJSON('api.json?t='+Date.now()).then(function(p){
+  apiBase=p.api;
+  return fetchJSON(apiBase+'/data');
+}).then(function(remote){
+  online=true;
+  $('banner').classList.remove('show');
+  $('addBtn').disabled=false;
+  if(remote.meta.updatedAt>doc.meta.updatedAt)doc=remote;
+  setSaveState('saved');
+  render();
+  setInterval(poll,30000);
+}).catch(function(){goOffline();});
+})();
+</script>
 </body>
 </html>
