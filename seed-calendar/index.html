@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>种子单执行日历 v26（下单日·连排混合版）</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --paper:#F6F3EC; --panel:#FFFEFA; --ink:#23201B; --ink2:#6F675A; --ink3:#ABA393;
+    --hair:#E4DFD3; --gold:#B8860B;
+    --gyg:#D9531E; --gyg-ink:#9E3A10; --gyg-bg:#FAEAE2;
+    --mrt:#1F6FEB; --mrt-ink:#164FAE; --mrt-bg:#E7EEFC;
+    --trip:#00838F; --trip-ink:#005F68; --trip-bg:#E2EFF1;
+    --done:#3E7C4F; --done-bg:#E8F1E9;
+  }
+  html,body { width:100%; min-height:100%; background:var(--paper);
+    font-family:"Microsoft YaHei","微软雅黑",sans-serif; color:var(--ink); }
+  body { min-width:1100px; }
+  .num,.en { font-family:"Bahnschrift","Microsoft YaHei",sans-serif; font-variant-numeric:tabular-nums; }
+  .page { min-height:100vh; display:flex; flex-direction:column; padding:14px 20px 9px; }
+
+  /* ---------- masthead ---------- */
+  .mast { display:flex; align-items:flex-end; justify-content:space-between; }
+  .kicker { font-family:"Bahnschrift",sans-serif; font-size:12.5px; font-weight:600; letter-spacing:3px;
+    color:var(--ink2); margin-bottom:4px; }
+  .mast h1 { font-size:37px; font-weight:700; letter-spacing:1px; line-height:1.12; }
+  .mast h1 .v { font-family:"Bahnschrift",sans-serif; font-size:16px; font-weight:700;
+    color:var(--paper); background:var(--ink); border-radius:4px; padding:2px 10px 3px;
+    margin-left:10px; vertical-align:7px; letter-spacing:1px; }
+  .mast .sub { font-size:13.5px; font-weight:600; color:var(--ink2); margin-top:7px; letter-spacing:.5px; }
+  .mast-r { display:flex; align-items:flex-end; gap:20px; }
+  .stamp { font-family:"Bahnschrift",sans-serif; font-size:13.5px; font-weight:700; letter-spacing:2.5px;
+    color:var(--gyg-ink); border:2px solid var(--gyg-ink); border-radius:4px; padding:5px 13px 4px;
+    transform:rotate(2.5deg); margin-bottom:8px; opacity:.92; }
+  .stats { display:flex; }
+  .st { padding:0 20px; border-left:1px solid var(--hair); text-align:right; }
+  .st:first-child { border-left:none; }
+  .st .n { font-family:"Bahnschrift",sans-serif; font-size:33px; font-weight:700; line-height:1.05;
+    font-variant-numeric:tabular-nums; }
+  .st .n .u { font-size:14px; font-weight:700; color:var(--ink2); margin-left:3px; }
+  .st .n .g { color:var(--gyg); } .st .n .m { color:var(--mrt); } .st .n .t { color:var(--trip); }
+  .st .l { font-size:10.5px; font-weight:600; color:var(--ink2); letter-spacing:1.5px; margin-top:4px; white-space:nowrap; }
+  .rule { border-top:3px solid var(--ink); margin-top:10px; }
+  .rule2 { border-top:1px solid var(--ink); margin-top:2px; margin-bottom:9px; }
+
+  /* ---------- calendar ---------- */
+  .cal { display:grid; grid-template-columns:64px repeat(7,1fr); grid-template-rows:auto repeat(11,minmax(62px,1fr));
+    flex:1; min-height:0; background:var(--panel); border:1px solid var(--hair); }
+  .wk { border-bottom:1px solid var(--hair); padding:7px 0 6px; text-align:center;
+    font-size:13px; font-weight:700; color:var(--ink2); }
+  .wk .en { font-size:10px; font-weight:600; letter-spacing:1.5px; color:var(--ink3); margin-left:5px; }
+  .wk.hd-we { color:#9A5B2E; }
+  .gut { border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; }
+  .gut .w { font-family:"Bahnschrift",sans-serif; font-size:26px; font-weight:700; color:#D8D2C4; line-height:1; }
+  .gut .n { font-size:12px; font-weight:700; color:var(--ink2); }
+  .gut .n em { font-style:normal; font-family:"Bahnschrift",sans-serif; font-size:14px; font-weight:700; color:var(--ink); }
+  .cell { border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
+    padding:6px 8px 5px; background:var(--panel); }
+  .cell:nth-child(8n) { border-right:none; }
+  .cell.we { background:#FAF7EF; }
+  .drow { display:flex; align-items:center; justify-content:space-between; }
+  .d { font-family:"Bahnschrift",sans-serif; font-size:19px; font-weight:700; color:var(--ink);
+    font-variant-numeric:tabular-nums; }
+  .cell.dim .d { color:var(--ink3); font-weight:600; }
+  .d.today { background:var(--ink); color:var(--paper); border-radius:4px; padding:1px 9px 2px; }
+  .mo { font-family:"Bahnschrift",sans-serif; font-size:10.5px; font-weight:600; letter-spacing:2px; color:var(--ink3); }
+  .td { font-size:11px; letter-spacing:1.5px; color:var(--ink2); font-weight:700; }
+
+  /* ---------- event capsules ---------- */
+  .ev { display:flex; align-items:center; width:fit-content; max-width:100%; margin-top:5px;
+    padding:3px 10px 3px 7px; border-radius:4px; border-left:4px solid var(--c);
+    background:var(--cb); color:var(--ci); font-size:13.5px; font-weight:700; line-height:20px;
+    white-space:nowrap; overflow:hidden; }
+  .ev .pl { font-family:"Bahnschrift",sans-serif; font-size:10.5px; font-weight:700; letter-spacing:1px;
+    opacity:.8; margin-right:6px; }
+  .ev .s { color:var(--gold); font-size:12.5px; margin-left:4px; }
+  .ev.g { --c:var(--gyg); --cb:var(--gyg-bg); --ci:var(--gyg-ink); }
+  .ev.m { --c:var(--mrt); --cb:var(--mrt-bg); --ci:var(--mrt-ink); }
+  .ev.t { --c:var(--trip); --cb:var(--trip-bg); --ci:var(--trip-ink); }
+  .ev.ok { --c:var(--done); --cb:var(--done-bg); --ci:var(--done); }
+
+  /* ---------- footer ---------- */
+  .ft { margin-top:auto; padding-top:8px; border-top:1px solid var(--hair);
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:12px; font-weight:600; color:var(--ink2); }
+  .lg { display:flex; align-items:center; gap:18px; }
+  .lg .it { display:flex; align-items:center; gap:6px; }
+  .sw { display:inline-block; width:13px; height:13px; border-radius:3px; border-left:4px solid var(--c);
+    background:var(--cb); }
+  .sw.g { --c:var(--gyg); --cb:var(--gyg-bg); } .sw.m { --c:var(--mrt); --cb:var(--mrt-bg); }
+  .sw.t { --c:var(--trip); --cb:var(--trip-bg); } .sw.ok { --c:var(--done); --cb:var(--done-bg); }
+  .lg .st5 { color:var(--gold); font-weight:700; font-size:13px; }
+  .ft .src { text-align:right; letter-spacing:.2px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="mast">
+    <div>
+      <div class="kicker">SEED ORDER EXECUTION CALENDAR · ORDER-DATE VIEW</div>
+      <h1>种子单执行日历<span class="v">V26</span></h1>
+      <div class="sub">下单窗口 8/26 – 11/4 · 连排(2-3天)+间隔混合 · 无规律 · 每日 ≤1 单 · 数据制表 2026-08-26</div>
+    </div>
+    <div class="mast-r">
+      <div class="stamp">已拍板 APPROVED</div>
+      <div class="stats">
+        <div class="st"><div class="n">31<span class="u">单</span></div><div class="l">总单数 TOTAL</div></div>
+        <div class="st"><div class="n"><span class="g">19</span>·<span class="m">7</span>·<span class="t">5</span></div><div class="l">GYG · MRT · TRIP</div></div>
+        <div class="st"><div class="n">11<span class="u">单</span></div><div class="l">富士 FUJI（★ 新品 7）</div></div>
+        <div class="st"><div class="n">15<span class="u">/</span>16</div><div class="l">单人 / 双人 PAX</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="rule"></div>
+  <div class="rule2"></div>
+
+  <div class="cal">
+    <div class="wk"></div>
+    <div class="wk">周一<span class="en">MON</span></div>
+    <div class="wk">周二<span class="en">TUE</span></div>
+    <div class="wk">周三<span class="en">WED</span></div>
+    <div class="wk">周四<span class="en">THU</span></div>
+    <div class="wk">周五<span class="en">FRI</span></div>
+    <div class="wk hd-we">周六<span class="en">SAT</span></div>
+    <div class="wk hd-we">周日<span class="en">SUN</span></div>
+
+    <!-- W1 -->
+    <div class="gut"><div class="w">01</div><div class="n"><em>2</em> 单</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">8/24</span><span class="mo">AUG</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">8/25</span></div></div>
+    <div class="cell"><div class="drow"><span class="d today">8/26</span><span class="td">今天</span></div>
+      <div class="ev t"><span class="pl">TRIP</span>日光·2</div>
+      <div class="ev ok">✓ 已下单</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">8/27</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">8/28</span></div></div>
+    <div class="cell we"><div class="drow"><span class="d">8/29</span></div>
+      <div class="ev g"><span class="pl">GYG</span>花海·2</div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">8/30</span></div></div>
+    <!-- W2 -->
+    <div class="gut"><div class="w">02</div><div class="n"><em>3</em> 单</div></div>
+    <div class="cell"><div class="drow"><span class="d">8/31</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士三湖·2</div></div>
+    <div class="cell"><div class="drow"><span class="d">9/1</span><span class="mo">SEP</span></div>
+      <div class="ev m"><span class="pl">MRT</span>富良野·2</div></div>
+    <div class="cell"><div class="drow"><span class="d">9/2</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士双湖·1<span class="s">★</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/3</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/4</span></div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">9/5</span></div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">9/6</span></div></div>
+    <!-- W3 -->
+    <div class="gut"><div class="w">03</div><div class="n"><em>3</em> 单</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/7</span></div></div>
+    <div class="cell"><div class="drow"><span class="d">9/8</span></div>
+      <div class="ev g"><span class="pl">GYG</span>贵船·1</div></div>
+    <div class="cell"><div class="drow"><span class="d">9/9</span></div>
+      <div class="ev m"><span class="pl">MRT</span>富士山·2</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/10</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/11</span></div></div>
+    <div class="cell we"><div class="drow"><span class="d">9/12</span></div>
+      <div class="ev g"><span class="pl">GYG</span>花海·1</div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">9/13</span></div></div>
+    <!-- W4 -->
+    <div class="gut"><div class="w">04</div><div class="n"><em>3</em> 单</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/14</span></div></div>
+    <div class="cell"><div class="drow"><span class="d">9/15</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士三湖·2<span class="s">★</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/16</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/17</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/18</span></div></div>
+    <div class="cell we"><div class="drow"><span class="d">9/19</span></div>
+      <div class="ev g"><span class="pl">GYG</span>伊豆列车·2</div></div>
+    <div class="cell we"><div class="drow"><span class="d">9/20</span></div>
+      <div class="ev m"><span class="pl">MRT</span>贵船·2</div></div>
+    <!-- W5 -->
+    <div class="gut"><div class="w">05</div><div class="n"><em>3</em> 单</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/21</span></div></div>
+    <div class="cell"><div class="drow"><span class="d">9/22</span></div>
+      <div class="ev t"><span class="pl">TRIP</span>伊豆·2</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/23</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/24</span></div></div>
+    <div class="cell"><div class="drow"><span class="d">9/25</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士双湖·2<span class="s">★</span></div></div>
+    <div class="cell we"><div class="drow"><span class="d">9/26</span></div>
+      <div class="ev m"><span class="pl">MRT</span>富良野·1</div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">9/27</span></div></div>
+    <!-- W6 -->
+    <div class="gut"><div class="w">06</div><div class="n"><em>3</em> 单</div></div>
+    <div class="cell"><div class="drow"><span class="d">9/28</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士双湖·1<span class="s">★</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">9/29</span></div></div>
+    <div class="cell"><div class="drow"><span class="d">9/30</span></div>
+      <div class="ev g"><span class="pl">GYG</span>花海·2</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/1</span><span class="mo">OCT</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/2</span></div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">10/3</span></div></div>
+    <div class="cell we"><div class="drow"><span class="d">10/4</span></div>
+      <div class="ev g"><span class="pl">GYG</span>花海·1</div></div>
+    <!-- W7 -->
+    <div class="gut"><div class="w">07</div><div class="n"><em>3</em> 单</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/5</span></div></div>
+    <div class="cell"><div class="drow"><span class="d">10/6</span></div>
+      <div class="ev m"><span class="pl">MRT</span>富士山·1</div></div>
+    <div class="cell"><div class="drow"><span class="d">10/7</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士三湖·1<span class="s">★</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/8</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/9</span></div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">10/10</span></div></div>
+    <div class="cell we"><div class="drow"><span class="d">10/11</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士双湖·2</div></div>
+    <!-- W8 -->
+    <div class="gut"><div class="w">08</div><div class="n"><em>2</em> 单</div></div>
+    <div class="cell"><div class="drow"><span class="d">10/12</span></div>
+      <div class="ev t"><span class="pl">TRIP</span>JDM夜游·1</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/13</span></div></div>
+    <div class="cell"><div class="drow"><span class="d">10/14</span></div>
+      <div class="ev m"><span class="pl">MRT</span>贵船·1</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/15</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/16</span></div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">10/17</span></div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">10/18</span></div></div>
+    <!-- W9 -->
+    <div class="gut"><div class="w">09</div><div class="n"><em>3</em> 单</div></div>
+    <div class="cell"><div class="drow"><span class="d">10/19</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士双湖·2<span class="s">★</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/20</span></div></div>
+    <div class="cell"><div class="drow"><span class="d">10/21</span></div>
+      <div class="ev m"><span class="pl">MRT</span>日光·1</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/22</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/23</span></div></div>
+    <div class="cell we"><div class="drow"><span class="d">10/24</span></div>
+      <div class="ev t"><span class="pl">TRIP</span>伊豆·1</div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">10/25</span></div></div>
+    <!-- W10 -->
+    <div class="gut"><div class="w">10</div><div class="n"><em>3</em> 单</div></div>
+    <div class="cell"><div class="drow"><span class="d">10/26</span></div>
+      <div class="ev g"><span class="pl">GYG</span>贵船·2</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/27</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/28</span></div></div>
+    <div class="cell"><div class="drow"><span class="d">10/29</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士双湖·2</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">10/30</span></div></div>
+    <div class="cell we"><div class="drow"><span class="d">10/31</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士双湖·1<span class="s">★</span></div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">11/1</span><span class="mo">NOV</span></div></div>
+    <!-- W11 -->
+    <div class="gut"><div class="w">11</div><div class="n"><em>3</em> 单</div></div>
+    <div class="cell"><div class="drow"><span class="d">11/2</span></div>
+      <div class="ev g"><span class="pl">GYG</span>日光·1</div></div>
+    <div class="cell"><div class="drow"><span class="d">11/3</span></div>
+      <div class="ev t"><span class="pl">TRIP</span>JDM夜游·1</div></div>
+    <div class="cell"><div class="drow"><span class="d">11/4</span></div>
+      <div class="ev g"><span class="pl">GYG</span>富士双湖·2</div></div>
+    <div class="cell dim"><div class="drow"><span class="d">11/5</span></div></div>
+    <div class="cell dim"><div class="drow"><span class="d">11/6</span></div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">11/7</span></div></div>
+    <div class="cell we dim"><div class="drow"><span class="d">11/8</span></div></div>
+  </div>
+
+  <div class="ft">
+    <div class="lg">
+      <span class="it"><span class="sw g"></span>GYG</span>
+      <span class="it"><span class="sw m"></span>MRT</span>
+      <span class="it"><span class="sw t"></span>Trip</span>
+      <span class="it"><span class="st5">★</span>本次新增富士 t1169538 · 7 单</span>
+      <span class="it"><span class="sw ok"></span>已下单</span>
+    </div>
+    <div class="src">首单 8/26 已下单（香菜手改并入）· 富士 t1169538 现 3.9 分/26 评（12:20 实拉）· 9–11 月全月可订（14:47 实拉，过去日禁用校准✓）</div>
+  </div>
+</div>
+</body>
+</html>
