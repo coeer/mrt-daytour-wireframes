@@ -44,9 +44,9 @@
   .rule2 { border-top:1px solid var(--ink); margin-top:2px; margin-bottom:9px; }
 
   /* ---------- calendar ---------- */
-  .cal { display:grid; grid-template-columns:64px repeat(7,minmax(0,1fr)); grid-template-rows:auto repeat(11,minmax(62px,1fr));
+  .cal { display:grid; grid-template-columns:64px repeat(7,minmax(0,1fr)); grid-template-rows:auto repeat(11,minmax(80px,1fr));
     flex:1; min-height:0; background:var(--panel); border:1px solid var(--hair); }
-  .wk { border-bottom:1px solid var(--hair); padding:7px 0 6px; text-align:center;
+  .wk { border-bottom:1px solid var(--hair); padding:4px 0 3px; text-align:center;
     font-size:13px; font-weight:700; color:var(--ink2); }
   .wk .en { font-size:10px; font-weight:600; letter-spacing:1.5px; color:var(--ink3); margin-left:5px; }
   .wk.hd-we { color:#9A5B2E; }
@@ -68,9 +68,9 @@
   .td { font-size:11px; letter-spacing:1.5px; color:var(--ink2); font-weight:700; }
 
   /* ---------- event capsules ---------- */
-  .evrow { display:flex; align-items:center; gap:6px; margin-top:4px; }
-  .ev { display:flex; align-items:center; flex:0 1 auto; min-width:0; margin-top:0;
-    padding:3px 10px 3px 7px; border-radius:4px; border-left:4px solid var(--c);
+  .evrow { margin-top:3px; }
+  .ev { display:flex; align-items:center; width:fit-content; max-width:100%; min-width:0; margin-top:0;
+    padding:2px 10px 2px 7px; border-radius:4px; border-left:4px solid var(--c);
     background:var(--cb); color:var(--ci); font-size:13.5px; font-weight:700; line-height:20px;
     white-space:nowrap; overflow:hidden; text-decoration:none; }
   .ev .pl { font-family:"Bahnschrift",sans-serif; font-size:10.5px; font-weight:700; letter-spacing:1px;
@@ -119,11 +119,11 @@
     font-family:"Bahnschrift",sans-serif; font-size:12px; font-weight:700; opacity:.55; }
   .ev:hover .go { opacity:1; }
 
-  /* 状态独立按钮：未下单/已出行未评价/已评价，点击循环 */
-  .stb { display:block; flex:none; margin-top:0; padding:2px 9px;
-    border-radius:4px; font-family:inherit; font-size:11.5px; font-weight:700; letter-spacing:1px;
+  /* 状态独立按钮：未下单/已出行未评价/已评价，点击循环；整宽条带更易读 */
+  .stb { display:block; width:100%; margin-top:3px; padding:2px 6px; text-align:center;
+    border-radius:4px; font-family:inherit; font-size:12.5px; font-weight:700; letter-spacing:1px;
     cursor:pointer; white-space:nowrap; }
-  .stb.pd { color:var(--ink2); background:var(--panel); border:1px solid var(--hair); }
+  .stb.pd { color:var(--ink); background:var(--panel); border:1px solid var(--ink3); }
   .stb.od { color:var(--gold); background:#FBF3DD; border:1px solid var(--gold); }
   .stb.ok { color:var(--done); background:var(--done-bg); border:1px solid var(--done); }
 
@@ -379,6 +379,11 @@ $('reconCopy').addEventListener('click',function(){
 /* ================= boot ================= */
 render();
 updateBadge();
+/* 人性化：页面高于一屏时，打开自动滚到「今天」所在周 */
+if(document.body.scrollHeight>document.documentElement.clientHeight){
+  var tc=document.querySelector('.d.today');
+  if(tc)tc.closest('.cell').scrollIntoView({block:'center'});
+}
 var stored=loadStored();
 if(stored&&stored.changes&&stored.changes.length>0){
   if(stored.baseVersion===seed.meta.version){
