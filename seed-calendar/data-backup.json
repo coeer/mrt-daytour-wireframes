@@ -1,8 +1,8 @@
 {
  "meta": {
-  "version": "v30",
+  "version": "v31",
   "generatedAt": "2026-08-26 21:47",
-  "updatedAt": "2026-08-27 10:13:36",
+  "updatedAt": "2026-08-27 13:58:00",
   "window": [
    "2026-08-24",
    "2026-11-08"
@@ -379,6 +379,18 @@
    "star": false,
    "status": "pending",
    "link": "https://getyourguide.com/fujikawaguchiko-l145166/tokyo-mt-fuji-three-lakes-scenic-train-quiet-shoji-lake-t1169538/",
+   "note": null
+  },
+  {
+   "no": 32,
+   "order": "2026-08-28",
+   "travel": "2026-08-31",
+   "plat": "TRIP",
+   "prod": "JDM夜游",
+   "pax": 1,
+   "star": false,
+   "status": "pending",
+   "link": "https://www.trip.com/things-to-do/detail/102059655/",
    "note": null
   }
  ]
