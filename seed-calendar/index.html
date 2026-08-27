@@ -44,7 +44,7 @@
   .rule2 { border-top:1px solid var(--ink); margin-top:2px; margin-bottom:9px; }
 
   /* ---------- calendar ---------- */
-  .cal { display:grid; grid-template-columns:64px repeat(7,1fr); grid-template-rows:auto repeat(11,minmax(62px,1fr));
+  .cal { display:grid; grid-template-columns:64px repeat(7,minmax(0,1fr)); grid-template-rows:auto repeat(11,minmax(62px,1fr));
     flex:1; min-height:0; background:var(--panel); border:1px solid var(--hair); }
   .wk { border-bottom:1px solid var(--hair); padding:7px 0 6px; text-align:center;
     font-size:13px; font-weight:700; color:var(--ink2); }
@@ -56,7 +56,7 @@
   .gut .n { font-size:12px; font-weight:700; color:var(--ink2); }
   .gut .n em { font-style:normal; font-family:"Bahnschrift",sans-serif; font-size:14px; font-weight:700; color:var(--ink); }
   .cell { border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
-    padding:6px 8px 5px; background:var(--panel); }
+    padding:6px 8px 5px; background:var(--panel); min-width:0; }
   .cell:nth-child(8n) { border-right:none; }
   .cell.we { background:#FAF7EF; }
   .drow { display:flex; align-items:center; justify-content:space-between; }
@@ -68,13 +68,15 @@
   .td { font-size:11px; letter-spacing:1.5px; color:var(--ink2); font-weight:700; }
 
   /* ---------- event capsules ---------- */
-  .ev { display:flex; align-items:center; width:fit-content; max-width:100%; margin-top:5px;
+  .evrow { display:flex; align-items:center; gap:6px; margin-top:4px; }
+  .ev { display:flex; align-items:center; flex:0 1 auto; min-width:0; margin-top:0;
     padding:3px 10px 3px 7px; border-radius:4px; border-left:4px solid var(--c);
     background:var(--cb); color:var(--ci); font-size:13.5px; font-weight:700; line-height:20px;
     white-space:nowrap; overflow:hidden; text-decoration:none; }
   .ev .pl { font-family:"Bahnschrift",sans-serif; font-size:10.5px; font-weight:700; letter-spacing:1px;
-    opacity:.8; margin-right:6px; }
-  .ev .s { color:var(--gold); font-size:12.5px; margin-left:4px; }
+    opacity:.8; margin-right:6px; flex:none; }
+  .ev .pr { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+  .ev .s { color:var(--gold); font-size:12.5px; margin-left:4px; flex:none; }
   .ev.g { --c:var(--gyg); --cb:var(--gyg-bg); --ci:var(--gyg-ink); }
   .ev.m { --c:var(--mrt); --cb:var(--mrt-bg); --ci:var(--mrt-ink); }
   .ev.t { --c:var(--trip); --cb:var(--trip-bg); --ci:var(--trip-ink); }
@@ -113,12 +115,12 @@
   .recon .r-clear { color:var(--ink); background:var(--panel); border:1px solid var(--hair); }
 
   .ev { cursor:pointer; }
-  .ev .go { margin-left:6px; color:inherit;
+  .ev .go { margin-left:6px; color:inherit; flex:none;
     font-family:"Bahnschrift",sans-serif; font-size:12px; font-weight:700; opacity:.55; }
   .ev:hover .go { opacity:1; }
 
   /* 状态独立按钮：未下单/已出行未评价/已评价，点击循环 */
-  .stb { display:block; width:fit-content; max-width:100%; margin-top:3px; padding:2px 9px;
+  .stb { display:block; flex:none; margin-top:0; padding:2px 9px;
     border-radius:4px; font-family:inherit; font-size:11.5px; font-weight:700; letter-spacing:1px;
     cursor:pointer; white-space:nowrap; }
   .stb.pd { color:var(--ink2); background:var(--panel); border:1px solid var(--hair); }
@@ -305,10 +307,10 @@ function renderCal(){
       var right=isToday?'<span class="td">今天</span>':(moTag?'<span class="mo">'+MO[dt.getMonth()]+'</span>':'');
       var ev='';
       if(o){
-        ev='<a class="ev '+PLAT_CLS[o.plat]+'" href="'+esc(o.link||'#')+'" target="_blank" rel="noopener" title="打开产品页">'+
-          '<span class="pl">'+o.plat+'</span>'+esc(o.prod)+'·'+o.pax+
+        ev='<div class="evrow"><a class="ev '+PLAT_CLS[o.plat]+'" href="'+esc(o.link||'#')+'" target="_blank" rel="noopener" title="打开产品页">'+
+          '<span class="pl">'+o.plat+'</span><span class="pr">'+esc(o.prod)+'·'+o.pax+'</span>'+
           (o.star?'<span class="s">★</span>':'')+'<span class="go">↗</span></a>'+
-          '<button type="button" class="stb '+ST_CLS[o.status]+'" data-no="'+o.no+'" title="点击推进状态">'+ST_LABEL[o.status]+'</button>';
+          '<button type="button" class="stb '+ST_CLS[o.status]+'" data-no="'+o.no+'" title="点击推进状态">'+ST_LABEL[o.status]+'</button></div>';
       }
       cells+='<div class="'+cls+'"><div class="drow"><span class="'+(isToday?'d today':'d')+'">'+md(s)+'</span>'+right+'</div>'+ev+'</div>';
     }
