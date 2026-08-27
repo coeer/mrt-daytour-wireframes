@@ -76,6 +76,8 @@
   .ev .pl { font-family:"Bahnschrift",sans-serif; font-size:10.5px; font-weight:700; letter-spacing:1px;
     opacity:.8; margin-right:6px; flex:none; }
   .ev .pr { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+  .cell .tr { font-family:"Bahnschrift","Microsoft YaHei",sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:.5px; color:var(--ink2); }
   .ev .s { color:var(--gold); font-size:12.5px; margin-left:4px; flex:none; }
   .ev.g { --c:var(--gyg); --cb:var(--gyg-bg); --ci:var(--gyg-ink); }
   .ev.m { --c:var(--mrt); --cb:var(--mrt-bg); --ci:var(--mrt-ink); }
@@ -304,7 +306,7 @@ function renderCal(){
       var prev=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()-1);
       var moTag=(w===0&&d===0)||dt.getMonth()!==prev.getMonth();
       var isToday=(s===todayISO);
-      var right=isToday?'<span class="td">今天</span>':(moTag?'<span class="mo">'+MO[dt.getMonth()]+'</span>':'');
+      var right=o?'<span class="tr">走'+md(o.travel)+'</span>':(isToday?'<span class="td">今天</span>':(moTag?'<span class="mo">'+MO[dt.getMonth()]+'</span>':''));
       var ev='';
       if(o){
         ev='<div class="evrow"><a class="ev '+PLAT_CLS[o.plat]+'" href="'+esc(o.link||'#')+'" target="_blank" rel="noopener" title="打开产品页">'+
