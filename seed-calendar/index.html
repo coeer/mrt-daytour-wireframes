@@ -40,6 +40,8 @@
   .st .n .u { font-size:14px; font-weight:700; color:var(--ink2); margin-left:3px; }
   .st .n .g { color:var(--gyg); } .st .n .m { color:var(--mrt); } .st .n .t { color:var(--trip); }
   .st .l { font-size:10.5px; font-weight:600; color:var(--ink2); letter-spacing:1.5px; margin-top:4px; white-space:nowrap; }
+  .st .sb { font-size:11px; font-weight:700; letter-spacing:.5px; margin-top:3px; white-space:nowrap; color:var(--ink2); }
+  .st .sb .od { color:var(--gold); } .st .sb .ok { color:var(--done); }
   .rule { border-top:3px solid var(--ink); margin-top:10px; }
   .rule2 { border-top:1px solid var(--ink); margin-top:2px; margin-bottom:9px; }
 
@@ -164,7 +166,7 @@
       </div>
       <div class="stamp">已拍板 APPROVED</div>
       <div class="stats">
-        <div class="st"><div class="n" id="stTotal">0<span class="u">单</span></div><div class="l">总单数 TOTAL</div></div>
+        <div class="st"><div class="n" id="stTotal">0<span class="u">单</span></div><div class="l">总单数 TOTAL</div><div class="sb" id="stStat"></div></div>
         <div class="st"><div class="n" id="stPlat"></div><div class="l">GYG · MRT · TRIP</div></div>
         <div class="st"><div class="n" id="stFuji">0<span class="u">单</span></div><div class="l" id="stFujiL">富士 FUJI</div></div>
         <div class="st"><div class="n" id="stPax"></div><div class="l">单人 / 双人 PAX</div></div>
@@ -272,14 +274,16 @@ function renderMast(){
   var ds=os.map(function(o){return o.order;}).sort();
   $('subLine').textContent='下单窗口 '+md(ds[0])+' – '+md(ds[ds.length-1])+
     ' · 连排(2-3天)+间隔混合 · 无规律 · 每日 ≤1 单 · 数据制表 '+(doc.meta.generatedAt||'').slice(0,10);
-  var pc={GYG:0,MRT:0,TRIP:0},fuji=0,star=0,p1=0,p2p=0;
+  var pc={GYG:0,MRT:0,TRIP:0},fuji=0,star=0,p1=0,p2p=0,sc={pending:0,ordered:0,reviewed:0};
   os.forEach(function(o){
     if(pc[o.plat]!=null)pc[o.plat]++;
     if(FUJI_PRODS[o.prod])fuji++;
     if(o.star)star++;
     if(o.pax===1)p1++;else p2p++;
+    if(sc[o.status]!=null)sc[o.status]++;
   });
   $('stTotal').innerHTML=os.length+'<span class="u">单</span>';
+  $('stStat').innerHTML='未下单 '+sc.pending+' · <span class="od">已下单未评价 '+sc.ordered+'</span> · <span class="ok">已评价 '+sc.reviewed+'</span>';
   $('stPlat').innerHTML='<span class="g">'+pc.GYG+'</span>·<span class="m">'+pc.MRT+'</span>·<span class="t">'+pc.TRIP+'</span>';
   $('stFuji').innerHTML=fuji+'<span class="u">单</span>';
   $('stFujiL').textContent='富士 FUJI（★ 新品 '+star+'）';
