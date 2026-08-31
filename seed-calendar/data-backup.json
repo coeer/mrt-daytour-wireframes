@@ -1,8 +1,8 @@
 {
  "meta": {
-  "version": "v37",
+  "version": "v38",
   "generatedAt": "2026-08-26 21:47",
-  "updatedAt": "2026-08-31 14:18:00",
+  "updatedAt": "2026-08-31 22:15:00",
   "window": [
    "2026-08-24",
    "2026-11-08"
@@ -17,7 +17,7 @@
    "prod": "日光",
    "pax": 2,
    "star": false,
-   "status": "ordered",
+   "status": "reviewed",
    "link": "https://www.trip.com/things-to-do/detail/104635996/",
    "note": null
   },
@@ -29,7 +29,7 @@
    "prod": "花海",
    "pax": 2,
    "star": false,
-   "status": "pending",
+   "status": "ordered",
    "link": "https://www.getyourguide.com/sapporo-l32644/sapporo-biei-furano-summer-flower-fields-day-trip-t1265146/",
    "note": null
   },
