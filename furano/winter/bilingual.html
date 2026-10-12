@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>富良野·美瑛冬季一日游详情页 · 冬季限定设计稿（韩中对照）v1 · 2026-10-12</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background: #f4f7fb;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* 美工交付保障：全页文字均可选中复制 */
+  body, body * { user-select: text !important; -webkit-user-select: text !important; }
+  .page { max-width: 960px; margin: 0 auto; padding: 24px 18px 40px; }
+
+  .doc-head {
+    background: #fff; border: 1px solid #dce6f2; border-radius: 14px;
+    padding: 16px 18px; margin-bottom: 20px;
+  }
+  .doc-head h1 { font-size: 16px; color: #232a31; margin-bottom: 8px; }
+  .doc-head p { font-size: 12px; color: #5a6672; line-height: 1.8; }
+  .doc-head .global-spec { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #dce6f2; }
+  .doc-head .global-spec li { font-size: 12px; color: #44515e; line-height: 1.8; margin-left: 18px; }
+
+  .spec-bar {
+    background: #fff; border: 1px solid #dce6f2; border-left: 4px solid #3a6ea5;
+    border-radius: 10px; padding: 10px 14px; margin: 20px 0 8px;
+  }
+  .spec-bar .spec-title { font-size: 12.5px; font-weight: 700; color: #2f3a44; margin-bottom: 4px; }
+  .spec-bar li { font-size: 11.5px; color: #5a6672; line-height: 1.75; margin-left: 16px; }
+  .spec-bar .do { color: #2e6b4f; }
+  .spec-bar .dont { color: #a05454; }
+
+  .row { display: flex; gap: 28px; align-items: stretch; }
+  .cell {
+    flex: 1; min-width: 0; background: #fff;
+    border: 1px solid #e3ebf5; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 3px 14px rgba(58,110,165,.07);
+  }
+  .cell-kr { border-top: 4px solid #4a5560; }
+  .cell-zh { border-top: 4px solid #8a7a55; }
+  .cell-head { padding: 7px 12px; font-size: 10.5px; font-weight: 700; letter-spacing: 1px; color: #fff; }
+  .cell-kr .cell-head { background: #4a5560; }
+  .cell-zh .cell-head { background: #8a7a55; }
+  .cell-body { padding: 14px 14px 16px; }
+  @media (max-width: 880px) {
+    .row { flex-direction: column; gap: 10px; }
+  }
+
+  /* ① Hero：大图压标题 */
+  .hero-card { position: relative; border-radius: 18px; overflow: hidden; }
+  .hero-card img { width: 100%; height: 230px; object-fit: cover; display: block; }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(16,32,52,.05) 40%, rgba(14,28,48,.78) 100%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 14px 16px;
+  }
+  .slogan-chip {
+    position: absolute; top: 12px; left: 12px; z-index: 2;
+    background: #ffd166; color: #5a3d00; font-size: 10.5px; font-weight: 800;
+    padding: 5px 11px; border-radius: 999px; letter-spacing: .5px;
+    white-space: nowrap; max-width: calc(100% - 24px); overflow: hidden; text-overflow: ellipsis;
+    transform: rotate(-2deg); box-shadow: 0 2px 8px rgba(0,0,0,.18);
+  }
+  .slogan-chip.winter {
+    top: 42px;
+    background: linear-gradient(135deg, #4a90d9, #3a6ea5); color: #fff;
+    transform: rotate(2deg);
+  }
+  .hero-overlay h1 { color: #fff; font-size: 19px; font-weight: 900; line-height: 1.4; text-shadow: 0 2px 8px rgba(0,0,0,.35); margin-bottom: 4px; }
+  .hero-overlay .sub { color: rgba(255,255,255,.92); font-size: 11.5px; line-height: 1.6; }
+  .hero-ref-cap { font-size: 10px; color: #a8b6c8; margin-top: 5px; }
+
+  /* ② 亮点 chips */
+  .hl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .chip {
+    border-radius: 14px; padding: 10px 11px; font-size: 11.5px; font-weight: 600;
+    line-height: 1.55; color: #33303d; display: flex; gap: 6px; align-items: flex-start;
+  }
+  .chip .em { font-size: 14px; line-height: 1.3; }
+  .chip-1 { background: #e3f0fc; } .chip-2 { background: #e8f4f8; }
+  .chip-3 { background: #fff3d6; } .chip-4 { background: #eef7ee; }
+  .chip-5 { background: #e0f2fe; } .chip-6 { background: #ffe9d6; }
+
+  /* ③ 痛点：便签气泡 */
+  .pain {
+    background: #fff6d9; border-radius: 16px; padding: 13px 15px;
+    font-size: 12.5px; line-height: 1.8; color: #4a4033;
+    box-shadow: 0 2px 8px rgba(255,209,102,.25);
+  }
+  .pain b { color: #8a5a00; }
+
+  /* ④ 接送：大数字时刻 */
+  .pickup-time {
+    font-size: 26px; font-weight: 900; letter-spacing: .5px;
+    background: linear-gradient(90deg, #3a6ea5, #67b0e8);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin-bottom: 8px;
+  }
+  .kv p { font-size: 12px; color: #4a545e; line-height: 1.9; }
+
+  /* ⑤ 站点卡 */
+  .stop-card {
+    background: #fff; border: 2px solid #ddd; border-radius: 18px;
+    overflow: hidden; margin-bottom: 12px;
+    box-shadow: 0 3px 10px rgba(20,50,90,.06);
+  }
+  .stop-card .stop-img { width: 100%; height: 150px; object-fit: cover; display: block; }
+  .stop-card.peak .stop-img { height: 175px; }
+  .stop-body { padding: 10px 13px 12px; }
+  .time-badge {
+    display: inline-block; color: #fff; font-size: 11px; font-weight: 800;
+    padding: 3px 10px; border-radius: 999px; transform: rotate(-2deg);
+    box-shadow: 0 2px 6px rgba(0,0,0,.15); margin-bottom: 5px;
+  }
+  .stop-name { font-size: 14px; font-weight: 800; color: #232a31; line-height: 1.4; }
+  .stop-name .dur { font-weight: 500; color: #8a95a0; font-size: 11px; }
+  .stop-desc { font-size: 12px; color: #5a6672; line-height: 1.65; margin-top: 3px; }
+  .sticker {
+    display: inline-block; font-size: 10px; font-weight: 800;
+    padding: 2px 8px; border-radius: 999px; margin-left: 5px; vertical-align: 1px;
+  }
+  .sticker-peak { background: #ffd166; color: #5a3d00; transform: rotate(2deg); box-shadow: 0 2px 5px rgba(255,209,102,.5); }
+  .sticker-free { background: #06d6a0; color: #fff; transform: rotate(-2deg); }
+  .stop-placeholder {
+    height: 90px; display: flex; align-items: center; justify-content: center;
+    background: repeating-linear-gradient(45deg, #f2f7fc, #f2f7fc 10px, #e8f0f9 10px, #e8f0f9 20px);
+    color: #7a90a8; font-size: 11px; text-align: center; padding: 8px;
+  }
+  .stop-note { font-size: 11px; color: #8a95a0; line-height: 1.65; margin-top: 4px; }
+  .ref-cap { font-size: 10px; color: #a8b6c8; margin-top: 5px; }
+
+  .pass-card {
+    background: #fff; border: 2px dashed #cfdff0; border-radius: 16px;
+    padding: 10px 13px; margin-bottom: 12px;
+  }
+
+  /* ⑥ 资质 */
+  .logi-card {
+    background: #fff; border: 2px solid #e3ebf5; border-radius: 16px; padding: 12px 14px;
+  }
+  .placeholder-img {
+    background: repeating-linear-gradient(45deg, #f2f7fc, #f2f7fc 10px, #e8f0f9 10px, #e8f0f9 20px);
+    min-height: 90px; border-radius: 14px; display: flex;
+    align-items: center; justify-content: center; color: #7a90a8; font-size: 11px; margin-top: 10px;
+    border: 1px dashed #b8cce0; text-align: center; padding: 10px;
+  }
+
+  /* ⑦ FAQ 彩色卡 */
+  .faq-item { margin-bottom: 8px; padding: 10px 13px; border-radius: 14px; }
+  .faq-item:nth-child(6n+1) { background: #e3f0fc; }
+  .faq-item:nth-child(6n+2) { background: #e8f4f8; }
+  .faq-item:nth-child(6n+3) { background: #fff3d6; }
+  .faq-item:nth-child(6n+4) { background: #eef7ee; }
+  .faq-item:nth-child(6n+5) { background: #e0f2fe; }
+  .faq-item:nth-child(6n+6) { background: #ffe9d6; }
+  .faq-item .q { font-size: 12.5px; font-weight: 800; color: #232a31; margin-bottom: 3px; }
+  .faq-item .a { font-size: 12px; color: #4a4a58; line-height: 1.7; }
+  .faq-closing { font-size: 12px; color: #8a95a0; margin-top: 10px; }
+  .faq-title { font-size: 13.5px; font-weight: 800; color: #232a31; margin-bottom: 10px; }
+
+  .img-credit { font-size: 10px; color: #9aa8bc; text-align: center; padding: 16px 10px 4px; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="page">
+<div class="doc-head">
+  <h1>富良野·美瑛冬季一日游详情页 · 冬季限定设计稿（韩中对照）v1 · 2026-10-12</h1>
+  <p>本文档 = 结构骨架 + 文案定稿（韩/中对照）+ 逐区块设计建议。设计建议只给方向与必守点，版式/质感/动效由美工自由发挥。</p>
+  <div class="global-spec"><ul><li>风格方向：冬季清透、蓝白雪景、多图少字。本稿示例为冬季蓝调处理，仅供气质参考，美工可自由诠释。</li>
+<li>核心概念 = 冬季限定「最暖和的走法」：雪路三难（自驾赌命/公交稀疏/打车天价）→ 酒店门口上车。一句话卖点：零下十度的北海道，最暖和的走法。</li>
+<li>全页照片均为占位参考（Wikimedia Commons 冬季素材），正式版全部替换自家实拍；白须瀑布站现用美瑛川蓝河雪景替代（无冬季瀑布公开图），正式版须换冬季冰瀑实拍。</li>
+<li>页面为韩语面向韩国客人，中文列仅供内部对照，成品只需韩语版。</li>
+<li>退改口径注意：本稿按「前3天100%退/前2天~当天不退」撰写；MRT 产品页正式条款为「3日全退/2日50%/当天不退」，两处打架，上线前以老板拍板为准。</li></ul></div>
+</div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ① 主视觉 HERO</div><ul><li>大图压字、字少，靠画面说话。冬季卖点一句话：零下十度的北海道，最暖和的走法。素材需备雪景氛围图（雪原/雾凇/蓝调）。版式自由发挥。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="hero-card">
+  <img src="assets/cover.jpg?v=20261012" alt="hero 参考">
+  <div class="slogan-chip">THE WARMEST WAY THROUGH WINTER.</div>
+  <div class="slogan-chip winter">❄️ 겨울 한정 코스</div>
+  <div class="hero-overlay"><h1>삿포로 출발 아사히야마·비에이·후라노 겨울 소그룹 1일 투어 (최대 9명)</h1><div class="sub">펭귄 산책 · 설원의 크리스마스 트리 · 얼지 않는 파란 폭포 · 숲속 불빛<br>영하 10도의 홋카이도, 가장 따뜻하게 다니는 방법</div></div>
+</div>
+<div class="hero-ref-cap">氛围参考 · 需替换实拍主视觉</div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="hero-card">
+  <img src="assets/cover.jpg?v=20261012" alt="hero 参考">
+  <div class="slogan-chip">最暖和的走法（THE WARMEST WAY THROUGH WINTER）</div>
+  <div class="slogan-chip winter">❄️ 冬季限定课程</div>
+  <div class="hero-overlay"><h1>札幌出发 旭山·美瑛·富良野冬季小团1日游（最多9人）</h1><div class="sub">企鹅散步 · 雪原圣诞树 · 不冻的蓝瀑布 · 森林灯火<br>零下十度的北海道，最暖和的走法</div></div>
+</div>
+<div class="hero-ref-cap">氛围参考 · 需替换实拍主视觉</div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ② 差异化亮点 ×4</div><ul><li>4个卖点扫读式呈现，前两个（门口接送 / 9人小团）是最强卖点。形式自由。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="hl-grid"><div class="chip chip-1"><span class="em">🚗</span><span>삿포로역 반경 3km 이내 호텔 로비 픽업 (이른 아침 집합 장소 이동 NO)</span></div>
+<div class="chip chip-2"><span class="em">👨‍👩‍👧‍👦</span><span>최대 9명 소그룹 · 대형 버스 NO · 소그룹이라 사진·관람 시간 넉넉</span></div>
+<div class="chip chip-3"><span class="em">🎫</span><span>아사히야마 동물원 입장권 포함 · 펭귄 산책은 겨울 한정</span></div>
+<div class="chip chip-4"><span class="em">💰</span><span>여행일 3일 전까지 통보 시 100% 전액 환불 · 출발 미성사 시에도 전액 환불</span></div></div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="hl-grid"><div class="chip chip-1"><span class="em">🚗</span><span>札幌站3km内酒店大堂接送（不用一早赶去集合点）</span></div>
+<div class="chip chip-2"><span class="em">👨‍👩‍👧‍👦</span><span>最多9人小团·不是大巴：小团拍照游玩时间更充裕</span></div>
+<div class="chip chip-3"><span class="em">🎫</span><span>含旭山动物园门票·企鹅散步为冬季限定</span></div>
+<div class="chip chip-4"><span class="em">💰</span><span>出行日前3天通知可100%全额退款·不成团也无损退款</span></div></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ③ 痛点钩子</div><ul><li>先痛点后转折：冬季雪路三难（自驾/公交/打车），落点=把方向盘交给老司机。轻松不嘲讽。形式自由。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="pain">🤔 겨울 홋카이도는 길이 관광지보다 어렵습니다. 빙판 렌터카는 위험하고, 시골 버스는 하루 두세 대뿐, 택시 왕복 요금은 항공권 값.<br>이 투어는 <b>호텔 앞에서 시작</b>합니다. 핸들은 매일 이 길을 달리는 현지 기사님께 맡기세요. 여러분은 창밖의 설원만 담으세요</div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="pain">🤔 冬天的北海道，路比景点难：结冰路面自驾危险、乡间公交一天两三班、出租车往返够买一张机票。<br>这个团从<b>酒店门口开始</b>。方向盘交给天天跑这条路的本地老司机，你只管把窗外的雪原装进相机</div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ④ 接送信息</div><ul><li>接送窗口 07:00~08:00 是全页时间锚点，3行说清接送规则（3km内上门/范围外札幌站北口7:45集合/前一天群通知）。呈现方式自由。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="kv"><div class="pickup-time">예정 07:00~08:00 호텔 앞 픽업 → 픽업 후 삿포로 출발</div><p>🏠 삿포로역 반경 3km 이내 숙소 → 호텔 로비 앞 픽업</p>
+<p>🚉 3km 범위 밖 숙소 → 삿포로역 북쪽 출구 단체 집합 장소 07:45 집합</p>
+<p>💬 정확한 픽업 시간과 차량 번호는 출발 전날 단톡방에서 안내드립니다</p></div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="kv"><div class="pickup-time">预计 07:00~08:00 酒店门口接送 → 接齐后札幌出发</div><p>🏠 札幌站半径3km内住宿 → 酒店大堂接送</p>
+<p>🚉 3km范围外住宿 → 札幌站北口团体集合点 7:45 集合</p>
+<p>💬 准确接送时间与车牌会在出发前一天通过群聊通知</p></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑤ 行程时间线（站点大卡 · 核心区块）</div><ul><li>每站一大卡一句话。旭山动物园是全行程高光（⭐+门票含）；出发/返程轻处理。</li>
+<li>必守：所有时间均为「预计/예정」；企鹅散步是否举行依当日积雪与园方安排，免责小字保留；返程保留路况免责小字。其余版式自由。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 07:30</span><div class="stop-name">삿포로 출발 <span class="dur">(호텔 픽업 또는 삿포로역 집합 후)</span></div></div>
+<div class="stop-card peak" style="border-color:#3a6ea5"><img class="stop-img" src="assets/asahiyama.jpg?v=20261012" alt="아사히야마 동물원 펭귄 산책" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#3a6ea5">예정 11:00</span><div class="stop-name">아사히야마 동물원 <span class="dur">(약 90분)</span><span class="sticker sticker-peak">⭐ 하이라이트</span><span class="sticker sticker-free">🎫 입장권 포함</span></div><div class="stop-desc">겨울 한정 펭귄 산책로에서 킹펭귄이 발밑을 지나갑니다 🐧 북극곰 다이빙도 놓치지 마세요!</div><div class="ref-cap">冬季氛围参考 · 正式版换自家实拍 | 아사히야마 동물원 펭귄 산책</div></div></div>
+<div class="stop-card" style="border-color:#67b0e8"><img class="stop-img" src="assets/xmas.jpg?v=20261012" alt="설원 위의 크리스마스 트리" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#67b0e8">예정 13:20</span><div class="stop-name">크리스마스 트리 (비에이) <span class="dur">(약 20분 · 포토타임)</span></div><div class="stop-desc">끝없는 설원 위에 홀로 선 나무 한 그루. 셔터만 눌러도 영화 포스터 📸</div><div class="ref-cap">冬季氛围参考 · 正式版换自家实拍 | 설원 위의 크리스마스 트리</div></div></div>
+<div class="stop-card" style="border-color:#2ec4b6"><img class="stop-img" src="assets/shirahige.jpg?v=20261012" alt="흰수염폭포 · 비에이강" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#2ec4b6">예정 14:30</span><div class="stop-name">흰수염폭포 <span class="dur">(약 20분)</span></div><div class="stop-desc">한겨울에도 얼지 않는 폭포, 고드름 사이로 코발트 블루. 눈이 내릴수록 강은 더 파랗게 빛납니다</div><div class="ref-cap">冬季氛围参考 · 正式版换自家实拍 | 흰수염폭포 · 비에이강</div></div></div>
+<div class="stop-card" style="border-color:#8a7a55"><img class="stop-img" src="assets/ningle.jpg?v=20261012" alt="닝구르테라스 오두막 마을" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#8a7a55">예정 15:40</span><div class="stop-name">닝구르테라스 <span class="dur">(약 30분)</span></div><div class="stop-desc">숲속 수공예 오두막 마을. 해 질 녘 하나둘 켜지는 불빛으로 하루를 마무리</div><div class="ref-cap">冬季氛围参考 · 正式版换自家实拍 | 닝구르테라스 오두막 마을</div></div></div>
+<div class="pass-card"><span class="time-badge" style="background:#8a95a0">예정 16:20</span><div class="stop-name">삿포로로 출발 → 예정 18:30 삿포로 도착</div><div class="stop-note">⏰ 도로 상황과 날씨에 따라 도착 시간이 앞뒤로 달라질 수 있습니다. 출발 시간이 정해진 교통편(항공·기차)이나 공연·레스토랑 예약은 가급적 다른 날짜에 잡아 주세요.</div></div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="pass-card"><span class="time-badge" style="background:#8a95a0">预计 07:30</span><div class="stop-name">札幌出发 <span class="dur">（酒店接送或札幌站集合后）</span></div></div>
+<div class="stop-card peak" style="border-color:#3a6ea5"><img class="stop-img" src="assets/asahiyama.jpg?v=20261012" alt="旭山动物园企鹅散步" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#3a6ea5">预计 11:00</span><div class="stop-name">旭山动物园 <span class="dur">（约90分钟）</span><span class="sticker sticker-peak">⭐ 高光时刻</span><span class="sticker sticker-free">🎫 含门票</span></div><div class="stop-desc">冬季限定企鹅散步道，国王企鹅从你脚边走过 🐧 北极熊跳水也别错过！</div><div class="ref-cap">冬季氛围参考 · 正式版换自家实拍 | 旭山动物园企鹅散步</div></div></div>
+<div class="stop-card" style="border-color:#67b0e8"><img class="stop-img" src="assets/xmas.jpg?v=20261012" alt="雪原上的圣诞树" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#67b0e8">预计 13:20</span><div class="stop-name">圣诞树（美瑛） <span class="dur">（约20分钟·拍照时间）</span></div><div class="stop-desc">一望无际的雪原上只有这一棵树。快门一按，就是电影海报 📸</div><div class="ref-cap">冬季氛围参考 · 正式版换自家实拍 | 雪原上的圣诞树</div></div></div>
+<div class="stop-card" style="border-color:#2ec4b6"><img class="stop-img" src="assets/shirahige.jpg?v=20261012" alt="白须瀑布 · 美瑛川" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#2ec4b6">预计 14:30</span><div class="stop-name">白须瀑布 <span class="dur">（约20分钟）</span></div><div class="stop-desc">寒冬里不冻的瀑布，冰凌间泛着钴蓝。雪越落，河越蓝</div><div class="ref-cap">冬季氛围参考 · 正式版换自家实拍 | 白须瀑布 · 美瑛川</div></div></div>
+<div class="stop-card" style="border-color:#8a7a55"><img class="stop-img" src="assets/ningle.jpg?v=20261012" alt="宁古鲁露台木屋村" loading="lazy"><div class="stop-body"><span class="time-badge" style="background:#8a7a55">预计 15:40</span><div class="stop-name">宁古鲁露台 <span class="dur">（约30分钟）</span></div><div class="stop-desc">藏在森林里的手作小木屋村，傍晚灯火一盏盏亮起，为一天收尾</div><div class="ref-cap">冬季氛围参考 · 正式版换自家实拍 | 宁古鲁露台木屋村</div></div></div>
+<div class="pass-card"><span class="time-badge" style="background:#8a95a0">预计 16:20</span><div class="stop-name">返程回札幌 → 预计18:30左右抵达札幌</div><div class="stop-note">⏰ 根据当天路况与天气，抵达时间可能前后浮动。有固定出发时间的交通工具（航班·火车）或演出、餐厅预约，建议您尽量安排在其他日期。</div></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑥ 资质·车辆·语言服务</div><ul><li>信任收尾。官方接送范围图与用车参考图（韩文整图）由我方提供，直接嵌入，勿重绘。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="logi-card"><div class="kv"><p><b>일본 오사카부 지사 등록 여행사 · JNTO(일본정부관광국) 협력사</b></p><p>🚐 차량: 6명 이하 7인승 알파드 / 9명 이하 10인승 하이에이스 (녹색 번호판 합법 영업 차량)</p>
+<p>📍 픽업: 삿포로역 반경 3km 숙소 앞 (범위 밖은 삿포로역 북쪽 출구 집합)</p>
+<p>언어: 한국어 가능 기사 우선 배정 + 일본어·영어·번역 앱 지원</p></div>
+<div class="placeholder-img">[ 자격증명서 + 차량 실물 사진 — 공식 정식 이미지는 공급측 제공본 사용 ]</div></div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="logi-card"><div class="kv"><p><b>日本大阪府知事登记旅行社·JNTO（日本政府观光局）合作方</b></p><p>🚐 车辆：6人及以下7座埃尔法 / 9人及以下10座海狮（绿牌合法运营车）</p>
+<p>📍 接送：札幌站半径3km内酒店门口（范围外为札幌站北口集合）</p>
+<p>语言：优先安排会韩语司机＋日语/英语/翻译app支持</p></div>
+<div class="placeholder-img">[ 资质证书+车辆实拍——正式版使用我方提供的官方整图 ]</div></div></div></div></div>
+<div class="spec-bar"><div class="spec-title">🎨 设计建议 · ⑦ FAQ ×7</div><ul><li>7问完整保留，Q7退改规则最易起纠纷、要做规整。形式自由（手风琴可选）。</li></ul></div>
+<div class="row"><div class="cell cell-kr"><div class="cell-head">🇰🇷 한국어 원문</div><div class="cell-body"><div class="faq-title">■ 예약 전, 이것만 알아두세요 💡</div><div class="faq-item"><div class="q">Q1. 겨울 빙판길, 안전한가요?</div><div class="a">걱정하지 마세요. 모든 차량은 녹색 번호판 합법 영업 차량이며, 매일 이 길을 운행하는 현지 기사님이 운전합니다. 폭설 등으로 안전한 진행이 어려운 악천후에만 출발 전 안내 후 전액 환불해 드립니다.</div></div>
+<div class="faq-item"><div class="q">Q2. 차량은 어떻게 배차되나요? 함께 타는 분은 누구인가요?</div><div class="a">소규모 합승으로 운행되며, 6명 이하는 7인승 알파드, 9명 이하는 10인승 하이에이스로 배차됩니다(당일 상황에 따라 달라질 수 있습니다). 다른 국가에서 오신 분들과 동승하실 수 있습니다. 함께하는 시간 동안 서로의 여행 이야기를 나누는 소소한 즐거움이 되기도 합니다.</div></div>
+<div class="faq-item"><div class="q">Q3. 펭귄 산책은 매일 볼 수 있나요?</div><div class="a">펭귄 산책은 겨울 한정 프로그램으로, 당일 적설 상황과 동물원 측 판단에 따라 진행 여부가 결정됩니다. 진행되지 않는 날에도 동물원 관람은 정상적으로 즐기실 수 있습니다.</div></div>
+<div class="faq-item"><div class="q">Q4. 기사님이 안내도 해 주시나요?</div><div class="a">운전 겸 안내 기사가 동행합니다. 주요 포인트 도착 시 간단한 안내를 드리며, 각 명소에서 하차하여 자유롭게 관람하시면 됩니다. 기사님은 차량에서 대기하시며 출발 시간에 맞춰 다음 장소로 이동하십니다. 한국인 손님이 많은 날에는 한국어 가능 기사님을 우선 배정합니다.</div></div>
+<div class="faq-item"><div class="q">Q5. 출발 전 연락은 어떻게 오나요?</div><div class="a">예약 완료 후, 자주 사용하시는 메신저(WhatsApp·LINE·KakaoTalk)를 남겨 주세요. WhatsApp을 가장 추천해 드립니다. 출발 전날, 온라인 여행 그룹(단톡방)을 만들어 차량·기사 정보를 이메일과 함께 보내드립니다. 출발 당일 아침, 기사님이 약속된 시간에 숙소(또는 집합 장소) 앞으로 모시러 오십니다.</div></div>
+<div class="faq-item"><div class="q">Q6. 식사와 입장료는 포함되어 있나요?</div><div class="a">아사히야마 동물원 입장권은 포함되어 있습니다. 크리스마스 트리·흰수염폭포·닝구르테라스는 무료 입장입니다. 식사는 포함되어 있지 않으며, 동물원 내 레스토랑이나 이동 경로에서 개별 결제로 자유롭게 드시면 됩니다(1인 약 1,000~3,000엔).</div></div>
+<div class="faq-item"><div class="q">Q7. 취소 및 환불 규정은 어떻게 되나요?</div><div class="a">여행일 기준 3일 전까지 통보 시: 100% 전액 환불 / 여행일 기준 2일 전~당일 통보 시: 환불 불가 ※ 여행일은 현지(일본) 시각 기준입니다. 최소 4인 미만으로 출발이 어려운 경우 출발 1주일 전까지 안내드리며, 취소 시 전액 환불해 드립니다.</div></div><div class="faq-closing">■ 그 외에 궁금하신 점이 있으시면, 언제든 편하게 문의해 주세요 💬</div></div></div>
+<div class="cell cell-zh"><div class="cell-head">🇨🇳 中文对照</div><div class="cell-body"><div class="faq-title">■ 预订前，这些请先了解一下 💡</div><div class="faq-item"><div class="q">Q1. 冬天雪路，行程安全吗？</div><div class="a">放心。行程用车均为绿牌合法运营车辆，司机是天天跑这条线的本地老司机。如遇暴雪等恶劣天气导致安全上难以进行，会在出发前通知并全额退款。</div></div>
+<div class="faq-item"><div class="q">Q2. 车辆怎么安排？同车的是谁？</div><div class="a">本行程为小团拼车，6人及以下安排7座埃尔法，9人及以下安排10座海狮（根据当日情况可能有所变动）。车上可能有来自其他国家的客人。同行时光里分享彼此的旅途故事，也是一种小小的乐趣。</div></div>
+<div class="faq-item"><div class="q">Q3. 企鹅散步每天都能看到吗？</div><div class="a">企鹅散步是冬季限定活动，是否举行依当日积雪与园方安排为准。即使当天不举行，动物园正常游览不受影响。</div></div>
+<div class="faq-item"><div class="q">Q4. 司机也做讲解吗？</div><div class="a">司机兼向导陪同。到达主要景点时做简短介绍，各景点下车后自由参观，司机在车内等候并按时前往下一站。韩国客人较多的日子会优先安排会韩语的司机。</div></div>
+<div class="faq-item"><div class="q">Q5. 出发前怎么联系？</div><div class="a">预订完成后，请留下您常用的即时通讯账号（WhatsApp·LINE·KakaoTalk），我们最推荐WhatsApp。出发前一天我们会建立线上旅行群并邮件发送车辆与司机信息。出发当天早上，司机会按约定时间到住宿（或集合点）门口来接。</div></div>
+<div class="faq-item"><div class="q">Q6. 餐费和门票包含吗？</div><div class="a">旭山动物园门票已包含。圣诞树·白须瀑布·宁古鲁露台均免费入场。餐食不含，可在动物园内餐厅或沿途自行点单结账（人均约1,000~3,000日元）。</div></div>
+<div class="faq-item"><div class="q">Q7. 取消退款规定？</div><div class="a">以出行日为准，提前3天及之前通知：100%全额退款。提前2天至当天通知：不可退款。※ 出行日以当地（日本）时间为准。最少4人成团，未成团将于出发前1周通知，取消即全额退款。</div></div><div class="faq-closing">■ 如有其他疑问，请随时咨询 💬</div></div></div></div>
+<div class="img-credit">※ 页内照片均为冬季氛围参考图（Wikimedia Commons），仅用于示意画面感觉，正式详情页须全部替换为自家实拍图。</div>
+</div>
+</body>
+</html>
