@@ -67,7 +67,7 @@ section{position:relative}
 .chead .badge{flex:0 0 46px;width:46px;height:46px;border-radius:13px;color:#fff;font-weight:900;font-size:23px;
  display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(20,40,60,.16)}
 .chead h2{font-size:23px;font-weight:900;line-height:1.32}
-.chead h2 em{font-style:normal;font-size:15px;font-weight:800;color:#fff;padding:3px 9px;border-radius:8px;margin-left:4px;vertical-align:3px}
+.chead h2 em{font-style:normal;font-size:15px;font-weight:800;color:#fff;padding:3px 9px;border-radius:8px;margin-left:4px;vertical-align:3px};display:inline-block;margin-top:4px
 .chead .cs{font-size:13.5px;color:#7c8b99;margin-top:7px}
 .tagline{margin:18px 26px 0;text-align:center;font-size:19px;letter-spacing:.26em;font-weight:600;
  font-family:"Cormorant Garamond",Georgia,serif;color:#a8b6c4;padding:11px 0;border-top:1px solid #edeff3;border-bottom:1px solid #edeff3}
@@ -106,6 +106,8 @@ figure .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 15px 11px;col
 .notice b{color:#3c4b59}
 .notice.warn{margin-top:0}
 
+.ctag{display:inline-block;font-size:13.5px;font-weight:800;color:#fff;padding:4px 11px;border-radius:8px;margin-top:9px;background:#3a6ea5}
+
 /* course colors */
 .A{--c:#3a6ea5}
 .B{--c:#d4763f}
@@ -131,6 +133,21 @@ figure .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 15px 11px;col
 .hkans{margin-top:16px;background:#fdf3ec;border-left:4px solid #d4763f;border-radius:12px;
  padding:15px 17px;font-size:14.5px;line-height:1.75;color:#3b4a58}
 .hkans b{color:#c26c36}
+
+/* hook intro 段 */
+.hkintro{font-size:14px;line-height:1.85;color:#3b4a58;background:#fafbfd;
+ border-radius:14px;padding:16px 18px;border-left:4px solid #3a6ea5;margin-bottom:14px}
+
+/* 费用含/不含 */
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cost-box{background:#fff;border:1px solid #e3ebf5;border-radius:16px;padding:18px 20px 14px}
+.cost-box h5{font-size:15px;font-weight:900;margin-bottom:9px}
+.cost-box.inc h5{color:#2e6b4f}.cost-box.exc h5{color:#a05454}
+.cost-box ul{margin:0;padding:0}
+.cost-box li{font-size:12.8px;line-height:1.75;color:#4d5d6d;list-style:none;
+ padding-left:16px;position:relative;margin-top:6px}
+.cost-box.inc li:before{content:"✓";position:absolute;left:0;color:#2e6b4f;font-weight:900}
+.cost-box.exc li:before{content:"–";position:absolute;left:0;color:#a05454;font-weight:900}
 
 /* ============ BREATH (路线收尾 -> 横幅 呼吸带) ============ */
 .breath{background:#eef2f6;text-align:center;padding:28px 0 0}
@@ -268,100 +285,94 @@ body{background:#dfe4ec}
 <div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 1</span><section class="cover"><img src="assets/cover.jpg" alt=""><div class="shade"></div>
 <div class="brand"><img src="assets/logo.png" alt="PGS"></div>
 <div class="tag">SAPPORO ・ BIEI ・ FURANO ・ WINTER</div>
-<div class="txt"><div class="eyebrow">THE WARMEST WAY THROUGH WINTER.</div>
-<h1>영하 10도의 홋카이도<br>가장 따뜻하게 다니는 방법</h1><div class="sub"><b>아사히야마 동물원 · 크리스마스 트리 · 흰수염폭포 · 닝구르테라스</b><br>호텔 앞에서 출발하세요</div>
-<div class="chips"><span>🚐 소그룹 합승 · 최대 9명</span><span>🐧 아사히야마 동물원 입장권 포함</span><span>📅 3일 전 무료 취소</span></div>
+<div class="txt"><div class="eyebrow">WINTER LIMITED COURSE.</div>
+<h1>눈길 운전은 맡기고,<br>홋카이도의 겨울을 만나세요.</h1><div class="sub">아사히야마 동물원에서 비에이의 겨울 풍경, 후라노의 숲속 작은 상점까지.<br>최대 9명이 함께하는 소규모 차량 투어로 하루를 이어갑니다.</div>
+<div class="chips"><span>🚐 대상 호텔 픽업</span><span>👥 최대 9명 소규모</span><span>🐧 아사히야마 동물원 입장권 포함</span></div>
 </div></section></div>
 <div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 1</span><section class="cover"><img src="assets/cover.jpg" alt=""><div class="shade"></div>
 <div class="brand"><img src="assets/logo.png" alt="PGS"></div>
 <div class="tag">SAPPORO ・ BIEI ・ FURANO ・ WINTER</div>
-<div class="txt"><div class="eyebrow">THE WARMEST WAY THROUGH WINTER.</div>
-<h1>零下十度的北海道<br>最暖和的走法</h1><div class="sub"><b>旭山动物园 · 圣诞树 · 白须瀑布 · 宁古鲁露台</b><br>酒店门口接你出发</div>
-<div class="chips"><span>🚐 小团拼车 · 最多 9 人</span><span>🐧 旭山动物园门票已含</span><span>📅 提前 3 天免费取消</span></div>
+<div class="txt"><div class="eyebrow">WINTER LIMITED COURSE.</div>
+<h1>把雪路驾驶交给我们，<br>去遇见北海道的冬天。</h1><div class="sub">从旭山动物园，到美瑛的冬日风景，再到富良野森林里的小店。<br>乘坐最多9人同行的小团车辆，将这一天串联起来。</div>
+<div class="chips"><span>🚐 范围内酒店接客</span><span>👥 最多 9 人小团</span><span>🐧 旭山动物园门票已含</span></div>
 </div></section></div>
 </div>
 <div class="birow">
 <div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 2</span><section class="hook"><div class="hkcard">
-<div class="hkq">겨울 홋카이도는 길이 관광지보다 어렵습니다</div>
-<div class="hkline"><div class="hkic">🚗 렌터카</div><div class="hktx">빙판길에 좌측 통행, 갑자기 몰아치는 눈보라까지——겨울 설경 도로는 여행자의 길이 아닙니다.</div></div>
-<div class="hkline"><div class="hkic">🚌 버스</div><div class="hktx">시골 버스는 하루 두세 대뿐. 한 대를 놓치면 반나절 일정이 무너집니다.</div></div>
-<div class="hkline"><div class="hkic">🚕 택시</div><div class="hktx">삿포로~아사히카와 왕복 택시 요금이면 항공권이 한 장 더 나옵니다.</div></div>
-<div class="hkans">핸들은 매일 이 길을 달리는 현지 기사님께 맡기세요——<b>호텔 앞까지 모시러 오면, 그냥 내리시면 됩니다.</b></div>
+<div class="hkintro">겨울의 비에이와 후라노는 가보고 싶지만, 눈길 운전과 낯선 길 찾기, 관광지 사이의 환승까지 직접 준비하기는 부담스럽습니다. 이 투어는 그 이동을 한 번에 연결합니다. 픽업 대상 호텔에서는 로비에서 기다렸다가 차량에 탑승하고, 관광지에서는 안내받은 시간 안에서 직접 둘러보세요. 이동은 맡기고, 눈앞의 풍경에 집중하는 하루입니다.</div>
+<div class="hkline"><div class="hkic">🏨</div><div class="hktx"><b>아침의 첫 이동을 줄입니다.</b> 삿포로역 반경 3km 이내의 대상 호텔에서 픽업합니다. 별도의 집합 장소까지 이동하지 않고 호텔에서 하루를 시작할 수 있습니다.</div></div>
+<div class="hkline"><div class="hkic">👥</div><div class="hktx"><b>최대 9명이 한 차량으로 함께합니다.</b> 전용 차량을 빌리는 프라이빗 투어가 아니라 다른 예약자와 함께하는 소규모 합승 투어입니다.</div></div>
+<div class="hkline"><div class="hkic">🎫</div><div class="hktx"><b>동물원 입장권은 미리 포함했습니다.</b> 아사히야마 동물원에서는 별도의 입장권 비용 없이 관람하고, 이후에는 비에이의 나무와 폭포, 후라노의 숲속 상점을 이어서 방문합니다.</div></div>
 </div></section></div>
 <div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 2</span><section class="hook"><div class="hkcard">
-<div class="hkq">北海道的冬天，路比景点难</div>
-<div class="hkline"><div class="hkic">🚗 自驾</div><div class="hktx">结冰路面 + 靠左驾驶 + 说来就来的暴风雪——雪路不是给游客开的。</div></div>
-<div class="hkline"><div class="hkic">🚌 公交</div><div class="hktx">乡间巴士一天只有两三班。错过一班，半天行程就没了。</div></div>
-<div class="hkline"><div class="hkic">🚕 打车</div><div class="hktx">札幌到旭山往返的出租车费，够再买一张机票。</div></div>
-<div class="hkans">把方向盘交给天天跑这条路的本地老司机——<b>你只管睡到酒店门口来接。</b></div>
+<div class="hkintro">想去冬天的美瑛和富良野，却觉得雪路驾驶、陌生道路导航，以及景点之间的换乘安排都要自己准备，难免有些负担。这条行程将这些移动一次串联起来。在接客范围内的酒店，您可以先在大堂等候，再上车；抵达景点后，则在告知的时间内自行游览。把移动交给我们，将注意力留给眼前的风景。</div>
+<div class="hkline"><div class="hkic">🏨</div><div class="hktx"><b>减少早晨的第一段移动。</b>札幌站半径3公里内的指定酒店可安排接客。您无需前往另一个集合地点，可以从酒店开始这一天。</div></div>
+<div class="hkline"><div class="hkic">👥</div><div class="hktx"><b>最多9人乘坐同一辆车同行。</b>这不是独享车辆的私人团，而是与其他预订者同行的小团拼车游。</div></div>
+<div class="hkline"><div class="hkic">🎫</div><div class="hktx"><b>动物园门票已经包含。</b>在旭山动物园，您无需另付门票费用即可参观；之后继续前往美瑛的树与瀑布，以及富良野森林里的小店。</div></div>
 </div></section></div>
 </div>
 <div class="birow">
 <div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 3</span><section class="coursewrap"><div class="card A">
-<div class="chead"><div class="badge">W</div><div><h2>아사히야마 동물원 + 비에이 설원 + 숲속 테라스<em>【겨울 한정】</em></h2><div class="cs">❄️ 펭귄 산책, 설원의 외로운 나무, 얼음 폭포, 숲속 불빛</div></div></div>
-<div class="tagline">SNOW COVERS EVERYTHING BUT WARMTH.</div>
-<div class="intro"><span class="lead"><b>"멀리 홋카이도까지 와서, 추위 속에 버스를 기다릴 수는 없습니다."</b></span>겨울 홋카이도는 관광지 사이를 잇는 대중교통이 거의 없습니다. 이 코스는 가장 클래식한 겨울 풍경 네 곳을 한 줄기로 엮었습니다. 오전에는 아사히야마 동물원에서 펭귄 산책을 만나고, 오후에는 비에이 설원에서 외로운 크리스마스 트리를 찾고, 저녁에는 숲속 오두막의 불빛으로 마무리합니다. 호텔 앞에서 타면, 내리는 곳이 바로 명소입니다.</div>
-<div class="tip">🐧 <b>아사히야마 동물원 입장권 포함</b>　※ 펭귄 산책은 겨울 한정 프로그램으로, 당일 적설 상황과 동물원 측 판단에 따라 진행 여부가 결정됩니다</div>
-<figure class=""><img src="assets/asahiyama.jpg"><div class="cap">아사히야마 동물원｜눈길 위의 펭귄 산책 (겨울 한정)</div></figure>
+<div class="chead"><div class="badge">W</div><div><h2>아사히야마 동물원·비에이·닝구르테라스 겨울 1일 투어</h2><div class="ctag">【최대 9명·호텔 픽업·입장권 포함】</div><div class="cs">❄️ 펭귄 산책 · 설원의 나무 · 파란 폭포 · 숲속 오두막</div></div></div>
+<div class="tagline">WINTER LIMITED COURSE.</div>
+<figure class=""><img src="assets/shirahige.jpg"><div class="cap">비에이강｜눈과 파란 강물</div></figure>
 <div class="tl">
-<div class="ev"><div class="pill">예정<br>07:30</div><div class="dot"></div>
-<h4>삿포로 출발 🚗<span class="dur">(예정 7:00~8:00 호텔 픽업)</span></h4><p>삿포로 시내 호텔 로비 앞으로 모시러 갑니다(시내 중심 반경 3km 이내). 픽업 지역 밖이시면 삿포로역 북쪽 출구 단체 집합 장소에서 7:45에 만납니다. 정확한 픽업 시간과 차량 번호는 출발 전날 단톡방에서 안내드립니다.</p>
+<div class="ev"><div class="pill">예정<br>07:00–8:00</div><div class="dot"></div>
+<h4>삿포로 호텔 픽업<span class="dur">픽업 시간대 약 1시간</span></h4><p>삿포로역 반경 3km 이내의 대상 호텔 로비에서 픽업합니다. 픽업 순서에 맞춰 안내받은 시간에 준비해 주세요. 대상 지역 밖에 숙박하시는 분은 예정 7:45에 삿포로역 북쪽 출구의 지정 단체 집합 장소에서 합류합니다.</p>
 </div>
 <div class="ev hl"><div class="pill">예정<br>11:00</div><div class="dot"></div>
-<h4>아사히야마 동물원<span class="dur">약 90분 · 입장권 포함</span><span class="star">⭐ 하이라이트</span></h4><p>겨울 한정 주인공의 등장. 펭귄 산책로에서 킹펭귄이 뒤뚱뒤뚱 발밑을 지나가고, 북극곰이 물에 뛰어드는 순간이 유리 터널 위로 펼쳐집니다. 다른 분들이 매표소 앞에 줄 서 있을 때, 여러분은 이미 산책로 첫 줄에 서 계실 거예요.</p>
-<figure class=""><img src="assets/asahiyama.jpg"><div class="cap">아사히야마 동물원｜킹펭귄의 눈길 산책</div></figure>
+<h4>아사히야마 동물원<span class="dur">약 90분 · 입장권 포함</span><span class="star">⭐ 하이라이트</span></h4><p>겨울의 동물원에서는 펭귄과 북극곰 등 동물들의 모습을 직접 살펴보세요. 펭귄 산책이 운영되는 날에는 눈 위를 걷는 모습을 만날 기회도 있습니다. 관람 시간 안에서 보고 싶은 동물과 이동 동선을 정해 둘러보며, 점심은 개인 취향에 맞춰 개별적으로 해결합니다.<br>🐧 펭귄 산책은 적설 상태와 동물의 컨디션, 동물원 운영 일정에 따라 진행됩니다. 투어 날짜나 도착 시간에 따라 관람하지 못할 수 있으며, 북극곰의 특정 행동도 보장되지 않습니다.</p>
+<figure class=""><img src="assets/asahiyama.jpg"><div class="cap">아사히야마 동물원｜눈 위의 펭귄</div></figure>
 </div>
 <div class="ev"><div class="pill">예정<br>13:20</div><div class="dot"></div>
-<h4>크리스마스 트리 (비에이)<span class="dur">약 20분 · 인증샷</span></h4><p>끝없이 펼쳐진 설원 위에 홀로 선 나무 한 그루. 셔터만 누르면 그 자체로 영화 포스터입니다.</p>
-<figure class=""><img src="assets/xmas.jpg"><div class="cap">비에이｜설원 위의 크리스마스 트리</div></figure>
+<h4>비에이 크리스마스 나무<span class="dur">약 20분 · 포토타임</span></h4><p>넓게 펼쳐진 들판과 홀로 선 나무를 한 장의 사진에 담아보세요. 눈이 쌓인 날에는 나무의 윤곽이 하얀 풍경 위로 또렷하게 드러납니다. 비에이의 겨울을 사진으로 남기는 짧은 정차입니다.</p>
+<figure class=""><img src="assets/xmas.jpg"><div class="cap">비에이｜설원 위의 크리스마스 나무</div></figure>
 </div>
 <div class="ev"><div class="pill">예정<br>14:30</div><div class="dot"></div>
-<h4>흰수염폭포<span class="dur">약 20분</span></h4><p>한겨울에도 얼지 않는 폭포. 지하수가 바위 틈에서 스며 나와 고드름을 달고도 코발트빛을 잃지 않습니다. 발아래 비에이강은 눈이 내릴수록 더 파랗게 빛납니다.</p>
-<figure class=""><img src="assets/shirahige.jpg"><div class="cap">흰수염폭포 · 비에이강｜고드름과 코발트 블루의 강</div></figure>
+<h4>흰수염폭포<span class="dur">약 20분</span></h4><p>바위 사이에서 흘러내리는 물줄기와 아래로 이어지는 푸른 강물을 바라보세요. 겨울에는 주변에 쌓인 눈과 물빛이 대비를 이루며, 나무 한 그루를 담았던 풍경과는 또 다른 비에이의 모습을 보여줍니다.</p>
+<figure class=""><img src="assets/shirahige.jpg"><div class="cap">흰수염폭포 · 비에이강｜눈과 파란 강물</div></figure>
 </div>
 <div class="ev"><div class="pill">예정<br>15:40</div><div class="dot"></div>
-<h4>닝구르테라스<span class="dur">약 30분</span></h4><p>숲속에 숨은 수공예 오두막 마을. 해 질 녘 하나둘 불이 켜지면——하루의 마지막은 이곳에 맡기세요.</p>
-<figure class=""><img src="assets/ningle.jpg"><div class="cap">닝구르테라스｜숲속 수공예 오두막 마을</div></figure>
+<h4>닝구르테라스<span class="dur">약 30분</span></h4><p>후라노에서는 숲속 산책길을 따라 작은 통나무 상점들을 둘러봅니다. 수공예품을 구경하거나 마음에 드는 풍경을 사진으로 남기며, 하루의 마지막 관광을 마무리하세요. 쇼핑은 자유이며, 구매 비용은 개인 부담입니다.<br>💡 방문 시간과 계절에 따라 밝기와 점등 상태, 상점 영업 상황이 달라질 수 있어 야경 관람은 보장되지 않습니다.</p>
+<figure class=""><img src="assets/ningle.jpg"><div class="cap">닝구르테라스｜숲속 통나무 상점</div></figure>
 </div>
 <div class="ev"><div class="pill">예정<br>16:20</div><div class="dot"></div>
-<h4>삿포로로 출발</h4><p>예정 18:30경 삿포로 시내 도착.</p>
+<h4>귀환 시작 → 예정 18:30 삿포로 도착<span class="dur">귀환 차량 이동 약 2시간 10분</span></h4><p>관광을 마친 뒤 차량으로 삿포로에 돌아옵니다. 도착 시간은 참고용이며, 특히 겨울에는 도로와 기상 상황에 따라 늦어질 수 있습니다. 귀환 직후의 예약이나 이동 계획은 시간 여유를 두고 잡아 주세요.</p>
 </div>
 </div>
-<div class="notice">도로 상황과 날씨에 따라 각 일정 시간이 앞뒤로 달라질 수 있습니다. 출발 시간이 정해진 교통편(항공·기차)이나 공연·레스토랑 예약은 가급적 다른 날짜에 잡아 주세요.</div>
-<div class="notice warn" style="margin-top:-12px">👥 본 투어는 최소 4인 출발입니다. 미달 시 출발 7일 전까지 날짜 변경 또는 전액 환불을 안내해 드립니다.</div>
+<div class="notice">아래 시간은 모두 일본 현지 시간 기준의 예정 시간입니다. 교통, 적설, 날씨 및 시설 운영 상황에 따라 방문 순서와 체류 시간, 귀환 시간이 달라질 수 있습니다.</div>
+<div class="notice warn" style="margin-top:-12px">👥 최소 4명 이상 예약 시 출발합니다. 출발 1주일 전까지 최소 인원이 모이지 않으면 일정 변경 또는 취소를 안내하며, 최소 출발 인원이 모이지 않아 투어가 취소되는 경우 전액 환불합니다.</div>
 </div></section></div>
 <div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 3</span><section class="coursewrap"><div class="card A">
-<div class="chead"><div class="badge">W</div><div><h2>旭山动物园 + 美瑛雪原 + 森林露台<em>【冬季限定】</em></h2><div class="cs">❄️ 企鹅散步、雪原孤树、冰蓝瀑布、森林灯火</div></div></div>
-<div class="tagline">SNOW COVERS EVERYTHING BUT WARMTH.</div>
-<div class="intro"><span class="lead"><b>「大老远飞来北海道，不能在寒风里等车。」</b></span>冬天的北海道，景点之间没有方便的公共交通。这条线把最经典的四个冬季画面串成一串：上午旭山动物园看企鹅散步，下午美瑛雪原找那棵孤独的圣诞树，傍晚在森林小木屋的灯火里收尾。酒店门口上车，下车就是景点。</div>
-<div class="tip">🐧 <b>旭山动物园门票已含</b>　※ 企鹅散步为冬季限定活动，是否举行依当日积雪与园方安排为准</div>
-<figure class=""><img src="assets/asahiyama.jpg"><div class="cap">旭山动物园｜雪道上的企鹅散步（冬季限定）</div></figure>
+<div class="chead"><div class="badge">W</div><div><h2>旭山动物园·美瑛·宁古鲁露台冬季一日游</h2><div class="ctag">【最多9人·酒店接客·含门票】</div><div class="cs">❄️ 企鹅散步 · 雪原孤树 · 蓝色瀑布 · 森林木屋</div></div></div>
+<div class="tagline">WINTER LIMITED COURSE.</div>
+<figure class=""><img src="assets/shirahige.jpg"><div class="cap">美瑛川｜雪与蓝色河水</div></figure>
 <div class="tl">
-<div class="ev"><div class="pill">预计<br>07:30</div><div class="dot"></div>
-<h4>札幌出发 🚗<span class="dur">（预计 7:00~8:00 酒店接客）</span></h4><p>从札幌市内酒店门口接您出发（市中心半径 3 公里内）。范围外的客人在札幌站北口团体集合点 7:45 会合。具体接送时间与车牌，出发前一天在群内通知。</p>
+<div class="ev"><div class="pill">预计<br>07:00–8:00</div><div class="dot"></div>
+<h4>札幌酒店接客<span class="dur">接客时段约1小时</span></h4><p>在札幌站半径3公里内的指定酒店大堂安排接客。请根据接客顺序，在告知的时间做好准备。入住范围外住宿的旅客，预计7:45在札幌站北口指定团体集合地点加入。</p>
 </div>
 <div class="ev hl"><div class="pill">预计<br>11:00</div><div class="dot"></div>
-<h4>旭山动物园<span class="dur">约 90 分钟 · 门票已含</span><span class="star">⭐ 高光时刻</span></h4><p>冬季限定的主角登场：企鹅散步道上，国王企鹅摇摇晃晃从你脚边走过；北极熊跃入水中的瞬间就在头顶的玻璃隧道上方。别人在售票处排队时，你已经站在散步道第一排。</p>
-<figure class=""><img src="assets/asahiyama.jpg"><div class="cap">旭山动物园｜国王企鹅的雪中散步</div></figure>
+<h4>旭山动物园<span class="dur">约 90 分钟 · 门票已含</span><span class="star">⭐ 高光时刻</span></h4><p>在冬季的动物园里，亲眼看看企鹅、北极熊等动物的模样。企鹅散步开放的日子，也有机会遇见它们在雪地上行走。您可以在参观时间内，选择想看的动物并规划游览动线；午餐则根据个人喜好自行解决。<br>🐧 企鹅散步根据积雪情况、动物状态及动物园运营日程进行。因出行日期或抵达时间不同，可能无法观看；北极熊的特定行为也不作保证。</p>
+<figure class=""><img src="assets/asahiyama.jpg"><div class="cap">旭山动物园｜雪地上的企鹅</div></figure>
 </div>
 <div class="ev"><div class="pill">预计<br>13:20</div><div class="dot"></div>
-<h4>圣诞树（美瑛）<span class="dur">约 20 分钟 · 打卡照</span></h4><p>一望无际的雪原上，只有这一棵树。快门一按，就是电影海报。</p>
+<h4>美瑛圣诞树<span class="dur">约 20 分钟 · 拍照</span></h4><p>将开阔的田野和独立其间的一棵树，放进同一张照片里。有积雪的日子，树的轮廓会在白色风景中清晰显现。这是一段用照片记录美瑛冬天的短暂停留。</p>
 <figure class=""><img src="assets/xmas.jpg"><div class="cap">美瑛｜雪原上的圣诞树</div></figure>
 </div>
 <div class="ev"><div class="pill">预计<br>14:30</div><div class="dot"></div>
-<h4>白须瀑布<span class="dur">约 20 分钟</span></h4><p>寒冬里不冻的瀑布：地下水从岩缝间渗出，挂着冰凌仍泛着钴蓝。脚下的美瑛川，雪越落，水越蓝。</p>
-<figure class=""><img src="assets/shirahige.jpg"><div class="cap">白须瀑布 · 美瑛川｜冰凌与钴蓝色的河</div></figure>
+<h4>白须瀑布<span class="dur">约 20 分钟</span></h4><p>看看从岩石间落下的水流，以及向下延伸的蓝色河水。冬季，周围的积雪与水色形成对比，展现出不同于刚才独树画面的另一种美瑛风景。</p>
+<figure class=""><img src="assets/shirahige.jpg"><div class="cap">白须瀑布 · 美瑛川｜雪与蓝色河水</div></figure>
 </div>
 <div class="ev"><div class="pill">预计<br>15:40</div><div class="dot"></div>
-<h4>宁古鲁露台<span class="dur">约 30 分钟</span></h4><p>藏在森林里的手作小木屋村。傍晚灯一盏一盏亮起来——一天的最后，交给这里。</p>
-<figure class=""><img src="assets/ningle.jpg"><div class="cap">宁古鲁露台｜森林里的手作木屋村</div></figure>
+<h4>宁古鲁露台<span class="dur">约 30 分钟</span></h4><p>在富良野，沿森林步道看看小木屋店铺。浏览手工艺品，或拍下喜欢的风景，为一天的最后一段游览收尾。购物自由，购买费用由个人承担。<br>💡 因到访时间和季节不同，现场明暗、点灯状态及店铺营业情况可能不同，因此不保证夜景观赏。</p>
+<figure class=""><img src="assets/ningle.jpg"><div class="cap">宁古鲁露台｜森林小木屋店铺</div></figure>
 </div>
 <div class="ev"><div class="pill">预计<br>16:20</div><div class="dot"></div>
-<h4>返程回札幌</h4><p>预计 18:30 左右抵达札幌市中心。</p>
+<h4>开始返程 → 预计 18:30 抵达札幌市中心<span class="dur">返程车程约2小时10分钟</span></h4><p>游览结束后，乘车返回札幌。抵达时间仅供参考，尤其冬季可能因道路与天气情况延后。请为返程后的预约或交通安排预留时间。</p>
 </div>
 </div>
-<div class="notice">根据当天路况与天气，各站时间可能前后浮动。当天还要赶飞机、赶火车，或订了演出、餐厅的，建议改到别的日子。</div>
-<div class="notice warn" style="margin-top:-12px">👥 本行程最少 4 人成团。未成团时将于出发前至少 7 天通知您改期或全额退款。</div>
+<div class="notice">以下时间均为日本当地时间的预计时间。交通、积雪、天气及设施运营情况可能影响游览顺序、停留时长和返程抵达时间。</div>
+<div class="notice warn" style="margin-top:-12px">👥 达到至少4人预订后出发。出发前1周仍未达到最低人数时，会联系告知改期或取消；因未达到最低出发人数而取消行程时，全额退款。</div>
 </div></section></div>
 </div>
 <div class="birow">
@@ -373,44 +384,54 @@ body{background:#dfe4ec}
 <div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 5</span><section class="bandimg"><img src="assets/band.jpg"><div class="shade"></div><div class="txt"><b>冬天的北海道，值得一整天</b><span>企鹅散步 · 雪原孤树 · 冰蓝瀑布 · 森林灯火 —— 一条线走完</span></div></section></div>
 </div>
 <div class="birow">
-<div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 6</span><section class="trustpickup"><img src="assets/trust_full.jpg" style="display:block;width:780px;height:auto"><img src="assets/pickup_full.jpg" style="display:block;width:780px;height:auto"></section></div>
-<div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 6</span><section class="trustpickup"><img src="assets/trust_full.jpg" style="display:block;width:780px;height:auto"><img src="assets/pickup_full.jpg" style="display:block;width:780px;height:auto"></section></div>
+<div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 6</span><section class="trustpickup"><img src="assets/trust_full.jpg" style="display:block;width:780px;height:auto"><div style="padding:18px 38px 4px"><div class="notice" style="margin:0">삿포로역 반경 3km 이내 대상 호텔: 로비 픽업, 예정 7:00–8:00. 범위 밖 숙소: 삿포로역 북쪽 출구 지정 집합 장소, 예정 7:45. 예약 시 호텔명과 주소를 보내 주세요. 픽업 시간과 장소는 예약 인원과 픽업 순서에 맞춰 안내합니다.</div></div><img src="assets/pickup_full.jpg" style="display:block;width:780px;height:auto"></section></div>
+<div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 6</span><section class="trustpickup"><img src="assets/trust_full.jpg" style="display:block;width:780px;height:auto"><div style="padding:18px 38px 4px"><div class="notice" style="margin:0">札幌站半径3公里内指定酒店：大堂接客，预计7:00–8:00。范围外住宿：札幌站北口指定集合地点，预计7:45。预订时请提供酒店名称和地址，接客时间与地点将根据预订人数和接客顺序告知。</div></div><img src="assets/pickup_full.jpg" style="display:block;width:780px;height:auto"></section></div>
 </div>
 <div class="birow">
-<div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 7</span><section class="faqzone"><div class="fhead"><div class="ic">💬</div><div><b>💬 예약 전, 이런 점이 궁금하실 수 있어요</b><span>FAQ ・ 자주 묻는 질문 7가지</span></div></div>
+<div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 7</span><section class="coursewrap" style="padding-top:0"><div class="cost-grid">
+<div class="cost-box inc"><h5>✔ 포함 사항</h5><ul><li>일정에 기재된 차량 이동 및 기사님 서비스</li><li>차량 유류비와 도로·고속도로 통행료</li><li>아사히야마 동물원 입장권</li><li>1인당 수하물 1개 묣료(지참 시 사전 고지)</li></ul></div>
+<div class="cost-box exc"><h5>✘ 불포함 사항</h5><ul><li>식사 및 숙박 비용</li><li>쇼핑 등 개인 지출</li><li>개인 여행자 보험</li><li>포함 사항에 명시되지 않은 항목</li></ul></div>
+</div></section></div>
+<div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 7</span><section class="coursewrap" style="padding-top:0"><div class="cost-grid">
+<div class="cost-box inc"><h5>✔ 费用包含</h5><ul><li>行程所列车辆交通与司机服务</li><li>车辆燃油费及道路、高速公路通行费</li><li>旭山动物园门票</li><li>每人免费携带1件行李（携带时须提前告知）</li></ul></div>
+<div class="cost-box exc"><h5>✘ 费用不包含</h5><ul><li>餐食及住宿费用</li><li>购物等个人支出</li><li>个人旅行保险</li><li>费用包含中未明确列出的项目</li></ul></div>
+</div></section></div>
+</div>
+<div class="birow">
+<div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 8</span><section class="faqzone"><div class="fhead"><div class="ic">💬</div><div><b>💬 예약 전, 이런 점이 궁금하실 수 있어요</b><span>FAQ ・ 자주 묻는 질문 7가지</span></div></div>
 <div class="fbody">
-<div class="qa"><div class="q"><div class="n">Q1</div><b>겨울 빙판길, 안전한가요?</b></div><div class="a">걱정하지 마세요. 모든 차량은 녹색 번호판 합법 영업 차량이며, 매일 이 길을 운행하는 현지 기사님이 운전합니다. 폭설 등으로 안전한 진행이 어려운 악천후에만 출발 전 취소로 안내드리며, 이 경우 전액 환불됩니다.</div></div>
-<div class="qa"><div class="q"><div class="n">Q2</div><b>차량은 어떻게 배차되나요? 함께 타는 분은 누구인가요?</b></div><div class="a">본 투어는 합승으로 운행됩니다. 6명 이하는 7인승 알파드, 9명 이하는 10인승 하이에이스로 배차됩니다(당일 상황에 따라 달라질 수 있습니다). 다른 국가에서 오신 게스트와 함께 타실 수 있어요. 함께하는 시간 동안 서로의 여행 이야기를 나누는 것도 소소한 즐거움이 됩니다.</div></div>
-<div class="qa"><div class="q"><div class="n">Q3</div><b>기사님이 관광 안내도 해주시나요?</b></div><div class="a">운전 겸 안내 기사가 동행합니다. 주요 포인트 도착 시 간단한 안내를 드리며, 각 명소에서는 하차 후 자유 관람하시고 기사님은 차량에서 대기합니다. 한국인 손님이 많은 날에는 한국어 가능 기사님을 우선 배정하고 있습니다.</div></div>
-<div class="qa"><div class="q"><div class="n">Q4</div><b>출발 전 연락은 어떻게 오나요?</b></div><div class="a">예약 완료 후 자주 사용하시는 메신저(WhatsApp·LINE·KakaoTalk)를 남겨 주세요. WhatsApp을 가장 추천드립니다. 출발 전날 온라인 단톡방을 만들어 차량·기사 정보를 이메일과 함께 보내드립니다. 출발 당일 아침, 기사님이 약속된 시간에 숙소(또는 집합 장소) 앞으로 모시러 옵니다.</div></div>
-<div class="qa"><div class="q"><div class="n">Q5</div><b>식비와 입장료가 포함되어 있나요?</b></div><div class="a"><em>아사히야마 동물원 입장권은 포함</em>되어 있습니다. 식비는 포함되지 않으며, 동물원 내 레스토랑이나 이동 경로에서 자유롭게 드시면 됩니다(1인 약 1,000~3,000엔). 그 외 개인 소비는 각자 부담입니다.</div></div>
-<div class="qa"><div class="q"><div class="n">Q6</div><b>아이 요금은 어떻게 되나요?</b></div><div class="a">만 0~2세 아동은 좌석 없이 무료입니다(사전에 알려 주세요). 만 3세 이상은 성인 요금이 적용됩니다. 유아용 카시트는 제공되지 않는 점 양해 부탁드립니다.</div></div>
-<div class="qa"><div class="q"><div class="n">Q7</div><b>취소·환불 규정은 어떻게 되나요?</b></div><div class="a">여행일 기준 <em>3일 전까지</em> 알려 주시면 100% 전액 환불됩니다. 2일 전부터 당일 취소는 환불이 어렵습니다. ※ 여행일은 현지(일본) 시각 기준입니다.</div></div>
+<div class="qa"><div class="q"><div class="n">Q1</div><b>겨울 눈길은 어떻게 이동하나요?</b></div><div class="a">눈길을 직접 운전하지 않고 기사님이 운전하는 차량으로 이동합니다. 다만 소규모 차량도 폭설이나 도로 통제의 영향을 받습니다. 당일 상황에 따라 일정이 조정될 수 있으며, 관광지의 보행 구간에서는 방한복과 미끄럼 방지 신발을 준비해 주세요.</div></div>
+<div class="qa"><div class="q"><div class="n">Q2</div><b>프라이빗 투어인가요? 함께 타는 분은 누구인가요?</b></div><div class="a">프라이빗 투어가 아니라 다른 예약자와 함께하는 최대 9명 합승 투어입니다. 차량은 예약 인원과 배차 상황에 따라 정해지며, 다양한 국적의 여행자가 함께할 수 있습니다. 차량과 기사님 정보는 출발 전날 안내합니다.</div></div>
+<div class="qa"><div class="q"><div class="n">Q3</div><b>매일 펭귄 산책을 볼 수 있나요?</b></div><div class="a">아닙니다. 펭귄 산책은 적설 상태와 동물의 컨디션, 동물원 운영 일정에 따라 진행되는 겨울 프로그램입니다. 아사히야마 동물원 방문과 입장권은 포함되지만, 펭귄 산책 관람 자체는 보장되지 않습니다.</div></div>
+<div class="qa"><div class="q"><div class="n">Q4</div><b>기사님이 관광지에 함께 입장하나요?</b></div><div class="a">기사님은 운전과 관광지의 간단한 소개, 집합 안내를 담당합니다. 관광지 내부에는 동행하지 않으며 별도의 가이드도 포함되지 않습니다. 자유롭게 관람하는 여행을 선호하시는 분께 적합한 방식입니다.</div></div>
+<div class="qa"><div class="q"><div class="n">Q5</div><b>출발 전 연락은 어떻게 오나요?</b></div><div class="a">예약 시 호텔명·주소와 WhatsApp, LINE 또는 KakaoTalk 연락처를 남겨 주세요. WhatsApp 사용을 추천합니다. 출발 전날 단체 채팅방을 만들며, 차량과 기사님 정보는 이메일로 안내합니다. 안내받은 픽업 시간보다 10분 일찍 준비해 주세요.</div></div>
+<div class="qa"><div class="q"><div class="n">Q6</div><b>입장료와 점심이 포함되어 있나요?</b></div><div class="a">아사히야마 동물원 입장권은 포함되어 있으며, 식사비는 포함되지 않습니다. 점심은 동물원 내 또는 이동 경로에서 개별적으로 해결합니다. 1인당 식사 예산은 약 1,000~3,000엔이며, 선택하시는 메뉴와 매장에 따라 달라집니다.</div></div>
+<div class="qa"><div class="q"><div class="n">Q7</div><b>출발 미성사 또는 취소하고 싶으면 어떻게 하나요?</b></div><div class="a">최소 4명 이상 예약 시 출발합니다. 출발 1주일 전까지 최소 인원이 모이지 않으면 일정 변경 또는 취소를 안내하며, 최소 출발 인원이 모이지 않아 투어가 취소되는 경우 전액 환불합니다. 여행자 사정으로 취소하시는 경우에는 예약 전 MRT 상품 페이지의 취소·환불 규정을 확인해 주세요.</div></div>
 <div class="fend">■ 그 외 궁금하신 점은 언제든 편하게 문의해 주세요. 픽업 시간·차량 번호·기사 정보는 출발 전날 단톡방으로 안내해 드립니다.</div>
 </div></section></div>
-<div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 7</span><section class="faqzone"><div class="fhead"><div class="ic">💬</div><div><b>💬 预订前，这些信息也许能帮到您</b><span>FAQ ・ 常见问题 7 问</span></div></div>
+<div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 8</span><section class="faqzone"><div class="fhead"><div class="ic">💬</div><div><b>💬 预订前，这些信息也许能帮到您</b><span>FAQ ・ 常见问题 7 问</span></div></div>
 <div class="fbody">
-<div class="qa"><div class="q"><div class="n">Q1</div><b>冬天雪路，行程安全吗？</b></div><div class="a">放心。行程用车均为绿牌合法运营车辆，司机是天天跑这条线的本地老司机。如遇暴雪等恶劣天气导致安全上难以进行，仅在这种情况下出发前取消时全额退款。</div></div>
-<div class="qa"><div class="q"><div class="n">Q2</div><b>车辆怎么安排？同车的是谁？</b></div><div class="a">本行程以拼车方式运行。6 人及以下安排 7 座埃尔法；9 人及以下安排 10 座海狮（根据当日情况可能有所变动）。车上可能有来自其他国家的客人一同乘坐。共同度过的时光里分享彼此的旅途故事，也是一种小小的乐趣。</div></div>
-<div class="qa"><div class="q"><div class="n">Q3</div><b>司机也会做观光讲解吗？</b></div><div class="a">司机兼向导，主要任务是安全驾驶。到达主要景点时会做简短介绍，各景点下车后自由参观，司机在车内等候并按时前往下一站。韩国客人较多的日子会优先安排会韩语的司机。</div></div>
-<div class="qa"><div class="q"><div class="n">Q4</div><b>出发前怎么联系？</b></div><div class="a">预订完成后，请留下您常用的即时通讯（WhatsApp · LINE · KakaoTalk），我们最推荐 WhatsApp。出发前一天我们会建立线上旅行群并邮件发送车辆与司机信息。出发当天早上，司机按约定时间到酒店（或集合点）门口接您。</div></div>
-<div class="qa"><div class="q"><div class="n">Q5</div><b>餐费和门票包含吗？</b></div><div class="a"><em>旭山动物园门票已含</em>。餐费不含：午餐可在动物园内餐厅或沿途解决（人均约 1,000~3,000 日元），其他个人消费自理。</div></div>
-<div class="qa"><div class="q"><div class="n">Q6</div><b>儿童怎么收费？</b></div><div class="a">0~2 岁儿童不占座免费（请提前告知）；3 岁及以上按成人收费。恕不提供儿童安全座椅，敬请谅解。</div></div>
-<div class="qa"><div class="q"><div class="n">Q7</div><b>取消退款规定？</b></div><div class="a">以出行日为准，<em>提前 3 天及之前</em>告知：100% 全额退款。提前 2 天至当天取消：不可退款。※ 出行日以当地（日本）时间为准。</div></div>
+<div class="qa"><div class="q"><div class="n">Q1</div><b>冬季雪路如何安排？</b></div><div class="a">您无需自己在雪路驾驶，而是乘坐由司机驾驶的车辆移动。但小团车辆同样会受到暴雪或道路管制影响。行程可能根据当天情况调整；景点步行区域请准备保暖衣物和防滑鞋。</div></div>
+<div class="qa"><div class="q"><div class="n">Q2</div><b>是私人包车吗？和谁同车？</b></div><div class="a">这不是私人包车，而是与其他预订者同行、最多9人的拼车游。车辆根据预订人数及调度情况确定，可能有不同国籍的旅客同行。车辆和司机信息将在出发前一天告知。</div></div>
+<div class="qa"><div class="q"><div class="n">Q3</div><b>每天都能看企鹅散步吗？</b></div><div class="a">不是。企鹅散步是根据积雪情况、动物状态及动物园运营日程进行的冬季活动。行程包含旭山动物园的到访和门票，但不保证观看到企鹅散步。</div></div>
+<div class="qa"><div class="q"><div class="n">Q4</div><b>司机会陪我们进景点吗？</b></div><div class="a">司机负责驾驶、景点的简要介绍和集合指引，不陪同进入景点内部，也不包含单独导游。这种形式适合喜欢自由参观的旅客。</div></div>
+<div class="qa"><div class="q"><div class="n">Q5</div><b>出发前怎么联系？</b></div><div class="a">预订时请留下酒店名称、地址，以及WhatsApp、LINE或KakaoTalk的联系方式。推荐使用WhatsApp。出发前一天会创建群聊，并通过邮件告知车辆及司机信息。请在告知的接客时间前10分钟做好准备。</div></div>
+<div class="qa"><div class="q"><div class="n">Q6</div><b>门票和午餐包含吗？</b></div><div class="a">旭山动物园门票已含，餐费不含。午餐在动物园内或行程沿途自行解决。每人的餐食预算约为1,000~3,000日元，具体因所选餐食和店铺而异。</div></div>
+<div class="qa"><div class="q"><div class="n">Q7</div><b>未成团或想取消怎么办？</b></div><div class="a">达到至少4人预订后出发。出发前1周仍未达到最低人数时，会联系告知改期或取消；因未达到最低出发人数而取消行程时，全额退款。因旅客个人原因取消时，请在预订前查看MRT商品页面的取消、退款规定。</div></div>
 <div class="fend">■ 如有其他疑问，请随时咨询。我们会在出发前一天把当天的接送时间、车牌与司机信息发到群里。</div>
 </div></section></div>
 </div>
 <div class="birow">
-<div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 8</span><section class="end"><img src="assets/closing.jpg"><div class="shade"></div><div class="txt">
-<div class="eyebrow">SEE YOU IN THE SNOW.</div><h3>이번 겨울, 핸들은 저희에게 맡기세요</h3><div class="line"></div><p>호텔 앞에서 타면 됩니다. 설원, 펭귄, 숲속의 불빛까지——다 준비해 두었습니다.</p>
+<div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 9</span><section class="end"><img src="assets/closing.jpg"><div class="shade"></div><div class="txt">
+<div class="eyebrow">SEE YOU IN THE SNOW.</div><h3>눈길의 이동은 맡기고, 겨울의 장면은 직접 담아가세요</h3><div class="line"></div><p>예약 전 숙소의 픽업 가능 여부와 출발 확정 상태를 문의해 주세요.</p>
 </div></section></div>
-<div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 8</span><section class="end"><img src="assets/closing.jpg"><div class="shade"></div><div class="txt">
-<div class="eyebrow">SEE YOU IN THE SNOW.</div><h3>这个冬天，把方向盘交给我们</h3><div class="line"></div><p>酒店门口上车。雪原、企鹅和森林里的灯火，都替你排好了。</p>
+<div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 9</span><section class="end"><img src="assets/closing.jpg"><div class="shade"></div><div class="txt">
+<div class="eyebrow">SEE YOU IN THE SNOW.</div><h3>把雪路上的移动交给我们，把冬天的画面亲自带回去</h3><div class="line"></div><p>预订前，请咨询住宿是否可接客及行程是否确认出发。</p>
 </div></section></div>
 </div>
 <div class="birow">
-<div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 9</span><div class="copyright">PEGASUS観光株式会社 · 오사카부 지사 등록 여행업 제2-3251号<br>本页面为冬季限定商品说明 · 일정과 사진은 참고용이며 당일 실제 상황에 따릅니다</div></div>
-<div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 9</span><div class="copyright">PEGASUS観光株式会社 · 大阪府知事登録 旅行業 第2-3251号<br>본 페이지는 겨울 시즌 상품 안내입니다 · 行程与照片为参考，以当日实际为准</div></div>
+<div class="bicol ko"><span class="lab">🇰🇷 한국어 · SECTION 10</span><div class="copyright">PEGASUS観光株式会社 · 오사칶부 지사 등록 여행업 제2-3251号<br>本页面为冬季限定商品说明 · 일정과 사진은 참고용이며 당일 실제 상황에 따릅니다</div></div>
+<div class="bicol zh"><span class="lab">🇨🇳 中文 · SECTION 10</span><div class="copyright">PEGASUS観光株式会社 · 大阪府知事登録 旅行業 第2-3251号<br>본 페이지는 겨울 시즌 상품 안내입니다 · 行程与照片为参考，以当日实际为准</div></div>
 </div>
 </div>
 </body>
