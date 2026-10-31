@@ -1,20 +1,15 @@
 <!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=1560">
 <meta name="format-detection" content="telephone=no">
 <title>삿포로 출발 겨울 1일 투어 · 札幌出发冬季一日游 | 한국어 / 中文</title>
 <style>
 html,body{margin:0;padding:0;background:#0b1626}
-#bi{display:flex;width:1560px;margin:0 auto;transform-origin:0 0}
+body{min-width:1560px;width:1560px}
+#bi{display:flex;flex-wrap:nowrap;width:1560px;min-width:1560px;margin:0}
 .c-ko,.c-zt{width:780px;flex:0 0 780px;background:#eef2f5;overflow:hidden;position:relative}
 .c-ko{box-shadow:inset -1px 0 0 rgba(19,38,63,.18)}
 .c-ko .orig,.c-zt .orig{margin-top:26px;background:#fff;border-radius:2px;overflow:hidden;box-shadow:0 1px 0 rgba(19,38,63,.08)}
 .c-ko .orig img,.c-zt .orig img{width:100%;height:auto;display:block}
-.bar{display:none}
-#bi.m{display:block}
-#bi.m .c-ko,#bi.m .c-zt{display:none}
-#bi .pair{display:none}
-#bi.m .pair{display:block}
-.tag{font:600 13px/1 Georgia,serif;letter-spacing:.3em;color:#a9c9df;background:#0b1626;padding:12px 56px}
 .sp{height:0}
 
 .c-ko *{box-sizing:border-box;margin:0;padding:0}
@@ -411,24 +406,8 @@ function align(){
   for(var i=0;i<n;i++){var d=top(z[i],Z)-top(a[i],K);if(Math.abs(d)<1)continue;var t=d>0?a[i]:z[i];var s=document.createElement('div');s.className='sp';s.style.height=Math.abs(d)+'px';t.parentNode.insertBefore(s,t)}
   var hk=K.scrollHeight,hz=Z.scrollHeight;
 }
-function mobile(){
-  var B=document.getElementById('bi');if(B.querySelector('.pair'))return;
-  var K=B.querySelector('.c-ko'),Z=B.querySelector('.c-zt');
-  var kk=Array.prototype.slice.call(K.children),zz=Array.prototype.slice.call(Z.children);
-  for(var i=0;i<Math.max(kk.length,zz.length);i++){
-    [[kk[i],'c-ko','한국어'],[zz[i],'c-zt','中文']].forEach(function(p){if(!p[0]||p[0].className=='sp')return;
-      var w=document.createElement('div');w.className='pair '+p[1];w.setAttribute('lang',p[1]=='c-ko'?'ko':'zh-CN');
-      if(p[0].tagName!='SECTION'||p[0].className.indexOf('hero')<0){var t=document.createElement('div');t.className='tag';t.textContent=p[2];w.appendChild(t)}
-      w.appendChild(p[0].cloneNode(true));B.appendChild(w)})}
-}
-function fit(){
-  var B=document.getElementById('bi'),w=document.documentElement.clientWidth;
-  var m=w<1000;B.className=m?'m':'';
-  if(m){mobile();B.style.width='780px';B.style.zoom=w/780}else{B.style.width='1560px';B.style.zoom=w<1560?w/1560:1}
-}
-function go(){align();fit()}
+function go(){align()}
 if(document.readyState!='loading')go();else document.addEventListener('DOMContentLoaded',go);
 addEventListener('load',function(){align();});
-addEventListener('resize',fit);
 })();
 </script></body></html>
